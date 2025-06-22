@@ -89,7 +89,6 @@
             background: var(--color-accent-gold-dark);
         }
 
-        /* Alerta de cierre */
         .warning-banner {
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.3);
@@ -100,7 +99,6 @@
             display: none;
         }
 
-        /* Debug panel */
         .debug-panel {
             position: fixed;
             bottom: 0;
@@ -257,7 +255,8 @@
         let chatStartTime;
         let hasSent = false;
         let debugMode = false;
-        let sendingInProgress = false; // Variable para controlar envíos múltiples
+        let sendingInProgress = false;
+        let chatPopup = null;
 
         const POWER_AUTOMATE_URL = 'https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII';
         const API_ENDPOINT = '/.netlify/functions/chat-gemini';
@@ -274,7 +273,6 @@
             debugLogDiv.appendChild(logEntry);
             debugLogDiv.scrollTop = debugLogDiv.scrollHeight;
 
-            // También log en consola
             console.log(`[DEBUG ${type.toUpperCase()}] ${message}`);
         }
 
@@ -294,14 +292,6 @@
             document.getElementById('debug-log').innerHTML = '';
             debugLog('Log limpiado', 'info');
         }
-
-        // Atajo de teclado para debug (Ctrl+D)
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'd') {
-                e.preventDefault();
-                toggleDebug();
-            }
-        });
 
         // Función para enviar a Power Automate
         function sendToPowerAutomate() {
@@ -339,11 +329,9 @@
             };
 
             debugLog(`Preparando datos: ${JSON.stringify(dataToSend).substring(0, 100)}...`, 'info');
-
-            // Marcar como enviado inmediatamente para evitar duplicados
             hasSent = true;
 
-            // MÉTODO 1: Intentar con Fetch normal (funcionó en el test)
+            // Intentar con Fetch normal
             debugLog('Intentando con Fetch normal...', 'info');
             
             fetch(POWER_AUTOMATE_URL, {
@@ -357,11 +345,11 @@
                 if (response.ok || response.status === 202) {
                     debugLog(`✅ Fetch exitoso! Status: ${response.status}`, 'success');
                     console.log('✅ Conversación enviada exitosamente a Power Automate');
-                    sendingInProgress = false; // Resetear después del éxito
+                    sendingInProgress = false;
                     
-                    // Feedback visual opcional
-                    if (document.getElementById('warning-banner')) {
-                        const banner = document.getElementById('warning-banner');
+                    // Feedback visual
+                    const banner = document.getElementById('warning-banner');
+                    if (banner) {
                         banner.style.background = 'rgba(34, 197, 94, 0.1)';
                         banner.style.borderColor = 'rgba(34, 197, 94, 0.3)';
                         banner.style.color = '#22c55e';
@@ -382,75 +370,41 @@
             })
             .catch(error => {
                 debugLog(`❌ Error con Fetch: ${error.message}`, 'error');
-                console.error('Error en Fetch, intentando con XMLHttpRequest...', error);
-                sendingInProgress = false; // Permitir reintento con XHR
-                
-                // MÉTODO 2: Fallback a XMLHttpRequest (también funcionó en el test)
-                sendWithXHR(dataToSend);
+                console.error('Error en Fetch:', error);
+                hasSent = false;
+                sendingInProgress = false;
             });
         }
 
-        // Función auxiliar para enviar con XMLHttpRequest
-        function sendWithXHR(dataToSend) {
-            debugLog('Intentando con XMLHttpRequest...', 'info');
-            
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', POWER_AUTOMATE_URL, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            
-            xhr.onload = function() {
-                if (xhr.status === 200 || xhr.status === 202) {
-                    debugLog(`✅ XHR exitoso! Status: ${xhr.status}`, 'success');
-                    console.log('✅ Conversación enviada exitosamente con XHR');
-                    sendingInProgress = false; // Resetear después del éxito
-                    
-                    // Feedback visual opcional
-                    if (document.getElementById('warning-banner')) {
-                        const banner = document.getElementById('warning-banner');
-                        banner.style.background = 'rgba(34, 197, 94, 0.1)';
-                        banner.style.borderColor = 'rgba(34, 197, 94, 0.3)';
-                        banner.style.color = '#22c55e';
-                        banner.innerHTML = '<i class="fas fa-check-circle mr-1"></i> Conversación guardada exitosamente';
-                        banner.style.display = 'block';
-                        setTimeout(() => { banner.style.display = 'none'; }, 3000);
-                    }
-                    
-                    if (xhr.responseText) {
-                        debugLog(`Respuesta: ${xhr.responseText}`, 'info');
-                    }
-                } else {
-                    debugLog(`❌ XHR Error. Status: ${xhr.status}`, 'error');
-                    hasSent = false; // Revertir para permitir reintento
-                    sendingInProgress = false;
-                }
-            };
-            
-            xhr.onerror = function() {
-                debugLog('❌ Error de red con XMLHttpRequest', 'error');
-                console.error('Error completo al enviar a Power Automate');
-                hasSent = false; // Revertir para permitir reintento
-                sendingInProgress = false;
-            };
-            
-            try {
-                xhr.send(JSON.stringify(dataToSend));
-            } catch (e) {
-                debugLog(`❌ Error al enviar XHR: ${e.message}`, 'error');
-                hasSent = false;
-                sendingInProgress = false;
-            }
-        }
-
-        // Función para cerrar el chat manualmente
+        // Función para cerrar el chat
         function closeChat() {
             debugLog('🚪 Cerrando chat manualmente (botón X)...', 'warning');
             safeSendToPowerAutomate();
             
-            // Dar tiempo para que se envíe antes de cerrar
             setTimeout(() => {
                 debugLog('Cerrando ventana...', 'info');
                 window.close();
             }, 500);
+        }
+
+        // Función segura para enviar
+        function safeSendToPowerAutomate() {
+            debugLog(`safeSendToPowerAutomate - sendingInProgress: ${sendingInProgress}, hasSent: ${hasSent}`, 'info');
+            
+            if (sendingInProgress || hasSent) {
+                debugLog('Envío ya en progreso o completado', 'warning');
+                return;
+            }
+            sendingInProgress = true;
+            sendToPowerAutomate();
+        }
+
+        // Función de prueba manual
+        function testManualSend() {
+            debugLog('🧪 TEST MANUAL: Iniciando envío de prueba...', 'warning');
+            hasSent = false;
+            sendingInProgress = false;
+            safeSendToPowerAutomate();
         }
 
         // Iniciar chat
@@ -474,7 +428,6 @@
             chatStartTime = Date.now();
 
             debugLog(`✅ Chat iniciado: ${name} (${email})`, 'success');
-            debugLog('Eventos de cierre listos para capturar', 'info');
 
             // Ocultar formulario y mostrar chat
             document.getElementById('chat-form-container').classList.add('hidden');
@@ -495,7 +448,6 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
             appendMessage(welcomeMessage, false);
             conversationHistory.push({ role: 'assistant', content: welcomeMessage });
 
-            // Enfocar el input
             document.getElementById('chat-input').focus();
         }
 
@@ -533,12 +485,10 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
 
             debugLog(`Enviando mensaje: ${message}`, 'info');
 
-            // Agregar mensaje del usuario
             appendMessage(message, true);
             conversationHistory.push({ role: 'user', content: message });
             input.value = '';
 
-            // Mostrar loading
             const loadingMessage = appendMessage('', false, true);
 
             try {
@@ -578,81 +528,28 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
             sendMessage();
         }
 
-        // 🔥 EVENTOS PARA ENVIAR LA CONVERSACIÓN (OPTIMIZADO)
-
-        // Variable para controlar envíos múltiples
-        let sendingInProgress = false;
-
-        // Función de prueba manual
-        function testManualSend() {
-            debugLog('🧪 TEST MANUAL: Iniciando envío de prueba...', 'warning');
-            hasSent = false; // Resetear para permitir la prueba
-            sendingInProgress = false; // Resetear
-            safeSendToPowerAutomate();
-        }
-
-        // 1. PRINCIPAL: Cuando se cierra el popup
+        // EVENTOS PARA CERRAR
         window.addEventListener('beforeunload', (event) => {
-            debugLog('Evento beforeunload disparado', 'warning');
+            debugLog('🚨 EVENTO beforeunload DISPARADO', 'warning');
             safeSendToPowerAutomate();
-            
-            // Notificar a la ventana principal si existe
-            if (window.opener && !window.opener.closed) {
-                window.opener.postMessage({ type: 'chatClosed' }, '*');
-            }
         });
 
-        // 2. BACKUP 1: Solo si beforeunload falló
-        window.addEventListener('pagehide', () => {
-            if (!hasSent && !sendingInProgress) {
-                debugLog('Evento pagehide - enviando como backup', 'warning');
-                safeSendToPowerAutomate();
-            }
+        window.addEventListener('unload', () => {
+            debugLog('🚨 EVENTO unload DISPARADO', 'warning');
+            if (!hasSent) safeSendToPowerAutomate();
         });
 
-        // 3. BACKUP 2: Detectar si la ventana principal se cierra
-        let parentCheckInterval = setInterval(() => {
-            if (window.opener && window.opener.closed) {
-                clearInterval(parentCheckInterval);
-                document.getElementById('warning-banner').style.display = 'block';
-                debugLog('⚠️ Ventana principal cerrada', 'warning');
-                
-                // Solo enviar si no se ha enviado aún
-                if (!hasSent && !sendingInProgress) {
-                    setTimeout(() => {
-                        safeSendToPowerAutomate();
-                        setTimeout(() => window.close(), 2000);
-                    }, 1000);
-                }
-            }
-        }, 2000); // Verificar cada 2 segundos en lugar de cada segundo
-
-        // 4. BACKUP 3: Enviar después de 10 minutos (aumentado de 5)
-        setTimeout(() => {
-            if (conversationHistory.length > 2 && !hasSent && !sendingInProgress) {
-                debugLog('⏱️ Backup automático después de 10 minutos', 'info');
-                safeSendToPowerAutomate();
-            }
-        }, 600000); // 10 minutos
-
-        // 5. REMOVIDO: Ya no enviamos por inactividad para evitar duplicados
-
-        // 6. Si el usuario presiona ESC
+        // Atajo de teclado para debug
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && conversationHistory.length > 0) {
-                if (confirm('¿Deseas cerrar el chat? Se guardará la conversación.')) {
-                    closeChat();
-                }
+            if (e.ctrlKey && e.key === 'd') {
+                e.preventDefault();
+                toggleDebug();
             }
         });
 
         // Log inicial
-        console.log('Chat popup cargado - v2.2 DEBUG COMPLETO');
-        debugLog('Chat popup iniciado correctamente', 'success');
-        
-        // Verificar que los eventos se registraron
-        console.log('✅ Eventos de cierre registrados: beforeunload, unload, pagehide, visibilitychange');
-        console.log('ℹ️ Usa el botón "🧪 Test Envío" para probar manualmente');
+        console.log('✅ Chat popup v3.0 SIMPLIFICADO cargado correctamente');
+        console.log('Usa Ctrl+D para activar el modo debug');
     </script>
 </body>
 </html>
