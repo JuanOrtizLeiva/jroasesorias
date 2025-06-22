@@ -1821,14 +1821,18 @@ Nuestro equipo está disponible de lunes a viernes de 9:00 a 18:00 hrs.`;
                     )
                 };
                 
-                // AQUÍ IRÁ EL WEBHOOK DE POWER AUTOMATE
-                // fetch('URL_DE_POWER_AUTOMATE', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json'
-                //     },
-                //     body: JSON.stringify(resumenConversacion)
-                // });
+               // Enviar a Power Automate
+fetch('https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(resumenConversacion)
+}).then(response => {
+    console.log('Resumen enviado exitosamente');
+}).catch(error => {
+    console.error('Error al enviar resumen:', error);
+});
                 
                 console.log('Datos listos para enviar:', resumenConversacion);
             }
