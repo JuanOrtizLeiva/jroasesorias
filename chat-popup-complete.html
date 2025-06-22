@@ -157,7 +157,7 @@
             </div>
             <div>
                 <h3 class="text-white font-semibold">JRO Assistant Pro</h3>
-                <p class="text-xs text-green-400">En línea</p>
+                <p class="text-xs text-green-400">En línea • <span id="save-status" class="text-gray-400">Guardado automático activo</span></p>
             </div>
         </div>
         <button onclick="closeChat()" class="text-gray-400 hover:text-white">
@@ -226,7 +226,8 @@
                        id="chat-input" 
                        class="flex-1 bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-600/50" 
                        placeholder="Escribe tu mensaje..."
-                       onkeypress="if(event.key === 'Enter') sendMessage()">
+                       onkeypress="if(event.key === 'Enter') sendMessage()"
+                       oninput="resetInactivityTimer()">
                 <button onclick="sendMessage()" class="btn-primary px-6">
                     <i class="fas fa-paper-plane"></i>
                 </button>
@@ -256,7 +257,8 @@
         let hasSent = false;
         let debugMode = false;
         let sendingInProgress = false;
-        let chatPopup = null;
+        let lastSentTime = 0;
+        let inactivityTimer = null;
 
         const POWER_AUTOMATE_URL = 'https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII';
         const API_ENDPOINT = '/.netlify/functions/chat-gemini';
@@ -293,14 +295,39 @@
             debugLog('Log limpiado', 'info');
         }
 
+        // Timer de inactividad
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                if (conversationHistory.length > 2 && canSendAgain()) {
+                    debugLog('⏱️ Inactividad detectada - guardando conversación...', 'warning');
+                    safeSendToPowerAutomate();
+                }
+            }, 30000); // 30 segundos
+        }
+
+        // Verificar si han pasado 90 segundos desde el último envío
+        function canSendAgain() {
+            const now = Date.now();
+            return (now - lastSentTime) > 90000; // 90 segundos
+        }
+
         // Función para enviar a Power Automate
         function sendToPowerAutomate() {
             debugLog('📤 Iniciando envío a Power Automate...', 'info');
             debugLog(`Estado actual: email=${userData.email}, mensajes=${conversationHistory.length}`, 'info');
             
-            if (hasSent || !userData.email || conversationHistory.length === 0) {
-                debugLog(`❌ No se envió: hasSent=${hasSent}, email=${userData.email}, mensajes=${conversationHistory.length}`, 'warning');
+            if (!userData.email || conversationHistory.length === 0) {
+                debugLog(`❌ No se envió: email=${userData.email}, mensajes=${conversationHistory.length}`, 'warning');
+                sendingInProgress = false;
                 return;
+            }
+
+            // Actualizar estado visual
+            const saveStatus = document.getElementById('save-status');
+            if (saveStatus) {
+                saveStatus.textContent = 'Guardando...';
+                saveStatus.style.color = '#F59E0B';
             }
 
             const dataToSend = {
@@ -329,7 +356,6 @@
             };
 
             debugLog(`Preparando datos: ${JSON.stringify(dataToSend).substring(0, 100)}...`, 'info');
-            hasSent = true;
 
             // Intentar con Fetch normal
             debugLog('Intentando con Fetch normal...', 'info');
@@ -345,7 +371,21 @@
                 if (response.ok || response.status === 202) {
                     debugLog(`✅ Fetch exitoso! Status: ${response.status}`, 'success');
                     console.log('✅ Conversación enviada exitosamente a Power Automate');
+                    lastSentTime = Date.now();
                     sendingInProgress = false;
+                    
+                    // Actualizar estado visual
+                    if (saveStatus) {
+                        const now = new Date().toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
+                        saveStatus.textContent = `Guardado ✓ (${now})`;
+                        saveStatus.style.color = '#10B981';
+                        
+                        // Después de 5 segundos, volver al estado normal
+                        setTimeout(() => {
+                            saveStatus.textContent = 'Guardado automático activo';
+                            saveStatus.style.color = '#9CA3AF';
+                        }, 5000);
+                    }
                     
                     // Feedback visual
                     const banner = document.getElementById('warning-banner');
@@ -371,8 +411,17 @@
             .catch(error => {
                 debugLog(`❌ Error con Fetch: ${error.message}`, 'error');
                 console.error('Error en Fetch:', error);
-                hasSent = false;
                 sendingInProgress = false;
+                
+                // Actualizar estado visual
+                if (saveStatus) {
+                    saveStatus.textContent = 'Error al guardar';
+                    saveStatus.style.color = '#EF4444';
+                    setTimeout(() => {
+                        saveStatus.textContent = 'Guardado automático activo';
+                        saveStatus.style.color = '#9CA3AF';
+                    }, 3000);
+                }
             });
         }
 
@@ -389,12 +438,18 @@
 
         // Función segura para enviar
         function safeSendToPowerAutomate() {
-            debugLog(`safeSendToPowerAutomate - sendingInProgress: ${sendingInProgress}, hasSent: ${hasSent}`, 'info');
+            debugLog(`safeSendToPowerAutomate - sendingInProgress: ${sendingInProgress}, canSendAgain: ${canSendAgain()}`, 'info');
             
-            if (sendingInProgress || hasSent) {
-                debugLog('Envío ya en progreso o completado', 'warning');
+            if (sendingInProgress) {
+                debugLog('Envío ya en progreso', 'warning');
                 return;
             }
+            
+            if (!canSendAgain()) {
+                debugLog('Muy pronto para enviar de nuevo, esperando...', 'info');
+                return;
+            }
+            
             sendingInProgress = true;
             sendToPowerAutomate();
         }
@@ -402,7 +457,7 @@
         // Función de prueba manual
         function testManualSend() {
             debugLog('🧪 TEST MANUAL: Iniciando envío de prueba...', 'warning');
-            hasSent = false;
+            lastSentTime = 0; // Resetear para permitir envío inmediato
             sendingInProgress = false;
             safeSendToPowerAutomate();
         }
@@ -449,6 +504,9 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
             conversationHistory.push({ role: 'assistant', content: welcomeMessage });
 
             document.getElementById('chat-input').focus();
+            
+            // Iniciar timer de inactividad
+            resetInactivityTimer();
         }
 
         // Agregar mensaje al chat
@@ -483,6 +541,9 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
             const message = input.value.trim();
             if (!message) return;
 
+            // Resetear timer de inactividad
+            resetInactivityTimer();
+
             debugLog(`Enviando mensaje: ${message}`, 'info');
 
             appendMessage(message, true);
@@ -513,6 +574,9 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
                     appendMessage(data.response);
                     conversationHistory.push({ role: 'assistant', content: data.response });
                     debugLog('Respuesta recibida correctamente', 'success');
+                    
+                    // Resetear timer después de recibir respuesta
+                    resetInactivityTimer();
                 }
 
             } catch (error) {
@@ -526,18 +590,91 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
         function sendQuickMessage(message) {
             document.getElementById('chat-input').value = message;
             sendMessage();
+            resetInactivityTimer();
         }
 
-        // EVENTOS PARA CERRAR
-        window.addEventListener('beforeunload', (event) => {
-            debugLog('🚨 EVENTO beforeunload DISPARADO', 'warning');
-            safeSendToPowerAutomate();
+        // 🔥 ESTRATEGIA DE GUARDADO INTELIGENTE
+
+        // 1. Guardar cada 2 minutos automáticamente
+        setInterval(() => {
+            if (conversationHistory.length > 2 && canSendAgain() && !sendingInProgress) {
+                debugLog('⏰ Guardado automático cada 2 minutos', 'info');
+                
+                // Notificar al usuario del guardado automático
+                const banner = document.getElementById('warning-banner');
+                if (banner) {
+                    banner.style.background = 'rgba(59, 130, 246, 0.1)';
+                    banner.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+                    banner.style.color = '#3B82F6';
+                    banner.innerHTML = '<i class="fas fa-save mr-1"></i> Guardando automáticamente...';
+                    banner.style.display = 'block';
+                    setTimeout(() => { banner.style.display = 'none'; }, 2000);
+                }
+                
+                safeSendToPowerAutomate();
+            }
+        }, 120000); // 2 minutos
+
+        // 2. Guardar cuando la ventana pierde el foco
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && conversationHistory.length > 0 && canSendAgain()) {
+                debugLog('👁️ Ventana oculta - guardando...', 'warning');
+                safeSendToPowerAutomate();
+            }
         });
 
-        window.addEventListener('unload', () => {
-            debugLog('🚨 EVENTO unload DISPARADO', 'warning');
-            if (!hasSent) safeSendToPowerAutomate();
+        // 3. Guardar cuando se minimiza o cambia de pestaña
+        window.addEventListener('blur', () => {
+            setTimeout(() => {
+                if (conversationHistory.length > 2 && canSendAgain() && !sendingInProgress) {
+                    debugLog('🔄 Ventana perdió el foco - guardando...', 'warning');
+                    safeSendToPowerAutomate();
+                }
+            }, 1000);
         });
+
+        // 4. Intentar con beforeunload pero sin depender de él
+        window.addEventListener('beforeunload', (event) => {
+            debugLog('🚨 beforeunload - último intento', 'warning');
+            if (conversationHistory.length > 0) {
+                // Usar sendBeacon como último recurso
+                const dataToSend = {
+                    nombre: userData.name || 'Usuario',
+                    email: userData.email || 'no-email@test.com',
+                    empresa: userData.company || 'No especificada',
+                    fecha: new Date().toLocaleString('es-CL'),
+                    duracionMinutos: Math.floor((Date.now() - chatStartTime) / 60000) || 1,
+                    cantidadMensajes: conversationHistory.length,
+                    esLeadCaliente: true,
+                    conversacion: conversationHistory
+                };
+                
+                if (navigator.sendBeacon) {
+                    const blob = new Blob([JSON.stringify(dataToSend)], { type: 'application/json' });
+                    navigator.sendBeacon(POWER_AUTOMATE_URL, blob);
+                    debugLog('🚀 sendBeacon enviado como último recurso', 'warning');
+                }
+            }
+        });
+
+        // 5. Guardar cuando se detecta intención de cerrar
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY <= 0 && conversationHistory.length > 2 && canSendAgain() && !sendingInProgress) {
+                debugLog('🖱️ Mouse salió por arriba - posible cierre', 'warning');
+                safeSendToPowerAutomate();
+            }
+        });
+
+        // 6. Detectar cuando la ventana principal se cierra
+        if (window.opener) {
+            setInterval(() => {
+                if (window.opener.closed && conversationHistory.length > 0 && canSendAgain()) {
+                    debugLog('🏠 Ventana principal cerrada - guardando y cerrando...', 'error');
+                    safeSendToPowerAutomate();
+                    setTimeout(() => window.close(), 2000);
+                }
+            }, 1000);
+        }
 
         // Atajo de teclado para debug
         document.addEventListener('keydown', (e) => {
@@ -545,11 +682,24 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
                 e.preventDefault();
                 toggleDebug();
             }
+            
+            // Activar timer cuando el usuario escribe
+            if (userData.email) {
+                resetInactivityTimer();
+            }
         });
 
         // Log inicial
-        console.log('✅ Chat popup v3.0 SIMPLIFICADO cargado correctamente');
-        console.log('Usa Ctrl+D para activar el modo debug');
+        console.log('✅ Chat popup v4.0 COMPLETO con GUARDADO INTELIGENTE');
+        console.log('📝 La conversación se guarda automáticamente cuando:');
+        console.log('   ⏱️  Dejas de escribir por 30 segundos');
+        console.log('   ⏰  Cada 2 minutos');
+        console.log('   🔄  Cambias de pestaña o minimizas');
+        console.log('   🏠  Se cierra la ventana principal');
+        console.log('   🖱️  El mouse sale por arriba de la ventana');
+        console.log('');
+        console.log('💡 Tip: Usa Ctrl+D para activar el modo debug');
+        console.log('🧪 Usa el botón rojo "Test Envío" para probar manualmente');
     </script>
 </body>
 </html>
