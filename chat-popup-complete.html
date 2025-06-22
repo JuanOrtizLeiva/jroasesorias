@@ -213,6 +213,11 @@
                         onclick="sendQuickMessage('¿Cuál es el precio?')">
                     💰 Precio
                 </button>
+                <!-- Botón de prueba temporal -->
+                <button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-full transition-colors text-white"
+                        onclick="testManualSend()" title="Solo para pruebas">
+                    🧪 Test Envío
+                </button>
             </div>
         </div>
 
@@ -252,6 +257,7 @@
         let chatStartTime;
         let hasSent = false;
         let debugMode = false;
+        let sendingInProgress = false; // Variable para controlar envíos múltiples
 
         const POWER_AUTOMATE_URL = 'https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII';
         const API_ENDPOINT = '/.netlify/functions/chat-gemini';
@@ -299,10 +305,11 @@
 
         // Función para enviar a Power Automate
         function sendToPowerAutomate() {
-            debugLog('Iniciando envío a Power Automate...', 'info');
+            debugLog('📤 Iniciando envío a Power Automate...', 'info');
+            debugLog(`Estado actual: email=${userData.email}, mensajes=${conversationHistory.length}`, 'info');
             
             if (hasSent || !userData.email || conversationHistory.length === 0) {
-                debugLog(`No se envió: hasSent=${hasSent}, email=${userData.email}, mensajes=${conversationHistory.length}`, 'warning');
+                debugLog(`❌ No se envió: hasSent=${hasSent}, email=${userData.email}, mensajes=${conversationHistory.length}`, 'warning');
                 return;
             }
 
@@ -350,6 +357,7 @@
                 if (response.ok || response.status === 202) {
                     debugLog(`✅ Fetch exitoso! Status: ${response.status}`, 'success');
                     console.log('✅ Conversación enviada exitosamente a Power Automate');
+                    sendingInProgress = false; // Resetear después del éxito
                     
                     // Feedback visual opcional
                     if (document.getElementById('warning-banner')) {
@@ -375,6 +383,7 @@
             .catch(error => {
                 debugLog(`❌ Error con Fetch: ${error.message}`, 'error');
                 console.error('Error en Fetch, intentando con XMLHttpRequest...', error);
+                sendingInProgress = false; // Permitir reintento con XHR
                 
                 // MÉTODO 2: Fallback a XMLHttpRequest (también funcionó en el test)
                 sendWithXHR(dataToSend);
@@ -393,6 +402,7 @@
                 if (xhr.status === 200 || xhr.status === 202) {
                     debugLog(`✅ XHR exitoso! Status: ${xhr.status}`, 'success');
                     console.log('✅ Conversación enviada exitosamente con XHR');
+                    sendingInProgress = false; // Resetear después del éxito
                     
                     // Feedback visual opcional
                     if (document.getElementById('warning-banner')) {
@@ -411,6 +421,7 @@
                 } else {
                     debugLog(`❌ XHR Error. Status: ${xhr.status}`, 'error');
                     hasSent = false; // Revertir para permitir reintento
+                    sendingInProgress = false;
                 }
             };
             
@@ -418,6 +429,7 @@
                 debugLog('❌ Error de red con XMLHttpRequest', 'error');
                 console.error('Error completo al enviar a Power Automate');
                 hasSent = false; // Revertir para permitir reintento
+                sendingInProgress = false;
             };
             
             try {
@@ -425,14 +437,20 @@
             } catch (e) {
                 debugLog(`❌ Error al enviar XHR: ${e.message}`, 'error');
                 hasSent = false;
+                sendingInProgress = false;
             }
         }
 
         // Función para cerrar el chat manualmente
         function closeChat() {
-            debugLog('Cerrando chat manualmente...', 'info');
+            debugLog('🚪 Cerrando chat manualmente (botón X)...', 'warning');
             safeSendToPowerAutomate();
-            setTimeout(() => window.close(), 100);
+            
+            // Dar tiempo para que se envíe antes de cerrar
+            setTimeout(() => {
+                debugLog('Cerrando ventana...', 'info');
+                window.close();
+            }, 500);
         }
 
         // Iniciar chat
@@ -455,7 +473,8 @@
             userData = { name, email, company };
             chatStartTime = Date.now();
 
-            debugLog(`Chat iniciado: ${name} (${email})`, 'success');
+            debugLog(`✅ Chat iniciado: ${name} (${email})`, 'success');
+            debugLog('Eventos de cierre listos para capturar', 'info');
 
             // Ocultar formulario y mostrar chat
             document.getElementById('chat-form-container').classList.add('hidden');
@@ -564,14 +583,12 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
         // Variable para controlar envíos múltiples
         let sendingInProgress = false;
 
-        // Función mejorada que evita envíos duplicados
-        function safeSendToPowerAutomate() {
-            if (sendingInProgress || hasSent) {
-                debugLog('Envío ya en progreso o completado, evitando duplicado', 'warning');
-                return;
-            }
-            sendingInProgress = true;
-            sendToPowerAutomate();
+        // Función de prueba manual
+        function testManualSend() {
+            debugLog('🧪 TEST MANUAL: Iniciando envío de prueba...', 'warning');
+            hasSent = false; // Resetear para permitir la prueba
+            sendingInProgress = false; // Resetear
+            safeSendToPowerAutomate();
         }
 
         // 1. PRINCIPAL: Cuando se cierra el popup
@@ -630,7 +647,12 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
         });
 
         // Log inicial
-        console.log('Chat popup cargado - v2.0 con métodos correctos (fetch normal + XHR)');
+        console.log('Chat popup cargado - v2.2 DEBUG COMPLETO');
+        debugLog('Chat popup iniciado correctamente', 'success');
+        
+        // Verificar que los eventos se registraron
+        console.log('✅ Eventos de cierre registrados: beforeunload, unload, pagehide, visibilitychange');
+        console.log('ℹ️ Usa el botón "🧪 Test Envío" para probar manualmente');
     </script>
 </body>
 </html>
