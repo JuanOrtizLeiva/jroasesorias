@@ -33,6 +33,7 @@
             --color-sapphire-light: #283593;
             --color-success: #10B981;
             --color-white: #FFFFFF;
+            --color-blue-elegant: #5DADE2;     /* Azul claro elegante agregado */
         }
 
         body { 
@@ -68,6 +69,21 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
@@ -78,9 +94,18 @@
             50% { box-shadow: 0 0 40px rgba(201, 154, 97, 0.8); }
         }
 
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
         .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-fadeInLeft { animation: fadeInLeft 0.8s ease-out forwards; }
+        .animate-fadeInRight { animation: fadeInRight 0.8s ease-out forwards; }
+        .animate-zoomIn { animation: zoomIn 0.8s ease-out forwards; }
         .animate-float { animation: float 6s ease-in-out infinite; }
         .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+        .animate-bounce { animation: bounce 2s ease-in-out infinite; }
 
         /* Clases de revelación */
         .reveal { 
@@ -205,6 +230,59 @@
             background: linear-gradient(135deg, rgba(201, 154, 97, 0.2), rgba(176, 141, 87, 0.1));
             border: 1px solid rgba(201, 154, 97, 0.3);
             color: var(--color-text-primary);
+        }
+
+        /* Botón flotante de chat */
+        .chat-float-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #C9A961, #B08D57);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(201, 154, 97, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-float-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(201, 154, 97, 0.6);
+        }
+        
+        .chat-float-button.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Formulario del chat */
+        .chat-form {
+            background: var(--color-bg-tertiary);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .chat-form input {
+            width: 100%;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .chat-form input:focus {
+            outline: none;
+            border-color: var(--color-accent-gold);
+            box-shadow: 0 0 0 2px rgba(201, 154, 97, 0.2);
         }
 
         /* Proceso visual */
@@ -437,8 +515,13 @@
         </nav>
     </header>
 
+    <!-- Botón flotante de chat -->
+    <div class="chat-float-button animate-bounce" id="chat-float-button">
+        <i class="fas fa-comments text-white text-2xl"></i>
+    </div>
+
     <main>
-        <!-- Hero Section - MODIFICADO: Agregado padding-top para bajar el texto -->
+        <!-- Hero Section - MODIFICADO: Color del título cambiado a azul -->
         <section id="inicio" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-32">
             <!-- Background gradient -->
             <div class="absolute inset-0 bg-gradient-to-br from-black via-sapphire/20 to-black"></div>
@@ -452,7 +535,7 @@
 
             <div class="relative z-10 container mx-auto px-6 text-center">
                 <h1 class="text-5xl md:text-7xl font-heading font-bold text-white mb-6 animate-fadeInUp">
-                    Deja de perder tiempo<br>
+                    <span style="color: #5DADE2;">Deja de perder tiempo</span><br>
                     <span class="text-gradient-gold">en tareas repetitivas</span>
                 </h1>
                 <div class="max-w-4xl mx-auto mb-8 animate-fadeInUp" style="animation-delay: 0.2s;">
@@ -573,7 +656,7 @@
                                         <span>Proyección de ROI esperado</span>
                                     </li>
                                 </ul>
-                                <button class="btn-primary w-full mt-6" onclick="openDiagnosticForm()">
+                                <button class="btn-primary w-full mt-6" onclick="window.open('https://wa.me/56966895746?text=Hola,%20quiero%20solicitar%20mi%20diagnóstico%20gratuito', '_blank')">
                                     Solicitar Diagnóstico Ahora
                                 </button>
                             </div>
@@ -950,7 +1033,7 @@
             </div>
         </section>
 
-        <!-- Dashboard Section - Soluciones en Acción (ACTUALIZADO) -->
+        <!-- Dashboard Section - Soluciones en Acción (ACTUALIZADO - ELIMINADAS ETIQUETAS) -->
         <section class="py-20 bg-black" id="galeria">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 reveal">
@@ -1064,31 +1147,25 @@
                                 </div>
                             </div>
 
-                            <!-- Heat Map con etiquetas -->
+                            <!-- Heat Map sin etiquetas Norte, Centro, Sur -->
                             <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
                                 <h5 class="text-lg font-semibold text-white mb-4">Mapa de Calor - Actividad por Región y Hora</h5>
                                 <div class="relative">
-                                    <!-- Etiquetas del eje Y (Regiones) -->
-                                    <div class="absolute -left-16 top-8 text-xs text-gray-400 space-y-4">
-                                        <div>Norte</div>
-                                        <div>Centro</div>
-                                        <div>Sur</div>
-                                    </div>
                                     <!-- Grid del mapa de calor -->
                                     <div class="grid grid-cols-5 gap-2 ml-4">
-                                        <!-- Fila 1 - Norte -->
+                                        <!-- Fila 1 -->
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.2);">12</div>
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.8);">89</div>
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.4);">34</div>
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 1);">120</div>
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.3);">23</div>
-                                        <!-- Fila 2 - Centro -->
+                                        <!-- Fila 2 -->
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.6);">67</div>
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.9);">98</div>
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.2);">15</div>
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.7);">78</div>
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.5);">56</div>
-                                        <!-- Fila 3 - Sur -->
+                                        <!-- Fila 3 -->
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.3);">29</div>
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.8);">87</div>
                                         <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.4);">43</div>
@@ -1214,7 +1291,7 @@
             </div>
         </section>
 
-        <!-- Chat IA Section - MODIFICADO CON EL CÓDIGO PROPUESTO -->
+        <!-- Chat IA Section - COMPLETAMENTE MODIFICADO -->
         <section id="asistente" class="py-20 md:py-28">
             <div class="container mx-auto px-6">
                 <div class="max-w-5xl mx-auto">
@@ -1246,31 +1323,28 @@
                             </div>
                         </div>
 
-                        <!-- Chat messages -->
-                        <div class="chat-messages h-96 overflow-y-auto p-6 custom-scrollbar" id="chat-messages">
-                            <div class="flex justify-start mb-4">
-                                <div class="chat-bubble ai-bubble">
-                                    <p class="text-sm">
-                                        ¡Hola! Soy el asistente de JRO Asesorías 🚀
-                                    </p>
-                                    <p class="text-sm mt-2">
-                                        Puedo ayudarte con:
-                                    </p>
-                                    <ul class="mt-2 space-y-1 text-sm">
-                                        <li>• Cómo Power BI puede acelerar tus decisiones</li>
-                                        <li>• Qué procesos puedes automatizar en tu empresa</li>
-                                        <li>• Cuánto tiempo toma la implementación</li>
-                                        <li>• Resultados medibles en 6 áreas clave del negocio</li>
-                                    </ul>
-                                    <p class="text-sm mt-3">
-                                        ¿Qué te gustaría saber?
-                                    </p>
-                                </div>
+                        <!-- Formulario inicial -->
+                        <div class="p-6" id="chat-form-container">
+                            <div class="chat-form">
+                                <h3 class="text-lg font-semibold mb-4" style="color: var(--color-accent-gold);">
+                                    Antes de comenzar, cuéntanos sobre ti:
+                                </h3>
+                                <input type="text" id="user-name" placeholder="Tu nombre *" required>
+                                <input type="email" id="user-email" placeholder="Tu email *" required>
+                                <input type="text" id="user-company" placeholder="Tu empresa (opcional)">
+                                <button class="btn-primary w-full mt-4" onclick="startChat()">
+                                    Iniciar Conversación
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Quick actions -->
-                        <div class="px-6 py-3 border-t border-gray-700">
+                        <!-- Chat messages (oculto inicialmente) -->
+                        <div class="chat-messages h-96 overflow-y-auto p-6 custom-scrollbar hidden" id="chat-messages">
+                            <!-- Los mensajes se agregarán dinámicamente aquí -->
+                        </div>
+
+                        <!-- Quick actions (oculto inicialmente) -->
+                        <div class="px-6 py-3 border-t border-gray-700 hidden" id="quick-actions">
                             <div class="flex flex-wrap gap-2 mb-4">
                                 <button class="quick-btn bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded-full transition-colors"
                                         onclick="sendQuickMessage('¿Cuánto tiempo toma implementar Power BI?')">
@@ -1287,8 +1361,8 @@
                             </div>
                         </div>
 
-                        <!-- Input area -->
-                        <div class="px-6 pb-6">
+                        <!-- Input area (oculto inicialmente) -->
+                        <div class="px-6 pb-6 hidden" id="chat-input-area">
                             <div class="flex space-x-3">
                                 <input type="text" 
                                        id="chat-input" 
@@ -1480,7 +1554,10 @@
             });
         });
 
-        // Intersection Observer for reveal animations
+        // Array de animaciones aleatorias
+        const animations = ['animate-fadeInUp', 'animate-fadeInLeft', 'animate-fadeInRight', 'animate-zoomIn'];
+
+        // Intersection Observer for reveal animations con efecto aleatorio
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1489,6 +1566,11 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    // Asignar animación aleatoria si no tiene una asignada
+                    if (!entry.target.classList.contains('visible')) {
+                        const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+                        entry.target.classList.add(randomAnimation);
+                    }
                     entry.target.classList.add('visible');
                     
                     // Animate counters if present
@@ -1552,13 +1634,62 @@
         // Initial calculation
         calculateROI();
 
-        // Chat functionality MODIFICADO con el código propuesto
+        // Variables globales para el chat
         const chatMessages = document.getElementById('chat-messages');
         const chatInput = document.getElementById('chat-input');
         let conversationHistory = [];
+        let userData = {};
+        let chatStartTime;
 
         // URL correcta para llamar a una función de Netlify
         const API_ENDPOINT = '/.netlify/functions/chat-gemini';
+
+        // Función para iniciar el chat después del formulario
+        function startChat() {
+            const name = document.getElementById('user-name').value.trim();
+            const email = document.getElementById('user-email').value.trim();
+            const company = document.getElementById('user-company').value.trim();
+
+            // Validación
+            if (!name || !email) {
+                alert('Por favor completa los campos obligatorios (nombre y email)');
+                return;
+            }
+
+            // Validar formato de email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Por favor ingresa un email válido');
+                return;
+            }
+
+            // Guardar datos del usuario
+            userData = {
+                name: name,
+                email: email,
+                company: company
+            };
+            chatStartTime = Date.now();
+
+            // Ocultar formulario y mostrar chat
+            document.getElementById('chat-form-container').classList.add('hidden');
+            document.getElementById('chat-messages').classList.remove('hidden');
+            document.getElementById('quick-actions').classList.remove('hidden');
+            document.getElementById('chat-input-area').classList.remove('hidden');
+
+            // Mensaje de bienvenida personalizado
+            appendMessage(`¡Hola ${name}! 🚀
+
+Soy el asistente de JRO Asesorías. Gracias por confiar en nosotros.
+
+Puedo ayudarte con:
+• Cómo Power BI puede acelerar tus decisiones
+• Qué procesos puedes automatizar en tu empresa
+• Cuánto tiempo toma la implementación
+• Resultados medibles en 6 áreas clave del negocio
+
+¿Qué te gustaría saber sobre la transformación digital de ${company || 'tu empresa'}?`);
+        }
 
         // Función para agregar mensaje al chat
         function appendMessage(text, isUser = false, isLoading = false) {
@@ -1588,77 +1719,82 @@
         }
 
         // Función principal para enviar mensaje
-        // Reemplaza la función sendMessage() en tu HTML con esta versión que muestra más detalles del error:
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
 
-async function sendMessage() {
-    const message = chatInput.value.trim();
-    if (!message) return;
+            // Verificar si quiere agendar
+            if (message.toLowerCase().includes('agendar') || 
+                message.toLowerCase().includes('reunión') || 
+                message.toLowerCase().includes('contactar') ||
+                message.toLowerCase().includes('llamada') ||
+                message.toLowerCase().includes('hablar')) {
+                
+                appendMessage(message, true);
+                conversationHistory.push({ role: 'user', content: message });
+                chatInput.value = '';
+                
+                // Respuesta específica para agendar
+                const scheduleResponse = `¡Excelente! Me encantaría coordinar una llamada contigo. 
 
-    // Agregar mensaje del usuario
-    appendMessage(message, true);
-    conversationHistory.push({ role: 'user', content: message });
-    chatInput.value = '';
+<a href='https://wa.me/56966895746' target='_blank' style='color: #C9A961; font-weight: bold;'>
+Haz clic aquí para contactarnos por WhatsApp</a> y encontraremos el mejor horario.
 
-    // Mostrar indicador de carga
-    const loadingMessage = appendMessage('', false, true);
-
-    try {
-        console.log('Enviando a:', API_ENDPOINT); // Debug
-        
-        const response = await fetch(API_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                message: message,
-                history: conversationHistory.slice(-10)
-            })
-        });
-
-        console.log('Response status:', response.status); // Debug
-        
-        loadingMessage.remove();
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error('Error del servidor:', errorData); // Debug
-            throw new Error(errorData.error || `Error HTTP: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log('Respuesta del servidor:', data); // Debug
-
-        if (data.response) {
-            appendMessage(data.response);
-            conversationHistory.push({ role: 'assistant', content: data.response });
-            
-            if (data.isHotLead) {
-                console.log('Lead caliente detectado!');
+Nuestro equipo está disponible de lunes a viernes de 9:00 a 18:00 hrs.`;
+                
+                appendMessage(scheduleResponse);
+                conversationHistory.push({ role: 'assistant', content: scheduleResponse });
+                return;
             }
-        } else {
-            throw new Error('Respuesta inesperada del servidor.');
-        }
 
-    } catch (error) {
-        console.error('Error completo:', error);
-        
-        // Mensaje más específico según el tipo de error
-        let errorMessage = 'Error desconocido. ';
-        
-        if (error.message.includes('Failed to fetch')) {
-            errorMessage = '❌ No se puede conectar con la función. La función podría no estar desplegada. ';
-        } else if (error.message.includes('404')) {
-            errorMessage = '❌ Función no encontrada (404). Verifica que esté en netlify/functions/chat-gemini.js. ';
-        } else if (error.message.includes('500')) {
-            errorMessage = '❌ Error del servidor (500). Revisa los logs de Netlify Functions. ';
-        } else if (error.message) {
-            errorMessage = `❌ Error: ${error.message}. `;
+            // Agregar mensaje del usuario
+            appendMessage(message, true);
+            conversationHistory.push({ role: 'user', content: message });
+            chatInput.value = '';
+
+            // Mostrar indicador de carga
+            const loadingMessage = appendMessage('', false, true);
+
+            try {
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: message,
+                        history: conversationHistory.slice(-10),
+                        userData: userData
+                    })
+                });
+
+                loadingMessage.remove();
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || `Error HTTP: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.response) {
+                    appendMessage(data.response);
+                    conversationHistory.push({ role: 'assistant', content: data.response });
+                    
+                    if (data.isHotLead) {
+                        console.log('Lead caliente detectado!');
+                    }
+                } else {
+                    throw new Error('Respuesta inesperada del servidor.');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                
+                let errorMessage = '❌ Lo siento, hubo un problema. ';
+                errorMessage += 'Por favor contáctanos directamente al +56 9 6689 5746.';
+                
+                appendMessage(errorMessage);
+            }
         }
-        
-        errorMessage += 'Mientras tanto, contáctanos al +56 9 6689 5746.';
-        
-        appendMessage(errorMessage);
-    }
-}
 
         // Función para respuestas rápidas
         function sendQuickMessage(message) {
@@ -1666,10 +1802,58 @@ async function sendMessage() {
             sendMessage();
         }
 
-        // Enter key para enviar
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
+        // Preparación para Power Automate
+        window.addEventListener('beforeunload', (event) => {
+            if (conversationHistory.length > 2 && userData.email) {
+                const resumenConversacion = {
+                    nombre: userData.name,
+                    email: userData.email,
+                    empresa: userData.company || 'No especificada',
+                    fecha: new Date().toLocaleString('es-CL'),
+                    duracionMinutos: Math.floor((Date.now() - chatStartTime) / 60000),
+                    cantidadMensajes: conversationHistory.length,
+                    conversacion: conversationHistory,
+                    esLeadCaliente: conversationHistory.some(msg => 
+                        msg.content.toLowerCase().includes('precio') ||
+                        msg.content.toLowerCase().includes('contratar') ||
+                        msg.content.toLowerCase().includes('agendar') ||
+                        msg.content.toLowerCase().includes('reunión')
+                    )
+                };
+                
+                // AQUÍ IRÁ EL WEBHOOK DE POWER AUTOMATE
+                // fetch('URL_DE_POWER_AUTOMATE', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify(resumenConversacion)
+                // });
+                
+                console.log('Datos listos para enviar:', resumenConversacion);
+            }
         });
+
+        // Botón flotante de chat
+        const chatFloatButton = document.getElementById('chat-float-button');
+        const assistantSection = document.getElementById('asistente');
+
+        chatFloatButton.addEventListener('click', () => {
+            assistantSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Observer para ocultar/mostrar botón flotante
+        const chatObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    chatFloatButton.classList.add('hidden');
+                } else {
+                    chatFloatButton.classList.remove('hidden');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        chatObserver.observe(assistantSection);
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1684,11 +1868,6 @@ async function sendMessage() {
                 }
             });
         });
-
-        // Diagnostic form (placeholder)
-        function openDiagnosticForm() {
-            alert('El formulario de diagnóstico se abrirá aquí. Por ahora, contáctanos directamente al +56 9 6689 5746');
-        }
     </script>
 </body>
 </html>
