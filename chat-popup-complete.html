@@ -99,6 +99,55 @@
             font-size: 12px;
             display: none;
         }
+
+        /* Debug panel */
+        .debug-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            border-top: 1px solid var(--color-accent-gold);
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 11px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .debug-panel.active {
+            display: block;
+        }
+
+        .debug-log {
+            margin: 2px 0;
+        }
+
+        .debug-success { color: #10B981; }
+        .debug-error { color: #EF4444; }
+        .debug-info { color: #3B82F6; }
+        .debug-warning { color: #F59E0B; }
+
+        .debug-toggle {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: #333;
+            color: #888;
+            border: 1px solid #555;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 10px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .debug-toggle:hover {
+            background: #444;
+            color: #aaa;
+        }
     </style>
 </head>
 <body>
@@ -182,19 +231,78 @@
         </div>
     </div>
 
+    <!-- Debug toggle button -->
+    <button class="debug-toggle" onclick="toggleDebug()" title="Presiona Ctrl+D para activar/desactivar">
+        🐛 Debug
+    </button>
+
+    <!-- Debug panel -->
+    <div id="debug-panel" class="debug-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <strong style="color: var(--color-accent-gold);">Debug Console</strong>
+            <button onclick="clearDebugLog()" style="background: #333; border: 1px solid #555; padding: 2px 8px; border-radius: 3px; color: #888; font-size: 10px;">Clear</button>
+        </div>
+        <div id="debug-log"></div>
+    </div>
+
     <script>
         // Variables globales
         let conversationHistory = [];
         let userData = {};
         let chatStartTime;
-        let hasSent = false; // Para evitar envíos duplicados
+        let hasSent = false;
+        let debugMode = false;
+
         const POWER_AUTOMATE_URL = 'https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII';
         const API_ENDPOINT = '/.netlify/functions/chat-gemini';
 
+        // Debug functions
+        function debugLog(message, type = 'info') {
+            if (!debugMode) return;
+            
+            const debugLogDiv = document.getElementById('debug-log');
+            const time = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `debug-log debug-${type}`;
+            logEntry.textContent = `[${time}] ${message}`;
+            debugLogDiv.appendChild(logEntry);
+            debugLogDiv.scrollTop = debugLogDiv.scrollHeight;
+
+            // También log en consola
+            console.log(`[DEBUG ${type.toUpperCase()}] ${message}`);
+        }
+
+        function toggleDebug() {
+            debugMode = !debugMode;
+            const panel = document.getElementById('debug-panel');
+            panel.classList.toggle('active');
+            
+            if (debugMode) {
+                debugLog('Modo debug activado', 'success');
+                debugLog(`URL Power Automate: ${POWER_AUTOMATE_URL.substring(0, 50)}...`, 'info');
+                debugLog(`Conversación actual: ${conversationHistory.length} mensajes`, 'info');
+            }
+        }
+
+        function clearDebugLog() {
+            document.getElementById('debug-log').innerHTML = '';
+            debugLog('Log limpiado', 'info');
+        }
+
+        // Atajo de teclado para debug (Ctrl+D)
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'd') {
+                e.preventDefault();
+                toggleDebug();
+            }
+        });
+
         // Función para enviar a Power Automate
         function sendToPowerAutomate() {
+            debugLog('Iniciando envío a Power Automate...', 'info');
+            
             if (hasSent || !userData.email || conversationHistory.length === 0) {
-                console.log('No hay datos para enviar o ya se enviaron');
+                debugLog(`No se envió: hasSent=${hasSent}, email=${userData.email}, mensajes=${conversationHistory.length}`, 'warning');
                 return;
             }
 
@@ -209,7 +317,12 @@
                     msg.content && (
                         msg.content.toLowerCase().includes('precio') ||
                         msg.content.toLowerCase().includes('contratar') ||
-                        msg.content.toLowerCase().includes('agendar')
+                        msg.content.toLowerCase().includes('agendar') ||
+                        msg.content.toLowerCase().includes('costo') ||
+                        msg.content.toLowerCase().includes('cotización') ||
+                        msg.content.toLowerCase().includes('reunión') ||
+                        msg.content.toLowerCase().includes('demo') ||
+                        msg.content.toLowerCase().includes('llamada')
                     )
                 ),
                 conversacion: conversationHistory.map(msg => ({
@@ -218,36 +331,56 @@
                 }))
             };
 
-            console.log('📤 Enviando conversación a Power Automate...');
+            debugLog(`Preparando datos: ${JSON.stringify(dataToSend).substring(0, 100)}...`, 'info');
 
-            // Usar sendBeacon que es más confiable para cuando se cierra la ventana
+            // Marcar como enviado inmediatamente para evitar duplicados
+            hasSent = true;
+
+            // Intentar con sendBeacon primero
             if (navigator.sendBeacon) {
-                const blob = new Blob([JSON.stringify(dataToSend)], { type: 'application/json' });
-                const sent = navigator.sendBeacon(POWER_AUTOMATE_URL, blob);
-                if (sent) {
-                    hasSent = true;
-                    console.log('✅ Conversación enviada con sendBeacon');
+                try {
+                    const blob = new Blob([JSON.stringify(dataToSend)], { type: 'application/json' });
+                    const sent = navigator.sendBeacon(POWER_AUTOMATE_URL, blob);
+                    
+                    if (sent) {
+                        debugLog('✅ Enviado con sendBeacon exitosamente', 'success');
+                        console.log('✅ Conversación enviada con sendBeacon');
+                    } else {
+                        debugLog('❌ sendBeacon devolvió false', 'error');
+                        hasSent = false; // Revertir si falló
+                    }
+                    return sent;
+                } catch (error) {
+                    debugLog(`❌ Error en sendBeacon: ${error.message}`, 'error');
+                    hasSent = false; // Revertir si falló
                 }
-                return sent;
             } else {
-                // Fallback a fetch
-                fetch(POWER_AUTOMATE_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dataToSend),
-                    mode: 'no-cors',
-                    keepalive: true
-                }).then(() => {
-                    hasSent = true;
-                    console.log('✅ Conversación enviada con fetch');
-                }).catch(err => console.error('❌ Error:', err));
+                debugLog('⚠️ navigator.sendBeacon no disponible', 'warning');
             }
+
+            // Fallback a fetch con no-cors
+            debugLog('Intentando con fetch (no-cors)...', 'info');
+            fetch(POWER_AUTOMATE_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dataToSend),
+                mode: 'no-cors',
+                keepalive: true
+            }).then(() => {
+                debugLog('✅ Enviado con fetch (no-cors)', 'success');
+                console.log('✅ Conversación enviada con fetch');
+            }).catch(err => {
+                debugLog(`❌ Error en fetch: ${err.message}`, 'error');
+                console.error('❌ Error:', err);
+                hasSent = false; // Revertir si falló completamente
+            });
         }
 
         // Función para cerrar el chat manualmente
         function closeChat() {
-            sendToPowerAutomate();
-            window.close();
+            debugLog('Cerrando chat manualmente...', 'info');
+            safeSendToPowerAutomate();
+            setTimeout(() => window.close(), 100);
         }
 
         // Iniciar chat
@@ -269,6 +402,8 @@
 
             userData = { name, email, company };
             chatStartTime = Date.now();
+
+            debugLog(`Chat iniciado: ${name} (${email})`, 'success');
 
             // Ocultar formulario y mostrar chat
             document.getElementById('chat-form-container').classList.add('hidden');
@@ -314,6 +449,8 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
             messagesDiv.appendChild(messageDiv);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
             
+            debugLog(`Mensaje agregado: ${isUser ? 'Usuario' : 'Asistente'} - ${text.substring(0, 50)}...`, 'info');
+            
             return messageDiv;
         }
 
@@ -322,6 +459,8 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
             const input = document.getElementById('chat-input');
             const message = input.value.trim();
             if (!message) return;
+
+            debugLog(`Enviando mensaje: ${message}`, 'info');
 
             // Agregar mensaje del usuario
             appendMessage(message, true);
@@ -344,18 +483,21 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
 
                 loadingMessage.remove();
 
-                if (!response.ok) throw new Error('Error en la respuesta');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
 
                 const data = await response.json();
                 if (data.response) {
                     appendMessage(data.response);
                     conversationHistory.push({ role: 'assistant', content: data.response });
+                    debugLog('Respuesta recibida correctamente', 'success');
                 }
 
             } catch (error) {
                 loadingMessage.remove();
                 appendMessage('Lo siento, hubo un error. Por favor contacta al +56 9 6689 5746');
-                console.error('Error:', error);
+                debugLog(`Error en API: ${error.message}`, 'error');
             }
         }
 
@@ -365,11 +507,25 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
             sendMessage();
         }
 
-        // 🔥 EVENTOS PARA ENVIAR LA CONVERSACIÓN
+        // 🔥 EVENTOS PARA ENVIAR LA CONVERSACIÓN (OPTIMIZADO)
 
-        // 1. Cuando se cierra el popup
-        window.addEventListener('beforeunload', (event) => {
+        // Variable para controlar envíos múltiples
+        let sendingInProgress = false;
+
+        // Función mejorada que evita envíos duplicados
+        function safeSendToPowerAutomate() {
+            if (sendingInProgress || hasSent) {
+                debugLog('Envío ya en progreso o completado, evitando duplicado', 'warning');
+                return;
+            }
+            sendingInProgress = true;
             sendToPowerAutomate();
+        }
+
+        // 1. PRINCIPAL: Cuando se cierra el popup
+        window.addEventListener('beforeunload', (event) => {
+            debugLog('Evento beforeunload disparado', 'warning');
+            safeSendToPowerAutomate();
             
             // Notificar a la ventana principal si existe
             if (window.opener && !window.opener.closed) {
@@ -377,50 +533,40 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
             }
         });
 
-        // 2. Cuando se cierra con unload (más agresivo)
-        window.addEventListener('unload', () => {
-            if (!hasSent) sendToPowerAutomate();
+        // 2. BACKUP 1: Solo si beforeunload falló
+        window.addEventListener('pagehide', () => {
+            if (!hasSent && !sendingInProgress) {
+                debugLog('Evento pagehide - enviando como backup', 'warning');
+                safeSendToPowerAutomate();
+            }
         });
 
-        // 3. IMPORTANTE: Detectar si la ventana principal se cierra
+        // 3. BACKUP 2: Detectar si la ventana principal se cierra
         let parentCheckInterval = setInterval(() => {
             if (window.opener && window.opener.closed) {
-                // La ventana principal se cerró
                 clearInterval(parentCheckInterval);
                 document.getElementById('warning-banner').style.display = 'block';
-                console.log('⚠️ Ventana principal cerrada - enviando datos...');
+                debugLog('⚠️ Ventana principal cerrada', 'warning');
                 
-                // Enviar automáticamente después de 2 segundos
-                setTimeout(() => {
-                    sendToPowerAutomate();
-                    // Opcional: cerrar este popup también
-                    setTimeout(() => window.close(), 1000);
-                }, 2000);
-            }
-        }, 1000); // Verificar cada segundo
-
-        // 4. Backup: enviar después de 5 minutos
-        setTimeout(() => {
-            if (conversationHistory.length > 2 && !hasSent) {
-                console.log('⏱️ Backup: enviando después de 5 min');
-                sendToPowerAutomate();
-            }
-        }, 300000);
-
-        // 5. Cuando la ventana pierde el foco por mucho tiempo
-        let blurTimeout;
-        window.addEventListener('blur', () => {
-            blurTimeout = setTimeout(() => {
-                if (conversationHistory.length > 2 && !hasSent) {
-                    console.log('💤 Ventana inactiva - enviando datos...');
-                    sendToPowerAutomate();
+                // Solo enviar si no se ha enviado aún
+                if (!hasSent && !sendingInProgress) {
+                    setTimeout(() => {
+                        safeSendToPowerAutomate();
+                        setTimeout(() => window.close(), 2000);
+                    }, 1000);
                 }
-            }, 180000); // 3 minutos
-        });
+            }
+        }, 2000); // Verificar cada 2 segundos en lugar de cada segundo
 
-        window.addEventListener('focus', () => {
-            clearTimeout(blurTimeout);
-        });
+        // 4. BACKUP 3: Enviar después de 10 minutos (aumentado de 5)
+        setTimeout(() => {
+            if (conversationHistory.length > 2 && !hasSent && !sendingInProgress) {
+                debugLog('⏱️ Backup automático después de 10 minutos', 'info');
+                safeSendToPowerAutomate();
+            }
+        }, 600000); // 10 minutos
+
+        // 5. REMOVIDO: Ya no enviamos por inactividad para evitar duplicados
 
         // 6. Si el usuario presiona ESC
         document.addEventListener('keydown', (e) => {
@@ -430,6 +576,9 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
                 }
             }
         });
+
+        // Log inicial
+        console.log('Chat popup cargado - v1.2 optimizado (un solo envío)');
     </script>
 </body>
 </html>
