@@ -178,10 +178,13 @@
         const POWER_AUTOMATE_URL = 'https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII';
         const API_ENDPOINT = '/.netlify/functions/chat-gemini';
 
-        // Generar ID de conversación único
+        // Generar ID de conversación único basado en fecha + email
         function generateConversationId() {
-            if (!conversationId) {
-                conversationId = `CONV-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            if (!conversationId && userData.email) {
+                // Crear ID único con fecha + email
+                const fecha = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5); // 2025-06-22T19-18-00
+                const emailBase = userData.email.split('@')[0].replace(/[^a-zA-Z0-9]/g, ''); // jortizleiva
+                conversationId = `${fecha}_${emailBase}`;
                 console.log('📌 ID de conversación generado:', conversationId);
             }
             return conversationId;
