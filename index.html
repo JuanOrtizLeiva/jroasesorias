@@ -1802,41 +1802,41 @@ Nuestro equipo está disponible de lunes a viernes de 9:00 a 18:00 hrs.`;
             sendMessage();
         }
 
-        // Preparación para Power Automate
-        window.addEventListener('beforeunload', (event) => {
-            if (conversationHistory.length > 2 && userData.email) {
-                const resumenConversacion = {
-                    nombre: userData.name,
-                    email: userData.email,
-                    empresa: userData.company || 'No especificada',
-                    fecha: new Date().toLocaleString('es-CL'),
-                    duracionMinutos: Math.floor((Date.now() - chatStartTime) / 60000),
-                    cantidadMensajes: conversationHistory.length,
-                    conversacion: conversationHistory,
-                    esLeadCaliente: conversationHistory.some(msg => 
-                        msg.content.toLowerCase().includes('precio') ||
-                        msg.content.toLowerCase().includes('contratar') ||
-                        msg.content.toLowerCase().includes('agendar') ||
-                        msg.content.toLowerCase().includes('reunión')
-                    )
-                };
-                
-               // Enviar a Power Automate
-fetch('https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(resumenConversacion)
-}).then(response => {
-    console.log('Resumen enviado exitosamente');
-}).catch(error => {
-    console.error('Error al enviar resumen:', error);
-});
-                
-                console.log('Datos listos para enviar:', resumenConversacion);
-            }
+       // Preparación para Power Automate
+window.addEventListener('beforeunload', (event) => {
+    if (conversationHistory.length > 2 && userData.email) {
+        const resumenConversacion = {
+            nombre: userData.name,
+            email: userData.email,
+            empresa: userData.company || 'No especificada',
+            fecha: new Date().toLocaleString('es-CL'),
+            duracionMinutos: Math.floor((Date.now() - chatStartTime) / 60000),
+            cantidadMensajes: conversationHistory.length,
+            conversacion: conversationHistory,
+            esLeadCaliente: conversationHistory.some(msg => 
+                msg.content.toLowerCase().includes('precio') ||
+                msg.content.toLowerCase().includes('contratar')
+            )
+        };
+        
+        // Enviar a Power Automate
+        fetch('https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(resumenConversacion)
+        }).then(response => {
+            console.log('Resumen enviado exitosamente');
+        }).catch(error => {
+            console.error('Error al enviar resumen:', error);
         });
+        
+        console.log('Datos listos para enviar:', resumenConversacion);
+    }
+}); 
+
+
 
         // Botón flotante de chat
         const chatFloatButton = document.getElementById('chat-float-button');
