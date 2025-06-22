@@ -204,34 +204,6 @@
             box-shadow: 0 20px 40px rgba(201, 154, 97, 0.2);
         }
 
-        /* Chat mejorado */
-        .chat-container {
-            background: var(--color-bg-secondary);
-            border: 1px solid var(--color-sapphire);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(26, 35, 126, 0.2);
-        }
-
-        .chat-bubble {
-            max-width: 80%;
-            word-wrap: break-word;
-            border-radius: 16px;
-            padding: 16px 20px;
-        }
-
-        .ai-bubble {
-            background: linear-gradient(135deg, rgba(26, 35, 126, 0.2), rgba(26, 35, 126, 0.1));
-            border: 1px solid rgba(26, 35, 126, 0.3);
-            color: var(--color-text-primary);
-        }
-
-        .user-bubble {
-            background: linear-gradient(135deg, rgba(201, 154, 97, 0.2), rgba(176, 141, 87, 0.1));
-            border: 1px solid rgba(201, 154, 97, 0.3);
-            color: var(--color-text-primary);
-        }
-
         /* Botón flotante de chat */
         .chat-float-button {
             position: fixed;
@@ -253,36 +225,6 @@
         .chat-float-button:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 30px rgba(201, 154, 97, 0.6);
-        }
-        
-        .chat-float-button.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Formulario del chat */
-        .chat-form {
-            background: var(--color-bg-tertiary);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-
-        .chat-form input {
-            width: 100%;
-            background: var(--color-bg-secondary);
-            border: 1px solid var(--color-border);
-            color: var(--color-text-primary);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .chat-form input:focus {
-            outline: none;
-            border-color: var(--color-accent-gold);
-            box-shadow: 0 0 0 2px rgba(201, 154, 97, 0.2);
         }
 
         /* Proceso visual */
@@ -483,6 +425,27 @@
             transform: scale(1.1);
             box-shadow: 0 0 20px rgba(201, 154, 97, 0.6);
         }
+
+        /* Chat showcase card */
+        .chat-showcase-card {
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.1), rgba(26, 35, 126, 0.05));
+            border: 1px solid rgba(26, 35, 126, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chat-showcase-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201, 154, 97, 0.1), transparent 60%);
+            animation: float 8s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -516,7 +479,7 @@
     </header>
 
     <!-- Botón flotante de chat -->
-    <div class="chat-float-button animate-bounce" id="chat-float-button">
+    <div class="chat-float-button animate-bounce" id="chat-float-button" onclick="openChatPopup()">
         <i class="fas fa-comments text-white text-2xl"></i>
     </div>
 
@@ -1291,90 +1254,113 @@
             </div>
         </section>
 
-        <!-- Chat IA Section -->
+        <!-- Chat IA Section - NUEVA VERSIÓN SIMPLIFICADA -->
         <section id="asistente" class="py-20 md:py-28">
             <div class="container mx-auto px-6">
-                <div class="max-w-5xl mx-auto">
+                <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-12 reveal">
                         <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
                             Asistente <span class="text-gradient-gold">24/7</span> para tus Dudas
                         </h2>
                         <p class="text-xl text-gray-400 mb-8">
-                            Pregunta lo que necesites sobre transformación digital
+                            Habla con nuestro experto virtual sobre transformación digital
                         </p>
                     </div>
 
-                    <div class="chat-container reveal">
-                        <!-- Chat header -->
-                        <div class="bg-sapphire/20 px-6 py-4 border-b border-sapphire/30">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 rounded-full gradient-gold flex items-center justify-center">
-                                        <i class="fas fa-robot text-black"></i>
+                    <div class="chat-showcase-card reveal">
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <div class="flex items-center space-x-3 mb-6">
+                                    <div class="w-12 h-12 rounded-full gradient-gold flex items-center justify-center">
+                                        <i class="fas fa-robot text-black text-xl"></i>
                                     </div>
                                     <div>
-                                        <h3 class="text-white font-semibold">JRO Assistant Pro</h3>
+                                        <h3 class="text-white font-semibold text-lg">JRO Assistant Pro</h3>
                                         <p class="text-xs text-green-400 flex items-center">
                                             <span class="w-2 h-2 bg-green-400 rounded-full mr-1 animate-pulse"></span>
-                                            Listo para ayudarte
+                                            Disponible ahora
                                         </p>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <!-- Formulario inicial -->
-                        <div class="p-6" id="chat-form-container">
-                            <div class="chat-form">
-                                <h3 class="text-lg font-semibold mb-4" style="color: var(--color-accent-gold);">
-                                    Antes de comenzar, cuéntanos sobre ti:
-                                </h3>
-                                <input type="text" id="user-name" placeholder="Tu nombre *" required>
-                                <input type="email" id="user-email" placeholder="Tu email *" required>
-                                <input type="text" id="user-company" placeholder="Tu empresa (opcional)">
-                                <button class="btn-primary w-full mt-4" onclick="startChat()">
+                                <h4 class="text-xl font-semibold mb-4" style="color: var(--color-accent-gold);">
+                                    ¿Cómo puedo ayudarte?
+                                </h4>
+
+                                <ul class="space-y-3 mb-6">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                        <span>Respuestas inmediatas sobre Power BI, Power Apps y Power Automate</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                        <span>Información detallada sobre tiempos y costos de implementación</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                        <span>Casos de éxito y resultados en tu industria</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                        <span>Recomendaciones personalizadas para tu empresa</span>
+                                    </li>
+                                </ul>
+
+                                <button onclick="openChatPopup()" class="btn-primary w-full">
+                                    <i class="fas fa-comments mr-2"></i>
                                     Iniciar Conversación
                                 </button>
                             </div>
-                        </div>
 
-                        <!-- Chat messages (oculto inicialmente) -->
-                        <div class="chat-messages h-96 overflow-y-auto p-6 custom-scrollbar hidden" id="chat-messages">
-                            <!-- Los mensajes se agregarán dinámicamente aquí -->
-                        </div>
+                            <div class="relative">
+                                <!-- Mock chat interface -->
+                                <div class="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
+                                    <div class="space-y-3">
+                                        <div class="flex justify-start">
+                                            <div class="bg-sapphire/20 rounded-lg p-3 max-w-[80%] border border-sapphire/30">
+                                                <p class="text-sm">👋 ¡Hola! Soy el asistente de JRO Asesorías. ¿En qué puedo ayudarte hoy?</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-end">
+                                            <div class="bg-gray-800 rounded-lg p-3 max-w-[80%]">
+                                                <p class="text-sm">¿Cuánto tiempo toma implementar Power BI?</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-start">
+                                            <div class="bg-sapphire/20 rounded-lg p-3 max-w-[80%] border border-sapphire/30">
+                                                <p class="text-sm">Excelente pregunta. La implementación típica de Power BI toma entre 2-4 semanas...</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-center py-2">
+                                            <span class="text-xs text-gray-500">El chat se abrirá en una nueva ventana</span>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <!-- Quick actions (oculto inicialmente) -->
-                        <div class="px-6 py-3 border-t border-gray-700 hidden" id="quick-actions">
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <button class="quick-btn bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded-full transition-colors"
-                                        onclick="sendQuickMessage('¿Cuánto tiempo toma implementar Power BI?')">
-                                    Tiempo de implementación
-                                </button>
-                                <button class="quick-btn bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded-full transition-colors"
-                                        onclick="sendQuickMessage('¿Qué incluye el diagnóstico gratuito?')">
-                                    Sobre el diagnóstico
-                                </button>
-                                <button class="quick-btn bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded-full transition-colors"
-                                        onclick="sendQuickMessage('¿Qué resultados han logrado en otras empresas?')">
-                                    Resultados comprobados
-                                </button>
+                                <!-- Features badges -->
+                                <div class="flex flex-wrap gap-2 mt-4 justify-center">
+                                    <span class="bg-gray-800 text-xs px-3 py-1 rounded-full">
+                                        <i class="fas fa-brain text-yellow-500 mr-1"></i>
+                                        IA Inteligente
+                                    </span>
+                                    <span class="bg-gray-800 text-xs px-3 py-1 rounded-full">
+                                        <i class="fas fa-shield-alt text-green-500 mr-1"></i>
+                                        100% Seguro
+                                    </span>
+                                    <span class="bg-gray-800 text-xs px-3 py-1 rounded-full">
+                                        <i class="fas fa-bolt text-blue-500 mr-1"></i>
+                                        Respuestas Rápidas
+                                    </span>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Input area (oculto inicialmente) -->
-                        <div class="px-6 pb-6 hidden" id="chat-input-area">
-                            <div class="flex space-x-3">
-                                <input type="text" 
-                                       id="chat-input" 
-                                       class="flex-grow bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gold/50 transition-all" 
-                                       placeholder="Escribe tu pregunta aquí..."
-                                       onkeypress="if(event.key === 'Enter') sendMessage()">
-                                <button onclick="sendMessage()" 
-                                        class="gradient-gold text-black font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-all">
-                                    <i class="fas fa-paper-plane"></i>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="text-center mt-8">
+                        <p class="text-sm text-gray-500">
+                            <i class="fas fa-lock mr-2"></i>
+                            Tu información es 100% confidencial y segura
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1534,6 +1520,47 @@
     <script src="https://player.vimeo.com/api/player.js"></script>
 
     <script>
+        // Variable global para el popup
+        let chatPopup = null;
+
+        // Función para abrir el chat popup
+        function openChatPopup() {
+            // Configuración de la ventana popup
+            const width = 400;
+            const height = 600;
+            const left = window.screen.width - width - 50;
+            const top = 100;
+
+            // Si ya hay un popup abierto, enfocarlo
+            if (chatPopup && !chatPopup.closed) {
+                chatPopup.focus();
+                return;
+            }
+
+            // Abrir nuevo popup
+            chatPopup = window.open(
+                'chat-popup-complete.html',
+                'JRO_Chat',
+                `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes,status=yes`
+            );
+
+            // Verificar si el popup se bloqueó
+            if (!chatPopup || chatPopup.closed || typeof chatPopup.closed == 'undefined') {
+                alert('Por favor permite las ventanas emergentes para usar el chat.');
+            }
+        }
+
+        // Escuchar mensajes del popup (por si necesitas comunicación bidireccional)
+        window.addEventListener('message', (event) => {
+            // Verificar el origen por seguridad
+            if (event.origin !== window.location.origin) return;
+
+            if (event.data.type === 'chatClosed') {
+                console.log('Chat cerrado');
+                chatPopup = null;
+            }
+        });
+
         // Mobile menu functionality
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -1634,224 +1661,6 @@
         // Initial calculation
         calculateROI();
 
-        // ================ SCRIPT DEL CHAT SIMPLIFICADO - SOLO BEFOREUNLOAD ================
-        // Variables globales para el chat
-        const chatMessages = document.getElementById('chat-messages');
-        const chatInput = document.getElementById('chat-input');
-        let conversationHistory = [];
-        let userData = {};
-        let chatStartTime;
-
-        // URL de tu Power Automate
-        const POWER_AUTOMATE_URL = 'https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII';
-
-        // URL para el chat con Gemini
-        const API_ENDPOINT = '/.netlify/functions/chat-gemini';
-
-        // Función simplificada para enviar a Power Automate - SOLO con sendBeacon
-        function sendToPowerAutomate() {
-            if (!userData.email || conversationHistory.length < 2) {
-                console.log('No hay suficientes datos para enviar');
-                return;
-            }
-
-            // Preparar datos en el formato exacto que espera Power Automate
-            const dataToSend = {
-                nombre: userData.name || 'No especificado',
-                email: userData.email,
-                empresa: userData.company || 'No especificada',
-                fecha: new Date().toLocaleString('es-CL'),
-                duracionMinutos: Math.floor((Date.now() - chatStartTime) / 60000) || 0,
-                cantidadMensajes: conversationHistory.length,
-                esLeadCaliente: conversationHistory.some(msg => 
-                    msg.content && (
-                        msg.content.toLowerCase().includes('precio') ||
-                        msg.content.toLowerCase().includes('contratar') ||
-                        msg.content.toLowerCase().includes('agendar') ||
-                        msg.content.toLowerCase().includes('diagnóstico') ||
-                        msg.content.toLowerCase().includes('reunión')
-                    )
-                ),
-                conversacion: conversationHistory.map(msg => ({
-                    role: msg.role,
-                    content: msg.content.replace(/<[^>]*>/g, '') // Eliminar HTML
-                }))
-            };
-
-            console.log('Enviando a Power Automate:', dataToSend);
-
-            // Usar SOLO navigator.sendBeacon
-            if (navigator.sendBeacon) {
-                const blob = new Blob([JSON.stringify(dataToSend)], { type: 'application/json' });
-                const sent = navigator.sendBeacon(POWER_AUTOMATE_URL, blob);
-                console.log(sent ? '✅ Datos enviados con sendBeacon' : '❌ sendBeacon falló');
-            } else {
-                console.log('❌ navigator.sendBeacon no está disponible en este navegador');
-            }
-        }
-
-        // Función para iniciar el chat
-        function startChat() {
-            const name = document.getElementById('user-name').value.trim();
-            const email = document.getElementById('user-email').value.trim();
-            const company = document.getElementById('user-company').value.trim();
-
-            // Validación
-            if (!name || !email) {
-                alert('Por favor completa los campos obligatorios (nombre y email)');
-                return;
-            }
-
-            // Validar formato de email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Por favor ingresa un email válido');
-                return;
-            }
-
-            // Guardar datos del usuario
-            userData = {
-                name: name,
-                email: email,
-                company: company
-            };
-            chatStartTime = Date.now();
-
-            // Ocultar formulario y mostrar chat
-            document.getElementById('chat-form-container').classList.add('hidden');
-            document.getElementById('chat-messages').classList.remove('hidden');
-            document.getElementById('quick-actions').classList.remove('hidden');
-            document.getElementById('chat-input-area').classList.remove('hidden');
-
-            // Mensaje de bienvenida personalizado
-            const welcomeMessage = `¡Hola ${name}! 🚀
-
-Soy el asistente de JRO Asesorías. Gracias por confiar en nosotros.
-
-Puedo ayudarte con:
-• Cómo Power BI puede acelerar tus decisiones
-• Qué procesos puedes automatizar en tu empresa
-• Cuánto tiempo toma la implementación
-• Resultados medibles en 6 áreas clave del negocio
-
-¿Qué te gustaría saber sobre la transformación digital de ${company || 'tu empresa'}?`;
-
-            appendMessage(welcomeMessage);
-            conversationHistory.push({ role: 'assistant', content: welcomeMessage });
-        }
-
-        // Función para agregar mensaje al chat
-        function appendMessage(text, isUser = false, isLoading = false) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`;
-            
-            const bubble = document.createElement('div');
-            bubble.className = `chat-bubble ${isUser ? 'user-bubble' : 'ai-bubble'}`;
-            
-            if (isLoading) {
-                bubble.innerHTML = `
-                    <div class="flex items-center space-x-2">
-                        <div class="loading-dot"></div>
-                        <div class="loading-dot" style="animation-delay: 0.2s;"></div>
-                        <div class="loading-dot" style="animation-delay: 0.4s;"></div>
-                    </div>
-                `;
-            } else {
-                bubble.innerHTML = `<p class="text-sm whitespace-pre-wrap">${text}</p>`;
-            }
-            
-            messageDiv.appendChild(bubble);
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            
-            return messageDiv;
-        }
-
-        // Función principal para enviar mensaje (SIN llamadas a sendToPowerAutomate)
-        async function sendMessage() {
-            const message = chatInput.value.trim();
-            if (!message) return;
-
-            // Agregar mensaje del usuario
-            appendMessage(message, true);
-            conversationHistory.push({ role: 'user', content: message });
-            chatInput.value = '';
-
-            // Mostrar indicador de carga
-            const loadingMessage = appendMessage('', false, true);
-
-            try {
-                const response = await fetch(API_ENDPOINT, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        message: message,
-                        history: conversationHistory.slice(-10),
-                        userData: userData
-                    })
-                });
-
-                loadingMessage.remove();
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || `Error HTTP: ${response.status}`);
-                }
-
-                const data = await response.json();
-
-                if (data.response) {
-                    appendMessage(data.response);
-                    conversationHistory.push({ role: 'assistant', content: data.response });
-                } else {
-                    throw new Error('Respuesta inesperada del servidor.');
-                }
-
-            } catch (error) {
-                console.error('Error:', error);
-                
-                let errorMessage = '❌ Lo siento, hubo un problema. ';
-                errorMessage += 'Por favor contáctanos directamente al +56 9 6689 5746.';
-                
-                appendMessage(errorMessage);
-            }
-        }
-
-        // Función para respuestas rápidas
-        function sendQuickMessage(message) {
-            chatInput.value = message;
-            sendMessage();
-        }
-
-        // ÚNICO evento para enviar datos - Solo al cerrar ventana/pestaña
-        window.addEventListener('beforeunload', (event) => {
-            // Solo enviar si hay una conversación real
-            if (conversationHistory.length > 2 && userData.email) {
-                sendToPowerAutomate();
-            }
-        });
-
-        // Botón flotante de chat
-        const chatFloatButton = document.getElementById('chat-float-button');
-        const assistantSection = document.getElementById('asistente');
-
-        chatFloatButton.addEventListener('click', () => {
-            assistantSection.scrollIntoView({ behavior: 'smooth' });
-        });
-
-        // Observer para ocultar/mostrar botón flotante
-        const chatObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    chatFloatButton.classList.add('hidden');
-                } else {
-                    chatFloatButton.classList.remove('hidden');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        chatObserver.observe(assistantSection);
-
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1867,7 +1676,7 @@ Puedo ayudarte con:
         });
 
         // Log de verificación
-        console.log('✅ Chat configurado - Envío SOLO al cerrar ventana (beforeunload)');
+        console.log('✅ Sitio web cargado con chat popup configurado');
     </script>
 </body>
 </html>
