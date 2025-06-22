@@ -98,54 +98,6 @@
             font-size: 12px;
             display: none;
         }
-
-        .debug-panel {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #000;
-            border-top: 1px solid var(--color-accent-gold);
-            max-height: 200px;
-            overflow-y: auto;
-            padding: 10px;
-            font-family: monospace;
-            font-size: 11px;
-            display: none;
-            z-index: 1000;
-        }
-
-        .debug-panel.active {
-            display: block;
-        }
-
-        .debug-log {
-            margin: 2px 0;
-        }
-
-        .debug-success { color: #10B981; }
-        .debug-error { color: #EF4444; }
-        .debug-info { color: #3B82F6; }
-        .debug-warning { color: #F59E0B; }
-
-        .debug-toggle {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: #333;
-            color: #888;
-            border: 1px solid #555;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 10px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .debug-toggle:hover {
-            background: #444;
-            color: #aaa;
-        }
     </style>
 </head>
 <body>
@@ -196,29 +148,6 @@
             <!-- Los mensajes se agregarán aquí -->
         </div>
 
-        <!-- Quick actions -->
-        <div class="px-4 py-2 border-t border-gray-700">
-            <div class="flex flex-wrap gap-2 text-xs">
-                <button class="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-full transition-colors"
-                        onclick="sendQuickMessage('¿Cuánto tiempo toma implementar Power BI?')">
-                    ⏱️ Tiempo
-                </button>
-                <button class="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-full transition-colors"
-                        onclick="sendQuickMessage('¿Qué incluye el diagnóstico gratuito?')">
-                    📋 Diagnóstico
-                </button>
-                <button class="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-full transition-colors"
-                        onclick="sendQuickMessage('¿Cuál es el precio?')">
-                    💰 Precio
-                </button>
-                <!-- Botón de prueba temporal -->
-                <button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-full transition-colors text-white"
-                        onclick="testManualSend()" title="Solo para pruebas">
-                    🧪 Test Envío
-                </button>
-            </div>
-        </div>
-
         <!-- Input area -->
         <div class="p-4 border-t border-gray-700">
             <div class="flex space-x-2">
@@ -235,27 +164,13 @@
         </div>
     </div>
 
-    <!-- Debug toggle button -->
-    <button class="debug-toggle" onclick="toggleDebug()" title="Presiona Ctrl+D para activar/desactivar">
-        🐛 Debug
-    </button>
-
-    <!-- Debug panel -->
-    <div id="debug-panel" class="debug-panel">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <strong style="color: var(--color-accent-gold);">Debug Console</strong>
-            <button onclick="clearDebugLog()" style="background: #333; border: 1px solid #555; padding: 2px 8px; border-radius: 3px; color: #888; font-size: 10px;">Clear</button>
-        </div>
-        <div id="debug-log"></div>
-    </div>
-
     <script>
         // Variables globales
+        let conversationId = null;
         let conversationHistory = [];
         let userData = {};
         let chatStartTime;
         let hasSent = false;
-        let debugMode = false;
         let sendingInProgress = false;
         let lastSentTime = 0;
         let inactivityTimer = null;
@@ -263,36 +178,13 @@
         const POWER_AUTOMATE_URL = 'https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII';
         const API_ENDPOINT = '/.netlify/functions/chat-gemini';
 
-        // Debug functions
-        function debugLog(message, type = 'info') {
-            if (!debugMode) return;
-            
-            const debugLogDiv = document.getElementById('debug-log');
-            const time = new Date().toLocaleTimeString();
-            const logEntry = document.createElement('div');
-            logEntry.className = `debug-log debug-${type}`;
-            logEntry.textContent = `[${time}] ${message}`;
-            debugLogDiv.appendChild(logEntry);
-            debugLogDiv.scrollTop = debugLogDiv.scrollHeight;
-
-            console.log(`[DEBUG ${type.toUpperCase()}] ${message}`);
-        }
-
-        function toggleDebug() {
-            debugMode = !debugMode;
-            const panel = document.getElementById('debug-panel');
-            panel.classList.toggle('active');
-            
-            if (debugMode) {
-                debugLog('Modo debug activado', 'success');
-                debugLog(`URL Power Automate: ${POWER_AUTOMATE_URL.substring(0, 50)}...`, 'info');
-                debugLog(`Conversación actual: ${conversationHistory.length} mensajes`, 'info');
+        // Generar ID de conversación único
+        function generateConversationId() {
+            if (!conversationId) {
+                conversationId = `CONV-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+                console.log('📌 ID de conversación generado:', conversationId);
             }
-        }
-
-        function clearDebugLog() {
-            document.getElementById('debug-log').innerHTML = '';
-            debugLog('Log limpiado', 'info');
+            return conversationId;
         }
 
         // Timer de inactividad
@@ -300,7 +192,7 @@
             clearTimeout(inactivityTimer);
             inactivityTimer = setTimeout(() => {
                 if (conversationHistory.length > 2 && canSendAgain()) {
-                    debugLog('⏱️ Inactividad detectada - guardando conversación...', 'warning');
+                    console.log('⏱️ Inactividad detectada - guardando conversación...');
                     safeSendToPowerAutomate();
                 }
             }, 30000); // 30 segundos
@@ -314,11 +206,11 @@
 
         // Función para enviar a Power Automate
         function sendToPowerAutomate() {
-            debugLog('📤 Iniciando envío a Power Automate...', 'info');
-            debugLog(`Estado actual: email=${userData.email}, mensajes=${conversationHistory.length}`, 'info');
+            console.log('📤 Iniciando envío a Power Automate...');
+            console.log(`Estado actual: email=${userData.email}, mensajes=${conversationHistory.length}, conversationId=${conversationId}`);
             
             if (!userData.email || conversationHistory.length === 0) {
-                debugLog(`❌ No se envió: email=${userData.email}, mensajes=${conversationHistory.length}`, 'warning');
+                console.log(`❌ No se envió: email=${userData.email}, mensajes=${conversationHistory.length}`);
                 sendingInProgress = false;
                 return;
             }
@@ -331,6 +223,7 @@
             }
 
             const dataToSend = {
+                conversationId: conversationId,
                 nombre: userData.name || 'No especificado',
                 email: userData.email,
                 empresa: userData.company || 'No especificada',
@@ -355,10 +248,10 @@
                 }))
             };
 
-            debugLog(`Preparando datos: ${JSON.stringify(dataToSend).substring(0, 100)}...`, 'info');
+            console.log(`Preparando datos con conversationId: ${conversationId}`);
 
             // Intentar con Fetch normal
-            debugLog('Intentando con Fetch normal...', 'info');
+            console.log('Intentando con Fetch normal...');
             
             fetch(POWER_AUTOMATE_URL, {
                 method: 'POST',
@@ -369,7 +262,7 @@
             })
             .then(response => {
                 if (response.ok || response.status === 202) {
-                    debugLog(`✅ Fetch exitoso! Status: ${response.status}`, 'success');
+                    console.log(`✅ Fetch exitoso! Status: ${response.status}`);
                     console.log('✅ Conversación enviada exitosamente a Power Automate');
                     lastSentTime = Date.now();
                     sendingInProgress = false;
@@ -405,11 +298,11 @@
             })
             .then(text => {
                 if (text) {
-                    debugLog(`Respuesta de Power Automate: ${text}`, 'info');
+                    console.log(`Respuesta de Power Automate: ${text}`);
                 }
             })
             .catch(error => {
-                debugLog(`❌ Error con Fetch: ${error.message}`, 'error');
+                console.log(`❌ Error con Fetch: ${error.message}`);
                 console.error('Error en Fetch:', error);
                 sendingInProgress = false;
                 
@@ -427,39 +320,31 @@
 
         // Función para cerrar el chat
         function closeChat() {
-            debugLog('🚪 Cerrando chat manualmente (botón X)...', 'warning');
+            console.log('🚪 Cerrando chat manualmente (botón X)...');
             safeSendToPowerAutomate();
             
             setTimeout(() => {
-                debugLog('Cerrando ventana...', 'info');
+                console.log('Cerrando ventana...');
                 window.close();
             }, 500);
         }
 
         // Función segura para enviar
         function safeSendToPowerAutomate() {
-            debugLog(`safeSendToPowerAutomate - sendingInProgress: ${sendingInProgress}, canSendAgain: ${canSendAgain()}`, 'info');
+            console.log(`safeSendToPowerAutomate - sendingInProgress: ${sendingInProgress}, canSendAgain: ${canSendAgain()}`);
             
             if (sendingInProgress) {
-                debugLog('Envío ya en progreso', 'warning');
+                console.log('Envío ya en progreso');
                 return;
             }
             
             if (!canSendAgain()) {
-                debugLog('Muy pronto para enviar de nuevo, esperando...', 'info');
+                console.log('Muy pronto para enviar de nuevo, esperando...');
                 return;
             }
             
             sendingInProgress = true;
             sendToPowerAutomate();
-        }
-
-        // Función de prueba manual
-        function testManualSend() {
-            debugLog('🧪 TEST MANUAL: Iniciando envío de prueba...', 'warning');
-            lastSentTime = 0; // Resetear para permitir envío inmediato
-            sendingInProgress = false;
-            safeSendToPowerAutomate();
         }
 
         // Iniciar chat
@@ -482,7 +367,10 @@
             userData = { name, email, company };
             chatStartTime = Date.now();
 
-            debugLog(`✅ Chat iniciado: ${name} (${email})`, 'success');
+            // Generar ID de conversación con el primer mensaje
+            generateConversationId();
+
+            console.log(`✅ Chat iniciado: ${name} (${email}) - ID: ${conversationId}`);
 
             // Ocultar formulario y mostrar chat
             document.getElementById('chat-form-container').classList.add('hidden');
@@ -530,7 +418,7 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
             messagesDiv.appendChild(messageDiv);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
             
-            debugLog(`Mensaje agregado: ${isUser ? 'Usuario' : 'Asistente'} - ${text.substring(0, 50)}...`, 'info');
+            console.log(`Mensaje agregado: ${isUser ? 'Usuario' : 'Asistente'} - ${text.substring(0, 50)}...`);
             
             return messageDiv;
         }
@@ -544,11 +432,14 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
             // Resetear timer de inactividad
             resetInactivityTimer();
 
-            debugLog(`Enviando mensaje: ${message}`, 'info');
+            console.log(`Enviando mensaje: ${message}`);
 
             appendMessage(message, true);
             conversationHistory.push({ role: 'user', content: message });
             input.value = '';
+
+            // IMPORTANTE: Enviar a Power Automate después de cada mensaje del usuario
+            safeSendToPowerAutomate();
 
             const loadingMessage = appendMessage('', false, true);
 
@@ -573,7 +464,7 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
                 if (data.response) {
                     appendMessage(data.response);
                     conversationHistory.push({ role: 'assistant', content: data.response });
-                    debugLog('Respuesta recibida correctamente', 'success');
+                    console.log('Respuesta recibida correctamente');
                     
                     // Resetear timer después de recibir respuesta
                     resetInactivityTimer();
@@ -582,15 +473,8 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
             } catch (error) {
                 loadingMessage.remove();
                 appendMessage('Lo siento, hubo un error. Por favor contacta al +56 9 6689 5746');
-                debugLog(`Error en API: ${error.message}`, 'error');
+                console.log(`Error en API: ${error.message}`);
             }
-        }
-
-        // Mensajes rápidos
-        function sendQuickMessage(message) {
-            document.getElementById('chat-input').value = message;
-            sendMessage();
-            resetInactivityTimer();
         }
 
         // 🔥 ESTRATEGIA DE GUARDADO INTELIGENTE
@@ -598,7 +482,7 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
         // 1. Guardar cada 2 minutos automáticamente
         setInterval(() => {
             if (conversationHistory.length > 2 && canSendAgain() && !sendingInProgress) {
-                debugLog('⏰ Guardado automático cada 2 minutos', 'info');
+                console.log('⏰ Guardado automático cada 2 minutos');
                 
                 // Notificar al usuario del guardado automático
                 const banner = document.getElementById('warning-banner');
@@ -618,7 +502,7 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
         // 2. Guardar cuando la ventana pierde el foco
         document.addEventListener('visibilitychange', () => {
             if (document.hidden && conversationHistory.length > 0 && canSendAgain()) {
-                debugLog('👁️ Ventana oculta - guardando...', 'warning');
+                console.log('👁️ Ventana oculta - guardando...');
                 safeSendToPowerAutomate();
             }
         });
@@ -627,7 +511,7 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
         window.addEventListener('blur', () => {
             setTimeout(() => {
                 if (conversationHistory.length > 2 && canSendAgain() && !sendingInProgress) {
-                    debugLog('🔄 Ventana perdió el foco - guardando...', 'warning');
+                    console.log('🔄 Ventana perdió el foco - guardando...');
                     safeSendToPowerAutomate();
                 }
             }, 1000);
@@ -635,10 +519,11 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
 
         // 4. Intentar con beforeunload pero sin depender de él
         window.addEventListener('beforeunload', (event) => {
-            debugLog('🚨 beforeunload - último intento', 'warning');
+            console.log('🚨 beforeunload - último intento');
             if (conversationHistory.length > 0) {
                 // Usar sendBeacon como último recurso
                 const dataToSend = {
+                    conversationId: conversationId,
                     nombre: userData.name || 'Usuario',
                     email: userData.email || 'no-email@test.com',
                     empresa: userData.company || 'No especificada',
@@ -652,7 +537,7 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
                 if (navigator.sendBeacon) {
                     const blob = new Blob([JSON.stringify(dataToSend)], { type: 'application/json' });
                     navigator.sendBeacon(POWER_AUTOMATE_URL, blob);
-                    debugLog('🚀 sendBeacon enviado como último recurso', 'warning');
+                    console.log('🚀 sendBeacon enviado como último recurso');
                 }
             }
         });
@@ -660,7 +545,7 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
         // 5. Guardar cuando se detecta intención de cerrar
         document.addEventListener('mouseleave', (e) => {
             if (e.clientY <= 0 && conversationHistory.length > 2 && canSendAgain() && !sendingInProgress) {
-                debugLog('🖱️ Mouse salió por arriba - posible cierre', 'warning');
+                console.log('🖱️ Mouse salió por arriba - posible cierre');
                 safeSendToPowerAutomate();
             }
         });
@@ -669,37 +554,24 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
         if (window.opener) {
             setInterval(() => {
                 if (window.opener.closed && conversationHistory.length > 0 && canSendAgain()) {
-                    debugLog('🏠 Ventana principal cerrada - guardando y cerrando...', 'error');
+                    console.log('🏠 Ventana principal cerrada - guardando y cerrando...');
                     safeSendToPowerAutomate();
                     setTimeout(() => window.close(), 2000);
                 }
             }, 1000);
         }
 
-        // Atajo de teclado para debug
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'd') {
-                e.preventDefault();
-                toggleDebug();
-            }
-            
-            // Activar timer cuando el usuario escribe
-            if (userData.email) {
-                resetInactivityTimer();
-            }
-        });
-
         // Log inicial
-        console.log('✅ Chat popup v4.0 COMPLETO con GUARDADO INTELIGENTE');
+        console.log('✅ Chat popup v5.0 - VERSIÓN COMPLETA SIN DEBUG');
         console.log('📝 La conversación se guarda automáticamente cuando:');
+        console.log('   📤  Envías cada mensaje');
         console.log('   ⏱️  Dejas de escribir por 30 segundos');
         console.log('   ⏰  Cada 2 minutos');
         console.log('   🔄  Cambias de pestaña o minimizas');
         console.log('   🏠  Se cierra la ventana principal');
         console.log('   🖱️  El mouse sale por arriba de la ventana');
         console.log('');
-        console.log('💡 Tip: Usa Ctrl+D para activar el modo debug');
-        console.log('🧪 Usa el botón rojo "Test Envío" para probar manualmente');
+        console.log('🔑 ID de conversación único se genera con el primer mensaje');
     </script>
 </body>
 </html>
