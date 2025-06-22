@@ -1820,7 +1820,7 @@ window.addEventListener('beforeunload', (event) => {
         };
         
         // Enviar a Power Automate
-        fetch('https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01', {
+        fetch('https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
