@@ -521,7 +521,7 @@
     </div>
 
     <main>
-        <!-- Hero Section - MODIFICADO: Color del título cambiado a azul -->
+        <!-- Hero Section -->
         <section id="inicio" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-32">
             <!-- Background gradient -->
             <div class="absolute inset-0 bg-gradient-to-br from-black via-sapphire/20 to-black"></div>
@@ -689,7 +689,7 @@
             </div>
         </section>
 
-        <!-- Servicios Section (ACTUALIZADO CON LOGOS UNIFORMES) -->
+        <!-- Servicios Section -->
         <section id="servicios" class="py-20 md:py-28">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
@@ -813,7 +813,7 @@
             </div>
         </section>
 
-        <!-- Proceso Section - MODIFICADO: Eliminada la imagen -->
+        <!-- Proceso Section -->
         <section id="proceso" class="py-20 md:py-28 bg-gradient-to-b from-gray-900 to-black">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
@@ -887,7 +887,7 @@
             </div>
         </section>
 
-        <!-- Métricas de Impacto Section (REEMPLAZA TESTIMONIOS) -->
+        <!-- Métricas de Impacto Section -->
         <section id="impacto" class="py-20 md:py-28">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
@@ -953,7 +953,7 @@
             </div>
         </section>
 
-        <!-- Educational Videos Section - MODIFICADO: Cambiados los videos de automatizar e IA -->
+        <!-- Educational Videos Section -->
         <section class="py-20 bg-gradient-to-b from-black to-gray-900">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 reveal">
@@ -988,7 +988,7 @@
                         </div>
                     </div>
                     
-                    <!-- Video 2: Por qué automatizar - MODIFICADO -->
+                    <!-- Video 2: Por qué automatizar -->
                     <div class="reveal" style="animation-delay: 0.2s;">
                         <div class="premium-card h-full">
                             <div style="padding:56.25% 0 0 0;position:relative;">
@@ -1009,7 +1009,7 @@
                         </div>
                     </div>
                     
-                    <!-- Video 3: Por qué IA - MODIFICADO -->
+                    <!-- Video 3: Por qué IA -->
                     <div class="reveal" style="animation-delay: 0.3s;">
                         <div class="premium-card h-full">
                             <div style="padding:56.25% 0 0 0;position:relative;">
@@ -1033,7 +1033,7 @@
             </div>
         </section>
 
-        <!-- Dashboard Section - Soluciones en Acción (ACTUALIZADO - ELIMINADAS ETIQUETAS) -->
+        <!-- Dashboard Section - Soluciones en Acción -->
         <section class="py-20 bg-black" id="galeria">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 reveal">
@@ -1113,7 +1113,7 @@
 
                         <!-- Charts Row -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Percentage Metrics (Reemplaza gráfico de línea) -->
+                            <!-- Percentage Metrics -->
                             <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
                                 <h5 class="text-lg font-semibold text-white mb-4">Distribución de Ventas por Categoría</h5>
                                 <div class="space-y-4">
@@ -1147,7 +1147,7 @@
                                 </div>
                             </div>
 
-                            <!-- Heat Map sin etiquetas Norte, Centro, Sur -->
+                            <!-- Heat Map -->
                             <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
                                 <h5 class="text-lg font-semibold text-white mb-4">Mapa de Calor - Actividad por Región y Hora</h5>
                                 <div class="relative">
@@ -1207,7 +1207,7 @@
             </div>
         </section>
 
-        <!-- ROI Calculator Section (ACTUALIZADO CON PESOS CHILENOS) -->
+        <!-- ROI Calculator Section -->
         <section class="py-20 md:py-28 bg-gradient-to-b from-black to-gray-900">
             <div class="container mx-auto px-6">
                 <div class="max-w-4xl mx-auto">
@@ -1291,7 +1291,7 @@
             </div>
         </section>
 
-        <!-- Chat IA Section - COMPLETAMENTE MODIFICADO -->
+        <!-- Chat IA Section -->
         <section id="asistente" class="py-20 md:py-28">
             <div class="container mx-auto px-6">
                 <div class="max-w-5xl mx-auto">
@@ -1423,7 +1423,7 @@
             </div>
         </section>
 
-        <!-- CTA Final Section - MODIFICADO: Cambiado teléfono por WhatsApp -->
+        <!-- CTA Final Section -->
         <section class="py-20 md:py-28 relative overflow-hidden">
             <!-- Background effect -->
             <div class="absolute inset-0 bg-gradient-to-r from-sapphire/20 via-transparent to-sapphire/20"></div>
@@ -1451,7 +1451,7 @@
         </section>
     </main>
 
-    <!-- Footer (ACTUALIZADO SIN LINKEDIN) -->
+    <!-- Footer -->
     <footer id="contacto" class="bg-black border-t border-gray-800">
         <div class="container mx-auto px-6 py-16">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
@@ -1530,7 +1530,7 @@
         </nav>
     </div>
 
-    <!-- Script de Vimeo (solo uno al final) -->
+    <!-- Script de Vimeo -->
     <script src="https://player.vimeo.com/api/player.js"></script>
 
     <script>
@@ -1604,7 +1604,7 @@
             updateCount();
         }
 
-        // ROI Calculator (ACTUALIZADO PARA PESOS CHILENOS)
+        // ROI Calculator
         function calculateROI() {
             const hours = document.getElementById('hours-range').value;
             const employees = document.getElementById('employees-range').value;
@@ -1634,6 +1634,7 @@
         // Initial calculation
         calculateROI();
 
+        // ================ SCRIPT DEL CHAT CORREGIDO ================
         // Variables globales para el chat
         const chatMessages = document.getElementById('chat-messages');
         const chatInput = document.getElementById('chat-input');
@@ -1641,10 +1642,68 @@
         let userData = {};
         let chatStartTime;
 
-        // URL correcta para llamar a una función de Netlify
+        // URL de tu Power Automate
+        const POWER_AUTOMATE_URL = 'https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII';
+
+        // URL para el chat con Gemini
         const API_ENDPOINT = '/.netlify/functions/chat-gemini';
 
-        // Función para iniciar el chat después del formulario
+        // Función para enviar datos a Power Automate
+        async function sendToPowerAutomate(trigger = 'manual') {
+            if (!userData.email || conversationHistory.length < 2) {
+                console.log('No hay suficientes datos para enviar');
+                return;
+            }
+
+            // Preparar datos en el formato exacto que espera Power Automate
+            const dataToSend = {
+                nombre: userData.name || 'No especificado',
+                email: userData.email,
+                empresa: userData.company || 'No especificada',
+                fecha: new Date().toLocaleString('es-CL'),
+                duracionMinutos: Math.floor((Date.now() - chatStartTime) / 60000) || 0,
+                cantidadMensajes: conversationHistory.length,
+                esLeadCaliente: conversationHistory.some(msg => 
+                    msg.content && (
+                        msg.content.toLowerCase().includes('precio') ||
+                        msg.content.toLowerCase().includes('contratar') ||
+                        msg.content.toLowerCase().includes('agendar') ||
+                        msg.content.toLowerCase().includes('diagnóstico') ||
+                        msg.content.toLowerCase().includes('reunión')
+                    )
+                ),
+                conversacion: conversationHistory.map(msg => ({
+                    role: msg.role,
+                    content: msg.content.replace(/<[^>]*>/g, '') // Eliminar HTML
+                }))
+            };
+
+            console.log('Enviando a Power Automate:', dataToSend);
+
+            try {
+                // Para beforeunload, usar sendBeacon si está disponible
+                if (trigger === 'beforeunload' && navigator.sendBeacon) {
+                    const blob = new Blob([JSON.stringify(dataToSend)], { type: 'application/json' });
+                    const sent = navigator.sendBeacon(POWER_AUTOMATE_URL, blob);
+                    console.log(sent ? '✅ Datos enviados con sendBeacon' : '❌ sendBeacon falló');
+                } else {
+                    // Para otros casos, usar fetch normal
+                    const response = await fetch(POWER_AUTOMATE_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(dataToSend),
+                        mode: 'no-cors' // Importante para evitar problemas de CORS
+                    });
+                    console.log('✅ Solicitud enviada a Power Automate');
+                }
+            } catch (error) {
+                console.error('❌ Error al enviar a Power Automate:', error);
+            }
+        }
+
+        // Función para iniciar el chat
         function startChat() {
             const name = document.getElementById('user-name').value.trim();
             const email = document.getElementById('user-email').value.trim();
@@ -1678,7 +1737,7 @@
             document.getElementById('chat-input-area').classList.remove('hidden');
 
             // Mensaje de bienvenida personalizado
-            appendMessage(`¡Hola ${name}! 🚀
+            const welcomeMessage = `¡Hola ${name}! 🚀
 
 Soy el asistente de JRO Asesorías. Gracias por confiar en nosotros.
 
@@ -1688,7 +1747,10 @@ Puedo ayudarte con:
 • Cuánto tiempo toma la implementación
 • Resultados medibles en 6 áreas clave del negocio
 
-¿Qué te gustaría saber sobre la transformación digital de ${company || 'tu empresa'}?`);
+¿Qué te gustaría saber sobre la transformación digital de ${company || 'tu empresa'}?`;
+
+            appendMessage(welcomeMessage);
+            conversationHistory.push({ role: 'assistant', content: welcomeMessage });
         }
 
         // Función para agregar mensaje al chat
@@ -1744,6 +1806,9 @@ Nuestro equipo está disponible de lunes a viernes de 9:00 a 18:00 hrs.`;
                 
                 appendMessage(scheduleResponse);
                 conversationHistory.push({ role: 'assistant', content: scheduleResponse });
+                
+                // Enviar a Power Automate cuando detecta intención de agendar
+                sendToPowerAutomate('lead_caliente');
                 return;
             }
 
@@ -1781,6 +1846,8 @@ Nuestro equipo está disponible de lunes a viernes de 9:00 a 18:00 hrs.`;
                     
                     if (data.isHotLead) {
                         console.log('Lead caliente detectado!');
+                        // Enviar inmediatamente a Power Automate
+                        sendToPowerAutomate('lead_caliente_auto');
                     }
                 } else {
                     throw new Error('Respuesta inesperada del servidor.');
@@ -1802,41 +1869,44 @@ Nuestro equipo está disponible de lunes a viernes de 9:00 a 18:00 hrs.`;
             sendMessage();
         }
 
-       // Preparación para Power Automate
-window.addEventListener('beforeunload', (event) => {
-    if (conversationHistory.length > 2 && userData.email) {
-        const resumenConversacion = {
-            nombre: userData.name,
-            email: userData.email,
-            empresa: userData.company || 'No especificada',
-            fecha: new Date().toLocaleString('es-CL'),
-            duracionMinutos: Math.floor((Date.now() - chatStartTime) / 60000),
-            cantidadMensajes: conversationHistory.length,
-            conversacion: conversationHistory,
-            esLeadCaliente: conversationHistory.some(msg => 
-                msg.content.toLowerCase().includes('precio') ||
-                msg.content.toLowerCase().includes('contratar')
-            )
-        };
-        
-        // Enviar a Power Automate
-        fetch('https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(resumenConversacion)
-        }).then(response => {
-            console.log('Resumen enviado exitosamente');
-        }).catch(error => {
-            console.error('Error al enviar resumen:', error);
+        // Enviar datos cuando se cierra la ventana/pestaña
+        window.addEventListener('beforeunload', (event) => {
+            // Solo enviar si hay una conversación real
+            if (conversationHistory.length > 2 && userData.email) {
+                sendToPowerAutomate('beforeunload');
+            }
         });
-        
-        console.log('Datos listos para enviar:', resumenConversacion);
-    }
-}); 
 
+        // También enviar cuando el usuario navega a otra página del sitio
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden' && conversationHistory.length > 2 && userData.email) {
+                sendToPowerAutomate('visibility_change');
+            }
+        });
 
+        // Enviar periódicamente para no perder datos (cada 5 minutos)
+        setInterval(() => {
+            if (conversationHistory.length > 2 && userData.email) {
+                sendToPowerAutomate('periodic');
+            }
+        }, 300000); // 5 minutos
+
+        // Enviar cuando el usuario ha estado inactivo por 3 minutos
+        let inactivityTimer;
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                if (conversationHistory.length > 2 && userData.email) {
+                    sendToPowerAutomate('inactivity');
+                }
+            }, 180000); // 3 minutos
+        }
+
+        // Resetear timer en cada interacción
+        if (chatInput) {
+            chatInput.addEventListener('input', resetInactivityTimer);
+        }
+        chatMessages.addEventListener('click', resetInactivityTimer);
 
         // Botón flotante de chat
         const chatFloatButton = document.getElementById('chat-float-button');
@@ -1872,6 +1942,9 @@ window.addEventListener('beforeunload', (event) => {
                 }
             });
         });
+
+        // Log de verificación
+        console.log('✅ Chat configurado correctamente con Power Automate');
     </script>
 </body>
 </html>
