@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - JRO Asesorías</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-bg-primary: #0a0a0a;
+            --color-bg-secondary: #141414;
+            --color-bg-tertiary: #1a1a1a;
+            --color-text-primary: #F5F5DC;
+            --color-text-secondary: #B0B0B0;
+            --color-border: #2a2a2a;
+            --color-accent-gold: #C9A961;
+            --color-accent-gold-dark: #B08D57;
+            --color-sapphire: #1a237e;
+            --color-sapphire-light: #283593;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--color-bg-primary); 
+            color: var(--color-text-primary);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-bubble {
+            max-width: 80%;
+            word-wrap: break-word;
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin: 8px 0;
+        }
+
+        .ai-bubble {
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.2), rgba(26, 35, 126, 0.1));
+            border: 1px solid rgba(26, 35, 126, 0.3);
+            align-self: flex-start;
+        }
+
+        .user-bubble {
+            background: linear-gradient(135deg, rgba(201, 154, 97, 0.2), rgba(176, 141, 87, 0.1));
+            border: 1px solid rgba(201, 154, 97, 0.3);
+            align-self: flex-end;
+        }
+
+        .loading-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-accent-gold);
+            animation: loading 1.4s infinite;
+            display: inline-block;
+            margin: 0 2px;
+        }
+
+        @keyframes loading {
+            0%, 60%, 100% { transform: scale(1); opacity: 1; }
+            30% { transform: scale(1.5); opacity: 0.5; }
+        }
+
+        .btn-primary {
+            background: var(--color-accent-gold);
+            color: var(--color-bg-primary);
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-gold-dark);
+        }
+
+        /* Alerta de cierre */
+        .warning-banner {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 8px 12px;
+            text-align: center;
+            font-size: 12px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="bg-sapphire/20 px-4 py-3 border-b border-sapphire/30 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-600 to-yellow-700 flex items-center justify-center">
+                <i class="fas fa-robot text-black"></i>
+            </div>
+            <div>
+                <h3 class="text-white font-semibold">JRO Assistant Pro</h3>
+                <p class="text-xs text-green-400">En línea</p>
+            </div>
+        </div>
+        <button onclick="closeChat()" class="text-gray-400 hover:text-white">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+    </div>
+
+    <!-- Banner de advertencia -->
+    <div id="warning-banner" class="warning-banner">
+        <i class="fas fa-exclamation-triangle mr-1"></i>
+        La ventana principal se cerró. Cierra este chat para guardar la conversación.
+    </div>
+
+    <!-- Formulario inicial -->
+    <div id="chat-form-container" class="flex-1 flex items-center justify-center p-6">
+        <div class="bg-gray-900 p-6 rounded-lg max-w-sm w-full">
+            <h3 class="text-lg font-semibold mb-4 text-yellow-600">
+                Antes de comenzar:
+            </h3>
+            <input type="text" id="user-name" placeholder="Tu nombre *" required 
+                   class="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded mb-3">
+            <input type="email" id="user-email" placeholder="Tu email *" required
+                   class="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded mb-3">
+            <input type="text" id="user-company" placeholder="Tu empresa (opcional)"
+                   class="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded mb-4">
+            <button onclick="startChat()" class="btn-primary w-full">
+                Iniciar Conversación
+            </button>
+        </div>
+    </div>
+
+    <!-- Chat container (oculto inicialmente) -->
+    <div id="chat-container" class="hidden flex-1 flex flex-col">
+        <!-- Messages area -->
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-4 flex flex-col">
+            <!-- Los mensajes se agregarán aquí -->
+        </div>
+
+        <!-- Quick actions -->
+        <div class="px-4 py-2 border-t border-gray-700">
+            <div class="flex flex-wrap gap-2 text-xs">
+                <button class="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-full transition-colors"
+                        onclick="sendQuickMessage('¿Cuánto tiempo toma implementar Power BI?')">
+                    ⏱️ Tiempo
+                </button>
+                <button class="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-full transition-colors"
+                        onclick="sendQuickMessage('¿Qué incluye el diagnóstico gratuito?')">
+                    📋 Diagnóstico
+                </button>
+                <button class="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-full transition-colors"
+                        onclick="sendQuickMessage('¿Cuál es el precio?')">
+                    💰 Precio
+                </button>
+            </div>
+        </div>
+
+        <!-- Input area -->
+        <div class="p-4 border-t border-gray-700">
+            <div class="flex space-x-2">
+                <input type="text" 
+                       id="chat-input" 
+                       class="flex-1 bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-600/50" 
+                       placeholder="Escribe tu mensaje..."
+                       onkeypress="if(event.key === 'Enter') sendMessage()">
+                <button onclick="sendMessage()" class="btn-primary px-6">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let conversationHistory = [];
+        let userData = {};
+        let chatStartTime;
+        let hasSent = false; // Para evitar envíos duplicados
+        const POWER_AUTOMATE_URL = 'https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII';
+        const API_ENDPOINT = '/.netlify/functions/chat-gemini';
+
+        // Función para enviar a Power Automate
+        function sendToPowerAutomate() {
+            if (hasSent || !userData.email || conversationHistory.length === 0) {
+                console.log('No hay datos para enviar o ya se enviaron');
+                return;
+            }
+
+            const dataToSend = {
+                nombre: userData.name || 'No especificado',
+                email: userData.email,
+                empresa: userData.company || 'No especificada',
+                fecha: new Date().toLocaleString('es-CL'),
+                duracionMinutos: Math.floor((Date.now() - chatStartTime) / 60000) || 1,
+                cantidadMensajes: conversationHistory.length,
+                esLeadCaliente: conversationHistory.some(msg => 
+                    msg.content && (
+                        msg.content.toLowerCase().includes('precio') ||
+                        msg.content.toLowerCase().includes('contratar') ||
+                        msg.content.toLowerCase().includes('agendar')
+                    )
+                ),
+                conversacion: conversationHistory.map(msg => ({
+                    role: msg.role,
+                    content: msg.content.replace(/<[^>]*>/g, '')
+                }))
+            };
+
+            console.log('📤 Enviando conversación a Power Automate...');
+
+            // Usar sendBeacon que es más confiable para cuando se cierra la ventana
+            if (navigator.sendBeacon) {
+                const blob = new Blob([JSON.stringify(dataToSend)], { type: 'application/json' });
+                const sent = navigator.sendBeacon(POWER_AUTOMATE_URL, blob);
+                if (sent) {
+                    hasSent = true;
+                    console.log('✅ Conversación enviada con sendBeacon');
+                }
+                return sent;
+            } else {
+                // Fallback a fetch
+                fetch(POWER_AUTOMATE_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dataToSend),
+                    mode: 'no-cors',
+                    keepalive: true
+                }).then(() => {
+                    hasSent = true;
+                    console.log('✅ Conversación enviada con fetch');
+                }).catch(err => console.error('❌ Error:', err));
+            }
+        }
+
+        // Función para cerrar el chat manualmente
+        function closeChat() {
+            sendToPowerAutomate();
+            window.close();
+        }
+
+        // Iniciar chat
+        function startChat() {
+            const name = document.getElementById('user-name').value.trim();
+            const email = document.getElementById('user-email').value.trim();
+            const company = document.getElementById('user-company').value.trim();
+
+            if (!name || !email) {
+                alert('Por favor completa nombre y email');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Por favor ingresa un email válido');
+                return;
+            }
+
+            userData = { name, email, company };
+            chatStartTime = Date.now();
+
+            // Ocultar formulario y mostrar chat
+            document.getElementById('chat-form-container').classList.add('hidden');
+            document.getElementById('chat-container').classList.remove('hidden');
+            document.getElementById('chat-container').classList.add('flex');
+
+            // Mensaje de bienvenida
+            const welcomeMessage = `¡Hola ${name}! 👋
+
+Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
+
+• Información sobre Power BI, Power Apps y Power Automate
+• Cómo podemos optimizar tus procesos
+• Detalles sobre implementación y resultados
+
+¿En qué puedo ayudarte hoy?`;
+
+            appendMessage(welcomeMessage, false);
+            conversationHistory.push({ role: 'assistant', content: welcomeMessage });
+
+            // Enfocar el input
+            document.getElementById('chat-input').focus();
+        }
+
+        // Agregar mensaje al chat
+        function appendMessage(text, isUser = false, isLoading = false) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-bubble ${isUser ? 'user-bubble' : 'ai-bubble'}`;
+            
+            if (isLoading) {
+                messageDiv.innerHTML = `
+                    <div class="flex items-center space-x-1">
+                        <span class="loading-dot" style="animation-delay: 0s;"></span>
+                        <span class="loading-dot" style="animation-delay: 0.2s;"></span>
+                        <span class="loading-dot" style="animation-delay: 0.4s;"></span>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `<p class="text-sm whitespace-pre-wrap m-0">${text}</p>`;
+            }
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            return messageDiv;
+        }
+
+        // Enviar mensaje
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Agregar mensaje del usuario
+            appendMessage(message, true);
+            conversationHistory.push({ role: 'user', content: message });
+            input.value = '';
+
+            // Mostrar loading
+            const loadingMessage = appendMessage('', false, true);
+
+            try {
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: message,
+                        history: conversationHistory.slice(-10),
+                        userData: userData
+                    })
+                });
+
+                loadingMessage.remove();
+
+                if (!response.ok) throw new Error('Error en la respuesta');
+
+                const data = await response.json();
+                if (data.response) {
+                    appendMessage(data.response);
+                    conversationHistory.push({ role: 'assistant', content: data.response });
+                }
+
+            } catch (error) {
+                loadingMessage.remove();
+                appendMessage('Lo siento, hubo un error. Por favor contacta al +56 9 6689 5746');
+                console.error('Error:', error);
+            }
+        }
+
+        // Mensajes rápidos
+        function sendQuickMessage(message) {
+            document.getElementById('chat-input').value = message;
+            sendMessage();
+        }
+
+        // 🔥 EVENTOS PARA ENVIAR LA CONVERSACIÓN
+
+        // 1. Cuando se cierra el popup
+        window.addEventListener('beforeunload', (event) => {
+            sendToPowerAutomate();
+            
+            // Notificar a la ventana principal si existe
+            if (window.opener && !window.opener.closed) {
+                window.opener.postMessage({ type: 'chatClosed' }, '*');
+            }
+        });
+
+        // 2. Cuando se cierra con unload (más agresivo)
+        window.addEventListener('unload', () => {
+            if (!hasSent) sendToPowerAutomate();
+        });
+
+        // 3. IMPORTANTE: Detectar si la ventana principal se cierra
+        let parentCheckInterval = setInterval(() => {
+            if (window.opener && window.opener.closed) {
+                // La ventana principal se cerró
+                clearInterval(parentCheckInterval);
+                document.getElementById('warning-banner').style.display = 'block';
+                console.log('⚠️ Ventana principal cerrada - enviando datos...');
+                
+                // Enviar automáticamente después de 2 segundos
+                setTimeout(() => {
+                    sendToPowerAutomate();
+                    // Opcional: cerrar este popup también
+                    setTimeout(() => window.close(), 1000);
+                }, 2000);
+            }
+        }, 1000); // Verificar cada segundo
+
+        // 4. Backup: enviar después de 5 minutos
+        setTimeout(() => {
+            if (conversationHistory.length > 2 && !hasSent) {
+                console.log('⏱️ Backup: enviando después de 5 min');
+                sendToPowerAutomate();
+            }
+        }, 300000);
+
+        // 5. Cuando la ventana pierde el foco por mucho tiempo
+        let blurTimeout;
+        window.addEventListener('blur', () => {
+            blurTimeout = setTimeout(() => {
+                if (conversationHistory.length > 2 && !hasSent) {
+                    console.log('💤 Ventana inactiva - enviando datos...');
+                    sendToPowerAutomate();
+                }
+            }, 180000); // 3 minutos
+        });
+
+        window.addEventListener('focus', () => {
+            clearTimeout(blurTimeout);
+        });
+
+        // 6. Si el usuario presiona ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && conversationHistory.length > 0) {
+                if (confirm('¿Deseas cerrar el chat? Se guardará la conversación.')) {
+                    closeChat();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
