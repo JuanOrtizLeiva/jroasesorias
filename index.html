@@ -1634,7 +1634,7 @@
         // Initial calculation
         calculateROI();
 
-        // ================ SCRIPT DEL CHAT CORREGIDO ================
+        // ================ SCRIPT DEL CHAT SIMPLIFICADO - SOLO BEFOREUNLOAD ================
         // Variables globales para el chat
         const chatMessages = document.getElementById('chat-messages');
         const chatInput = document.getElementById('chat-input');
@@ -1648,8 +1648,8 @@
         // URL para el chat con Gemini
         const API_ENDPOINT = '/.netlify/functions/chat-gemini';
 
-        // Función para enviar datos a Power Automate
-        async function sendToPowerAutomate(trigger = 'manual') {
+        // Función simplificada para enviar a Power Automate - SOLO con sendBeacon
+        function sendToPowerAutomate() {
             if (!userData.email || conversationHistory.length < 2) {
                 console.log('No hay suficientes datos para enviar');
                 return;
@@ -1680,26 +1680,13 @@
 
             console.log('Enviando a Power Automate:', dataToSend);
 
-            try {
-                // Para beforeunload, usar sendBeacon si está disponible
-                if (trigger === 'beforeunload' && navigator.sendBeacon) {
-                    const blob = new Blob([JSON.stringify(dataToSend)], { type: 'application/json' });
-                    const sent = navigator.sendBeacon(POWER_AUTOMATE_URL, blob);
-                    console.log(sent ? '✅ Datos enviados con sendBeacon' : '❌ sendBeacon falló');
-                } else {
-                    // Para otros casos, usar fetch normal
-                    const response = await fetch(POWER_AUTOMATE_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(dataToSend),
-                        mode: 'no-cors' // Importante para evitar problemas de CORS
-                    });
-                    console.log('✅ Solicitud enviada a Power Automate');
-                }
-            } catch (error) {
-                console.error('❌ Error al enviar a Power Automate:', error);
+            // Usar SOLO navigator.sendBeacon
+            if (navigator.sendBeacon) {
+                const blob = new Blob([JSON.stringify(dataToSend)], { type: 'application/json' });
+                const sent = navigator.sendBeacon(POWER_AUTOMATE_URL, blob);
+                console.log(sent ? '✅ Datos enviados con sendBeacon' : '❌ sendBeacon falló');
+            } else {
+                console.log('❌ navigator.sendBeacon no está disponible en este navegador');
             }
         }
 
@@ -1780,37 +1767,10 @@ Puedo ayudarte con:
             return messageDiv;
         }
 
-        // Función principal para enviar mensaje
+        // Función principal para enviar mensaje (SIN llamadas a sendToPowerAutomate)
         async function sendMessage() {
             const message = chatInput.value.trim();
             if (!message) return;
-
-            // Verificar si quiere agendar
-            if (message.toLowerCase().includes('agendar') || 
-                message.toLowerCase().includes('reunión') || 
-                message.toLowerCase().includes('contactar') ||
-                message.toLowerCase().includes('llamada') ||
-                message.toLowerCase().includes('hablar')) {
-                
-                appendMessage(message, true);
-                conversationHistory.push({ role: 'user', content: message });
-                chatInput.value = '';
-                
-                // Respuesta específica para agendar
-                const scheduleResponse = `¡Excelente! Me encantaría coordinar una llamada contigo. 
-
-<a href='https://wa.me/56966895746' target='_blank' style='color: #C9A961; font-weight: bold;'>
-Haz clic aquí para contactarnos por WhatsApp</a> y encontraremos el mejor horario.
-
-Nuestro equipo está disponible de lunes a viernes de 9:00 a 18:00 hrs.`;
-                
-                appendMessage(scheduleResponse);
-                conversationHistory.push({ role: 'assistant', content: scheduleResponse });
-                
-                // Enviar a Power Automate cuando detecta intención de agendar
-                sendToPowerAutomate('lead_caliente');
-                return;
-            }
 
             // Agregar mensaje del usuario
             appendMessage(message, true);
@@ -1843,12 +1803,6 @@ Nuestro equipo está disponible de lunes a viernes de 9:00 a 18:00 hrs.`;
                 if (data.response) {
                     appendMessage(data.response);
                     conversationHistory.push({ role: 'assistant', content: data.response });
-                    
-                    if (data.isHotLead) {
-                        console.log('Lead caliente detectado!');
-                        // Enviar inmediatamente a Power Automate
-                        sendToPowerAutomate('lead_caliente_auto');
-                    }
                 } else {
                     throw new Error('Respuesta inesperada del servidor.');
                 }
@@ -1869,44 +1823,13 @@ Nuestro equipo está disponible de lunes a viernes de 9:00 a 18:00 hrs.`;
             sendMessage();
         }
 
-        // Enviar datos cuando se cierra la ventana/pestaña
+        // ÚNICO evento para enviar datos - Solo al cerrar ventana/pestaña
         window.addEventListener('beforeunload', (event) => {
             // Solo enviar si hay una conversación real
             if (conversationHistory.length > 2 && userData.email) {
-                sendToPowerAutomate('beforeunload');
+                sendToPowerAutomate();
             }
         });
-
-        // También enviar cuando el usuario navega a otra página del sitio
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden' && conversationHistory.length > 2 && userData.email) {
-                sendToPowerAutomate('visibility_change');
-            }
-        });
-
-        // Enviar periódicamente para no perder datos (cada 5 minutos)
-        setInterval(() => {
-            if (conversationHistory.length > 2 && userData.email) {
-                sendToPowerAutomate('periodic');
-            }
-        }, 300000); // 5 minutos
-
-        // Enviar cuando el usuario ha estado inactivo por 3 minutos
-        let inactivityTimer;
-        function resetInactivityTimer() {
-            clearTimeout(inactivityTimer);
-            inactivityTimer = setTimeout(() => {
-                if (conversationHistory.length > 2 && userData.email) {
-                    sendToPowerAutomate('inactivity');
-                }
-            }, 180000); // 3 minutos
-        }
-
-        // Resetear timer en cada interacción
-        if (chatInput) {
-            chatInput.addEventListener('input', resetInactivityTimer);
-        }
-        chatMessages.addEventListener('click', resetInactivityTimer);
 
         // Botón flotante de chat
         const chatFloatButton = document.getElementById('chat-float-button');
@@ -1944,7 +1867,7 @@ Nuestro equipo está disponible de lunes a viernes de 9:00 a 18:00 hrs.`;
         });
 
         // Log de verificación
-        console.log('✅ Chat configurado correctamente con Power Automate');
+        console.log('✅ Chat configurado - Envío SOLO al cerrar ventana (beforeunload)');
     </script>
 </body>
 </html>
