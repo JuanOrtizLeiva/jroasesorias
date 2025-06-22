@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JRO Asesorías - Inteligencia de Negocios que Acelera Decisiones</title>
+    <meta name="description" content="Transformamos datos complejos en decisiones claras. Optimizamos procesos empresariales con Power BI, Power Apps y Power Automate.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Executive Sapphire Color Palette - Refined Gold */
+        :root {
+            --color-bg-primary: #0a0a0a;
+            --color-bg-secondary: #141414;
+            --color-bg-tertiary: #1a1a1a;
+            --color-text-primary: #F5F5DC;
+            --color-text-secondary: #B0B0B0;
+            --color-border: #2a2a2a;
+            --color-accent-gold: #C9A961;      /* Oro Azteca Sofisticado */
+            --color-accent-gold-dark: #B08D57;  /* Bronce Dorado */
+            --color-accent-gold-light: #D4AF37; /* Oro Viejo para hovers */
+            --color-sapphire: #1a237e;
+            --color-sapphire-light: #283593;
+            --color-success: #10B981;
+            --color-white: #FFFFFF;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--color-bg-primary); 
+            color: var(--color-text-primary); 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .font-heading { font-family: 'Montserrat', sans-serif; }
+
+        /* Gradientes principales */
+        .gradient-gold {
+            background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-gold-dark));
+        }
+
+        .gradient-sapphire {
+            background: linear-gradient(135deg, var(--color-sapphire), var(--color-sapphire-light));
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Animaciones suaves */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(201, 154, 97, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(201, 154, 97, 0.8); }
+        }
+
+        .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+        /* Clases de revelación */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(30px); 
+        }
+        
+        .reveal.visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Botones premium */
+        .btn-primary {
+            background: var(--color-accent-gold);
+            color: var(--color-bg-primary);
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.8s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 154, 97, 0.4);
+            background: var(--color-accent-gold-light);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-accent-gold);
+            border: 2px solid var(--color-accent-gold);
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-accent-gold);
+            color: var(--color-bg-primary);
+        }
+
+        /* Cards con efecto premium */
+        .premium-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--color-accent-gold);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .premium-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .premium-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-accent-gold);
+            box-shadow: 0 20px 40px rgba(201, 154, 97, 0.2);
+        }
+
+        /* Chat mejorado */
+        .chat-container {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-sapphire);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(26, 35, 126, 0.2);
+        }
+
+        .chat-bubble {
+            max-width: 80%;
+            word-wrap: break-word;
+            border-radius: 16px;
+            padding: 16px 20px;
+        }
+
+        .ai-bubble {
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.2), rgba(26, 35, 126, 0.1));
+            border: 1px solid rgba(26, 35, 126, 0.3);
+            color: var(--color-text-primary);
+        }
+
+        .user-bubble {
+            background: linear-gradient(135deg, rgba(201, 154, 97, 0.2), rgba(176, 141, 87, 0.1));
+            border: 1px solid rgba(201, 154, 97, 0.3);
+            color: var(--color-text-primary);
+        }
+
+        /* Proceso visual */
+        .process-step {
+            position: relative;
+            text-align: center;
+            flex: 1;
+        }
+
+        .process-step::after {
+            content: '';
+            position: absolute;
+            top: 35px;
+            left: 60%;
+            width: 80%;
+            height: 2px;
+            background: var(--color-accent-gold);
+            opacity: 0.3;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .process-number {
+            width: 70px;
+            height: 70px;
+            background: var(--color-sapphire);
+            border: 3px solid var(--color-accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--color-accent-gold);
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Animación de números */
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .counter-animation {
+            display: inline-block;
+            animation: countUp 0.8s ease-out;
+        }
+
+        /* Custom scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: var(--color-bg-tertiary);
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--color-accent-gold);
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent-gold-dark);
+        }
+
+        /* Navegación fija mejorada */
+        .nav-link {
+            position: relative;
+            color: var(--color-text-secondary);
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--color-accent-gold);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Loading animation */
+        .loading-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-accent-gold);
+            animation: loading 1.4s infinite;
+        }
+
+        @keyframes loading {
+            0%, 60%, 100% { transform: scale(1); opacity: 1; }
+            30% { transform: scale(1.5); opacity: 0.5; }
+        }
+
+        /* Estilos para el dashboard */
+        .dashboard-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(201, 154, 97, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-accent-gold);
+            line-height: 1;
+        }
+
+        /* Logo container circular */
+        .logo-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--color-bg-secondary);
+            border: 2px solid var(--color-accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(201, 154, 97, 0.5);
+        }
+
+        .logo-container img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+        }
+
+        /* Chart bars */
+        .chart-bar {
+            background: var(--color-accent-gold);
+            border-radius: 4px 4px 0 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .chart-bar:hover {
+            background: var(--color-accent-gold-light);
+        }
+
+        .chart-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--color-text-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .chart-bar:hover::after {
+            opacity: 1;
+        }
+
+        /* Heat map cell */
+        .heat-cell {
+            aspect-square: 1/1;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-bg-primary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .heat-cell:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(201, 154, 97, 0.6);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header/Navigation -->
+    <header class="bg-black/90 backdrop-blur-md fixed top-0 left-0 w-full z-50 border-b border-gray-800">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#inicio" class="flex items-center space-x-3 group">
+                <div class="w-12 h-12 rounded-lg gradient-gold flex items-center justify-center group-hover:animate-pulse-glow transition-all">
+                    <span class="font-heading font-bold text-xl text-black">JRO</span>
+                </div>
+                <div>
+                    <h1 class="font-heading text-xl font-bold text-white">JRO Asesorías</h1>
+                    <p class="text-xs text-gradient-gold">Decisiones Inteligentes</p>
+                </div>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#diagnostico" class="nav-link">Diagnóstico Gratuito</a>
+                <a href="#servicios" class="nav-link">Servicios</a>
+                <a href="#proceso" class="nav-link">Proceso</a>
+                <a href="#impacto" class="nav-link">Impacto</a>
+                <a href="#contacto" class="btn-primary">Acelera tus Decisiones</a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button class="md:hidden text-white" id="mobile-menu-btn">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section - MODIFICADO: Agregado padding-top para bajar el texto -->
+        <section id="inicio" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-32">
+            <!-- Background gradient -->
+            <div class="absolute inset-0 bg-gradient-to-br from-black via-sapphire/20 to-black"></div>
+            
+            <!-- Animated particles -->
+            <div class="absolute inset-0">
+                <div class="absolute top-20 left-10 w-2 h-2 bg-gold rounded-full animate-float"></div>
+                <div class="absolute top-40 right-20 w-3 h-3 bg-gold rounded-full animate-float" style="animation-delay: 2s;"></div>
+                <div class="absolute bottom-20 left-40 w-2 h-2 bg-gold rounded-full animate-float" style="animation-delay: 4s;"></div>
+            </div>
+
+            <div class="relative z-10 container mx-auto px-6 text-center">
+                <h1 class="text-5xl md:text-7xl font-heading font-bold text-white mb-6 animate-fadeInUp">
+                    Deja de perder tiempo<br>
+                    <span class="text-gradient-gold">en tareas repetitivas</span>
+                </h1>
+                <div class="max-w-4xl mx-auto mb-8 animate-fadeInUp" style="animation-delay: 0.2s;">
+                    <p class="text-xl md:text-2xl text-gray-300 mb-6">
+                        Transformamos tu empresa con soluciones inteligentes:
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left max-w-3xl mx-auto">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-chart-bar text-2xl" style="color: var(--color-accent-gold);"></i>
+                            <span class="text-lg">Toma decisiones basadas en datos reales</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-robot text-2xl" style="color: var(--color-accent-gold);"></i>
+                            <span class="text-lg">Automatiza procesos administrativos</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-shield-alt text-2xl" style="color: var(--color-accent-gold);"></i>
+                            <span class="text-lg">Mejora la gobernanza de datos</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-tachometer-alt text-2xl" style="color: var(--color-accent-gold);"></i>
+                            <span class="text-lg">Acelera tu operación diaria</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Value props mejoradas -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12 animate-fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="flex items-center justify-center space-x-2">
+                        <i class="fas fa-rocket text-2xl" style="color: var(--color-accent-gold);"></i>
+                        <span class="text-lg">Resultados desde el día 1</span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-2">
+                        <i class="fas fa-chart-line text-2xl" style="color: var(--color-accent-gold);"></i>
+                        <span class="text-lg">ROI comprobado</span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-2">
+                        <i class="fas fa-handshake text-2xl" style="color: var(--color-accent-gold);"></i>
+                        <span class="text-lg">Acompañamiento continuo</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fadeInUp" style="animation-delay: 0.6s;">
+                    <a href="#diagnostico" class="btn-primary text-lg">
+                        <i class="fas fa-chart-pie mr-2"></i>
+                        Obtén tu Diagnóstico Gratuito
+                    </a>
+                    <a href="#impacto" class="btn-secondary text-lg">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        Ver Impacto Real
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diagnóstico Gratuito Section -->
+        <section id="diagnostico" class="py-20 md:py-28 bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+                        Diagnóstico <span class="text-gradient-gold">Gratuito</span> de 15 minutos
+                    </h2>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                        Descubre cuánto tiempo y dinero está perdiendo tu empresa por no tener datos organizados
+                    </p>
+                </div>
+
+                <div class="max-w-4xl mx-auto">
+                    <div class="premium-card reveal">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-2xl font-heading font-semibold mb-6" style="color: var(--color-accent-gold);">
+                                    ¿Tu empresa sufre de estos síntomas?
+                                </h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
+                                        <span>Reportes manuales que toman horas o días</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
+                                        <span>Datos dispersos en múltiples archivos Excel</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
+                                        <span>Decisiones basadas en intuición, no en datos</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
+                                        <span>Errores costosos por información desactualizada</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
+                                        <span>Reuniones interminables sin datos claros</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-sapphire/20 rounded-lg p-6 border border-sapphire/30">
+                                <h4 class="text-xl font-semibold mb-4" style="color: var(--color-accent-gold);">
+                                    En tu diagnóstico gratuito recibirás:
+                                </h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                        <span>Análisis de tu situación actual de datos</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                        <span>Estimación de tiempo y costos perdidos</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                        <span>Plan de acción personalizado</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                        <span>Proyección de ROI esperado</span>
+                                    </li>
+                                </ul>
+                                <button class="btn-primary w-full mt-6" onclick="openDiagnosticForm()">
+                                    Solicitar Diagnóstico Ahora
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Demo Section -->
+        <section class="py-20 bg-black">
+            <div class="container mx-auto px-6">
+                <div class="max-w-5xl mx-auto text-center">
+                    <h3 class="text-3xl font-heading font-bold text-white mb-4">
+                        Ve la <span class="text-gradient-gold">Transformación</span> en Acción
+                    </h3>
+                    <p class="text-lg text-gray-400 mb-8">
+                        Descubre cómo empresas como la tuya pasaron del caos a la claridad
+                    </p>
+                    <div class="relative rounded-xl overflow-hidden shadow-2xl" style="padding-bottom: 56.25%;">
+                        <iframe 
+                            src="https://player.vimeo.com/video/1095167933?h=4bb341459e&color=C9A961&title=0&byline=0&portrait=0"
+                            class="absolute top-0 left-0 w-full h-full"
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicios Section (ACTUALIZADO CON LOGOS UNIFORMES) -->
+        <section id="servicios" class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+                        Soluciones que <span class="text-gradient-gold">Transforman</span> Empresas
+                    </h2>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                        No vendemos software, entregamos claridad y velocidad en la toma de decisiones
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Power BI Service -->
+                    <div class="premium-card reveal" style="animation-delay: 0.1s;">
+                        <!-- Logo de Power BI -->
+                        <div class="flex justify-center mb-6">
+                            <div class="logo-container">
+                                <img src="https://i.postimg.cc/43qjLHb7/Power-bi.jpg" 
+                                     alt="Power BI Logo">
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-heading font-semibold mb-4 text-center" style="color: var(--color-accent-gold);">
+                            Tableros Inteligentes
+                        </h3>
+                        <p class="text-gray-400 mb-6">
+                            Convierte montañas de datos en visualizaciones claras que cualquiera puede entender. 
+                            Toma decisiones en minutos, no en días.
+                        </p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span class="text-sm">KPIs en tiempo real</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span class="text-sm">Alertas automáticas</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span class="text-sm">Acceso desde cualquier dispositivo</span>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <p class="text-3xl font-bold text-gradient-gold">60%</p>
+                            <p class="text-sm text-gray-400">Reducción en tiempo de análisis</p>
+                        </div>
+                    </div>
+
+                    <!-- Power Apps Service -->
+                    <div class="premium-card reveal" style="animation-delay: 0.2s;">
+                        <!-- Logo de Power Apps -->
+                        <div class="flex justify-center mb-6">
+                            <div class="logo-container">
+                                <img src="https://i.postimg.cc/DfqR6ZW0/powerapps2.jpg" 
+                                     alt="Power Apps Logo">
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-heading font-semibold mb-4 text-center" style="color: var(--color-accent-gold);">
+                            Apps Empresariales
+                        </h3>
+                        <p class="text-gray-400 mb-6">
+                            Digitaliza procesos manuales con aplicaciones personalizadas. 
+                            Sin código complejo, sin largos desarrollos.
+                        </p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span class="text-sm">Formularios inteligentes</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span class="text-sm">Flujos de aprobación</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span class="text-sm">Integración total</span>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <p class="text-3xl font-bold text-gradient-gold">85%</p>
+                            <p class="text-sm text-gray-400">Reducción de errores manuales</p>
+                        </div>
+                    </div>
+
+                    <!-- Power Automate Service -->
+                    <div class="premium-card reveal" style="animation-delay: 0.3s;">
+                        <!-- Logo de Power Automate -->
+                        <div class="flex justify-center mb-6">
+                            <div class="logo-container">
+                                <img src="https://i.postimg.cc/7YwdWk7V/powerautomate2.jpg" 
+                                     alt="Power Automate Logo">
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-heading font-semibold mb-4 text-center" style="color: var(--color-accent-gold);">
+                            Automatización Total
+                        </h3>
+                        <p class="text-gray-400 mb-6">
+                            Elimina tareas repetitivas y libera a tu equipo para trabajo estratégico. 
+                            Los robots trabajan 24/7 sin errores.
+                        </p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span class="text-sm">Workflows automáticos</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span class="text-sm">Notificaciones inteligentes</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span class="text-sm">Procesamiento 24/7</span>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <p class="text-3xl font-bold text-gradient-gold">40h</p>
+                            <p class="text-sm text-gray-400">Ahorradas por semana</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proceso Section - MODIFICADO: Eliminada la imagen -->
+        <section id="proceso" class="py-20 md:py-28 bg-gradient-to-b from-gray-900 to-black">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+                        De Caos a Claridad en <span class="text-gradient-gold">4 Semanas</span>
+                    </h2>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                        Nuestro proceso probado garantiza resultados rápidos y medibles
+                    </p>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between items-start max-w-6xl mx-auto">
+                    <!-- Step 1 -->
+                    <div class="process-step reveal" style="animation-delay: 0.1s;">
+                        <div class="process-number">1</div>
+                        <h3 class="text-xl font-heading font-semibold mb-3" style="color: var(--color-accent-gold);">
+                            Diagnóstico
+                        </h3>
+                        <p class="text-gray-400 text-sm max-w-xs mx-auto">
+                            Analizamos tu situación actual y identificamos oportunidades de mejora inmediata
+                        </p>
+                        <p class="text-xs text-gray-500 mt-2">Semana 1</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="process-step reveal" style="animation-delay: 0.2s;">
+                        <div class="process-number">2</div>
+                        <h3 class="text-xl font-heading font-semibold mb-3" style="color: var(--color-accent-gold);">
+                            Diseño
+                        </h3>
+                        <p class="text-gray-400 text-sm max-w-xs mx-auto">
+                            Creamos la arquitectura de tu solución personalizada y definimos KPIs clave
+                        </p>
+                        <p class="text-xs text-gray-500 mt-2">Semana 2</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="process-step reveal" style="animation-delay: 0.3s;">
+                        <div class="process-number">3</div>
+                        <h3 class="text-xl font-heading font-semibold mb-3" style="color: var(--color-accent-gold);">
+                            Implementación
+                        </h3>
+                        <p class="text-gray-400 text-sm max-w-xs mx-auto">
+                            Construimos y configuramos tus dashboards, apps y automatizaciones
+                        </p>
+                        <p class="text-xs text-gray-500 mt-2">Semana 3-4</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="process-step reveal" style="animation-delay: 0.4s;">
+                        <div class="process-number">4</div>
+                        <h3 class="text-xl font-heading font-semibold mb-3" style="color: var(--color-accent-gold);">
+                            Optimización
+                        </h3>
+                        <p class="text-gray-400 text-sm max-w-xs mx-auto">
+                            Entrenamos a tu equipo y ajustamos para máximo rendimiento
+                        </p>
+                        <p class="text-xs text-gray-500 mt-2">Continuo</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-16 reveal">
+                    <p class="text-lg text-gray-300 mb-6">
+                        <i class="fas fa-shield-alt text-green-500 mr-2"></i>
+                        Garantía de satisfacción del 100% o devolvemos tu inversión
+                    </p>
+                    <a href="#contacto" class="btn-primary">
+                        Inicia tu Transformación Ahora
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Métricas de Impacto Section (REEMPLAZA TESTIMONIOS) -->
+        <section id="impacto" class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+                        Impacto <span class="text-gradient-gold">Medible</span> en tu Negocio
+                    </h2>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                        Resultados promedio que nuestros clientes experimentan en los primeros 6 meses
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                    <!-- Métrica 1 -->
+                    <div class="premium-card text-center reveal" style="animation-delay: 0.1s;">
+                        <div class="w-20 h-20 rounded-full gradient-gold flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-clock text-3xl text-black"></i>
+                        </div>
+                        <h3 class="text-4xl font-bold text-gradient-gold mb-2">75%</h3>
+                        <p class="text-lg font-semibold text-white mb-2">Reducción de Tiempo</p>
+                        <p class="text-sm text-gray-400">En generación de reportes y análisis de datos</p>
+                    </div>
+
+                    <!-- Métrica 2 -->
+                    <div class="premium-card text-center reveal" style="animation-delay: 0.2s;">
+                        <div class="w-20 h-20 rounded-full gradient-gold flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-dollar-sign text-3xl text-black"></i>
+                        </div>
+                        <h3 class="text-4xl font-bold text-gradient-gold mb-2">40%</h3>
+                        <p class="text-lg font-semibold text-white mb-2">Ahorro en Costos</p>
+                        <p class="text-sm text-gray-400">Por automatización de procesos manuales</p>
+                    </div>
+
+                    <!-- Métrica 3 -->
+                    <div class="premium-card text-center reveal" style="animation-delay: 0.3s;">
+                        <div class="w-20 h-20 rounded-full gradient-gold flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-3xl text-black"></i>
+                        </div>
+                        <h3 class="text-4xl font-bold text-gradient-gold mb-2">95%</h3>
+                        <p class="text-lg font-semibold text-white mb-2">Precisión de Datos</p>
+                        <p class="text-sm text-gray-400">Eliminación de errores manuales</p>
+                    </div>
+
+                    <!-- Métrica 4 -->
+                    <div class="premium-card text-center reveal" style="animation-delay: 0.4s;">
+                        <div class="w-20 h-20 rounded-full gradient-gold flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-rocket text-3xl text-black"></i>
+                        </div>
+                        <h3 class="text-4xl font-bold text-gradient-gold mb-2">8-12</h3>
+                        <p class="text-lg font-semibold text-white mb-2">Semanas ROI</p>
+                        <p class="text-sm text-gray-400">Tiempo promedio de retorno de inversión</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-16 reveal">
+                    <p class="text-lg text-gray-300 mb-6">
+                        <i class="fas fa-shield-alt text-green-500 mr-2"></i>
+                        Metodología comprobada con más de 50 implementaciones exitosas
+                    </p>
+                    <a href="#contacto" class="btn-primary">
+                        Comienza tu Transformación
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educational Videos Section - MODIFICADO: Cambiados los videos de automatizar e IA -->
+        <section class="py-20 bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+                        Aprende por qué tu empresa <span class="text-gradient-gold">necesita evolucionar</span>
+                    </h2>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                        Videos cortos que explican el poder de la transformación digital
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Video 1: Por qué analizar datos -->
+                    <div class="reveal" style="animation-delay: 0.1s;">
+                        <div class="premium-card h-full">
+                            <div class="relative rounded-lg overflow-hidden mb-4" style="padding-bottom: 56.25%;">
+                                <iframe 
+                                    src="https://player.vimeo.com/video/1095168160?h=dac104e81f&color=C9A961&title=0&byline=0&portrait=0"
+                                    class="absolute top-0 left-0 w-full h-full"
+                                    frameborder="0" 
+                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--color-accent-gold);">
+                                ¿Por qué analizar datos?
+                            </h3>
+                            <p class="text-gray-400 text-sm">
+                                Descubre cómo los datos pueden revelar oportunidades ocultas 
+                                y prevenir problemas antes de que ocurran.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 2: Por qué automatizar - MODIFICADO -->
+                    <div class="reveal" style="animation-delay: 0.2s;">
+                        <div class="premium-card h-full">
+                            <div style="padding:56.25% 0 0 0;position:relative;">
+                                <iframe src="https://player.vimeo.com/video/1095176960?h=64c6c1108a&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                                        frameborder="0" 
+                                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                                        style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+                                        title="Video 3">
+                                </iframe>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 mt-4" style="color: var(--color-accent-gold);">
+                                ¿Por qué automatizar?
+                            </h3>
+                            <p class="text-gray-400 text-sm">
+                                Aprende cómo la automatización libera a tu equipo 
+                                para enfocarse en trabajo estratégico de alto valor.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 3: Por qué IA - MODIFICADO -->
+                    <div class="reveal" style="animation-delay: 0.3s;">
+                        <div class="premium-card h-full">
+                            <div style="padding:56.25% 0 0 0;position:relative;">
+                                <iframe src="https://player.vimeo.com/video/1095169755?h=8fb10670ba&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                                        frameborder="0" 
+                                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                                        style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+                                        title="Video 4">
+                                </iframe>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 mt-4" style="color: var(--color-accent-gold);">
+                                ¿Por qué usar IA?
+                            </h3>
+                            <p class="text-gray-400 text-sm">
+                                La inteligencia artificial puede predecir tendencias 
+                                y optimizar decisiones como nunca antes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section - Soluciones en Acción (ACTUALIZADO) -->
+        <section class="py-20 bg-black" id="galeria">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 reveal">
+                    <h3 class="text-3xl font-heading font-bold text-white mb-4">
+                        Soluciones en <span class="text-gradient-gold">Acción</span>
+                    </h3>
+                    <p class="text-lg text-gray-400">
+                        Dashboard ejecutivo en tiempo real - Ejemplo de lo que creamos para nuestros clientes
+                    </p>
+                </div>
+
+                <!-- Dashboard Container -->
+                <div class="max-w-7xl mx-auto reveal">
+                    <div class="dashboard-card">
+                        <!-- Dashboard Header -->
+                        <div class="flex flex-col md:flex-row justify-between items-center mb-8 pb-6 border-b border-gray-700">
+                            <div>
+                                <h4 class="text-2xl font-bold text-white mb-1">Panel Ejecutivo - Empresa Demo</h4>
+                                <p class="text-gray-400">Actualizado en tiempo real • Última sincronización: Hace 2 minutos</p>
+                            </div>
+                            <div class="flex space-x-4 mt-4 md:mt-0">
+                                <button class="px-4 py-2 bg-gray-800 text-gray-300 rounded-lg hover:bg-gray-700 transition">
+                                    <i class="fas fa-download mr-2"></i>Exportar
+                                </button>
+                                <button class="px-4 py-2 gradient-gold text-black rounded-lg font-semibold hover:opacity-90 transition">
+                                    <i class="fas fa-sync mr-2"></i>Actualizar
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- KPI Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                            <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-gray-400 text-sm">Ventas Totales</span>
+                                    <i class="fas fa-dollar-sign text-green-500"></i>
+                                </div>
+                                <p class="metric-value">$2.4M</p>
+                                <p class="text-sm text-green-500 mt-2">
+                                    <i class="fas fa-arrow-up mr-1"></i>+23% vs mes anterior
+                                </p>
+                            </div>
+
+                            <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-gray-400 text-sm">Eficiencia Operativa</span>
+                                    <i class="fas fa-chart-line text-blue-500"></i>
+                                </div>
+                                <p class="metric-value">87%</p>
+                                <p class="text-sm text-blue-500 mt-2">
+                                    <i class="fas fa-arrow-up mr-1"></i>+5% optimización
+                                </p>
+                            </div>
+
+                            <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-gray-400 text-sm">Tickets Resueltos</span>
+                                    <i class="fas fa-check-circle text-purple-500"></i>
+                                </div>
+                                <p class="metric-value">1,245</p>
+                                <p class="text-sm text-purple-500 mt-2">
+                                    <i class="fas fa-clock mr-1"></i>Promedio: 2.3h
+                                </p>
+                            </div>
+
+                            <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-gray-400 text-sm">Satisfacción Cliente</span>
+                                    <i class="fas fa-smile text-yellow-500"></i>
+                                </div>
+                                <p class="metric-value">4.8/5</p>
+                                <p class="text-sm text-yellow-500 mt-2">
+                                    <i class="fas fa-star mr-1"></i>+0.3 puntos
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Charts Row -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Percentage Metrics (Reemplaza gráfico de línea) -->
+                            <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
+                                <h5 class="text-lg font-semibold text-white mb-4">Distribución de Ventas por Categoría</h5>
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm text-gray-400">Productos Premium</span>
+                                            <span class="text-sm font-semibold" style="color: var(--color-accent-gold);">45%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-700 rounded-full h-3">
+                                            <div class="h-3 rounded-full" style="width: 45%; background: var(--color-accent-gold);"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm text-gray-400">Productos Estándar</span>
+                                            <span class="text-sm font-semibold" style="color: var(--color-accent-gold);">30%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-700 rounded-full h-3">
+                                            <div class="h-3 rounded-full" style="width: 30%; background: var(--color-accent-gold);"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm text-gray-400">Servicios</span>
+                                            <span class="text-sm font-semibold" style="color: var(--color-accent-gold);">25%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-700 rounded-full h-3">
+                                            <div class="h-3 rounded-full" style="width: 25%; background: var(--color-accent-gold);"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Heat Map con etiquetas -->
+                            <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
+                                <h5 class="text-lg font-semibold text-white mb-4">Mapa de Calor - Actividad por Región y Hora</h5>
+                                <div class="relative">
+                                    <!-- Etiquetas del eje Y (Regiones) -->
+                                    <div class="absolute -left-16 top-8 text-xs text-gray-400 space-y-4">
+                                        <div>Norte</div>
+                                        <div>Centro</div>
+                                        <div>Sur</div>
+                                    </div>
+                                    <!-- Grid del mapa de calor -->
+                                    <div class="grid grid-cols-5 gap-2 ml-4">
+                                        <!-- Fila 1 - Norte -->
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.2);">12</div>
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.8);">89</div>
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.4);">34</div>
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 1);">120</div>
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.3);">23</div>
+                                        <!-- Fila 2 - Centro -->
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.6);">67</div>
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.9);">98</div>
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.2);">15</div>
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.7);">78</div>
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.5);">56</div>
+                                        <!-- Fila 3 - Sur -->
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.3);">29</div>
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.8);">87</div>
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.4);">43</div>
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.9);">102</div>
+                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.6);">61</div>
+                                    </div>
+                                    <!-- Etiquetas del eje X (Horas) -->
+                                    <div class="flex justify-around mt-2 ml-4 text-xs text-gray-400">
+                                        <span>8-10</span>
+                                        <span>10-12</span>
+                                        <span>12-14</span>
+                                        <span>14-16</span>
+                                        <span>16-18</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between mt-4">
+                                    <span class="text-xs text-gray-400">Baja actividad</span>
+                                    <div class="flex space-x-1">
+                                        <div class="w-4 h-4 rounded" style="background-color: rgba(201, 154, 97, 0.2);"></div>
+                                        <div class="w-4 h-4 rounded" style="background-color: rgba(201, 154, 97, 0.5);"></div>
+                                        <div class="w-4 h-4 rounded" style="background-color: rgba(201, 154, 97, 0.8);"></div>
+                                        <div class="w-4 h-4 rounded" style="background-color: rgba(201, 154, 97, 1);"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-400">Alta actividad</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer Note -->
+                        <div class="mt-8 text-center">
+                            <p class="text-sm text-gray-500">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                Este es un ejemplo simplificado. Los dashboards reales incluyen múltiples páginas, 
+                                filtros interactivos y conexión directa con tus sistemas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI Calculator Section (ACTUALIZADO CON PESOS CHILENOS) -->
+        <section class="py-20 md:py-28 bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12 reveal">
+                        <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+                            Calcula tu <span class="text-gradient-gold">ROI Potencial</span>
+                        </h2>
+                        <p class="text-xl text-gray-400">
+                            Descubre cuánto puedes ahorrar con inteligencia de negocios
+                        </p>
+                    </div>
+
+                    <div class="premium-card reveal">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-6" style="color: var(--color-accent-gold);">
+                                    Ingresa tus datos actuales:
+                                </h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">
+                                            Horas semanales ahorradas <span class="text-xs">(por persona)</span>
+                                        </label>
+                                        <input type="range" id="hours-range" min="1" max="40" value="10" 
+                                               class="w-full" onchange="calculateROI()">
+                                        <span id="hours-value" class="text-gradient-gold font-bold">10 horas</span>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">
+                                            Número de empleados beneficiados
+                                        </label>
+                                        <input type="range" id="employees-range" min="1" max="20" value="3" 
+                                               class="w-full" onchange="calculateROI()">
+                                        <span id="employees-value" class="text-gradient-gold font-bold">3 personas</span>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">
+                                            Remuneración promedio mensual (CLP)
+                                        </label>
+                                        <select id="salary-select" class="w-full bg-gray-800 text-white rounded px-3 py-2" onchange="calculateROI()">
+                                            <option value="600000">$600.000</option>
+                                            <option value="800000">$800.000</option>
+                                            <option value="1000000" selected>$1.000.000</option>
+                                            <option value="1500000">$1.500.000</option>
+                                            <option value="2000000">$2.000.000</option>
+                                            <option value="2500000">$2.500.000</option>
+                                            <option value="3000000">$3.000.000</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-sapphire/20 rounded-lg p-6 border border-sapphire/30">
+                                <h3 class="text-xl font-semibold mb-6" style="color: var(--color-accent-gold);">
+                                    Tu ahorro potencial:
+                                </h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-400">Ahorro semanal:</span>
+                                        <span id="weekly-savings" class="text-2xl font-bold text-gradient-gold">$187.500</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-400">Ahorro mensual:</span>
+                                        <span id="monthly-savings" class="text-2xl font-bold text-gradient-gold">$750.000</span>
+                                    </div>
+                                    <div class="border-t border-gray-700 pt-4">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-300 font-semibold">Ahorro anual:</span>
+                                            <span id="yearly-savings" class="text-3xl font-bold text-gradient-gold">$9.000.000</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-400 mt-4">
+                                        * Valores en pesos chilenos (CLP)<br>
+                                        * Basado en la automatización y optimización de procesos
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chat IA Section - MODIFICADO CON EL CÓDIGO PROPUESTO -->
+        <section id="asistente" class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="max-w-5xl mx-auto">
+                    <div class="text-center mb-12 reveal">
+                        <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+                            Asistente <span class="text-gradient-gold">24/7</span> para tus Dudas
+                        </h2>
+                        <p class="text-xl text-gray-400 mb-8">
+                            Pregunta lo que necesites sobre transformación digital
+                        </p>
+                    </div>
+
+                    <div class="chat-container reveal">
+                        <!-- Chat header -->
+                        <div class="bg-sapphire/20 px-6 py-4 border-b border-sapphire/30">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-full gradient-gold flex items-center justify-center">
+                                        <i class="fas fa-robot text-black"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-white font-semibold">JRO Assistant Pro</h3>
+                                        <p class="text-xs text-green-400 flex items-center">
+                                            <span class="w-2 h-2 bg-green-400 rounded-full mr-1 animate-pulse"></span>
+                                            Listo para ayudarte
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat messages -->
+                        <div class="chat-messages h-96 overflow-y-auto p-6 custom-scrollbar" id="chat-messages">
+                            <div class="flex justify-start mb-4">
+                                <div class="chat-bubble ai-bubble">
+                                    <p class="text-sm">
+                                        ¡Hola! Soy el asistente de JRO Asesorías 🚀
+                                    </p>
+                                    <p class="text-sm mt-2">
+                                        Puedo ayudarte con:
+                                    </p>
+                                    <ul class="mt-2 space-y-1 text-sm">
+                                        <li>• Cómo Power BI puede acelerar tus decisiones</li>
+                                        <li>• Qué procesos puedes automatizar en tu empresa</li>
+                                        <li>• Cuánto tiempo toma la implementación</li>
+                                        <li>• Resultados medibles en 6 áreas clave del negocio</li>
+                                    </ul>
+                                    <p class="text-sm mt-3">
+                                        ¿Qué te gustaría saber?
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick actions -->
+                        <div class="px-6 py-3 border-t border-gray-700">
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <button class="quick-btn bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded-full transition-colors"
+                                        onclick="sendQuickMessage('¿Cuánto tiempo toma implementar Power BI?')">
+                                    Tiempo de implementación
+                                </button>
+                                <button class="quick-btn bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded-full transition-colors"
+                                        onclick="sendQuickMessage('¿Qué incluye el diagnóstico gratuito?')">
+                                    Sobre el diagnóstico
+                                </button>
+                                <button class="quick-btn bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded-full transition-colors"
+                                        onclick="sendQuickMessage('¿Qué resultados han logrado en otras empresas?')">
+                                    Resultados comprobados
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Input area -->
+                        <div class="px-6 pb-6">
+                            <div class="flex space-x-3">
+                                <input type="text" 
+                                       id="chat-input" 
+                                       class="flex-grow bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gold/50 transition-all" 
+                                       placeholder="Escribe tu pregunta aquí..."
+                                       onkeypress="if(event.key === 'Enter') sendMessage()">
+                                <button onclick="sendMessage()" 
+                                        class="gradient-gold text-black font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-all">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section with Real Images -->
+        <section class="py-20 bg-black">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                    <div class="reveal">
+                        <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-6">
+                            Transformación Digital con <span class="text-gradient-gold">Experiencia Real</span>
+                        </h3>
+                        <p class="text-lg text-gray-400 mb-6">
+                            Con más de una década de experiencia, combinamos el rigor de la consultoría 
+                            tradicional con las herramientas más modernas de Microsoft.
+                        </p>
+                        <p class="text-lg text-gray-400 mb-8">
+                            Nuestro enfoque personalizado garantiza que cada solución se adapte 
+                            perfectamente a las necesidades únicas de tu empresa.
+                        </p>
+                        <!-- Imagen vertical -->
+                        <div class="max-w-sm mx-auto md:mx-0">
+                            <img src="https://i.postimg.cc/QxcpX9yk/0o1a2566-689-S-min.jpg" 
+                                 alt="Juan Ramón Ortiz - Fundador JRO Asesorías" 
+                                 class="w-full rounded-lg shadow-2xl">
+                        </div>
+                    </div>
+                    <div class="reveal" style="animation-delay: 0.2s;">
+                        <!-- Imagen horizontal -->
+                        <img src="https://i.postimg.cc/25rTpFjZ/0o1a6439-1982-min.jpg" 
+                             alt="Oficina JRO Asesorías" 
+                             class="w-full rounded-lg shadow-2xl mb-8">
+                        <div class="grid grid-cols-2 gap-6 text-center">
+                            <div class="premium-card">
+                                <h4 class="text-3xl font-bold text-gradient-gold">15+</h4>
+                                <p class="text-gray-400">Años de Experiencia</p>
+                            </div>
+                            <div class="premium-card">
+                                <h4 class="text-3xl font-bold text-gradient-gold">100%</h4>
+                                <p class="text-gray-400">Clientes Satisfechos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final Section - MODIFICADO: Cambiado teléfono por WhatsApp -->
+        <section class="py-20 md:py-28 relative overflow-hidden">
+            <!-- Background effect -->
+            <div class="absolute inset-0 bg-gradient-to-r from-sapphire/20 via-transparent to-sapphire/20"></div>
+            
+            <div class="container mx-auto px-6 relative z-10 text-center">
+                <h2 class="text-4xl md:text-6xl font-heading font-bold text-white mb-6 reveal">
+                    ¿Listo para dejar de <br>
+                    <span class="text-gradient-gold">perder tiempo y dinero?</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8 reveal" style="animation-delay: 0.2s;">
+                    Únete a las +50 empresas que ya optimizaron sus procesos y mejoraron 
+                    sus decisiones. Empieza con un diagnóstico gratuito.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="animation-delay: 0.4s;">
+                    <a href="#contacto" class="btn-primary text-lg">
+                        <i class="fas fa-rocket mr-2"></i>
+                        Empieza tu Transformación
+                    </a>
+                    <a href="https://wa.me/56966895746" class="btn-secondary text-lg">
+                        <i class="fab fa-whatsapp mr-2"></i>
+                        WhatsApp Directo
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (ACTUALIZADO SIN LINKEDIN) -->
+    <footer id="contacto" class="bg-black border-t border-gray-800">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Company info -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg gradient-gold flex items-center justify-center">
+                            <span class="font-heading font-bold text-lg text-black">JRO</span>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-white">JRO Asesorías E.I.R.L.</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Transformamos datos complejos en decisiones simples. 
+                        Expertos en Power Platform con resultados garantizados.
+                    </p>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <p><i class="fas fa-id-card mr-2" style="color: var(--color-accent-gold);"></i>RUT: 76.325.663-4</p>
+                        <p><i class="fas fa-city mr-2" style="color: var(--color-accent-gold);"></i>Santiago, Chile</p>
+                    </div>
+                </div>
+
+                <!-- Quick links -->
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#servicios" class="hover:text-gold transition-colors">Servicios</a></li>
+                        <li><a href="#proceso" class="hover:text-gold transition-colors">Proceso</a></li>
+                        <li><a href="#impacto" class="hover:text-gold transition-colors">Impacto Medible</a></li>
+                        <li><a href="#diagnostico" class="hover:text-gold transition-colors">Diagnóstico Gratuito</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Contacto Directo</h4>
+                    <div class="space-y-3">
+                        <a href="mailto:info@duocapital.cl" 
+                           class="flex items-center text-gray-400 hover:text-gold transition-colors">
+                            <i class="fas fa-envelope mr-3" style="color: var(--color-accent-gold);"></i>
+                            <span>info@duocapital.cl</span>
+                        </a>
+                        <a href="tel:+56966895746" 
+                           class="flex items-center text-gray-400 hover:text-gold transition-colors">
+                            <i class="fas fa-phone mr-3" style="color: var(--color-accent-gold);"></i>
+                            <span>+56 9 6689 5746</span>
+                        </a>
+                        <a href="https://wa.me/56966895746" 
+                           class="flex items-center text-gray-400 hover:text-gold transition-colors">
+                            <i class="fab fa-whatsapp mr-3" style="color: var(--color-accent-gold);"></i>
+                            <span>WhatsApp Business</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 JRO Asesorías E.I.R.L. Todos los derechos reservados.</p>
+                <p class="text-sm mt-2">Transformando empresas con inteligencia de negocios desde 2013</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden">
+        <div class="flex justify-end p-6">
+            <button id="close-mobile-menu" class="text-white text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col items-center space-y-8 mt-20">
+            <a href="#diagnostico" class="text-2xl text-white hover:text-gold transition-colors mobile-link">Diagnóstico Gratuito</a>
+            <a href="#servicios" class="text-2xl text-white hover:text-gold transition-colors mobile-link">Servicios</a>
+            <a href="#proceso" class="text-2xl text-white hover:text-gold transition-colors mobile-link">Proceso</a>
+            <a href="#impacto" class="text-2xl text-white hover:text-gold transition-colors mobile-link">Impacto</a>
+            <a href="#contacto" class="btn-primary mobile-link">Acelera tus Decisiones</a>
+        </nav>
+    </div>
+
+    <!-- Script de Vimeo (solo uno al final) -->
+    <script src="https://player.vimeo.com/api/player.js"></script>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate counters if present
+                    const counters = entry.target.querySelectorAll('.counter-target');
+                    counters.forEach(counter => animateCounter(counter));
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation
+        function animateCounter(counter) {
+            const target = +counter.getAttribute('data-target');
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const updateCount = () => {
+                if (current < target) {
+                    current += increment;
+                    counter.innerText = Math.min(Math.ceil(current), target);
+                    requestAnimationFrame(updateCount);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+
+            updateCount();
+        }
+
+        // ROI Calculator (ACTUALIZADO PARA PESOS CHILENOS)
+        function calculateROI() {
+            const hours = document.getElementById('hours-range').value;
+            const employees = document.getElementById('employees-range').value;
+            const monthlySalary = document.getElementById('salary-select').value;
+
+            document.getElementById('hours-value').textContent = hours + ' horas';
+            document.getElementById('employees-value').textContent = employees + ' personas';
+
+            // Calcular valor hora: salario mensual / 4 semanas / 40 horas
+            const hourlyRate = monthlySalary / (4 * 40);
+            
+            // Calcular ahorros
+            const weeklyTotal = hours * employees * hourlyRate;
+            const monthlyTotal = weeklyTotal * 4;
+            const yearlyTotal = monthlyTotal * 12;
+
+            // Formatear números con separador de miles
+            const formatNumber = (num) => {
+                return Math.round(num).toLocaleString('es-CL');
+            };
+
+            document.getElementById('weekly-savings').textContent = '$' + formatNumber(weeklyTotal);
+            document.getElementById('monthly-savings').textContent = '$' + formatNumber(monthlyTotal);
+            document.getElementById('yearly-savings').textContent = '$' + formatNumber(yearlyTotal);
+        }
+
+        // Initial calculation
+        calculateROI();
+
+        // Chat functionality MODIFICADO con el código propuesto
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        let conversationHistory = [];
+
+        // URL correcta para llamar a una función de Netlify
+        const API_ENDPOINT = '/.netlify/functions/chat-gemini';
+
+        // Función para agregar mensaje al chat
+        function appendMessage(text, isUser = false, isLoading = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`;
+            
+            const bubble = document.createElement('div');
+            bubble.className = `chat-bubble ${isUser ? 'user-bubble' : 'ai-bubble'}`;
+            
+            if (isLoading) {
+                bubble.innerHTML = `
+                    <div class="flex items-center space-x-2">
+                        <div class="loading-dot"></div>
+                        <div class="loading-dot" style="animation-delay: 0.2s;"></div>
+                        <div class="loading-dot" style="animation-delay: 0.4s;"></div>
+                    </div>
+                `;
+            } else {
+                bubble.innerHTML = `<p class="text-sm whitespace-pre-wrap">${text}</p>`;
+            }
+            
+            messageDiv.appendChild(bubble);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            return messageDiv;
+        }
+
+        // Función principal para enviar mensaje
+        // Reemplaza la función sendMessage() en tu HTML con esta versión que muestra más detalles del error:
+
+async function sendMessage() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    // Agregar mensaje del usuario
+    appendMessage(message, true);
+    conversationHistory.push({ role: 'user', content: message });
+    chatInput.value = '';
+
+    // Mostrar indicador de carga
+    const loadingMessage = appendMessage('', false, true);
+
+    try {
+        console.log('Enviando a:', API_ENDPOINT); // Debug
+        
+        const response = await fetch(API_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                message: message,
+                history: conversationHistory.slice(-10)
+            })
+        });
+
+        console.log('Response status:', response.status); // Debug
+        
+        loadingMessage.remove();
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Error del servidor:', errorData); // Debug
+            throw new Error(errorData.error || `Error HTTP: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Respuesta del servidor:', data); // Debug
+
+        if (data.response) {
+            appendMessage(data.response);
+            conversationHistory.push({ role: 'assistant', content: data.response });
+            
+            if (data.isHotLead) {
+                console.log('Lead caliente detectado!');
+            }
+        } else {
+            throw new Error('Respuesta inesperada del servidor.');
+        }
+
+    } catch (error) {
+        console.error('Error completo:', error);
+        
+        // Mensaje más específico según el tipo de error
+        let errorMessage = 'Error desconocido. ';
+        
+        if (error.message.includes('Failed to fetch')) {
+            errorMessage = '❌ No se puede conectar con la función. La función podría no estar desplegada. ';
+        } else if (error.message.includes('404')) {
+            errorMessage = '❌ Función no encontrada (404). Verifica que esté en netlify/functions/chat-gemini.js. ';
+        } else if (error.message.includes('500')) {
+            errorMessage = '❌ Error del servidor (500). Revisa los logs de Netlify Functions. ';
+        } else if (error.message) {
+            errorMessage = `❌ Error: ${error.message}. `;
+        }
+        
+        errorMessage += 'Mientras tanto, contáctanos al +56 9 6689 5746.';
+        
+        appendMessage(errorMessage);
+    }
+}
+
+        // Función para respuestas rápidas
+        function sendQuickMessage(message) {
+            chatInput.value = message;
+            sendMessage();
+        }
+
+        // Enter key para enviar
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Diagnostic form (placeholder)
+        function openDiagnosticForm() {
+            alert('El formulario de diagnóstico se abrirá aquí. Por ahora, contáctanos directamente al +56 9 6689 5746');
+        }
+    </script>
+</body>
+</html>
