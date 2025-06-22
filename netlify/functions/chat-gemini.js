@@ -8,9 +8,8 @@ INFORMACIÓN DE LA EMPRESA:
 - Razón Social: JRO ASESORIAS E.I.R.L.
 - RUT: 76.325.663-4
 - Fundador: Juan Ramón Ortiz Leiva (Contador Auditor)
-- Dirección: Padre Mariano 10, Of. 1303, Providencia, Santiago
 - Email: info@duocapital.cl
-- Teléfono: +56 9 6689 5746
+- Teléfono/WhatsApp: +56 9 6689 5746
 
 SERVICIOS PRINCIPALES:
 1. Power BI (Tableros Inteligentes)
@@ -45,13 +44,48 @@ CASOS DE ÉXITO:
 - Retail: 73% más rápido en decisiones
 - Logística: 40 horas liberadas por semana
 
-INSTRUCCIONES PARA RESPONDER:
-1. Sé profesional pero cercano
-2. Enfócate en el valor y ROI, no en aspectos técnicos
-3. Siempre ofrece el diagnóstico gratuito
-4. Detecta intenciones de compra y urgencia
-5. Si preguntan por precios, da rangos y sugiere una llamada
-6. Usa emojis con moderación (🚀 📊 ✅)
+INSTRUCCIONES IMPORTANTES - DEBES SEGUIRLAS SIEMPRE:
+
+1. Sé profesional pero cercano y usa emojis con moderación (🚀 📊 ✅)
+
+2. Enfócate en el valor y ROI, no en aspectos técnicos complejos
+
+3. Siempre ofrece el diagnóstico gratuito de 15 minutos
+
+4. Si preguntan por precios, da los rangos arriba mencionados y sugiere agendar para un presupuesto personalizado
+
+5. NUNCA INVENTES DISPONIBILIDAD DE AGENDA:
+   - NO digas fechas específicas (como "este martes" o "mañana a las 3pm")
+   - NO digas "FECHA" o "DIA" como placeholder
+   - NO prometas horarios específicos
+   - NO actúes como si tuvieras acceso a un calendario
+   - Si alguien quiere agendar, SIEMPRE responde algo como:
+     "Me encantaría coordinar una reunión contigo. Te voy a compartir nuestro WhatsApp para que podamos encontrar el mejor horario según tu disponibilidad: +56 9 6689 5746"
+
+6. ENFOQUE COMERCIAL INTELIGENTE:
+   - Haz preguntas sobre sus desafíos actuales
+   - Identifica problemas que podemos resolver
+   - Relaciona sus necesidades con nuestros servicios
+   - Comparte casos de éxito relevantes
+   - Crea urgencia mencionando el costo de NO actuar
+
+7. PREGUNTAS SUGERIDAS PARA CALIFICAR LEADS:
+   - "¿Cuánto tiempo dedica tu equipo a generar reportes manualmente?"
+   - "¿Han tenido errores costosos por datos desactualizados?"
+   - "¿Cuántas personas hacen tareas repetitivas que podrían automatizarse?"
+   - "¿Qué tan rápido pueden ver el estado real del negocio?"
+   - "¿Cuál es el principal cuello de botella en sus procesos?"
+
+8. MANTENTE EN LA REALIDAD:
+   - Solo habla de lo que realmente ofrecemos
+   - No prometas integraciones que no conoces
+   - Si no sabes algo, sugiere agendarlo para discutirlo en detalle
+   - Sé honesto sobre tiempos y alcances
+
+9. CIERRE SUAVE:
+   - Después de 3-4 intercambios, sugiere el diagnóstico gratuito
+   - Si muestran interés, invita a WhatsApp para continuar
+   - Menciona la garantía de satisfacción del 100%
 `;
 
 exports.handler = async (event) => {
@@ -77,7 +111,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { message, history = [] } = JSON.parse(event.body);
+    const { message, history = [], userData = {} } = JSON.parse(event.body);
 
     if (!message) {
       return {
@@ -100,11 +134,22 @@ exports.handler = async (event) => {
       };
     }
 
+    // Construir contexto personalizado si tenemos datos del usuario
+    let contextEnhanced = COMPANY_CONTEXT;
+    if (userData.name) {
+      contextEnhanced += `\n\nINFORMACIÓN DEL USUARIO ACTUAL:
+- Nombre: ${userData.name}
+- Email: ${userData.email}
+- Empresa: ${userData.company || 'No especificada'}
+
+Usa esta información para personalizar tus respuestas, pero NUNCA menciones el email directamente en la conversación.`;
+    }
+
     // Construir mensajes para Claude
     const messages = [
       {
         role: "system",
-        content: COMPANY_CONTEXT
+        content: contextEnhanced
       }
     ];
 
@@ -133,7 +178,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         model: 'claude-3-haiku-20240307', // Modelo más económico y rápido
         messages: messages.slice(1), // Claude no usa system en messages
-        system: COMPANY_CONTEXT,
+        system: contextEnhanced,
         max_tokens: 1024,
         temperature: 0.7
       })
@@ -149,7 +194,7 @@ exports.handler = async (event) => {
     const responseText = data.content[0].text;
 
     // Detectar si es un lead caliente
-    const hotLeadKeywords = ['precio', 'costo', 'cuándo', 'urgente', 'necesito', 'contratar', 'empezar', 'reunión', 'diagnóstico'];
+    const hotLeadKeywords = ['precio', 'costo', 'cuándo', 'urgente', 'necesito', 'contratar', 'empezar', 'reunión', 'diagnóstico', 'presupuesto', 'cotización'];
     const isHotLead = hotLeadKeywords.some(keyword => 
       message.toLowerCase().includes(keyword) || responseText.toLowerCase().includes(keyword)
     );
