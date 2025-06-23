@@ -28,25 +28,15 @@
             --color-sapphire-light: #283593;
         }
 
-        html, body { 
+        body { 
             font-family: 'Inter', sans-serif; 
             background-color: var(--color-bg-primary); 
             color: var(--color-text-primary);
             margin: 0;
             padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-        }
-        
-        body {
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            width: 100vw;
-            position: fixed;
-            top: 0;
-            left: 0;
         }
 
         .chat-bubble {
@@ -185,15 +175,6 @@
         let lastSentTime = 0;
         let inactivityTimer = null;
 
-        // Intentar maximizar la ventana al cargar
-        window.addEventListener('load', () => {
-            // Si es una ventana popup, intentar maximizar
-            if (window.opener) {
-                window.moveTo(0, 0);
-                window.resizeTo(screen.width, screen.height);
-            }
-        });
-
         const POWER_AUTOMATE_URL = 'https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII';
         const API_ENDPOINT = '/.netlify/functions/chat-gemini';
 
@@ -237,12 +218,8 @@
                 return;
             }
 
-            // Actualizar estado visual
+            // Actualizar estado visual discretamente
             const saveStatus = document.getElementById('save-status');
-            if (saveStatus) {
-                saveStatus.textContent = 'Guardando...';
-                saveStatus.style.color = '#F59E0B';
-            }
 
             const dataToSend = {
                 conversationId: conversationId,
@@ -302,17 +279,6 @@
                         }, 5000);
                     }
                     
-                    // Feedback visual
-                    const banner = document.getElementById('warning-banner');
-                    if (banner) {
-                        banner.style.background = 'rgba(34, 197, 94, 0.1)';
-                        banner.style.borderColor = 'rgba(34, 197, 94, 0.3)';
-                        banner.style.color = '#22c55e';
-                        banner.innerHTML = '<i class="fas fa-check-circle mr-1"></i> Conversación guardada exitosamente';
-                        banner.style.display = 'block';
-                        setTimeout(() => { banner.style.display = 'none'; }, 3000);
-                    }
-                    
                     return response.text();
                 } else {
                     throw new Error(`Status: ${response.status}`);
@@ -327,16 +293,6 @@
                 console.log(`❌ Error con Fetch: ${error.message}`);
                 console.error('Error en Fetch:', error);
                 sendingInProgress = false;
-                
-                // Actualizar estado visual
-                if (saveStatus) {
-                    saveStatus.textContent = 'Error al guardar';
-                    saveStatus.style.color = '#EF4444';
-                    setTimeout(() => {
-                        saveStatus.textContent = 'Guardado automático activo';
-                        saveStatus.style.color = '#9CA3AF';
-                    }, 3000);
-                }
             });
         }
 
@@ -507,18 +463,6 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
         setInterval(() => {
             if (conversationHistory.length > 2 && canSendAgain() && !sendingInProgress) {
                 console.log('⏰ Guardado automático cada 5 minutos');
-                
-                // Notificar al usuario del guardado automático
-                const banner = document.getElementById('warning-banner');
-                if (banner) {
-                    banner.style.background = 'rgba(59, 130, 246, 0.1)';
-                    banner.style.borderColor = 'rgba(59, 130, 246, 0.3)';
-                    banner.style.color = '#3B82F6';
-                    banner.innerHTML = '<i class="fas fa-save mr-1"></i> Guardando automáticamente...';
-                    banner.style.display = 'block';
-                    setTimeout(() => { banner.style.display = 'none'; }, 2000);
-                }
-                
                 safeSendToPowerAutomate();
             }
         }, 300000); // 5 minutos
