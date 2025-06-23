@@ -109,7 +109,7 @@
             </div>
             <div>
                 <h3 class="text-white font-semibold">JRO Assistant Pro</h3>
-                <p class="text-xs text-green-400">En línea • <span id="save-status" class="text-gray-400">Guardado automático activo</span></p>
+                <p class="text-xs text-green-400">En línea</p>
             </div>
         </div>
         <button onclick="closeChat()" class="text-gray-400 hover:text-white">
@@ -218,9 +218,6 @@
                 return;
             }
 
-            // Actualizar estado visual discretamente
-            const saveStatus = document.getElementById('save-status');
-
             const dataToSend = {
                 conversationId: conversationId,
                 nombre: userData.name || 'No especificado',
@@ -265,19 +262,6 @@
                     console.log('✅ Conversación enviada exitosamente a Power Automate');
                     lastSentTime = Date.now();
                     sendingInProgress = false;
-                    
-                    // Actualizar estado visual
-                    if (saveStatus) {
-                        const now = new Date().toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
-                        saveStatus.textContent = `Guardado ✓ (${now})`;
-                        saveStatus.style.color = '#10B981';
-                        
-                        // Después de 5 segundos, volver al estado normal
-                        setTimeout(() => {
-                            saveStatus.textContent = 'Guardado automático activo';
-                            saveStatus.style.color = '#9CA3AF';
-                        }, 5000);
-                    }
                     
                     return response.text();
                 } else {
