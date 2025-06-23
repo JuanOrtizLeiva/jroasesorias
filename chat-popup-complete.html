@@ -28,15 +28,25 @@
             --color-sapphire-light: #283593;
         }
 
-        body { 
+        html, body { 
             font-family: 'Inter', sans-serif; 
             background-color: var(--color-bg-primary); 
             color: var(--color-text-primary);
             margin: 0;
             padding: 0;
-            height: 100vh;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        body {
             display: flex;
             flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
         }
 
         .chat-bubble {
@@ -175,6 +185,15 @@
         let lastSentTime = 0;
         let inactivityTimer = null;
 
+        // Intentar maximizar la ventana al cargar
+        window.addEventListener('load', () => {
+            // Si es una ventana popup, intentar maximizar
+            if (window.opener) {
+                window.moveTo(0, 0);
+                window.resizeTo(screen.width, screen.height);
+            }
+        });
+
         const POWER_AUTOMATE_URL = 'https://prod-14.westus.logic.azure.com:443/workflows/42627b4cb17d41b5a5cbeb16941f1cfd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA_i7-dfQd-I30K6aFez1j3JLNIwQxOQIFcnpCGOsII';
         const API_ENDPOINT = '/.netlify/functions/chat-gemini';
 
@@ -194,17 +213,17 @@
         function resetInactivityTimer() {
             clearTimeout(inactivityTimer);
             inactivityTimer = setTimeout(() => {
-                if (conversationHistory.length > 2 && canSendAgain()) {
+                if (conversationHistory.length > 2) {
                     console.log('⏱️ Inactividad detectada - guardando conversación...');
                     safeSendToPowerAutomate();
                 }
-            }, 30000); // 30 segundos
+            }, 60000); // 60 segundos (cambio de 30 a 60)
         }
 
-        // Verificar si han pasado 90 segundos desde el último envío
+        // Verificar si han pasado 5 segundos desde el último envío
         function canSendAgain() {
             const now = Date.now();
-            return (now - lastSentTime) > 90000; // 90 segundos
+            return (now - lastSentTime) > 5000; // 5 segundos (cambio de 90 a 5)
         }
 
         // Función para enviar a Power Automate
@@ -442,7 +461,9 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
             input.value = '';
 
             // IMPORTANTE: Enviar a Power Automate después de cada mensaje del usuario
-            safeSendToPowerAutomate();
+            // Sin restricciones para mensajes del usuario
+            sendingInProgress = true;
+            sendToPowerAutomate();
 
             const loadingMessage = appendMessage('', false, true);
 
@@ -482,10 +503,10 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
 
         // 🔥 ESTRATEGIA DE GUARDADO INTELIGENTE
 
-        // 1. Guardar cada 2 minutos automáticamente
+        // 1. Guardar cada 5 minutos automáticamente (cambio de 2 a 5 minutos)
         setInterval(() => {
             if (conversationHistory.length > 2 && canSendAgain() && !sendingInProgress) {
-                console.log('⏰ Guardado automático cada 2 minutos');
+                console.log('⏰ Guardado automático cada 5 minutos');
                 
                 // Notificar al usuario del guardado automático
                 const banner = document.getElementById('warning-banner');
@@ -500,7 +521,7 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
                 
                 safeSendToPowerAutomate();
             }
-        }, 120000); // 2 minutos
+        }, 300000); // 5 minutos
 
         // 2. Guardar cuando la ventana pierde el foco
         document.addEventListener('visibilitychange', () => {
@@ -567,14 +588,15 @@ Soy el asistente de JRO Asesorías. Estoy aquí para ayudarte con:
         // Log inicial
         console.log('✅ Chat popup v5.0 - VERSIÓN COMPLETA SIN DEBUG');
         console.log('📝 La conversación se guarda automáticamente cuando:');
-        console.log('   📤  Envías cada mensaje');
-        console.log('   ⏱️  Dejas de escribir por 30 segundos');
-        console.log('   ⏰  Cada 2 minutos');
+        console.log('   📤  Envías cada mensaje (INMEDIATAMENTE)');
+        console.log('   ⏱️  Dejas de escribir por 60 segundos');
+        console.log('   ⏰  Cada 5 minutos');
         console.log('   🔄  Cambias de pestaña o minimizas');
         console.log('   🏠  Se cierra la ventana principal');
         console.log('   🖱️  El mouse sale por arriba de la ventana');
         console.log('');
         console.log('🔑 ID de conversación único se genera con el primer mensaje');
+        console.log('⚡ Cada mensaje se envía INMEDIATAMENTE a Power Automate');
     </script>
 </body>
 </html>
