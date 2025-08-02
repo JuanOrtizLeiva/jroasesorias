@@ -1,309 +1,243 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JRO Asesorías - Inteligencia de Negocios que Acelera Decisiones</title>
-    <meta name="description" content="Transformamos datos complejos en decisiones claras. Optimizamos procesos empresariales con Power BI, Power Apps y Power Automate.">
+    <title>JRO Asesorías | Transformación Digital Inteligente</title>
+    <meta name="description" content="Arquitectos de la transformación digital. Convertimos datos en decisiones y procesos en ventajas competitivas.">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
+    <!-- Typography System -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Executive Sapphire Color Palette - Refined Gold */
+        /* Design Philosophy: Trust Through Sophistication
+           Color Psychology: Deep Ocean Blue (Trust) + Warm Charcoal (Stability) + Emerald Accents (Growth)
+           Typography: Instrument Sans (Modern Authority) + Serif (Heritage)
+        */
+        
         :root {
-            --color-bg-primary: #0a0a0a;
-            --color-bg-secondary: #141414;
-            --color-bg-tertiary: #1a1a1a;
-            --color-text-primary: #F5F5DC;
-            --color-text-secondary: #B0B0B0;
-            --color-border: #2a2a2a;
-            --color-accent-gold: #C9A961;      /* Oro Azteca Sofisticado */
-            --color-accent-gold-dark: #B08D57;  /* Bronce Dorado */
-            --color-accent-gold-light: #D4AF37; /* Oro Viejo para hovers */
-            --color-sapphire: #1a237e;
-            --color-sapphire-light: #283593;
-            --color-success: #10B981;
-            --color-white: #FFFFFF;
-            --color-blue-elegant: #5DADE2;     /* Azul claro elegante agregado */
-        }
-
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--color-bg-primary); 
-            color: var(--color-text-primary); 
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-        }
-
-        .font-heading { font-family: 'Montserrat', sans-serif; }
-
-        /* Gradientes principales */
-        .gradient-gold {
-            background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-gold-dark));
-        }
-
-        .gradient-sapphire {
-            background: linear-gradient(135deg, var(--color-sapphire), var(--color-sapphire-light));
-        }
-
-        .text-gradient-gold {
-            background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-gold-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Animaciones suaves */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes zoomIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(201, 154, 97, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(201, 154, 97, 0.8); }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
-        .animate-fadeInLeft { animation: fadeInLeft 0.8s ease-out forwards; }
-        .animate-fadeInRight { animation: fadeInRight 0.8s ease-out forwards; }
-        .animate-zoomIn { animation: zoomIn 0.8s ease-out forwards; }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
-        .animate-bounce { animation: bounce 2s ease-in-out infinite; }
-
-        /* Clases de revelación */
-        .reveal { 
-            opacity: 0; 
-            transform: translateY(30px); 
+            /* Primary Palette - Psychological Impact */
+            --midnight-ocean: #0A1628; /* Deep trust, infinite possibilities */
+            --deep-ocean: #162B4D; /* Professional depth, stability */
+            --ocean-blue: #1E3A5F; /* Corporate confidence */
+            --steel-blue: #364F6B; /* Approachable professionalism */
+            
+            /* Accent Colors - Strategic Communication */
+            --emerald-growth: #10B981; /* Growth, success, positive change */
+            --warm-gold: #F59E0B; /* Premium value, attention */
+            --pearl-white: #FAFBFC; /* Clarity, transparency */
+            --silk-gray: #F3F4F6; /* Sophisticated neutrality */
+            
+            /* Functional Grays */
+            --charcoal: #1F2937; /* Primary text - authority */
+            --slate: #475569; /* Secondary text - approachable */
+            --mist: #94A3B8; /* Tertiary text - subtle */
+            --smoke: #E2E8F0; /* Borders - definition */
+            
+            /* Spacing System - Golden Ratio Based */
+            --space-xs: 0.382rem; /* 6.11px */
+            --space-sm: 0.618rem; /* 9.89px */
+            --space-md: 1rem; /* 16px */
+            --space-lg: 1.618rem; /* 25.89px */
+            --space-xl: 2.618rem; /* 41.89px */
+            --space-2xl: 4.236rem; /* 67.78px */
+            --space-3xl: 6.854rem; /* 109.66px */
+            
+            /* Typography Scale - Perfect Fourth (1.333) */
+            --text-xs: 0.75rem; /* 12px */
+            --text-sm: 0.875rem; /* 14px */
+            --text-base: 1rem; /* 16px */
+            --text-lg: 1.333rem; /* 21.33px */
+            --text-xl: 1.777rem; /* 28.43px */
+            --text-2xl: 2.369rem; /* 37.90px */
+            --text-3xl: 3.157rem; /* 50.51px */
+            --text-4xl: 4.209rem; /* 67.34px */
+            
+            /* Premium Shadows */
+            --shadow-subtle: 0 1px 2px rgba(10, 22, 40, 0.05);
+            --shadow-soft: 0 4px 6px -1px rgba(10, 22, 40, 0.07), 0 2px 4px -1px rgba(10, 22, 40, 0.03);
+            --shadow-medium: 0 10px 15px -3px rgba(10, 22, 40, 0.08), 0 4px 6px -2px rgba(10, 22, 40, 0.04);
+            --shadow-strong: 0 20px 25px -5px rgba(10, 22, 40, 0.10), 0 10px 10px -5px rgba(10, 22, 40, 0.04);
+            --shadow-xl: 0 25px 50px -12px rgba(10, 22, 40, 0.15);
+            
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
         }
         
-        .reveal.visible { 
-            opacity: 1; 
-            transform: translateY(0); 
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Reset with Premium Defaults */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-
-        /* Botones premium */
-        .btn-primary {
-            background: var(--color-accent-gold);
-            color: var(--color-bg-primary);
-            font-weight: 600;
-            padding: 14px 32px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            display: inline-block;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+        
+        body {
+            font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            line-height: 1.618; /* Golden ratio */
+            color: var(--charcoal);
+            background-color: var(--pearl-white);
+            overflow-x: hidden;
+        }
+        
+        /* Typography System */
+        h1, .h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: var(--text-4xl);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--midnight-ocean);
+        }
+        
+        h2, .h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: var(--text-3xl);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.015em;
+            color: var(--midnight-ocean);
+        }
+        
+        h3, .h3 {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: var(--text-2xl);
+            font-weight: 500;
+            line-height: 1.3;
+            color: var(--deep-ocean);
+        }
+        
+        p {
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--slate);
+        }
+        
+        .lead {
+            font-size: var(--text-lg);
+            line-height: 1.8;
+            color: var(--charcoal);
+        }
+        
+        /* Container System */
+        .container {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.8s;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
         }
-
-        .btn-primary:hover::before {
-            left: 100%;
+        
+        .container-fluid {
+            width: 100%;
+            padding: 0 var(--space-lg);
         }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(201, 154, 97, 0.4);
-            background: var(--color-accent-gold-light);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--color-accent-gold);
-            border: 2px solid var(--color-accent-gold);
-            font-weight: 600;
-            padding: 12px 30px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .btn-secondary:hover {
-            background: var(--color-accent-gold);
-            color: var(--color-bg-primary);
-        }
-
-        /* Cards con efecto premium */
-        .premium-card {
-            background: var(--color-bg-secondary);
-            border: 1px solid var(--color-border);
-            border-radius: 12px;
-            padding: 32px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .premium-card::before {
-            content: '';
-            position: absolute;
+        
+        /* Premium Navigation */
+        .navigation {
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            background: var(--color-accent-gold);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .premium-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .premium-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--color-accent-gold);
-            box-shadow: 0 20px 40px rgba(201, 154, 97, 0.2);
-        }
-
-        /* Botón flotante de chat */
-        .chat-float-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #C9A961, #B08D57);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(201, 154, 97, 0.4);
             z-index: 1000;
-            transition: all 0.3s ease;
+            background: rgba(250, 251, 252, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all var(--transition-base);
         }
         
-        .chat-float-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(201, 154, 97, 0.6);
+        .navigation.scrolled {
+            background: rgba(250, 251, 252, 0.95);
+            box-shadow: var(--shadow-soft);
         }
-
-        /* Proceso visual */
-        .process-step {
-            position: relative;
-            text-align: center;
-            flex: 1;
-        }
-
-        .process-step::after {
-            content: '';
-            position: absolute;
-            top: 35px;
-            left: 60%;
-            width: 80%;
-            height: 2px;
-            background: var(--color-accent-gold);
-            opacity: 0.3;
-        }
-
-        .process-step:last-child::after {
-            display: none;
-        }
-
-        .process-number {
-            width: 70px;
-            height: 70px;
-            background: var(--color-sapphire);
-            border: 3px solid var(--color-accent-gold);
-            border-radius: 50%;
+        
+        .nav-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--color-accent-gold);
-            margin: 0 auto 20px;
+            justify-content: space-between;
+            height: 5rem;
+        }
+        
+        /* New Logo Design */
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: transform var(--transition-base);
+        }
+        
+        .logo:hover {
+            transform: translateX(4px);
+        }
+        
+        .logo-mark {
+            width: 48px;
+            height: 48px;
+            margin-right: var(--space-md);
             position: relative;
-            z-index: 1;
         }
-
-        /* Animación de números */
-        @keyframes countUp {
-            from { opacity: 0; transform: scale(0.5); }
-            to { opacity: 1; transform: scale(1); }
+        
+        .logo-mark svg {
+            width: 100%;
+            height: 100%;
         }
-
-        .counter-animation {
-            display: inline-block;
-            animation: countUp 0.8s ease-out;
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
         }
-
-        /* Custom scrollbar */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
+        
+        .logo-name {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--midnight-ocean);
         }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: var(--color-bg-tertiary);
-            border-radius: 4px;
+        
+        .logo-tagline {
+            font-size: var(--text-xs);
+            color: var(--mist);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: var(--color-accent-gold);
-            border-radius: 4px;
+        
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xl);
         }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: var(--color-accent-gold-dark);
-        }
-
-        /* Navegación fija mejorada */
+        
         .nav-link {
-            position: relative;
-            color: var(--color-text-secondary);
-            transition: color 0.3s ease;
+            font-size: var(--text-sm);
             font-weight: 500;
+            color: var(--charcoal);
+            text-decoration: none;
+            position: relative;
+            transition: color var(--transition-fast);
         }
-
+        
         .nav-link::after {
             content: '';
             position: absolute;
@@ -311,1357 +245,1248 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--color-accent-gold);
-            transition: width 0.3s ease;
+            background: var(--emerald-growth);
+            transition: width var(--transition-base);
         }
-
+        
         .nav-link:hover {
-            color: var(--color-accent-gold);
+            color: var(--deep-ocean);
         }
-
+        
         .nav-link:hover::after {
             width: 100%;
         }
-
-        /* Loading animation */
-        .loading-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--color-accent-gold);
-            animation: loading 1.4s infinite;
-        }
-
-        @keyframes loading {
-            0%, 60%, 100% { transform: scale(1); opacity: 1; }
-            30% { transform: scale(1.5); opacity: 0.5; }
-        }
-
-        /* Estilos para el dashboard */
-        .dashboard-card {
-            background: rgba(20, 20, 20, 0.8);
-            border: 1px solid rgba(201, 154, 97, 0.3);
-            border-radius: 12px;
-            padding: 24px;
-            backdrop-filter: blur(10px);
-        }
-
-        .metric-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--color-accent-gold);
-            line-height: 1;
-        }
-
-        /* Logo container circular */
-        .logo-container {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: var(--color-bg-secondary);
-            border: 2px solid var(--color-accent-gold);
-            display: flex;
+        
+        /* Premium Button */
+        .btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .logo-container:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(201, 154, 97, 0.5);
-        }
-
-        .logo-container img {
-            width: 70%;
-            height: 70%;
-            object-fit: contain;
-        }
-
-        /* Chart bars */
-        .chart-bar {
-            background: var(--color-accent-gold);
-            border-radius: 4px 4px 0 0;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .chart-bar:hover {
-            background: var(--color-accent-gold-light);
-        }
-
-        .chart-bar::after {
-            content: attr(data-value);
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--color-text-primary);
-            font-size: 0.875rem;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            font-size: var(--text-sm);
             font-weight: 600;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .chart-bar:hover::after {
-            opacity: 1;
-        }
-
-        /* Heat map cell */
-        .heat-cell {
-            aspect-square: 1/1;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--color-bg-primary);
-            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            border-radius: var(--radius-md);
             cursor: pointer;
-        }
-
-        .heat-cell:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(201, 154, 97, 0.6);
-        }
-
-        /* Chat showcase card */
-        .chat-showcase-card {
-            background: linear-gradient(135deg, rgba(26, 35, 126, 0.1), rgba(26, 35, 126, 0.05));
-            border: 1px solid rgba(26, 35, 126, 0.3);
-            border-radius: 16px;
-            padding: 40px;
+            transition: all var(--transition-base);
             position: relative;
             overflow: hidden;
         }
-
-        .chat-showcase-card::before {
+        
+        .btn-primary {
+            background: var(--deep-ocean);
+            color: white;
+        }
+        
+        .btn-primary::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(201, 154, 97, 0.1), transparent 60%);
-            animation: float 8s ease-in-out infinite;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left var(--transition-slow);
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            background: var(--midnight-ocean);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--deep-ocean);
+            border: 1px solid var(--smoke);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--silk-gray);
+            border-color: var(--mist);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            right: -20%;
+            width: 60%;
+            height: 100%;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-xs) var(--space-md);
+            background: var(--silk-gray);
+            border-radius: var(--radius-2xl);
+            font-size: var(--text-sm);
+            color: var(--slate);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald-growth);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        .hero-title {
+            margin-bottom: var(--space-lg);
+            max-width: 800px;
+        }
+        
+        .hero-title-accent {
+            color: var(--ocean-blue);
+            position: relative;
+        }
+        
+        .hero-description {
+            font-size: var(--text-xl);
+            line-height: 1.6;
+            color: var(--slate);
+            max-width: 600px;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-2xl);
+        }
+        
+        /* Trust Indicators */
+        .trust-indicators {
+            display: flex;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .trust-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--silk-gray);
+            border-radius: var(--radius-lg);
+            color: var(--ocean-blue);
+        }
+        
+        .trust-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .trust-value {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+        
+        .trust-label {
+            font-size: var(--text-sm);
+            color: var(--mist);
+        }
+        
+        /* Section System */
+        .section {
+            padding: var(--space-3xl) 0;
+        }
+        
+        .section-header {
+            max-width: 800px;
+            margin: 0 auto var(--space-2xl);
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--emerald-growth);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .section-title {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .section-description {
+            font-size: var(--text-lg);
+            color: var(--slate);
+        }
+        
+        /* Service Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            border: 1px solid var(--smoke);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--emerald-growth), var(--ocean-blue));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-base);
+        }
+        
+        .service-card:hover {
+            box-shadow: var(--shadow-strong);
+            transform: translateY(-4px);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--silk-gray);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-lg);
+            font-size: 24px;
+            color: var(--ocean-blue);
+        }
+        
+        .service-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .service-description {
+            color: var(--slate);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .service-features {
+            list-style: none;
+        }
+        
+        .service-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-xs) 0;
+            font-size: var(--text-sm);
+            color: var(--slate);
+        }
+        
+        .service-feature i {
+            color: var(--emerald-growth);
+        }
+        
+        /* Counter Animation Styles */
+        .counter-number {
+            font-weight: 700;
+            color: var(--emerald-growth);
+        }
+        
+        /* Process Timeline */
+        .process-timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .process-line {
+            position: absolute;
+            top: 32px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--smoke);
+            z-index: 0;
+        }
+        
+        .process-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--emerald-growth), var(--ocean-blue));
+            width: 0%;
+            transition: width 2s ease-out;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .process-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .process-circle {
+            width: 64px;
+            height: 64px;
+            background: var(--pearl-white);
+            border: 3px solid var(--smoke);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--mist);
+            margin-bottom: var(--space-lg);
+            transition: all var(--transition-base);
+        }
+        
+        .process-step.active .process-circle {
+            background: var(--deep-ocean);
+            border-color: var(--deep-ocean);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .process-title {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .process-duration {
+            font-size: var(--text-sm);
+            color: var(--emerald-growth);
+        }
+        
+        /* Metrics Section */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .metric-card {
+            text-align: center;
+            padding: var(--space-xl);
+        }
+        
+        .metric-value {
+            font-size: var(--text-4xl);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--emerald-growth));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .metric-label {
+            font-size: var(--text-base);
+            color: var(--slate);
+        }
+        
+        /* Video Container */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            margin: var(--space-2xl) 0;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background: var(--deep-ocean);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: var(--shadow-strong);
+            transition: all var(--transition-base);
+            z-index: 999;
+        }
+        
+        .chat-widget:hover {
+            transform: scale(1.1);
+            background: var(--midnight-ocean);
+        }
+        
+        /* ROI Calculator */
+        .calculator-container {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            box-shadow: var(--shadow-soft);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .form-label {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            border: 1px solid var(--smoke);
+            border-radius: var(--radius-md);
+            font-size: var(--text-base);
+            transition: all var(--transition-fast);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--ocean-blue);
+            box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.1);
+        }
+        
+        .form-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--smoke);
+            outline: none;
+        }
+        
+        .form-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--ocean-blue);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .form-slider::-webkit-slider-thumb:hover {
+            background: var(--deep-ocean);
+            transform: scale(1.2);
+        }
+        
+        .results-container {
+            background: var(--silk-gray);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) 0;
+        }
+        
+        .result-label {
+            font-size: var(--text-base);
+            color: var(--slate);
+        }
+        
+        .result-value {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            color: var(--ocean-blue);
+        }
+        
+        .result-highlight {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin-top: var(--space-lg);
+            text-align: center;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--midnight-ocean);
+            color: white;
+            padding: var(--space-3xl) 0 var(--space-xl);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .footer-brand {
+            max-width: 320px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .footer-description {
+            color: var(--mist);
+            line-height: 1.8;
+        }
+        
+        .footer-column h4 {
+            font-size: var(--text-base);
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .footer-link {
+            display: block;
+            color: var(--mist);
+            text-decoration: none;
+            padding: var(--space-xs) 0;
+            transition: color var(--transition-fast);
+        }
+        
+        .footer-link:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--charcoal);
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            :root {
+                --text-4xl: 3rem;
+                --text-3xl: 2.25rem;
+                --text-2xl: 1.875rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+            }
+            
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: var(--space-xl);
+            }
+            
+            .process-line {
+                display: none;
+            }
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="antialiased">
-
-    <!-- Header/Navigation -->
-    <header class="bg-black/90 backdrop-blur-md fixed top-0 left-0 w-full z-50 border-b border-gray-800">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#inicio" class="flex items-center space-x-3 group">
-                <div class="w-12 h-12 rounded-lg gradient-gold flex items-center justify-center group-hover:animate-pulse-glow transition-all">
-                    <span class="font-heading font-bold text-xl text-black">JRO</span>
+<body>
+    <!-- Premium Navigation -->
+    <nav class="navigation" id="navigation">
+        <div class="container nav-container">
+            <a href="#inicio" class="logo">
+                <div class="logo-mark">
+                    <!-- New Premium Logo Design -->
+                    <svg viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="20" stroke="url(#gradient)" stroke-width="2"/>
+                        <path d="M24 12 L36 24 L24 36 L12 24 Z" stroke="url(#gradient)" stroke-width="2" fill="none"/>
+                        <circle cx="24" cy="24" r="4" fill="url(#gradient)"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#1E3A5F;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#10B981;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </div>
-                <div>
-                    <h1 class="font-heading text-xl font-bold text-white">JRO Asesorías</h1>
-                    <p class="text-xs text-gradient-gold">Decisiones Inteligentes</p>
+                <div class="logo-text">
+                    <span class="logo-name">JRO Asesorías</span>
+                    <span class="logo-tagline">Transformación Inteligente</span>
                 </div>
             </a>
             
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#diagnostico" class="nav-link">Diagnóstico Gratuito</a>
+            <div class="nav-menu">
                 <a href="#servicios" class="nav-link">Servicios</a>
-                <a href="#proceso" class="nav-link">Proceso</a>
-                <a href="#impacto" class="nav-link">Impacto</a>
-                <a href="#contacto" class="btn-primary">Acelera tus Decisiones</a>
+                <a href="#proceso" class="nav-link">Metodología</a>
+                <a href="#resultados" class="nav-link">Resultados</a>
+                <a href="#recursos" class="nav-link">Recursos</a>
+                <a href="#contacto" class="btn btn-primary">Iniciar Conversación</a>
             </div>
-
-            <!-- Mobile menu button -->
-            <button class="md:hidden text-white" id="mobile-menu-btn">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
-        </nav>
-    </header>
-
-    <!-- Botón flotante de chat -->
-    <div class="chat-float-button animate-bounce" id="chat-float-button" onclick="openChatPopup()">
-        <i class="fas fa-comments text-white text-2xl"></i>
-    </div>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="inicio" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-32">
-            <!-- Background gradient -->
-            <div class="absolute inset-0 bg-gradient-to-br from-black via-sapphire/20 to-black"></div>
             
-            <!-- Animated particles -->
-            <div class="absolute inset-0">
-                <div class="absolute top-20 left-10 w-2 h-2 bg-gold rounded-full animate-float"></div>
-                <div class="absolute top-40 right-20 w-3 h-3 bg-gold rounded-full animate-float" style="animation-delay: 2s;"></div>
-                <div class="absolute bottom-20 left-40 w-2 h-2 bg-gold rounded-full animate-float" style="animation-delay: 4s;"></div>
-            </div>
-
-            <div class="relative z-10 container mx-auto px-6 text-center">
-                <h1 class="text-5xl md:text-7xl font-heading font-bold text-white mb-6 animate-fadeInUp">
-                    <span style="color: #5DADE2;">Deja de perder tiempo</span><br>
-                    <span class="text-gradient-gold">en tareas repetitivas</span>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Chat Widget -->
+    <div class="chat-widget" onclick="openChatPopup()">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+    
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge fade-in">
+                    <span class="hero-badge-dot"></span>
+                    <span>Arquitectos de la Transformación Digital</span>
+                </div>
+                
+                <h1 class="hero-title fade-in" style="animation-delay: 0.1s;">
+                    Convertimos complejidad<br>
+                    en <span class="hero-title-accent">ventaja competitiva</span>
                 </h1>
-                <div class="max-w-4xl mx-auto mb-8 animate-fadeInUp" style="animation-delay: 0.2s;">
-                    <p class="text-xl md:text-2xl text-gray-300 mb-6">
-                        Transformamos tu empresa con soluciones inteligentes:
+                
+                <p class="hero-description fade-in" style="animation-delay: 0.2s;">
+                    Diseñamos ecosistemas digitales que transforman datos dispersos 
+                    en decisiones estratégicas y procesos manuales en flujos automatizados 
+                    que escalan con su ambición.
+                </p>
+                
+                <div class="hero-actions fade-in" style="animation-delay: 0.3s;">
+                    <a href="#diagnostico" class="btn btn-primary">
+                        <i class="fas fa-chart-line"></i>
+                        Evaluar mi potencial
+                    </a>
+                    <a href="#casos" class="btn btn-secondary">
+                        <i class="fas fa-play-circle"></i>
+                        Ver casos de éxito
+                    </a>
+                </div>
+                
+                <div class="trust-indicators fade-in" style="animation-delay: 0.4s;">
+                    <div class="trust-item">
+                        <div class="trust-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="trust-text">
+                            <span class="trust-value">50+</span>
+                            <span class="trust-label">Empresas líderes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-background">
+            <svg viewBox="0 0 800 600" opacity="0.1">
+                <path d="M0,300 Q200,100 400,300 T800,300" stroke="#1E3A5F" stroke-width="2" fill="none"/>
+                <circle cx="200" cy="200" r="80" fill="#10B981" opacity="0.1"/>
+                <rect x="500" y="350" width="150" height="150" fill="#1E3A5F" opacity="0.05" transform="rotate(45 575 425)"/>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="servicios" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Capacidades Core</p>
+                <h2 class="section-title">Soluciones que escalan con su visión</h2>
+                <p class="section-description">
+                    Cada organización tiene desafíos únicos. Nuestras soluciones se adaptan 
+                    a su contexto específico, entregando resultados medibles desde la primera semana.
+                </p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Business Intelligence -->
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="service-title">Intelligence Platform</h3>
+                    <p class="service-description">
+                        Consolidamos todas sus fuentes de datos en dashboards ejecutivos 
+                        que revelan patrones ocultos y oportunidades de crecimiento.
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left max-w-3xl mx-auto">
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-chart-bar text-2xl" style="color: var(--color-accent-gold);"></i>
-                            <span class="text-lg">Toma decisiones basadas en datos reales</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-robot text-2xl" style="color: var(--color-accent-gold);"></i>
-                            <span class="text-lg">Automatiza procesos administrativos</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-shield-alt text-2xl" style="color: var(--color-accent-gold);"></i>
-                            <span class="text-lg">Mejora la gobernanza de datos</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-tachometer-alt text-2xl" style="color: var(--color-accent-gold);"></i>
-                            <span class="text-lg">Acelera tu operación diaria</span>
-                        </div>
+                    <ul class="service-features">
+                        <li class="service-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Análisis predictivo avanzado</span>
+                        </li>
+                        <li class="service-feature">
+                            <i class="fas fa-check"></i>
+                            <span>KPIs en tiempo real</span>
+                        </li>
+                        <li class="service-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Alertas inteligentes</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Process Automation -->
+                <div class="service-card reveal" style="animation-delay: 0.1s;">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="service-title">Process Automation</h3>
+                    <p class="service-description">
+                        Eliminamos tareas repetitivas mediante flujos inteligentes que 
+                        liberan hasta 40 horas semanales de trabajo manual.
+                    </p>
+                    <ul class="service-features">
+                        <li class="service-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Workflows sin código</span>
+                        </li>
+                        <li class="service-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Integración total</span>
+                        </li>
+                        <li class="service-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Escalabilidad ilimitada</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Digital Applications -->
+                <div class="service-card reveal" style="animation-delay: 0.2s;">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="service-title">Digital Applications</h3>
+                    <p class="service-description">
+                        Desarrollamos aplicaciones empresariales que digitalizan 
+                        procesos complejos sin necesidad de código tradicional.
+                    </p>
+                    <ul class="service-features">
+                        <li class="service-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Despliegue en días</span>
+                        </li>
+                        <li class="service-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Multi-plataforma</span>
+                        </li>
+                        <li class="service-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Seguridad enterprise</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Success Cases Section -->
+    <section id="casos" class="section" style="background: var(--silk-gray);">
+        <div class="container">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Casos de Éxito</p>
+                <h2 class="section-title">Resultados que Generan Valor</h2>
+                <p class="section-description">
+                    No solo implementamos tecnología, construimos ventajas competitivas. 
+                    Estos son algunos de los impactos que generamos en nuestros clientes.
+                </p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Case 1 -->
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="service-title">Decisiones Estratégicas Basadas en Datos</h3>
+                    <p class="service-description">
+                        Al centralizar y visualizar la información crítica con Power BI, nuestros clientes 
+                        experimentan una mejora de hasta un <span class="counter-number" data-target="40">0</span>% 
+                        en la velocidad y precisión de su toma de decisiones.
+                    </p>
+                </div>
+                
+                <!-- Case 2 -->
+                <div class="service-card reveal" style="animation-delay: 0.1s;">
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="service-title">Optimización y Eficiencia Operacional</h3>
+                    <p class="service-description">
+                        Mediante la automatización de tareas manuales con Power Automate, hemos logrado 
+                        liberar hasta un <span class="counter-number" data-target="60">0</span>% del tiempo 
+                        del equipo, permitiendo que se enfoquen en tareas de mayor valor.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process Section -->
+    <section id="proceso" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Metodología Probada</p>
+                <h2 class="section-title">De la visión a la implementación en 30 días</h2>
+                <p class="section-description">
+                    Nuestra metodología ágil garantiza resultados tangibles desde la primera 
+                    semana, con implementación completa en un mes.
+                </p>
+            </div>
+            
+            <div class="process-timeline reveal">
+                <div class="process-line">
+                    <div class="process-progress" id="process-progress"></div>
+                </div>
+                
+                <div class="process-steps">
+                    <div class="process-step active">
+                        <div class="process-circle">1</div>
+                        <h4 class="process-title">Discovery</h4>
+                        <p class="process-duration">Semana 1</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-circle">2</div>
+                        <h4 class="process-title">Architecture</h4>
+                        <p class="process-duration">Semana 2</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-circle">3</div>
+                        <h4 class="process-title">Development</h4>
+                        <p class="process-duration">Semana 3-4</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-circle">4</div>
+                        <h4 class="process-title">Optimization</h4>
+                        <p class="process-duration">Continuo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Results Section -->
+    <section id="resultados" class="section" style="background: var(--silk-gray);">
+        <div class="container">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Impacto Medible</p>
+                <h2 class="section-title">Resultados que hablan por sí mismos</h2>
+                <p class="section-description">
+                    Cada implementación genera retornos cuantificables. 
+                    Estos son los promedios de nuestros últimos 50 proyectos.
+                </p>
+            </div>
+            
+            <div class="metrics-grid reveal">
+                <div class="metric-card">
+                    <div class="metric-value">87%</div>
+                    <p class="metric-label">Reducción en tiempo de reportes</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3.2x</div>
+                    <p class="metric-label">ROI en el primer año</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">45%</div>
+                    <p class="metric-label">Aumento en productividad</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">12</div>
+                    <p class="metric-label">Semanas para break-even</p>
+                </div>
+            </div>
+            
+            <!-- Video Case Study -->
+            <div class="video-container reveal">
+                <iframe 
+                    src="https://player.vimeo.com/video/1095167933?h=4bb341459e&color=1E3A5F&title=0&byline=0&portrait=0"
+                    frameborder="0" 
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ROI Calculator -->
+    <section id="diagnostico" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Herramienta de Diagnóstico</p>
+                <h2 class="section-title">Calcule su potencial de mejora</h2>
+                <p class="section-description">
+                    Descubra el impacto financiero de optimizar sus procesos 
+                    con nuestra calculadora basada en casos reales.
+                </p>
+            </div>
+            
+            <div class="calculator-container reveal">
+                <div class="calculator-grid">
+                    <div class="form-group">
+                        <label class="form-label">Horas semanales en tareas repetitivas</label>
+                        <input type="range" class="form-slider" id="hours" min="5" max="40" value="20" oninput="updateCalculator()">
+                        <span id="hours-display">20 horas</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Empleados afectados</label>
+                        <input type="range" class="form-slider" id="employees" min="1" max="50" value="10" oninput="updateCalculator()">
+                        <span id="employees-display">10 personas</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Costo promedio por hora (USD)</label>
+                        <input type="number" class="form-input" id="hourly-cost" value="35" oninput="updateCalculator()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Errores mensuales por procesos manuales</label>
+                        <input type="number" class="form-input" id="errors" value="25" oninput="updateCalculator()">
                     </div>
                 </div>
                 
-                <!-- Value props mejoradas -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12 animate-fadeInUp" style="animation-delay: 0.4s;">
-                    <div class="flex items-center justify-center space-x-2">
-                        <i class="fas fa-rocket text-2xl" style="color: var(--color-accent-gold);"></i>
-                        <span class="text-lg">Resultados desde el día 1</span>
+                <div class="results-container">
+                    <div class="result-item">
+                        <span class="result-label">Ahorro mensual estimado</span>
+                        <span class="result-value" id="monthly-savings">$14,000</span>
                     </div>
-                    <div class="flex items-center justify-center space-x-2">
-                        <i class="fas fa-chart-line text-2xl" style="color: var(--color-accent-gold);"></i>
-                        <span class="text-lg">ROI comprobado</span>
+                    <div class="result-item">
+                        <span class="result-label">ROI esperado</span>
+                        <span class="result-value" id="roi">320%</span>
                     </div>
-                    <div class="flex items-center justify-center space-x-2">
-                        <i class="fas fa-handshake text-2xl" style="color: var(--color-accent-gold);"></i>
-                        <span class="text-lg">Acompañamiento continuo</span>
+                    <div class="result-item">
+                        <span class="result-label">Tiempo de recuperación</span>
+                        <span class="result-value" id="payback">2.5 meses</span>
                     </div>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fadeInUp" style="animation-delay: 0.6s;">
-                    <a href="#diagnostico" class="btn-primary text-lg">
-                        <i class="fas fa-chart-pie mr-2"></i>
-                        Obtén tu Diagnóstico Gratuito
-                    </a>
-                    <a href="#impacto" class="btn-secondary text-lg">
-                        <i class="fas fa-chart-line mr-2"></i>
-                        Ver Impacto Real
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Diagnóstico Gratuito Section -->
-        <section id="diagnostico" class="py-20 md:py-28 bg-gradient-to-b from-black to-gray-900">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
-                        Diagnóstico <span class="text-gradient-gold">Gratuito</span> de 15 minutos
-                    </h2>
-                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                        Descubre cuánto tiempo y dinero está perdiendo tu empresa por no tener datos organizados
-                    </p>
-                </div>
-
-                <div class="max-w-4xl mx-auto">
-                    <div class="premium-card reveal">
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <div>
-                                <h3 class="text-2xl font-heading font-semibold mb-6" style="color: var(--color-accent-gold);">
-                                    ¿Tu empresa sufre de estos síntomas?
-                                </h3>
-                                <ul class="space-y-4">
-                                    <li class="flex items-start">
-                                        <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
-                                        <span>Reportes manuales que toman horas o días</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
-                                        <span>Datos dispersos en múltiples archivos Excel</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
-                                        <span>Decisiones basadas en intuición, no en datos</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
-                                        <span>Errores costosos por información desactualizada</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
-                                        <span>Reuniones interminables sin datos claros</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            
-                            <div class="bg-sapphire/20 rounded-lg p-6 border border-sapphire/30">
-                                <h4 class="text-xl font-semibold mb-4" style="color: var(--color-accent-gold);">
-                                    En tu diagnóstico gratuito recibirás:
-                                </h4>
-                                <ul class="space-y-3">
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                        <span>Análisis de tu situación actual de datos</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                        <span>Estimación de tiempo y costos perdidos</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                        <span>Plan de acción personalizado</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                        <span>Proyección de ROI esperado</span>
-                                    </li>
-                                </ul>
-                                <button class="btn-primary w-full mt-6" onclick="window.open('https://wa.me/56966895746?text=Hola,%20quiero%20solicitar%20mi%20diagnóstico%20gratuito', '_blank')">
-                                    Solicitar Diagnóstico Ahora
-                                </button>
-                            </div>
-                        </div>
+                    
+                    <div class="result-highlight">
+                        <p style="margin-bottom: 16px;">Potencial de mejora anual</p>
+                        <div class="metric-value" id="annual-value">$168,000</div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Video Demo Section -->
-        <section class="py-20 bg-black">
-            <div class="container mx-auto px-6">
-                <div class="max-w-5xl mx-auto text-center">
-                    <h3 class="text-3xl font-heading font-bold text-white mb-4">
-                        Ve la <span class="text-gradient-gold">Transformación</span> en Acción
-                    </h3>
-                    <p class="text-lg text-gray-400 mb-8">
-                        Descubre cómo empresas como la tuya pasaron del caos a la claridad
-                    </p>
-                    <div class="relative rounded-xl overflow-hidden shadow-2xl" style="padding-bottom: 56.25%;">
+        </div>
+    </section>
+    
+    <!-- Resources Section -->
+    <section id="recursos" class="section" style="background: var(--silk-gray);">
+        <div class="container">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Centro de Conocimiento</p>
+                <h2 class="section-title">Recursos para líderes digitales</h2>
+                <p class="section-description">
+                    Contenido curado para ejecutivos que buscan liderar 
+                    la transformación digital en sus organizaciones.
+                </p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Video 1 -->
+                <div class="service-card reveal">
+                    <div style="position: relative; padding-bottom: 56.25%; margin-bottom: 20px;">
                         <iframe 
-                            src="https://player.vimeo.com/video/1095167933?h=4bb341459e&color=C9A961&title=0&byline=0&portrait=0"
-                            class="absolute top-0 left-0 w-full h-full"
+                            src="https://player.vimeo.com/video/1095168160?h=dac104e81f&color=1E3A5F&title=0&byline=0&portrait=0"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;"
                             frameborder="0" 
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
                             allowfullscreen>
                         </iframe>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Servicios Section -->
-        <section id="servicios" class="py-20 md:py-28">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
-                        Soluciones que <span class="text-gradient-gold">Transforman</span> Empresas
-                    </h2>
-                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                        No vendemos software, entregamos claridad y velocidad en la toma de decisiones
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Power BI Service -->
-                    <div class="premium-card reveal" style="animation-delay: 0.1s;">
-                        <!-- Logo de Power BI -->
-                        <div class="flex justify-center mb-6">
-                            <div class="logo-container">
-                                <img src="https://i.postimg.cc/43qjLHb7/Power-bi.jpg" 
-                                     alt="Power BI Logo">
-                            </div>
-                        </div>
-                        <h3 class="text-2xl font-heading font-semibold mb-4 text-center" style="color: var(--color-accent-gold);">
-                            Tableros Inteligentes
-                        </h3>
-                        <p class="text-gray-400 mb-6">
-                            Convierte montañas de datos en visualizaciones claras que cualquiera puede entender. 
-                            Toma decisiones en minutos, no en días.
-                        </p>
-                        <ul class="space-y-3 mb-6">
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span class="text-sm">KPIs en tiempo real</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span class="text-sm">Alertas automáticas</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span class="text-sm">Acceso desde cualquier dispositivo</span>
-                            </li>
-                        </ul>
-                        <div class="text-center">
-                            <p class="text-3xl font-bold text-gradient-gold">60%</p>
-                            <p class="text-sm text-gray-400">Reducción en tiempo de análisis</p>
-                        </div>
-                    </div>
-
-                    <!-- Power Apps Service -->
-                    <div class="premium-card reveal" style="animation-delay: 0.2s;">
-                        <!-- Logo de Power Apps -->
-                        <div class="flex justify-center mb-6">
-                            <div class="logo-container">
-                                <img src="https://i.postimg.cc/DfqR6ZW0/powerapps2.jpg" 
-                                     alt="Power Apps Logo">
-                            </div>
-                        </div>
-                        <h3 class="text-2xl font-heading font-semibold mb-4 text-center" style="color: var(--color-accent-gold);">
-                            Apps Empresariales
-                        </h3>
-                        <p class="text-gray-400 mb-6">
-                            Digitaliza procesos manuales con aplicaciones personalizadas. 
-                            Sin código complejo, sin largos desarrollos.
-                        </p>
-                        <ul class="space-y-3 mb-6">
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span class="text-sm">Formularios inteligentes</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span class="text-sm">Flujos de aprobación</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span class="text-sm">Integración total</span>
-                            </li>
-                        </ul>
-                        <div class="text-center">
-                            <p class="text-3xl font-bold text-gradient-gold">85%</p>
-                            <p class="text-sm text-gray-400">Reducción de errores manuales</p>
-                        </div>
-                    </div>
-
-                    <!-- Power Automate Service -->
-                    <div class="premium-card reveal" style="animation-delay: 0.3s;">
-                        <!-- Logo de Power Automate -->
-                        <div class="flex justify-center mb-6">
-                            <div class="logo-container">
-                                <img src="https://i.postimg.cc/7YwdWk7V/powerautomate2.jpg" 
-                                     alt="Power Automate Logo">
-                            </div>
-                        </div>
-                        <h3 class="text-2xl font-heading font-semibold mb-4 text-center" style="color: var(--color-accent-gold);">
-                            Automatización Total
-                        </h3>
-                        <p class="text-gray-400 mb-6">
-                            Elimina tareas repetitivas y libera a tu equipo para trabajo estratégico. 
-                            Los robots trabajan 24/7 sin errores.
-                        </p>
-                        <ul class="space-y-3 mb-6">
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span class="text-sm">Workflows automáticos</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span class="text-sm">Notificaciones inteligentes</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span class="text-sm">Procesamiento 24/7</span>
-                            </li>
-                        </ul>
-                        <div class="text-center">
-                            <p class="text-3xl font-bold text-gradient-gold">40h</p>
-                            <p class="text-sm text-gray-400">Ahorradas por semana</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Proceso Section -->
-        <section id="proceso" class="py-20 md:py-28 bg-gradient-to-b from-gray-900 to-black">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
-                        De Caos a Claridad en <span class="text-gradient-gold">4 Semanas</span>
-                    </h2>
-                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                        Nuestro proceso probado garantiza resultados rápidos y medibles
-                    </p>
-                </div>
-
-                <div class="flex flex-col md:flex-row justify-between items-start max-w-6xl mx-auto">
-                    <!-- Step 1 -->
-                    <div class="process-step reveal" style="animation-delay: 0.1s;">
-                        <div class="process-number">1</div>
-                        <h3 class="text-xl font-heading font-semibold mb-3" style="color: var(--color-accent-gold);">
-                            Diagnóstico
-                        </h3>
-                        <p class="text-gray-400 text-sm max-w-xs mx-auto">
-                            Analizamos tu situación actual y identificamos oportunidades de mejora inmediata
-                        </p>
-                        <p class="text-xs text-gray-500 mt-2">Semana 1</p>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="process-step reveal" style="animation-delay: 0.2s;">
-                        <div class="process-number">2</div>
-                        <h3 class="text-xl font-heading font-semibold mb-3" style="color: var(--color-accent-gold);">
-                            Diseño
-                        </h3>
-                        <p class="text-gray-400 text-sm max-w-xs mx-auto">
-                            Creamos la arquitectura de tu solución personalizada y definimos KPIs clave
-                        </p>
-                        <p class="text-xs text-gray-500 mt-2">Semana 2</p>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="process-step reveal" style="animation-delay: 0.3s;">
-                        <div class="process-number">3</div>
-                        <h3 class="text-xl font-heading font-semibold mb-3" style="color: var(--color-accent-gold);">
-                            Implementación
-                        </h3>
-                        <p class="text-gray-400 text-sm max-w-xs mx-auto">
-                            Construimos y configuramos tus dashboards, apps y automatizaciones
-                        </p>
-                        <p class="text-xs text-gray-500 mt-2">Semana 3-4</p>
-                    </div>
-
-                    <!-- Step 4 -->
-                    <div class="process-step reveal" style="animation-delay: 0.4s;">
-                        <div class="process-number">4</div>
-                        <h3 class="text-xl font-heading font-semibold mb-3" style="color: var(--color-accent-gold);">
-                            Optimización
-                        </h3>
-                        <p class="text-gray-400 text-sm max-w-xs mx-auto">
-                            Entrenamos a tu equipo y ajustamos para máximo rendimiento
-                        </p>
-                        <p class="text-xs text-gray-500 mt-2">Continuo</p>
-                    </div>
-                </div>
-
-                <div class="text-center mt-16 reveal">
-                    <p class="text-lg text-gray-300 mb-6">
-                        <i class="fas fa-shield-alt text-green-500 mr-2"></i>
-                        Garantía de satisfacción del 100% o devolvemos tu inversión
-                    </p>
-                    <a href="#contacto" class="btn-primary">
-                        Inicia tu Transformación Ahora
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Métricas de Impacto Section -->
-        <section id="impacto" class="py-20 md:py-28">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
-                        Impacto <span class="text-gradient-gold">Medible</span> en tu Negocio
-                    </h2>
-                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                        Resultados promedio que nuestros clientes experimentan en los primeros 6 meses
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                    <!-- Métrica 1 -->
-                    <div class="premium-card text-center reveal" style="animation-delay: 0.1s;">
-                        <div class="w-20 h-20 rounded-full gradient-gold flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-clock text-3xl text-black"></i>
-                        </div>
-                        <h3 class="text-4xl font-bold text-gradient-gold mb-2">75%</h3>
-                        <p class="text-lg font-semibold text-white mb-2">Reducción de Tiempo</p>
-                        <p class="text-sm text-gray-400">En generación de reportes y análisis de datos</p>
-                    </div>
-
-                    <!-- Métrica 2 -->
-                    <div class="premium-card text-center reveal" style="animation-delay: 0.2s;">
-                        <div class="w-20 h-20 rounded-full gradient-gold flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-dollar-sign text-3xl text-black"></i>
-                        </div>
-                        <h3 class="text-4xl font-bold text-gradient-gold mb-2">40%</h3>
-                        <p class="text-lg font-semibold text-white mb-2">Ahorro en Costos</p>
-                        <p class="text-sm text-gray-400">Por automatización de procesos manuales</p>
-                    </div>
-
-                    <!-- Métrica 3 -->
-                    <div class="premium-card text-center reveal" style="animation-delay: 0.3s;">
-                        <div class="w-20 h-20 rounded-full gradient-gold flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-chart-line text-3xl text-black"></i>
-                        </div>
-                        <h3 class="text-4xl font-bold text-gradient-gold mb-2">95%</h3>
-                        <p class="text-lg font-semibold text-white mb-2">Precisión de Datos</p>
-                        <p class="text-sm text-gray-400">Eliminación de errores manuales</p>
-                    </div>
-
-                    <!-- Métrica 4 -->
-                    <div class="premium-card text-center reveal" style="animation-delay: 0.4s;">
-                        <div class="w-20 h-20 rounded-full gradient-gold flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-rocket text-3xl text-black"></i>
-                        </div>
-                        <h3 class="text-4xl font-bold text-gradient-gold mb-2">8-12</h3>
-                        <p class="text-lg font-semibold text-white mb-2">Semanas ROI</p>
-                        <p class="text-sm text-gray-400">Tiempo promedio de retorno de inversión</p>
-                    </div>
-                </div>
-
-                <div class="text-center mt-16 reveal">
-                    <p class="text-lg text-gray-300 mb-6">
-                        <i class="fas fa-shield-alt text-green-500 mr-2"></i>
-                        Metodología comprobada con más de 50 implementaciones exitosas
-                    </p>
-                    <a href="#contacto" class="btn-primary">
-                        Comienza tu Transformación
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Educational Videos Section -->
-        <section class="py-20 bg-gradient-to-b from-black to-gray-900">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12 reveal">
-                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
-                        Aprende por qué tu empresa <span class="text-gradient-gold">necesita evolucionar</span>
-                    </h2>
-                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                        Videos cortos que explican el poder de la transformación digital
+                    <h3 class="service-title">El poder de los datos</h3>
+                    <p class="service-description">
+                        Cómo las empresas líderes usan analytics para 
+                        anticipar tendencias y tomar mejores decisiones.
                     </p>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <!-- Video 1: Por qué analizar datos -->
-                    <div class="reveal" style="animation-delay: 0.1s;">
-                        <div class="premium-card h-full">
-                            <div class="relative rounded-lg overflow-hidden mb-4" style="padding-bottom: 56.25%;">
-                                <iframe 
-                                    src="https://player.vimeo.com/video/1095168160?h=dac104e81f&color=C9A961&title=0&byline=0&portrait=0"
-                                    class="absolute top-0 left-0 w-full h-full"
-                                    frameborder="0" 
-                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-2" style="color: var(--color-accent-gold);">
-                                ¿Por qué analizar datos?
-                            </h3>
-                            <p class="text-gray-400 text-sm">
-                                Descubre cómo los datos pueden revelar oportunidades ocultas 
-                                y prevenir problemas antes de que ocurran.
-                            </p>
-                        </div>
+                <!-- Video 2 -->
+                <div class="service-card reveal" style="animation-delay: 0.1s;">
+                    <div style="position: relative; padding-bottom: 56.25%; margin-bottom: 20px;">
+                        <iframe 
+                            src="https://player.vimeo.com/video/1095176960?h=64c6c1108a&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;"
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                            allowfullscreen>
+                        </iframe>
                     </div>
-                    
-                    <!-- Video 2: Por qué automatizar -->
-                    <div class="reveal" style="animation-delay: 0.2s;">
-                        <div class="premium-card h-full">
-                            <div style="padding:56.25% 0 0 0;position:relative;">
-                                <iframe src="https://player.vimeo.com/video/1095176960?h=64c6c1108a&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
-                                        frameborder="0" 
-                                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                                        style="position:absolute;top:0;left:0;width:100%;height:100%;" 
-                                        title="Video 3">
-                                </iframe>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-2 mt-4" style="color: var(--color-accent-gold);">
-                                ¿Por qué automatizar?
-                            </h3>
-                            <p class="text-gray-400 text-sm">
-                                Aprende cómo la automatización libera a tu equipo 
-                                para enfocarse en trabajo estratégico de alto valor.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <!-- Video 3: Por qué IA -->
-                    <div class="reveal" style="animation-delay: 0.3s;">
-                        <div class="premium-card h-full">
-                            <div style="padding:56.25% 0 0 0;position:relative;">
-                                <iframe src="https://player.vimeo.com/video/1095169755?h=8fb10670ba&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
-                                        frameborder="0" 
-                                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                                        style="position:absolute;top:0;left:0;width:100%;height:100%;" 
-                                        title="Video 4">
-                                </iframe>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-2 mt-4" style="color: var(--color-accent-gold);">
-                                ¿Por qué usar IA?
-                            </h3>
-                            <p class="text-gray-400 text-sm">
-                                La inteligencia artificial puede predecir tendencias 
-                                y optimizar decisiones como nunca antes.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dashboard Section - Soluciones en Acción -->
-        <section class="py-20 bg-black" id="galeria">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12 reveal">
-                    <h3 class="text-3xl font-heading font-bold text-white mb-4">
-                        Soluciones en <span class="text-gradient-gold">Acción</span>
-                    </h3>
-                    <p class="text-lg text-gray-400">
-                        Dashboard ejecutivo en tiempo real - Ejemplo de lo que creamos para nuestros clientes
+                    <h3 class="service-title">Automatización inteligente</h3>
+                    <p class="service-description">
+                        Estrategias para automatizar procesos sin perder 
+                        el toque humano en su organización.
                     </p>
                 </div>
-
-                <!-- Dashboard Container -->
-                <div class="max-w-7xl mx-auto reveal">
-                    <div class="dashboard-card">
-                        <!-- Dashboard Header -->
-                        <div class="flex flex-col md:flex-row justify-between items-center mb-8 pb-6 border-b border-gray-700">
-                            <div>
-                                <h4 class="text-2xl font-bold text-white mb-1">Panel Ejecutivo - Empresa Demo</h4>
-                                <p class="text-gray-400">Actualizado en tiempo real • Última sincronización: Hace 2 minutos</p>
-                            </div>
-                            <div class="flex space-x-4 mt-4 md:mt-0">
-                                <button class="px-4 py-2 bg-gray-800 text-gray-300 rounded-lg hover:bg-gray-700 transition">
-                                    <i class="fas fa-download mr-2"></i>Exportar
-                                </button>
-                                <button class="px-4 py-2 gradient-gold text-black rounded-lg font-semibold hover:opacity-90 transition">
-                                    <i class="fas fa-sync mr-2"></i>Actualizar
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- KPI Cards -->
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                            <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-gray-400 text-sm">Ventas Totales</span>
-                                    <i class="fas fa-dollar-sign text-green-500"></i>
-                                </div>
-                                <p class="metric-value">$2.4M</p>
-                                <p class="text-sm text-green-500 mt-2">
-                                    <i class="fas fa-arrow-up mr-1"></i>+23% vs mes anterior
-                                </p>
-                            </div>
-
-                            <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-gray-400 text-sm">Eficiencia Operativa</span>
-                                    <i class="fas fa-chart-line text-blue-500"></i>
-                                </div>
-                                <p class="metric-value">87%</p>
-                                <p class="text-sm text-blue-500 mt-2">
-                                    <i class="fas fa-arrow-up mr-1"></i>+5% optimización
-                                </p>
-                            </div>
-
-                            <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-gray-400 text-sm">Tickets Resueltos</span>
-                                    <i class="fas fa-check-circle text-purple-500"></i>
-                                </div>
-                                <p class="metric-value">1,245</p>
-                                <p class="text-sm text-purple-500 mt-2">
-                                    <i class="fas fa-clock mr-1"></i>Promedio: 2.3h
-                                </p>
-                            </div>
-
-                            <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-gray-400 text-sm">Satisfacción Cliente</span>
-                                    <i class="fas fa-smile text-yellow-500"></i>
-                                </div>
-                                <p class="metric-value">4.8/5</p>
-                                <p class="text-sm text-yellow-500 mt-2">
-                                    <i class="fas fa-star mr-1"></i>+0.3 puntos
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Charts Row -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Percentage Metrics -->
-                            <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-                                <h5 class="text-lg font-semibold text-white mb-4">Distribución de Ventas por Categoría</h5>
-                                <div class="space-y-4">
-                                    <div>
-                                        <div class="flex justify-between mb-1">
-                                            <span class="text-sm text-gray-400">Productos Premium</span>
-                                            <span class="text-sm font-semibold" style="color: var(--color-accent-gold);">45%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-700 rounded-full h-3">
-                                            <div class="h-3 rounded-full" style="width: 45%; background: var(--color-accent-gold);"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between mb-1">
-                                            <span class="text-sm text-gray-400">Productos Estándar</span>
-                                            <span class="text-sm font-semibold" style="color: var(--color-accent-gold);">30%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-700 rounded-full h-3">
-                                            <div class="h-3 rounded-full" style="width: 30%; background: var(--color-accent-gold);"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between mb-1">
-                                            <span class="text-sm text-gray-400">Servicios</span>
-                                            <span class="text-sm font-semibold" style="color: var(--color-accent-gold);">25%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-700 rounded-full h-3">
-                                            <div class="h-3 rounded-full" style="width: 25%; background: var(--color-accent-gold);"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Heat Map -->
-                            <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-                                <h5 class="text-lg font-semibold text-white mb-4">Mapa de Calor - Actividad por Región y Hora</h5>
-                                <div class="relative">
-                                    <!-- Grid del mapa de calor -->
-                                    <div class="grid grid-cols-5 gap-2 ml-4">
-                                        <!-- Fila 1 -->
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.2);">12</div>
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.8);">89</div>
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.4);">34</div>
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 1);">120</div>
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.3);">23</div>
-                                        <!-- Fila 2 -->
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.6);">67</div>
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.9);">98</div>
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.2);">15</div>
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.7);">78</div>
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.5);">56</div>
-                                        <!-- Fila 3 -->
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.3);">29</div>
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.8);">87</div>
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.4);">43</div>
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.9);">102</div>
-                                        <div class="heat-cell" style="background-color: rgba(201, 154, 97, 0.6);">61</div>
-                                    </div>
-                                    <!-- Etiquetas del eje X (Horas) -->
-                                    <div class="flex justify-around mt-2 ml-4 text-xs text-gray-400">
-                                        <span>8-10</span>
-                                        <span>10-12</span>
-                                        <span>12-14</span>
-                                        <span>14-16</span>
-                                        <span>16-18</span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between mt-4">
-                                    <span class="text-xs text-gray-400">Baja actividad</span>
-                                    <div class="flex space-x-1">
-                                        <div class="w-4 h-4 rounded" style="background-color: rgba(201, 154, 97, 0.2);"></div>
-                                        <div class="w-4 h-4 rounded" style="background-color: rgba(201, 154, 97, 0.5);"></div>
-                                        <div class="w-4 h-4 rounded" style="background-color: rgba(201, 154, 97, 0.8);"></div>
-                                        <div class="w-4 h-4 rounded" style="background-color: rgba(201, 154, 97, 1);"></div>
-                                    </div>
-                                    <span class="text-xs text-gray-400">Alta actividad</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Footer Note -->
-                        <div class="mt-8 text-center">
-                            <p class="text-sm text-gray-500">
-                                <i class="fas fa-info-circle mr-2"></i>
-                                Este es un ejemplo simplificado. Los dashboards reales incluyen múltiples páginas, 
-                                filtros interactivos y conexión directa con tus sistemas.
-                            </p>
-                        </div>
+                
+                <!-- Video 3 -->
+                <div class="service-card reveal" style="animation-delay: 0.2s;">
+                    <div style="position: relative; padding-bottom: 56.25%; margin-bottom: 20px;">
+                        <iframe 
+                            src="https://player.vimeo.com/video/1095169755?h=8fb10670ba&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;"
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                            allowfullscreen>
+                        </iframe>
                     </div>
+                    <h3 class="service-title">IA para negocios</h3>
+                    <p class="service-description">
+                        Casos prácticos de inteligencia artificial aplicada 
+                        a problemas empresariales reales.
+                    </p>
                 </div>
             </div>
-        </section>
-
-        <!-- ROI Calculator Section -->
-        <section class="py-20 md:py-28 bg-gradient-to-b from-black to-gray-900">
-            <div class="container mx-auto px-6">
-                <div class="max-w-4xl mx-auto">
-                    <div class="text-center mb-12 reveal">
-                        <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
-                            Calcula tu <span class="text-gradient-gold">ROI Potencial</span>
-                        </h2>
-                        <p class="text-xl text-gray-400">
-                            Descubre cuánto puedes ahorrar con inteligencia de negocios
-                        </p>
-                    </div>
-
-                    <div class="premium-card reveal">
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <div>
-                                <h3 class="text-xl font-semibold mb-6" style="color: var(--color-accent-gold);">
-                                    Ingresa tus datos actuales:
-                                </h3>
-                                <div class="space-y-4">
-                                    <div>
-                                        <label class="block text-sm text-gray-400 mb-2">
-                                            Horas semanales ahorradas <span class="text-xs">(por persona)</span>
-                                        </label>
-                                        <input type="range" id="hours-range" min="1" max="40" value="10" 
-                                               class="w-full" onchange="calculateROI()">
-                                        <span id="hours-value" class="text-gradient-gold font-bold">10 horas</span>
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm text-gray-400 mb-2">
-                                            Número de empleados beneficiados
-                                        </label>
-                                        <input type="range" id="employees-range" min="1" max="20" value="3" 
-                                               class="w-full" onchange="calculateROI()">
-                                        <span id="employees-value" class="text-gradient-gold font-bold">3 personas</span>
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm text-gray-400 mb-2">
-                                            Remuneración promedio mensual (CLP)
-                                        </label>
-                                        <select id="salary-select" class="w-full bg-gray-800 text-white rounded px-3 py-2" onchange="calculateROI()">
-                                            <option value="600000">$600.000</option>
-                                            <option value="800000">$800.000</option>
-                                            <option value="1000000" selected>$1.000.000</option>
-                                            <option value="1500000">$1.500.000</option>
-                                            <option value="2000000">$2.000.000</option>
-                                            <option value="2500000">$2.500.000</option>
-                                            <option value="3000000">$3.000.000</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-sapphire/20 rounded-lg p-6 border border-sapphire/30">
-                                <h3 class="text-xl font-semibold mb-6" style="color: var(--color-accent-gold);">
-                                    Tu ahorro potencial:
-                                </h3>
-                                <div class="space-y-4">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-400">Ahorro semanal:</span>
-                                        <span id="weekly-savings" class="text-2xl font-bold text-gradient-gold">$187.500</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-400">Ahorro mensual:</span>
-                                        <span id="monthly-savings" class="text-2xl font-bold text-gradient-gold">$750.000</span>
-                                    </div>
-                                    <div class="border-t border-gray-700 pt-4">
-                                        <div class="flex justify-between items-center">
-                                            <span class="text-gray-300 font-semibold">Ahorro anual:</span>
-                                            <span id="yearly-savings" class="text-3xl font-bold text-gradient-gold">$9.000.000</span>
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-400 mt-4">
-                                        * Valores en pesos chilenos (CLP)<br>
-                                        * Basado en la automatización y optimización de procesos
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Chat IA Section - NUEVA VERSIÓN SIMPLIFICADA -->
-        <section id="asistente" class="py-20 md:py-28">
-            <div class="container mx-auto px-6">
-                <div class="max-w-4xl mx-auto">
-                    <div class="text-center mb-12 reveal">
-                        <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
-                            Asistente <span class="text-gradient-gold">24/7</span> para tus Dudas
-                        </h2>
-                        <p class="text-xl text-gray-400 mb-8">
-                            Habla con nuestro experto virtual sobre transformación digital
-                        </p>
-                    </div>
-
-                    <div class="chat-showcase-card reveal">
-                        <div class="grid md:grid-cols-2 gap-8 items-center">
-                            <div>
-                                <div class="flex items-center space-x-3 mb-6">
-                                    <div class="w-12 h-12 rounded-full gradient-gold flex items-center justify-center">
-                                        <i class="fas fa-robot text-black text-xl"></i>
-                                    </div>
-                                    <div>
-                                        <h3 class="text-white font-semibold text-lg">JRO Assistant Pro</h3>
-                                        <p class="text-xs text-green-400 flex items-center">
-                                            <span class="w-2 h-2 bg-green-400 rounded-full mr-1 animate-pulse"></span>
-                                            Disponible ahora
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <h4 class="text-xl font-semibold mb-4" style="color: var(--color-accent-gold);">
-                                    ¿Cómo puedo ayudarte?
-                                </h4>
-
-                                <ul class="space-y-3 mb-6">
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                        <span>Respuestas inmediatas sobre Power BI, Power Apps y Power Automate</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                        <span>Información detallada sobre tiempos y costos de implementación</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                        <span>Casos de éxito y resultados en tu industria</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                        <span>Recomendaciones personalizadas para tu empresa</span>
-                                    </li>
-                                </ul>
-
-                                <button onclick="openChatPopup()" class="btn-primary w-full">
-                                    <i class="fas fa-comments mr-2"></i>
-                                    Iniciar Conversación
-                                </button>
-                            </div>
-
-                            <div class="relative">
-                                <!-- Mock chat interface -->
-                                <div class="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
-                                    <div class="space-y-3">
-                                        <div class="flex justify-start">
-                                            <div class="bg-sapphire/20 rounded-lg p-3 max-w-[80%] border border-sapphire/30">
-                                                <p class="text-sm">👋 ¡Hola! Soy el asistente de JRO Asesorías. ¿En qué puedo ayudarte hoy?</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex justify-end">
-                                            <div class="bg-gray-800 rounded-lg p-3 max-w-[80%]">
-                                                <p class="text-sm">¿Cuánto tiempo toma implementar Power BI?</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex justify-start">
-                                            <div class="bg-sapphire/20 rounded-lg p-3 max-w-[80%] border border-sapphire/30">
-                                                <p class="text-sm">Excelente pregunta. La implementación típica de Power BI toma entre 2-4 semanas...</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center justify-center py-2">
-                                            <span class="text-xs text-gray-500">El chat se abrirá en una nueva ventana</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Features badges -->
-                                <div class="flex flex-wrap gap-2 mt-4 justify-center">
-                                    <span class="bg-gray-800 text-xs px-3 py-1 rounded-full">
-                                        <i class="fas fa-brain text-yellow-500 mr-1"></i>
-                                        IA Inteligente
-                                    </span>
-                                    <span class="bg-gray-800 text-xs px-3 py-1 rounded-full">
-                                        <i class="fas fa-shield-alt text-green-500 mr-1"></i>
-                                        100% Seguro
-                                    </span>
-                                    <span class="bg-gray-800 text-xs px-3 py-1 rounded-full">
-                                        <i class="fas fa-bolt text-blue-500 mr-1"></i>
-                                        Respuestas Rápidas
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="text-center mt-8">
-                        <p class="text-sm text-gray-500">
-                            <i class="fas fa-lock mr-2"></i>
-                            Tu información es 100% confidencial y segura
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section with Real Images -->
-        <section class="py-20 bg-black">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-                    <div class="reveal">
-                        <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-6">
-                            Transformación Digital con <span class="text-gradient-gold">Experiencia Real</span>
-                        </h3>
-                        <p class="text-lg text-gray-400 mb-6">
-                            Con más de una década de experiencia, combinamos el rigor de la consultoría 
-                            tradicional con las herramientas más modernas de Microsoft.
-                        </p>
-                        <p class="text-lg text-gray-400 mb-8">
-                            Nuestro enfoque personalizado garantiza que cada solución se adapte 
-                            perfectamente a las necesidades únicas de tu empresa.
-                        </p>
-                        <!-- Imagen vertical -->
-                        <div class="max-w-sm mx-auto md:mx-0">
-                            <img src="https://i.postimg.cc/QxcpX9yk/0o1a2566-689-S-min.jpg" 
-                                 alt="Juan Ramón Ortiz - Fundador JRO Asesorías" 
-                                 class="w-full rounded-lg shadow-2xl">
-                        </div>
-                    </div>
-                    <div class="reveal" style="animation-delay: 0.2s;">
-                        <!-- Imagen horizontal -->
-                        <img src="https://i.postimg.cc/25rTpFjZ/0o1a6439-1982-min.jpg" 
-                             alt="Oficina JRO Asesorías" 
-                             class="w-full rounded-lg shadow-2xl mb-8">
-                        <div class="grid grid-cols-2 gap-6 text-center">
-                            <div class="premium-card">
-                                <h4 class="text-3xl font-bold text-gradient-gold">15+</h4>
-                                <p class="text-gray-400">Años de Experiencia</p>
-                            </div>
-                            <div class="premium-card">
-                                <h4 class="text-3xl font-bold text-gradient-gold">100%</h4>
-                                <p class="text-gray-400">Clientes Satisfechos</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Final Section -->
-        <section class="py-20 md:py-28 relative overflow-hidden">
-            <!-- Background effect -->
-            <div class="absolute inset-0 bg-gradient-to-r from-sapphire/20 via-transparent to-sapphire/20"></div>
-            
-            <div class="container mx-auto px-6 relative z-10 text-center">
-                <h2 class="text-4xl md:text-6xl font-heading font-bold text-white mb-6 reveal">
-                    ¿Listo para dejar de <br>
-                    <span class="text-gradient-gold">perder tiempo y dinero?</span>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="section" style="background: linear-gradient(135deg, var(--midnight-ocean), var(--deep-ocean));">
+        <div class="container">
+            <div class="section-header reveal" style="color: white;">
+                <h2 class="section-title" style="color: white;">
+                    ¿Listo para liderar el cambio?
                 </h2>
-                <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8 reveal" style="animation-delay: 0.2s;">
-                    Únete a las +50 empresas que ya optimizaron sus procesos y mejoraron 
-                    sus decisiones. Empieza con un diagnóstico gratuito.
+                <p class="section-description" style="color: rgba(255,255,255,0.8);">
+                    Únase a los líderes que están redefiniendo sus industrias 
+                    a través de la transformación digital inteligente.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="animation-delay: 0.4s;">
-                    <a href="#contacto" class="btn-primary text-lg">
-                        <i class="fas fa-rocket mr-2"></i>
-                        Empieza tu Transformación
-                    </a>
-                    <a href="https://wa.me/56966895746" class="btn-secondary text-lg">
-                        <i class="fab fa-whatsapp mr-2"></i>
-                        WhatsApp Directo
+                <div style="margin-top: 40px;">
+                    <a href="#contacto" class="btn btn-primary" style="background: white; color: var(--midnight-ocean);">
+                        Agendar conversación estratégica
                     </a>
                 </div>
             </div>
-        </section>
-    </main>
-
+        </div>
+    </section>
+    
     <!-- Footer -->
-    <footer id="contacto" class="bg-black border-t border-gray-800">
-        <div class="container mx-auto px-6 py-16">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                <!-- Company info -->
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg gradient-gold flex items-center justify-center">
-                            <span class="font-heading font-bold text-lg text-black">JRO</span>
+    <footer id="contacto" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-mark">
+                            <svg viewBox="0 0 48 48" fill="none" width="40" height="40">
+                                <circle cx="24" cy="24" r="20" stroke="white" stroke-width="2" opacity="0.3"/>
+                                <path d="M24 12 L36 24 L24 36 L12 24 Z" stroke="white" stroke-width="2" fill="none" opacity="0.3"/>
+                                <circle cx="24" cy="24" r="4" fill="white"/>
+                            </svg>
                         </div>
-                        <h3 class="font-heading text-xl font-bold text-white">JRO Asesorías E.I.R.L.</h3>
+                        <span style="font-size: 20px; font-weight: 600;">JRO Asesorías</span>
                     </div>
-                    <p class="text-gray-400 mb-4">
-                        Transformamos datos complejos en decisiones simples. 
-                        Expertos en Power Platform con resultados garantizados.
+                    <p class="footer-description">
+                        Arquitectos de la transformación digital. Convertimos la complejidad 
+                        tecnológica en ventaja competitiva sostenible.
                     </p>
-                    <div class="space-y-2 text-sm text-gray-400">
-                        <p><i class="fas fa-id-card mr-2" style="color: var(--color-accent-gold);"></i>RUT: 76.325.663-4</p>
-                        <p><i class="fas fa-city mr-2" style="color: var(--color-accent-gold);"></i>Santiago, Chile</p>
-                    </div>
                 </div>
-
-                <!-- Quick links -->
-                <div>
-                    <h4 class="font-semibold text-white mb-4">Enlaces Rápidos</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#servicios" class="hover:text-gold transition-colors">Servicios</a></li>
-                        <li><a href="#proceso" class="hover:text-gold transition-colors">Proceso</a></li>
-                        <li><a href="#impacto" class="hover:text-gold transition-colors">Impacto Medible</a></li>
-                        <li><a href="#diagnostico" class="hover:text-gold transition-colors">Diagnóstico Gratuito</a></li>
-                    </ul>
+                
+                <div class="footer-column">
+                    <h4>Empresa</h4>
+                    <a href="#" class="footer-link">Nuestra historia</a>
+                    <a href="#" class="footer-link">Carreras</a>
+                    <a href="#" class="footer-link">Partners</a>
                 </div>
-
-                <!-- Contact -->
-                <div>
-                    <h4 class="font-semibold text-white mb-4">Contacto Directo</h4>
-                    <div class="space-y-3">
-                        <a href="mailto:info@duocapital.cl" 
-                           class="flex items-center text-gray-400 hover:text-gold transition-colors">
-                            <i class="fas fa-envelope mr-3" style="color: var(--color-accent-gold);"></i>
-                            <span>info@duocapital.cl</span>
-                        </a>
-                        <a href="tel:+56966895746" 
-                           class="flex items-center text-gray-400 hover:text-gold transition-colors">
-                            <i class="fas fa-phone mr-3" style="color: var(--color-accent-gold);"></i>
-                            <span>+56 9 6689 5746</span>
-                        </a>
-                        <a href="https://wa.me/56966895746" 
-                           class="flex items-center text-gray-400 hover:text-gold transition-colors">
-                            <i class="fab fa-whatsapp mr-3" style="color: var(--color-accent-gold);"></i>
-                            <span>WhatsApp Business</span>
-                        </a>
-                    </div>
+                
+                <div class="footer-column">
+                    <h4>Recursos</h4>
+                    <a href="#" class="footer-link">Blog</a>
+                    <a href="#" class="footer-link">Whitepapers</a>
+                    <a href="#" class="footer-link">Webinars</a>
+                    <a href="#" class="footer-link">FAQ</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contacto</h4>
+                    <a href="tel:+56966895746" class="footer-link">
+                        <i class="fas fa-phone" style="margin-right: 8px;"></i>
+                        +56 9 6689 5746
+                    </a>
+                    <a href="mailto:info@duocapital.cl" class="footer-link">
+                        <i class="fas fa-envelope" style="margin-right: 8px;"></i>
+                        info@duocapital.cl
+                    </a>
+                    <a href="https://wa.me/56966895746" class="footer-link">
+                        <i class="fab fa-whatsapp" style="margin-right: 8px;"></i>
+                        WhatsApp Business
+                    </a>
                 </div>
             </div>
-
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
-                <p>&copy; 2025 JRO Asesorías E.I.R.L. Todos los derechos reservados.</p>
-                <p class="text-sm mt-2">Transformando empresas con inteligencia de negocios desde 2013</p>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 JRO Asesorías E.I.R.L. RUT: 76.325.663-4. Todos los derechos reservados.</p>
+                <div style="display: flex; gap: 20px;">
+                    <a href="#" class="footer-link">Privacidad</a>
+                    <a href="#" class="footer-link">Términos</a>
+                    <a href="#" class="footer-link">Seguridad</a>
+                </div>
             </div>
         </div>
     </footer>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden">
-        <div class="flex justify-end p-6">
-            <button id="close-mobile-menu" class="text-white text-2xl">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <nav class="flex flex-col items-center space-y-8 mt-20">
-            <a href="#diagnostico" class="text-2xl text-white hover:text-gold transition-colors mobile-link">Diagnóstico Gratuito</a>
-            <a href="#servicios" class="text-2xl text-white hover:text-gold transition-colors mobile-link">Servicios</a>
-            <a href="#proceso" class="text-2xl text-white hover:text-gold transition-colors mobile-link">Proceso</a>
-            <a href="#impacto" class="text-2xl text-white hover:text-gold transition-colors mobile-link">Impacto</a>
-            <a href="#contacto" class="btn-primary mobile-link">Acelera tus Decisiones</a>
-        </nav>
-    </div>
-
-    <!-- Script de Vimeo -->
+    
+    <!-- Scripts -->
     <script src="https://player.vimeo.com/api/player.js"></script>
-
     <script>
-        // Variable global para el popup
-        let chatPopup = null;
-
-        // Función para abrir el chat popup
-        function openChatPopup() {
-            // Configuración de la ventana popup
-            const width = 400;
-            const height = 600;
-            const left = window.screen.width - width - 50;
-            const top = 100;
-
-            // Si ya hay un popup abierto, enfocarlo
-            if (chatPopup && !chatPopup.closed) {
-                chatPopup.focus();
-                return;
-            }
-
-            // Abrir nuevo popup
-            chatPopup = window.open(
-                'chat-popup-complete.html',
-                'JRO_Chat',
-                `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes,status=yes`
-            );
-
-            // Verificar si el popup se bloqueó
-            if (!chatPopup || chatPopup.closed || typeof chatPopup.closed == 'undefined') {
-                alert('Por favor permite las ventanas emergentes para usar el chat.');
-            }
-        }
-
-        // Escuchar mensajes del popup (por si necesitas comunicación bidireccional)
-        window.addEventListener('message', (event) => {
-            // Verificar el origen por seguridad
-            if (event.origin !== window.location.origin) return;
-
-            if (event.data.type === 'chatClosed') {
-                console.log('Chat cerrado');
-                chatPopup = null;
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navigation');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
             }
         });
-
-        // Mobile menu functionality
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const closeMobileMenu = document.getElementById('close-mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
-        });
-
-        closeMobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Array de animaciones aleatorias
-        const animations = ['animate-fadeInUp', 'animate-fadeInLeft', 'animate-fadeInRight', 'animate-zoomIn'];
-
-        // Intersection Observer for reveal animations con efecto aleatorio
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Asignar animación aleatoria si no tiene una asignada
-                    if (!entry.target.classList.contains('visible')) {
-                        const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
-                        entry.target.classList.add(randomAnimation);
-                    }
-                    entry.target.classList.add('visible');
-                    
-                    // Animate counters if present
-                    const counters = entry.target.querySelectorAll('.counter-target');
-                    counters.forEach(counter => animateCounter(counter));
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Counter animation
-        function animateCounter(counter) {
-            const target = +counter.getAttribute('data-target');
-            const duration = 2000;
-            const increment = target / (duration / 16);
-            let current = 0;
-
-            const updateCount = () => {
-                if (current < target) {
-                    current += increment;
-                    counter.innerText = Math.min(Math.ceil(current), target);
-                    requestAnimationFrame(updateCount);
-                } else {
-                    counter.innerText = target;
-                }
-            };
-
-            updateCount();
-        }
-
-        // ROI Calculator
-        function calculateROI() {
-            const hours = document.getElementById('hours-range').value;
-            const employees = document.getElementById('employees-range').value;
-            const monthlySalary = document.getElementById('salary-select').value;
-
-            document.getElementById('hours-value').textContent = hours + ' horas';
-            document.getElementById('employees-value').textContent = employees + ' personas';
-
-            // Calcular valor hora: salario mensual / 4 semanas / 40 horas
-            const hourlyRate = monthlySalary / (4 * 40);
-            
-            // Calcular ahorros
-            const weeklyTotal = hours * employees * hourlyRate;
-            const monthlyTotal = weeklyTotal * 4;
-            const yearlyTotal = monthlyTotal * 12;
-
-            // Formatear números con separador de miles
-            const formatNumber = (num) => {
-                return Math.round(num).toLocaleString('es-CL');
-            };
-
-            document.getElementById('weekly-savings').textContent = '$' + formatNumber(weeklyTotal);
-            document.getElementById('monthly-savings').textContent = '$' + formatNumber(monthlyTotal);
-            document.getElementById('yearly-savings').textContent = '$' + formatNumber(yearlyTotal);
-        }
-
-        // Initial calculation
-        calculateROI();
-
-        // Smooth scrolling
+        
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1674,9 +1499,130 @@
                 }
             });
         });
-
-        // Log de verificación
-        console.log('✅ Sitio web cargado con chat popup configurado');
+        
+        // Process animation
+        const observerProcess = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progress = document.getElementById('process-progress');
+                    if (progress) {
+                        progress.style.width = '75%';
+                    }
+                }
+            });
+        });
+        
+        const processSection = document.querySelector('.process-timeline');
+        if (processSection) {
+            observerProcess.observe(processSection);
+        }
+        
+        // Reveal animation
+        const observerReveal = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.reveal').forEach(el => {
+            observerReveal.observe(el);
+        });
+        
+        // Counter animation
+        const observerCounter = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.counter-number');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        const duration = 2000; // 2 seconds
+                        const start = 0;
+                        const increment = target / (duration / 16); // 60fps
+                        
+                        const updateCounter = () => {
+                            const current = parseInt(counter.innerText);
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current + increment);
+                                setTimeout(updateCounter, 16);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        
+                        if (!counter.classList.contains('counted')) {
+                            counter.classList.add('counted');
+                            updateCounter();
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        // Observe all service cards that might contain counters
+        document.querySelectorAll('.service-card').forEach(card => {
+            if (card.querySelector('.counter-number')) {
+                observerCounter.observe(card);
+            }
+        });
+        
+        // Chat popup
+        let chatPopup = null;
+        
+        function openChatPopup() {
+            const width = 400;
+            const height = 600;
+            const left = window.screen.width - width - 50;
+            const top = 100;
+            
+            if (chatPopup && !chatPopup.closed) {
+                chatPopup.focus();
+                return;
+            }
+            
+            chatPopup = window.open(
+                'chat-popup-complete.html',
+                'JRO_Chat',
+                `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes,status=yes`
+            );
+            
+            if (!chatPopup || chatPopup.closed || typeof chatPopup.closed == 'undefined') {
+                alert('Por favor permite las ventanas emergentes para usar el chat.');
+            }
+        }
+        
+        // ROI Calculator
+        function updateCalculator() {
+            const hours = document.getElementById('hours').value;
+            const employees = document.getElementById('employees').value;
+            const hourlyCost = document.getElementById('hourly-cost').value;
+            const errors = document.getElementById('errors').value;
+            
+            document.getElementById('hours-display').textContent = `${hours} horas`;
+            document.getElementById('employees-display').textContent = `${employees} personas`;
+            
+            // Calculate savings
+            const weeklyHoursSaved = hours * employees * 0.7; // 70% efficiency gain
+            const monthlySavings = weeklyHoursSaved * 4 * hourlyCost;
+            const errorReduction = errors * 250 * 0.8; // $250 per error, 80% reduction
+            const totalMonthlySavings = monthlySavings + errorReduction;
+            const annualSavings = totalMonthlySavings * 12;
+            const investmentCost = 45000; // Average implementation cost
+            const roi = ((annualSavings - investmentCost) / investmentCost * 100).toFixed(0);
+            const payback = (investmentCost / totalMonthlySavings).toFixed(1);
+            
+            // Update displays
+            document.getElementById('monthly-savings').textContent = `$${totalMonthlySavings.toLocaleString()}`;
+            document.getElementById('roi').textContent = `${roi}%`;
+            document.getElementById('payback').textContent = `${payback} meses`;
+            document.getElementById('annual-value').textContent = `$${annualSavings.toLocaleString()}`;
+        }
+        
+        // Initialize calculator
+        updateCalculator();
+        
+        console.log('JRO Asesorías - Premium Design System Initialized');
     </script>
 </body>
 </html>
