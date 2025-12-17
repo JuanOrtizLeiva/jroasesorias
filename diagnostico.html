@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico de Madurez Digital | TECNIPRO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- PROTECCIÓN: Validación de dominio -->
+    <script>
+    (function(){
+        var dominiosPermitidos = ['jroasesorias.cl', 'www.jroasesorias.cl', 'localhost', '127.0.0.1'];
+        var hostActual = window.location.hostname;
+        var permitido = dominiosPermitidos.some(function(d){ return hostActual.indexOf(d) !== -1; });
+        if(!permitido && hostActual !== ''){
+            document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;text-align:center;padding:20px;"><div><h1 style="color:#ef4444;">Acceso no autorizado</h1><p style="color:#666;margin-top:10px;">Este contenido solo puede visualizarse en el sitio oficial.</p></div></div>';
+            throw new Error('Dominio no autorizado');
+        }
+    })();
+    </script>
+
+    <!-- PROTECCIÓN: Bloquear clic derecho y teclas -->
+    <script>
+    document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+    document.addEventListener('keydown', function(e){
+        if(e.key === 'F12' || 
+           (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+           (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+           (e.ctrlKey && e.key === 'u') ||
+           (e.ctrlKey && e.key === 'U') ||
+           (e.ctrlKey && e.key === 's') ||
+           (e.ctrlKey && e.key === 'S')){
+            e.preventDefault();
+            return false;
+        }
+    });
+    </script>
+
+    <style>
+        /* PROTECCIÓN: Dificultar selección */
+        html { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+        input, textarea { -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text; }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --secondary-light: #f472b6;
+            --accent: #06b6d4;
+            --accent-light: #22d3ee;
+            --success: #10b981;
+            --success-light: #34d399;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --purple: #8b5cf6;
+            --orange: #f97316;
+            --bg: #f8fafc;
+            --bg-card: #ffffff;
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            min-height: 100vh;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ================================ */
+        /* FONDO DECORATIVO                 */
+        /* ================================ */
+        .bg-decoration {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: blobFloat 20s ease-in-out infinite;
+        }
+
+        .bg-blob-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(236, 72, 153, 0.2));
+            top: -200px;
+            right: -200px;
+        }
+
+        .bg-blob-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.25), rgba(16, 185, 129, 0.2));
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -10s;
+        }
+
+        .bg-blob-3 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(249, 115, 22, 0.15));
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -5s;
+        }
+
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* Grid pattern */
+        .bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* ================================ */
+        /* CONTENEDOR PRINCIPAL             */
+        /* ================================ */
+        .app {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            z-index: 10;
+        }
+
+        /* ================================ */
+        /* HEADER CON PROGRESO              */
+        /* ================================ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            background-size: 200% 100%;
+            border-radius: 50px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: shimmer 2s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ================================ */
+        /* SISTEMA DE SLIDES                */
+        /* ================================ */
+        .slides-container {
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            perspective: 1500px;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(80px) scale(0.95);
+            filter: blur(10px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active {
+            position: relative;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0) scale(1);
+            filter: blur(0);
+        }
+
+        .slide.exit-left {
+            opacity: 0;
+            transform: translateX(-80px) scale(0.95);
+            filter: blur(10px);
+        }
+
+        .slide.exit-right {
+            opacity: 0;
+            transform: translateX(80px) scale(0.95);
+            filter: blur(10px);
+        }
+
+        /* Efecto de entrada especial para insights */
+        .slide.insight-slide.active {
+            animation: insightEnter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes insightEnter {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+                filter: blur(15px);
+            }
+            50% {
+                filter: blur(5px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0);
+            }
+        }
+
+        /* ================================ */
+        /* SLIDE DE INICIO                  */
+        /* ================================ */
+        .intro-card {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 80px 60px;
+            text-align: center;
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.05),
+                0 25px 50px -12px rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .intro-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 25px 50px rgba(99, 102, 241, 0.4); }
+        }
+
+        .intro-icon svg {
+            width: 56px;
+            height: 56px;
+            color: white;
+        }
+
+        .intro-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .intro-badge svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .intro-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .intro-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+
+        .intro-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .intro-feature svg {
+            width: 22px;
+            height: 22px;
+            color: var(--success);
+        }
+
+        .btn-start {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 48px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-family: inherit;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-start svg {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-start:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* ================================ */
+        /* SLIDE DE PREGUNTA                */
+        /* ================================ */
+        .question-card {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 56px;
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.05),
+                0 25px 50px -12px rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.08);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+
+        .dimension-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .dimension-badge svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .dimension-badge.excel {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
+            color: #059669;
+        }
+
+        .dimension-badge.analisis {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+            color: var(--primary);
+        }
+
+        .dimension-badge.automatizacion {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(245, 158, 11, 0.15));
+            color: #ea580c;
+        }
+
+        .dimension-badge.visualizacion {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(139, 92, 246, 0.15));
+            color: #db2777;
+        }
+
+        .dimension-badge.ia {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(99, 102, 241, 0.15));
+            color: #0891b2;
+        }
+
+        .question-counter {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .question-text {
+            font-size: 1.75rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 40px;
+            color: var(--text);
+        }
+
+        /* Opciones con colores */
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .option {
+            position: relative;
+        }
+
+        .option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .option label {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 24px;
+            background: rgba(248, 250, 252, 0.8);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+
+        .option label:hover {
+            background: white;
+            border-color: var(--primary-light);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .option input:checked + label {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.05));
+            border-color: var(--primary);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .option-icon {
+            width: 56px;
+            height: 56px;
+            min-width: 56px;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .option:nth-child(2) .option-icon {
+            background: linear-gradient(135deg, var(--secondary), var(--purple));
+        }
+
+        .option:nth-child(3) .option-icon {
+            background: linear-gradient(135deg, var(--accent), var(--success));
+        }
+
+        .option:nth-child(4) .option-icon {
+            background: linear-gradient(135deg, var(--orange), var(--warning));
+        }
+
+        .option-icon svg {
+            width: 28px;
+            height: 28px;
+            color: white;
+        }
+
+        .option input:checked + label .option-icon {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .option-content {
+            flex: 1;
+        }
+
+        .option-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+
+        .option-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .option-check {
+            width: 28px;
+            height: 28px;
+            border: 2px solid rgba(148, 163, 184, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .option-check svg {
+            width: 16px;
+            height: 16px;
+            color: white;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+
+        .option input:checked + label .option-check {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+        }
+
+        .option input:checked + label .option-check svg {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Navegación */
+        .question-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 28px;
+            border-top: 2px solid rgba(99, 102, 241, 0.08);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .btn-back {
+            background: rgba(99, 102, 241, 0.08);
+            color: var(--text-secondary);
+        }
+
+        .btn-back:hover {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
+        }
+
+        .btn-next:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.45);
+        }
+
+        .btn-next:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ================================ */
+        /* SLIDE DE INSIGHT - DISEÑO ESPECIAL */
+        /* ================================ */
+        .insight-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 28px;
+            padding: 40px 48px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            max-height: 85vh;
+        }
+
+        .insight-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+            animation: rotateGlow 15s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .insight-card.insight-2 {
+            background: linear-gradient(135deg, var(--accent), var(--success));
+        }
+
+        .insight-card.insight-3 {
+            background: linear-gradient(135deg, var(--purple), var(--primary));
+        }
+
+        .insight-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .insight-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .insight-badge svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .insight-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .insight-stat {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .insight-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .insight-unit {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .insight-desc {
+            font-size: 1rem;
+            line-height: 1.5;
+            opacity: 0.95;
+            margin-bottom: 24px;
+            max-width: 550px;
+        }
+
+        /* Gráfico de barras para insights */
+        .insight-chart {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .chart-bar:last-child {
+            margin-bottom: 0;
+        }
+
+        .chart-label {
+            width: 110px;
+            min-width: 110px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .chart-track {
+            flex: 1;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .chart-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50px;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            min-width: 45px;
+        }
+
+        .chart-value {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .insight-source {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+
+        .btn-continue {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: white;
+            color: var(--primary);
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-continue svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-continue:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* ================================ */
+        /* SLIDE DE FORMULARIO              */
+        /* ================================ */
+        .form-card {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 60px;
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.05),
+                0 25px 50px -12px rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            max-width: 520px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .form-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--success), var(--accent));
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.35);
+        }
+
+        .form-icon svg {
+            width: 50px;
+            height: 50px;
+            color: white;
+        }
+
+        .form-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--success), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .form-label span {
+            color: var(--danger);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 18px 20px;
+            background: rgba(248, 250, 252, 0.8);
+            border: 2px solid rgba(99, 102, 241, 0.1);
+            border-radius: 14px;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 20px;
+            margin-top: 28px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-family: inherit;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-submit svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Mensaje de error inline */
+        .error-message {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            margin-top: 16px;
+            color: #dc2626;
+            font-size: 0.95rem;
+            font-weight: 500;
+            animation: shakeError 0.5s ease;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        .error-message svg {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+        }
+
+        @keyframes shakeError {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+        }
+
+        .form-input.error {
+            border-color: #dc2626;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .form-input.error:focus {
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+        }
+
+        /* ================================ */
+        /* SLIDE DE RESULTADOS              */
+        /* ================================ */
+        .results-card {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 60px;
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.05),
+                0 25px 50px -12px rgba(6, 182, 212, 0.15);
+            border: 1px solid rgba(6, 182, 212, 0.1);
+            text-align: center;
+        }
+
+        .results-emoji {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .results-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .results-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 36px;
+        }
+
+        .score-level {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .score-level.level-1 { background: rgba(239, 68, 68, 0.15); color: #dc2626; }
+        .score-level.level-2 { background: rgba(245, 158, 11, 0.15); color: #d97706; }
+        .score-level.level-3 { background: rgba(16, 185, 129, 0.15); color: #059669; }
+        .score-level.level-4 { background: rgba(6, 182, 212, 0.15); color: #0891b2; }
+
+        .score-name {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .score-percent {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .score-desc {
+            color: var(--text-secondary);
+            margin-top: 16px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .dimensions-grid {
+            display: grid;
+            gap: 12px;
+            text-align: left;
+            margin-bottom: 36px;
+        }
+
+        .dim-item {
+            background: rgba(248, 250, 252, 0.8);
+            border-radius: 16px;
+            padding: 20px 24px;
+        }
+
+        .dim-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .dim-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+        }
+
+        .dim-name svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .dim-name.excel svg { color: #059669; }
+        .dim-name.analisis svg { color: var(--primary); }
+        .dim-name.automatizacion svg { color: #ea580c; }
+        .dim-name.visualizacion svg { color: #db2777; }
+        .dim-name.ia svg { color: #0891b2; }
+
+        .dim-score {
+            font-weight: 800;
+        }
+
+        .dim-bar {
+            height: 12px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .dim-fill {
+            height: 100%;
+            border-radius: 50px;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dim-fill.excel { background: linear-gradient(90deg, #10b981, #06b6d4); }
+        .dim-fill.analisis { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
+        .dim-fill.automatizacion { background: linear-gradient(90deg, #f97316, #f59e0b); }
+        .dim-fill.visualizacion { background: linear-gradient(90deg, #ec4899, #8b5cf6); }
+        .dim-fill.ia { background: linear-gradient(90deg, #06b6d4, #6366f1); }
+
+        .email-sent {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+            border-radius: 16px;
+        }
+
+        .email-sent svg {
+            width: 26px;
+            height: 26px;
+            color: var(--success);
+        }
+
+        .email-sent p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* ================================ */
+        /* LOADING                          */
+        /* ================================ */
+        .loading {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .loading.active {
+            display: flex;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        .loader::before,
+        .loader::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 4px solid transparent;
+        }
+
+        .loader::before {
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        .loader::after {
+            border-right-color: var(--secondary);
+            animation: spin 0.5s linear infinite reverse;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* ================================ */
+        /* RESPONSIVE                       */
+        /* ================================ */
+        
+        /* TABLET (768px - 900px) */
+        @media (max-width: 900px) {
+            .slides-container {
+                max-width: 100%;
+            }
+
+            .question-card, .intro-card, .results-card {
+                padding: 40px 32px;
+            }
+
+            .insight-card {
+                padding: 32px 28px;
+            }
+
+            .question-text {
+                font-size: 1.4rem;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-features {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .intro-title {
+                font-size: 2rem;
+            }
+
+            .insight-title {
+                font-size: 1.4rem;
+            }
+
+            .insight-number {
+                font-size: 3rem;
+            }
+
+            .insight-unit {
+                font-size: 1rem;
+            }
+
+            .insight-desc {
+                font-size: 0.95rem;
+            }
+
+            .chart-label {
+                width: 90px;
+                min-width: 90px;
+                font-size: 0.8rem;
+            }
+
+            .chart-track {
+                height: 24px;
+            }
+
+            .header {
+                padding: 16px 20px;
+            }
+
+            .progress-bar {
+                width: 120px;
+            }
+
+            .score-percent {
+                font-size: 4rem;
+            }
+
+            .logo {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* MÓVIL GRANDE (500px - 768px) */
+        @media (max-width: 768px) {
+            .app {
+                padding: 80px 16px 32px;
+            }
+
+            .question-card, .intro-card, .form-card, .results-card {
+                padding: 32px 24px;
+                border-radius: 24px;
+            }
+
+            .insight-card {
+                padding: 28px 24px;
+                border-radius: 24px;
+            }
+
+            .question-text {
+                font-size: 1.25rem;
+                margin-bottom: 28px;
+            }
+
+            .intro-title {
+                font-size: 1.75rem;
+            }
+
+            .intro-subtitle {
+                font-size: 1rem;
+            }
+
+            .btn-start {
+                width: 100%;
+                justify-content: center;
+                padding: 18px 32px;
+            }
+
+            .intro-icon {
+                width: 90px;
+                height: 90px;
+            }
+
+            .intro-icon svg {
+                width: 44px;
+                height: 44px;
+            }
+
+            .insight-title {
+                font-size: 1.25rem;
+            }
+
+            .insight-number {
+                font-size: 2.5rem;
+            }
+
+            .insight-unit {
+                font-size: 0.9rem;
+                margin-bottom: 4px;
+            }
+
+            .insight-desc {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+            }
+
+            .insight-chart {
+                padding: 16px;
+            }
+
+            .chart-bar {
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+
+            .chart-label {
+                width: 80px;
+                min-width: 80px;
+                font-size: 0.75rem;
+            }
+
+            .chart-track {
+                height: 22px;
+            }
+
+            .chart-value {
+                font-size: 0.7rem;
+            }
+
+            .btn-continue {
+                padding: 12px 28px;
+                font-size: 0.95rem;
+            }
+
+            .option label {
+                padding: 18px;
+            }
+
+            .option-icon {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+            }
+
+            .option-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .score-percent {
+                font-size: 3.5rem;
+            }
+
+            .score-name {
+                font-size: 1.5rem;
+            }
+
+            .results-emoji {
+                font-size: 4rem;
+            }
+
+            .progress-container {
+                gap: 10px;
+            }
+
+            .progress-text {
+                font-size: 0.8rem;
+            }
+
+            .progress-bar {
+                width: 100px;
+            }
+
+            .logo {
+                font-size: 0.85rem;
+                max-width: 160px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        /* MÓVIL PEQUEÑO (menos de 500px) */
+        @media (max-width: 500px) {
+            .app {
+                padding: 72px 12px 24px;
+            }
+
+            .question-card, .intro-card, .form-card, .results-card {
+                padding: 28px 18px;
+                border-radius: 20px;
+            }
+
+            .insight-card {
+                padding: 24px 18px;
+                border-radius: 20px;
+            }
+
+            .question-text {
+                font-size: 1.15rem;
+                margin-bottom: 24px;
+            }
+
+            .question-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                margin-bottom: 24px;
+            }
+
+            .intro-title {
+                font-size: 1.5rem;
+            }
+
+            .intro-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .intro-badge {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
+            .insight-badge {
+                padding: 6px 14px;
+                font-size: 0.75rem;
+            }
+
+            .insight-title {
+                font-size: 1.15rem;
+                margin-bottom: 12px;
+            }
+
+            .insight-number {
+                font-size: 2.2rem;
+            }
+
+            .insight-unit {
+                font-size: 0.85rem;
+            }
+
+            .insight-desc {
+                font-size: 0.85rem;
+                line-height: 1.4;
+                margin-bottom: 16px;
+            }
+
+            .insight-chart {
+                padding: 14px;
+                margin-bottom: 16px;
+            }
+
+            .chart-label {
+                width: 70px;
+                min-width: 70px;
+                font-size: 0.7rem;
+            }
+
+            .chart-track {
+                height: 20px;
+            }
+
+            .chart-fill {
+                min-width: 38px;
+                padding-right: 8px;
+            }
+
+            .chart-value {
+                font-size: 0.65rem;
+            }
+
+            .insight-source {
+                font-size: 0.7rem;
+                margin-bottom: 12px;
+            }
+
+            .btn-continue {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+
+            .question-nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .question-nav .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .option label {
+                padding: 16px 14px;
+                gap: 12px;
+            }
+
+            .option-icon {
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+                border-radius: 12px;
+            }
+
+            .option-icon svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .option-title {
+                font-size: 0.95rem;
+            }
+
+            .option-desc {
+                font-size: 0.8rem;
+            }
+
+            .option-check {
+                width: 24px;
+                height: 24px;
+            }
+
+            .form-card {
+                padding: 28px 18px;
+            }
+
+            .form-icon {
+                width: 80px;
+                height: 80px;
+            }
+
+            .form-icon svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            .form-title {
+                font-size: 1.5rem;
+            }
+
+            .form-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .score-percent {
+                font-size: 3rem;
+            }
+
+            .score-name {
+                font-size: 1.3rem;
+            }
+
+            .score-desc {
+                font-size: 0.9rem;
+            }
+
+            .results-emoji {
+                font-size: 3.5rem;
+            }
+
+            .dim-item {
+                padding: 16px 18px;
+            }
+
+            .dim-name {
+                font-size: 0.85rem;
+            }
+
+            .header {
+                padding: 12px 16px;
+            }
+
+            .logo {
+                font-size: 0.75rem;
+                max-width: 140px;
+            }
+
+            .progress-bar {
+                width: 80px;
+                height: 6px;
+            }
+
+            .progress-text {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fondo decorativo -->
+    <div class="bg-decoration">
+        <div class="bg-grid"></div>
+        <div class="bg-blob bg-blob-1"></div>
+        <div class="bg-blob bg-blob-2"></div>
+        <div class="bg-blob bg-blob-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="logo">Instituto de Capacitación Tecnipro</div>
+        <div class="progress-container">
+            <span class="progress-text" id="progressText">1/10</span>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 10%"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Loading -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+        <p>Analizando tus respuestas...</p>
+    </div>
+
+    <!-- App -->
+    <div class="app">
+        <div class="slides-container" id="slidesContainer">
+
+            <!-- SLIDE: INTRO -->
+            <div class="slide active" id="slide-intro">
+                <div class="intro-card">
+                    <div class="intro-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <div class="intro-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        3 minutos
+                    </div>
+                    <h1 class="intro-title">Diagnóstico de Madurez Digital</h1>
+                    <p class="intro-subtitle">Descubre el nivel de transformación digital de tu área y recibe recomendaciones personalizadas para optimizar procesos.</p>
+                    
+                    <div class="intro-features">
+                        <div class="intro-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                            10 preguntas rápidas
+                        </div>
+                        <div class="intro-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                            Resultados inmediatos
+                        </div>
+                        <div class="intro-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                            100% confidencial
+                        </div>
+                    </div>
+
+                    <button class="btn-start" onclick="startQuiz()">
+                        Comenzar diagnóstico
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Los slides de preguntas e insights se generan con JS -->
+
+            <!-- SLIDE: FORMULARIO -->
+            <div class="slide" id="slide-form">
+                <div class="form-card">
+                    <div class="form-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h2 class="form-title">¡Ya casi terminas!</h2>
+                    <p class="form-subtitle">Ingresa tu correo para recibir el reporte completo</p>
+
+                    <div class="form-group">
+                        <label class="form-label">Correo electrónico (opcional)</label>
+                        <input type="email" class="form-input" id="email" placeholder="tu@empresa.cl para recibir informe completo">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nombre (opcional)</label>
+                        <input type="text" class="form-input" id="nombre" placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Empresa (opcional)</label>
+                        <input type="text" class="form-input" id="empresa" placeholder="Tu empresa">
+                    </div>
+
+                    <button class="btn-submit" onclick="submitForm()">
+                        Ver mis resultados
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </button>
+
+                    <div class="error-message" id="errorMessage">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                        <span id="errorText">Por favor ingresa un correo válido</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE: RESULTADOS -->
+            <div class="slide" id="slide-results">
+                <div class="results-card">
+                    <div class="results-emoji" id="resultsEmoji">🎯</div>
+                    <h2 class="results-title">¡Diagnóstico completado!</h2>
+                    <p class="results-subtitle">Tu nivel de madurez digital</p>
+
+                    <div class="score-display">
+                        <div class="score-level" id="scoreLevel">Nivel 3</div>
+                        <div class="score-name" id="scoreName">Competente</div>
+                        <div class="score-percent" id="scorePercent">68%</div>
+                        <p class="score-desc" id="scoreDesc">Descripción</p>
+                    </div>
+
+                    <div class="dimensions-grid" id="dimensionsGrid"></div>
+
+                    <div class="email-sent">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <p>Enviamos un reporte detallado a tu correo</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURACIÓN
+        // ============================================
+        const WEBHOOK_URL = '/.netlify/functions/enviar-encuesta';
+
+        // Preguntas
+        const questions = [
+            { id: 1, dimension: 'Excel', dimClass: 'excel', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM9 3v18M3 9h18"/></svg>',
+                text: '¿Cómo manejan datos y reportes en su área?',
+                options: [
+                    { title: 'Todo manual', desc: 'Copiar/pegar, cálculos a mano', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>' },
+                    { title: 'Fórmulas básicas', desc: 'SUMA, SI, BUSCARV', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>' },
+                    { title: 'Tablas dinámicas', desc: 'Funciones avanzadas', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>' },
+                    { title: 'Power Query', desc: 'Automatización total', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>' }
+                ]
+            },
+            { id: 2, dimension: 'Excel', dimClass: 'excel', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM9 3v18M3 9h18"/></svg>',
+                text: '¿Con qué frecuencia reconstruyen reportes desde cero?',
+                options: [
+                    { title: 'Siempre', desc: 'Cada vez desde cero', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>' },
+                    { title: 'Frecuentemente', desc: 'Copiamos y modificamos', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>' },
+                    { title: 'A veces', desc: 'Tenemos plantillas', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>' },
+                    { title: 'Nunca', desc: 'Todo automatizado', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>' }
+                ]
+            },
+            { id: 3, dimension: 'Análisis', dimClass: 'analisis', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8v8m-8-4v4m-4-8v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2z"/></svg>',
+                text: '¿Cómo toman decisiones importantes en su área?',
+                options: [
+                    { title: 'Por intuición', desc: 'Experiencia personal', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>' },
+                    { title: 'Datos reactivos', desc: 'Cuando hay problemas', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>' },
+                    { title: 'Reportes periódicos', desc: 'Informes regulares', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>' },
+                    { title: 'Dashboards en vivo', desc: 'Tiempo real', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>' }
+                ]
+            },
+            { id: 4, dimension: 'Análisis', dimClass: 'analisis', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8v8m-8-4v4m-4-8v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2z"/></svg>',
+                text: '¿Cuánto tiempo toma obtener un dato clave?',
+                options: [
+                    { title: 'Horas o días', desc: 'Pedir a TI', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>' },
+                    { title: 'Menos de 1 hora', desc: 'Buscar manualmente', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>' },
+                    { title: 'Minutos', desc: 'Sabemos dónde está', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>' },
+                    { title: 'Instantáneo', desc: 'Dashboard en vivo', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>' }
+                ]
+            },
+            { id: 5, dimension: 'Automatización', dimClass: 'automatizacion', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>',
+                text: '¿Cómo manejan las tareas repetitivas?',
+                options: [
+                    { title: '100% manual', desc: 'Paso a paso', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"/></svg>' },
+                    { title: 'Algunas macros', desc: 'Scripts básicos', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>' },
+                    { title: 'Semi-automatizado', desc: 'Herramientas sistema', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg>' },
+                    { title: 'Flujos automáticos', desc: 'Power Automate/RPA', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>' }
+                ]
+            },
+            { id: 6, dimension: 'Automatización', dimClass: 'automatizacion', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>',
+                text: '¿Cuántas horas/semana se pierden en tareas automatizables?',
+                options: [
+                    { title: 'Más de 10h', desc: 'Mucho tiempo', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>' },
+                    { title: '5 a 10h', desc: 'Considerable', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>' },
+                    { title: '2 a 5h', desc: 'Algo optimizable', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>' },
+                    { title: 'Menos de 2h', desc: 'Casi optimizado', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>' }
+                ]
+            },
+            { id: 7, dimension: 'Visualización', dimClass: 'visualizacion', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/></svg>',
+                text: '¿Cómo presentan información a jefaturas?',
+                options: [
+                    { title: 'Tablas números', desc: 'Excel/Word', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>' },
+                    { title: 'Gráficos básicos', desc: 'Barras, tortas', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8v8m-8-4v4m-4-8v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2z"/></svg>' },
+                    { title: 'PPT elaboradas', desc: 'Diseño cuidado', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>' },
+                    { title: 'Dashboards', desc: 'Power BI interactivo', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>' }
+                ]
+            },
+            { id: 8, dimension: 'Visualización', dimClass: 'visualizacion', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/></svg>',
+                text: '¿Pueden explorar datos sin pedir ayuda a TI?',
+                options: [
+                    { title: 'No', desc: 'Dependemos de TI', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>' },
+                    { title: 'Parcialmente', desc: 'Filtros básicos', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>' },
+                    { title: 'Sí, limitado', desc: 'Excel, Access', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>' },
+                    { title: 'Sí, self-service', desc: 'Dashboards abiertos', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>' }
+                ]
+            },
+            { id: 9, dimension: 'IA', dimClass: 'ia', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>',
+                text: '¿Usan herramientas de IA (ChatGPT, Copilot) en el trabajo?',
+                options: [
+                    { title: 'No', desc: 'Prohibido/desconocido', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>' },
+                    { title: 'Algunos', desc: 'Sin directrices', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>' },
+                    { title: 'Permitido', desc: 'Sin políticas', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>' },
+                    { title: 'Organizado', desc: 'Políticas claras', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>' }
+                ]
+            },
+            { id: 10, dimension: 'IA', dimClass: 'ia', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>',
+                text: '¿Han capacitado a su equipo en el uso de IA?',
+                options: [
+                    { title: 'No', desc: 'Sin capacitación', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>' },
+                    { title: 'Planificado', desc: 'Para el futuro', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>' },
+                    { title: 'Básica', desc: 'Intro a ChatGPT', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>' },
+                    { title: 'Avanzada', desc: 'Uso activo', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>' }
+                ]
+            }
+        ];
+
+        // Insights
+        const insights = [
+            {
+                id: 1,
+                afterQuestion: 3,
+                cardClass: 'insight-1',
+                title: '¿Sabías que el análisis de datos es clave?',
+                number: '23%',
+                unit: 'más rentabilidad',
+                desc: 'Las empresas que basan sus decisiones en datos tienen un 23% más de probabilidad de superar a sus competidores en rentabilidad.',
+                chart: [
+                    { label: 'Con datos', value: 78 },
+                    { label: 'Mixto', value: 52 },
+                    { label: 'Por intuición', value: 35 }
+                ],
+                source: 'McKinsey Global Institute'
+            },
+            {
+                id: 2,
+                afterQuestion: 6,
+                cardClass: 'insight-2',
+                title: 'El costo oculto de lo manual',
+                number: '4.5h',
+                unit: 'por semana perdidas',
+                desc: 'El profesional promedio pierde 4.5 horas semanales en tareas que podrían automatizarse. Eso equivale a 23 días laborales al año.',
+                chart: [
+                    { label: 'Email manual', value: 85 },
+                    { label: 'Copiar datos', value: 72 },
+                    { label: 'Buscar info', value: 65 }
+                ],
+                source: 'Automation Anywhere Report 2024'
+            },
+            {
+                id: 3,
+                afterQuestion: 9,
+                cardClass: 'insight-3',
+                title: 'La revolución de la IA ya llegó',
+                number: '72%',
+                unit: 'invertirán en IA',
+                desc: 'El 72% de las empresas en Chile planean invertir en capacitación de IA durante 2026. ¿Tu equipo está preparado para el próximo año?',
+                chart: [
+                    { label: 'Ya capacitaron', value: 28 },
+                    { label: 'En proceso', value: 38 },
+                    { label: 'Plan 2026', value: 72 }
+                ],
+                source: 'Estudio Transformación Digital Chile 2025'
+            }
+        ];
+
+        // Estado
+        let currentSlide = 'intro';
+        const answers = {};
+        const slideOrder = ['intro'];
+
+        // Construir orden de slides
+        questions.forEach((q, i) => {
+            slideOrder.push(`q${q.id}`);
+            const insight = insights.find(ins => ins.afterQuestion === q.id);
+            if (insight) {
+                slideOrder.push(`insight-${insight.id}`);
+            }
+        });
+        slideOrder.push('form', 'results');
+
+        // Generar slides
+        function generateSlides() {
+            const container = document.getElementById('slidesContainer');
+            
+            // Generar preguntas
+            questions.forEach((q, index) => {
+                const prevSlide = index === 0 ? 'intro' : getPrevSlide(`q${q.id}`);
+                const nextSlide = getNextSlide(`q${q.id}`);
+                
+                const html = `
+                    <div class="slide" id="slide-q${q.id}">
+                        <div class="question-card">
+                            <div class="question-header">
+                                <div class="dimension-badge ${q.dimClass}">
+                                    ${q.icon}
+                                    ${q.dimension}
+                                </div>
+                                <span class="question-counter">${q.id} de 10</span>
+                            </div>
+                            <h2 class="question-text">${q.text}</h2>
+                            <div class="options">
+                                ${q.options.map((opt, i) => `
+                                    <div class="option">
+                                        <input type="radio" name="q${q.id}" id="q${q.id}_${i}" value="${i}">
+                                        <label for="q${q.id}_${i}">
+                                            <div class="option-icon">${opt.icon}</div>
+                                            <div class="option-content">
+                                                <div class="option-title">${opt.title}</div>
+                                                <div class="option-desc">${opt.desc}</div>
+                                            </div>
+                                            <div class="option-check">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                                            </div>
+                                        </label>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="question-nav">
+                                <button class="btn btn-back" onclick="goTo('${prevSlide}')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                                    Atrás
+                                </button>
+                                <button class="btn btn-next" id="btnNext${q.id}" onclick="goTo('${nextSlide}')" disabled>
+                                    Siguiente
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertBefore(createElementFromHTML(html), document.getElementById('slide-form'));
+            });
+
+            // Generar insights
+            insights.forEach(ins => {
+                const nextSlide = getNextSlide(`insight-${ins.id}`);
+                const html = `
+                    <div class="slide insight-slide" id="slide-insight-${ins.id}">
+                        <div class="insight-card ${ins.cardClass}">
+                            <div class="insight-content">
+                                <div class="insight-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    Dato interesante
+                                </div>
+                                <h2 class="insight-title">${ins.title}</h2>
+                                <div class="insight-stat">
+                                    <span class="insight-number">${ins.number}</span>
+                                    <span class="insight-unit">${ins.unit}</span>
+                                </div>
+                                <p class="insight-desc">${ins.desc}</p>
+                                <div class="insight-chart" id="chart-${ins.id}">
+                                    ${ins.chart.map(item => `
+                                        <div class="chart-bar">
+                                            <span class="chart-label">${item.label}</span>
+                                            <div class="chart-track">
+                                                <div class="chart-fill" data-width="${item.value}" style="width: 0%">
+                                                    <span class="chart-value">${item.value}%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                <p class="insight-source">Fuente: ${ins.source}</p>
+                                <button class="btn-continue" onclick="goTo('${nextSlide}')">
+                                    Continuar
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                const afterSlide = document.getElementById(`slide-q${ins.afterQuestion}`);
+                afterSlide.insertAdjacentElement('afterend', createElementFromHTML(html));
+            });
+
+            // Event listeners
+            questions.forEach(q => {
+                document.querySelectorAll(`input[name="q${q.id}"]`).forEach(radio => {
+                    radio.addEventListener('change', (e) => {
+                        answers[q.id] = parseInt(e.target.value);
+                        document.getElementById(`btnNext${q.id}`).disabled = false;
+                    });
+                });
+            });
+        }
+
+        function createElementFromHTML(htmlString) {
+            const div = document.createElement('div');
+            div.innerHTML = htmlString.trim();
+            return div.firstChild;
+        }
+
+        function getPrevSlide(slideId) {
+            const idx = slideOrder.indexOf(slideId);
+            return idx > 0 ? slideOrder[idx - 1] : slideOrder[0];
+        }
+
+        function getNextSlide(slideId) {
+            const idx = slideOrder.indexOf(slideId);
+            return idx < slideOrder.length - 1 ? slideOrder[idx + 1] : slideOrder[slideOrder.length - 1];
+        }
+
+        // Navegación
+        function goTo(slideId) {
+            const currentIdx = slideOrder.indexOf(currentSlide);
+            const nextIdx = slideOrder.indexOf(slideId);
+            const isForward = nextIdx > currentIdx;
+
+            const currentEl = document.getElementById(`slide-${currentSlide}`);
+            const nextEl = document.getElementById(`slide-${slideId}`);
+
+            if (!nextEl) return;
+
+            // Salida
+            currentEl.classList.remove('active');
+            currentEl.classList.add(isForward ? 'exit-left' : 'exit-right');
+
+            setTimeout(() => {
+                currentEl.classList.remove('exit-left', 'exit-right');
+                
+                // Entrada
+                nextEl.classList.add('active');
+                currentSlide = slideId;
+
+                // Animar gráficos de insight
+                if (slideId.startsWith('insight')) {
+                    setTimeout(() => animateChart(slideId), 300);
+                }
+
+                updateUI();
+            }, 350);
+        }
+
+        function animateChart(slideId) {
+            const insightNum = slideId.split('-')[1];
+            const chart = document.getElementById(`chart-${insightNum}`);
+            if (chart) {
+                chart.querySelectorAll('.chart-fill').forEach(fill => {
+                    fill.style.width = fill.dataset.width + '%';
+                });
+            }
+        }
+
+        function startQuiz() {
+            goTo('q1');
+        }
+
+        function updateUI() {
+            const header = document.getElementById('header');
+            const progressText = document.getElementById('progressText');
+            const progressFill = document.getElementById('progressFill');
+
+            if (currentSlide === 'intro' || currentSlide === 'form' || currentSlide === 'results') {
+                header.classList.remove('visible');
+            } else {
+                header.classList.add('visible');
+                
+                // Calcular progreso
+                let qNum = 0;
+                if (currentSlide.startsWith('q')) {
+                    qNum = parseInt(currentSlide.replace('q', ''));
+                } else if (currentSlide.startsWith('insight')) {
+                    const insightId = parseInt(currentSlide.split('-')[1]);
+                    const insight = insights.find(i => i.id === insightId);
+                    qNum = insight ? insight.afterQuestion : 0;
+                }
+
+                progressText.textContent = `${qNum}/10`;
+                progressFill.style.width = (qNum * 10) + '%';
+            }
+        }
+
+        // Submit
+        async function submitForm() {
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim();
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+
+            // Limpiar errores previos
+            errorMessage.classList.remove('show');
+            emailInput.classList.remove('error');
+
+            // Validar email SOLO si el usuario escribió algo
+            if (email && (!email.includes('@') || !email.includes('.'))) {
+                errorText.textContent = 'El correo no parece válido (ejemplo: tu@empresa.cl)';
+                errorMessage.classList.add('show');
+                emailInput.classList.add('error');
+                emailInput.focus();
+                return;
+            }
+
+            document.getElementById('loading').classList.add('active');
+
+            const dims = {
+                'Excel': { score: (answers[1] || 0) + (answers[2] || 0), max: 6, class: 'excel' },
+                'Análisis': { score: (answers[3] || 0) + (answers[4] || 0), max: 6, class: 'analisis' },
+                'Automatización': { score: (answers[5] || 0) + (answers[6] || 0), max: 6, class: 'automatizacion' },
+                'Visualización': { score: (answers[7] || 0) + (answers[8] || 0), max: 6, class: 'visualizacion' },
+                'IA': { score: (answers[9] || 0) + (answers[10] || 0), max: 6, class: 'ia' }
+            };
+
+            let total = 0;
+            Object.values(dims).forEach(d => total += d.score);
+            const pct = Math.round((total / 30) * 100);
+
+            const levels = [
+                { min: 0, max: 25, name: 'Inicial', badge: 'Nivel 1', class: 'level-1', emoji: '🔴', desc: 'Tu área está comenzando su transformación digital. ¡Hay una gran oportunidad de crecimiento!' },
+                { min: 26, max: 50, name: 'En Desarrollo', badge: 'Nivel 2', class: 'level-2', emoji: '🟠', desc: 'Han dado los primeros pasos. Capacitación enfocada acelerará los resultados.' },
+                { min: 51, max: 75, name: 'Competente', badge: 'Nivel 3', class: 'level-3', emoji: '🟢', desc: 'Buen nivel de madurez. Siguiente paso: automatizar para liberar tiempo estratégico.' },
+                { min: 76, max: 100, name: 'Avanzado', badge: 'Nivel 4', class: 'level-4', emoji: '🚀', desc: '¡Excelente! Tu área puede liderar la transformación digital de la empresa.' }
+            ];
+
+            const level = levels.find(l => pct >= l.min && pct <= l.max);
+
+            try {
+                if (WEBHOOK_URL) {
+                    const response = await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            // Datos del usuario
+                            Email: email || '',
+                            Nombre: document.getElementById('nombre').value || '',
+                            Empresa: document.getElementById('empresa').value || '',
+                            
+                            // Resultado general
+                            PorcentajeTotal: pct,
+                            NivelNombre: level.name,
+                            NivelNumero: levels.indexOf(level) + 1,
+                            
+                            // Puntajes por dimensión (para Microsoft Lists)
+                            Excel: Math.round((dims['Excel'].score / 6) * 100),
+                            Analisis: Math.round((dims['Análisis'].score / 6) * 100),
+                            Automatizacion: Math.round((dims['Automatización'].score / 6) * 100),
+                            Visualizacion: Math.round((dims['Visualización'].score / 6) * 100),
+                            IA: Math.round((dims['IA'].score / 6) * 100),
+                            
+                            // Respuestas individuales (valores 0-3)
+                            R1: answers[1] || 0,
+                            R2: answers[2] || 0,
+                            R3: answers[3] || 0,
+                            R4: answers[4] || 0,
+                            R5: answers[5] || 0,
+                            R6: answers[6] || 0,
+                            R7: answers[7] || 0,
+                            R8: answers[8] || 0,
+                            R9: answers[9] || 0,
+                            R10: answers[10] || 0,
+                            
+                            // Metadata
+                            FechaHora: new Date().toISOString(),
+                            Fuente: 'Diagnostico Web',
+                            EnviarEmail: email ? 'Si' : 'No'
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        console.error('Error al enviar datos');
+                    }
+                }
+            } catch (e) { console.log('Error:', e); }
+
+            // Guardar email para mostrar mensaje condicional
+            const userEmail = email;
+
+            setTimeout(() => {
+                document.getElementById('loading').classList.remove('active');
+                showResults(pct, level, dims, userEmail);
+            }, 1800);
+        }
+
+        function showResults(pct, level, dims, userEmail) {
+            document.getElementById('resultsEmoji').textContent = level.emoji;
+            document.getElementById('scoreLevel').textContent = level.badge;
+            document.getElementById('scoreLevel').className = `score-level ${level.class}`;
+            document.getElementById('scoreName').textContent = level.name;
+            document.getElementById('scorePercent').textContent = `${pct}%`;
+            document.getElementById('scoreDesc').textContent = level.desc;
+
+            // Mostrar mensaje de email solo si proporcionó correo
+            const emailSentDiv = document.querySelector('.email-sent');
+            if (userEmail) {
+                emailSentDiv.style.display = 'flex';
+                emailSentDiv.querySelector('p').textContent = `Enviamos un reporte detallado a ${userEmail}`;
+            } else {
+                emailSentDiv.style.display = 'none';
+            }
+
+            const icons = {
+                'Excel': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM9 3v18M3 9h18"/></svg>',
+                'Análisis': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8v8m-8-4v4m-4-8v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2z"/></svg>',
+                'Automatización': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>',
+                'Visualización': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/></svg>',
+                'IA': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>'
+            };
+
+            const grid = document.getElementById('dimensionsGrid');
+            grid.innerHTML = '';
+
+            Object.entries(dims).forEach(([name, data]) => {
+                const p = Math.round((data.score / data.max) * 100);
+                grid.innerHTML += `
+                    <div class="dim-item">
+                        <div class="dim-header">
+                            <span class="dim-name ${data.class}">${icons[name]} ${name}</span>
+                            <span class="dim-score" style="color: var(--${data.class === 'excel' ? 'success' : data.class === 'analisis' ? 'primary' : data.class === 'automatizacion' ? 'orange' : data.class === 'visualizacion' ? 'secondary' : 'accent'})">${p}%</span>
+                        </div>
+                        <div class="dim-bar">
+                            <div class="dim-fill ${data.class}" style="width: 0%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            goTo('results');
+
+            setTimeout(() => {
+                document.querySelectorAll('#dimensionsGrid .dim-fill').forEach((fill, i) => {
+                    const d = Object.values(dims)[i];
+                    fill.style.width = Math.round((d.score / d.max) * 100) + '%';
+                });
+            }, 800);
+        }
+
+        // Init
+        generateSlides();
+
+        // Limpiar error de email al escribir
+        document.getElementById('email').addEventListener('input', function() {
+            this.classList.remove('error');
+            document.getElementById('errorMessage').classList.remove('show');
+        });
+    </script>
+</body>
+</html>
