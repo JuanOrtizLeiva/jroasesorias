@@ -500,10 +500,59 @@
         /* ============================================
            SERVICIOS
            ============================================ */
+        .section-servicios {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-servicios::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: -5%;
+            width: 40%;
+            height: 80%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Cdefs%3E%3ClinearGradient id='barGrad1' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%232555ba' stop-opacity='0.08'/%3E%3Cstop offset='100%25' stop-color='%232555ba' stop-opacity='0.02'/%3E%3C/linearGradient%3E%3C/defs%3E%3C!-- Circular chart --%3E%3Ccircle cx='150' cy='120' r='80' fill='none' stroke='rgba(37,85,186,0.05)' stroke-width='20'/%3E%3Cpath d='M150 40 A80 80 0 0 1 230 120' fill='none' stroke='rgba(37,85,186,0.12)' stroke-width='20' stroke-linecap='round'/%3E%3Cpath d='M230 120 A80 80 0 0 1 150 200' fill='none' stroke='rgba(37,85,186,0.08)' stroke-width='20' stroke-linecap='round'/%3E%3C!-- Bar chart --%3E%3Crect x='40' y='280' width='35' height='80' rx='4' fill='url(%23barGrad1)'/%3E%3Crect x='90' y='250' width='35' height='110' rx='4' fill='url(%23barGrad1)'/%3E%3Crect x='140' y='220' width='35' height='140' rx='4' fill='url(%23barGrad1)'/%3E%3Crect x='190' y='260' width='35' height='100' rx='4' fill='url(%23barGrad1)'/%3E%3Crect x='240' y='240' width='35' height='120' rx='4' fill='url(%23barGrad1)'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: floatLeft 8s ease-in-out infinite;
+        }
+        
+        .section-servicios::after {
+            content: '';
+            position: absolute;
+            bottom: 5%;
+            right: -5%;
+            width: 35%;
+            height: 70%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 350'%3E%3Cdefs%3E%3ClinearGradient id='lineGrad2' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%232555ba' stop-opacity='0.06'/%3E%3Cstop offset='100%25' stop-color='%232555ba' stop-opacity='0.12'/%3E%3C/linearGradient%3E%3C/defs%3E%3C!-- Grid dots --%3E%3Cg fill='rgba(37,85,186,0.06)'%3E%3Ccircle cx='50' cy='50' r='3'/%3E%3Ccircle cx='100' cy='50' r='3'/%3E%3Ccircle cx='150' cy='50' r='3'/%3E%3Ccircle cx='200' cy='50' r='3'/%3E%3Ccircle cx='250' cy='50' r='3'/%3E%3Ccircle cx='50' cy='100' r='3'/%3E%3Ccircle cx='100' cy='100' r='3'/%3E%3Ccircle cx='150' cy='100' r='3'/%3E%3Ccircle cx='200' cy='100' r='3'/%3E%3Ccircle cx='250' cy='100' r='3'/%3E%3Ccircle cx='50' cy='150' r='3'/%3E%3Ccircle cx='100' cy='150' r='3'/%3E%3Ccircle cx='150' cy='150' r='3'/%3E%3Ccircle cx='200' cy='150' r='3'/%3E%3Ccircle cx='250' cy='150' r='3'/%3E%3C/g%3E%3C!-- Rising line chart --%3E%3Cpath d='M30 280 Q70 260 100 250 T170 200 T230 160 T280 100' fill='none' stroke='url(%23lineGrad2)' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M30 280 Q70 260 100 250 T170 200 T230 160 T280 100 L280 320 L30 320 Z' fill='rgba(37,85,186,0.03)'/%3E%3C!-- Accent circles --%3E%3Ccircle cx='100' cy='250' r='6' fill='rgba(37,85,186,0.1)'/%3E%3Ccircle cx='170' cy='200' r='6' fill='rgba(37,85,186,0.1)'/%3E%3Ccircle cx='230' cy='160' r='6' fill='rgba(37,85,186,0.1)'/%3E%3Ccircle cx='280' cy='100' r='8' fill='rgba(37,85,186,0.15)'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: floatRight 10s ease-in-out infinite;
+        }
+        
+        @keyframes floatLeft {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        
+        @keyframes floatRight {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(10px) rotate(-2deg); }
+        }
+        
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: var(--espacio-lg);
+            position: relative;
+            z-index: 1;
         }
         
         .service-card {
@@ -994,6 +1043,15 @@
                 grid-template-columns: 1fr;
             }
             
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-servicios::before,
+            .section-servicios::after {
+                opacity: 0.4;
+            }
+            
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: var(--espacio-lg);
@@ -1100,7 +1158,7 @@
     <!-- ============================================
          SERVICIOS
          ============================================ -->
-    <section id="servicios" class="section-light">
+    <section id="servicios" class="section-light section-servicios">
         <div class="container">
             <div class="section-header fade-up">
                 <h2>¿En qué podemos ayudarle?</h2>
