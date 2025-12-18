@@ -152,7 +152,25 @@
             width: 100%;
             padding: 0 var(--space-lg);
         }
-        
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            background: #0f172a;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
         /* Premium Navigation */
         .navigation {
             position: fixed;
@@ -317,7 +335,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding-top: 5rem;
+            padding-top: 6rem;
             position: relative;
             overflow: hidden;
         }
@@ -990,24 +1008,23 @@
                 </div>
                 
                 <h1 class="hero-title fade-in" style="animation-delay: 0.1s;">
-                    Convertimos complejidad<br>
-                    en <span class="hero-title-accent">ventaja competitiva</span>
+                    Pasar de intuición<br>
+                    a <span class="hero-title-accent">decisiones claras</span>
                 </h1>
                 
                 <p class="hero-description fade-in" style="animation-delay: 0.2s;">
-                    Diseñamos ecosistemas digitales que transforman datos dispersos 
-                    en decisiones estratégicas y procesos manuales en flujos automatizados 
-                    que escalan con su ambición.
+                    Unificamos datos, automatizaciones y apps internas para que su equipo 
+                    reduzca trabajo manual y tome decisiones con confianza desde la primera semana.
                 </p>
                 
                 <div class="hero-actions fade-in" style="animation-delay: 0.3s;">
-                    <a href="#diagnostico" class="btn btn-primary">
-                        <i class="fas fa-chart-line"></i>
-                        Evaluar mi potencial
+                    <a href="#contacto" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i>
+                        Agendar reunión de 20 minutos
                     </a>
-                    <a href="#casos" class="btn btn-secondary">
-                        <i class="fas fa-play-circle"></i>
-                        Ver casos de éxito
+                    <a href="https://wa.me/56966895746" class="btn btn-secondary">
+                        <i class="fab fa-whatsapp"></i>
+                        Hablar por WhatsApp
                     </a>
                 </div>
                 
@@ -1052,23 +1069,22 @@
                     <div class="service-icon">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3 class="service-title">Intelligence Platform</h3>
+                    <h3 class="service-title">Reportes ejecutivos claros</h3>
                     <p class="service-description">
-                        Consolidamos todas sus fuentes de datos en dashboards ejecutivos 
-                        que revelan patrones ocultos y oportunidades de crecimiento.
+                        Tableros simples para responder qué pasa, por qué y qué hacer, sin buscar datos a mano.
                     </p>
                     <ul class="service-features">
-                        <li class="service-feature">
-                            <i class="fas fa-check"></i>
-                            <span>Análisis predictivo avanzado</span>
-                        </li>
                         <li class="service-feature">
                             <i class="fas fa-check"></i>
                             <span>KPIs en tiempo real</span>
                         </li>
                         <li class="service-feature">
                             <i class="fas fa-check"></i>
-                            <span>Alertas inteligentes</span>
+                            <span>Fuentes consolidadas</span>
+                        </li>
+                        <li class="service-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Alertas claras</span>
                         </li>
                     </ul>
                 </div>
@@ -1078,23 +1094,22 @@
                     <div class="service-icon">
                         <i class="fas fa-cogs"></i>
                     </div>
-                    <h3 class="service-title">Process Automation</h3>
+                    <h3 class="service-title">Procesos automáticos (menos trabajo manual)</h3>
                     <p class="service-description">
-                        Eliminamos tareas repetitivas mediante flujos inteligentes que 
-                        liberan hasta 40 horas semanales de trabajo manual.
+                        Bots y flujos que hacen las tareas repetitivas por su equipo, con controles y trazabilidad.
                     </p>
                     <ul class="service-features">
                         <li class="service-feature">
                             <i class="fas fa-check"></i>
-                            <span>Workflows sin código</span>
+                            <span>Flujos con IA y RPA</span>
                         </li>
                         <li class="service-feature">
                             <i class="fas fa-check"></i>
-                            <span>Integración total</span>
+                            <span>Integraciones listas</span>
                         </li>
                         <li class="service-feature">
                             <i class="fas fa-check"></i>
-                            <span>Escalabilidad ilimitada</span>
+                            <span>Alertas de errores</span>
                         </li>
                     </ul>
                 </div>
@@ -1104,23 +1119,22 @@
                     <div class="service-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <h3 class="service-title">Digital Applications</h3>
+                    <h3 class="service-title">Formularios y apps internas (más orden)</h3>
                     <p class="service-description">
-                        Desarrollamos aplicaciones empresariales que digitalizan 
-                        procesos complejos sin necesidad de código tradicional.
+                        Formularios, flujos de aprobación y apps internas para que la información circule sin correos.
                     </p>
                     <ul class="service-features">
                         <li class="service-feature">
                             <i class="fas fa-check"></i>
-                            <span>Despliegue en días</span>
+                            <span>Listos en días</span>
                         </li>
                         <li class="service-feature">
                             <i class="fas fa-check"></i>
-                            <span>Multi-plataforma</span>
+                            <span>Versiones web y móvil</span>
                         </li>
                         <li class="service-feature">
                             <i class="fas fa-check"></i>
-                            <span>Seguridad enterprise</span>
+                            <span>Accesos por rol</span>
                         </li>
                     </ul>
                 </div>
@@ -1146,12 +1160,13 @@
                     <div class="service-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3 class="service-title">Decisiones Estratégicas Basadas en Datos</h3>
-                    <p class="service-description">
-                        Al centralizar y visualizar la información crítica con Power BI, nuestros clientes 
-                        experimentan una mejora de hasta un <span class="counter-number" data-target="40">0</span>% 
-                        en la velocidad y precisión de su toma de decisiones.
-                    </p>
+                    <h3 class="service-title">Caso 1 (por completar)</h3>
+                    <!-- Completar con cliente/sector cuando sea publicable -->
+                    <div class="service-description">
+                        <p><strong>Contexto:</strong> Directorio necesitaba ver ventas y costos en un solo panel diario.</p>
+                        <p><strong>Qué se hizo:</strong> Se consolidaron ERP + CRM en un tablero ejecutivo con alertas.</p>
+                        <p><strong>Resultado:</strong> mejoras medibles según el caso.</p>
+                    </div>
                 </div>
                 
                 <!-- Case 2 -->
@@ -1159,12 +1174,27 @@
                     <div class="service-icon">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <h3 class="service-title">Optimización y Eficiencia Operacional</h3>
-                    <p class="service-description">
-                        Mediante la automatización de tareas manuales con Power Automate, hemos logrado 
-                        liberar hasta un <span class="counter-number" data-target="60">0</span>% del tiempo 
-                        del equipo, permitiendo que se enfoquen en tareas de mayor valor.
-                    </p>
+                    <h3 class="service-title">Caso 2 (por completar)</h3>
+                    <!-- Completar con indicadores al validar permisos de publicación -->
+                    <div class="service-description">
+                        <p><strong>Contexto:</strong> Equipo de operaciones dedicaba horas a registros manuales.</p>
+                        <p><strong>Qué se hizo:</strong> Bots de captura y validación con notificaciones en Teams.</p>
+                        <p><strong>Resultado:</strong> mejoras medibles según el caso.</p>
+                    </div>
+                </div>
+                
+                <!-- Case 3 -->
+                <div class="service-card reveal" style="animation-delay: 0.2s;">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="service-title">Caso 3 (por completar)</h3>
+                    <!-- Documentar cifras cuando existan autorizaciones del cliente -->
+                    <div class="service-description">
+                        <p><strong>Contexto:</strong> Área de finanzas requería formularios trazables para aprobaciones.</p>
+                        <p><strong>Qué se hizo:</strong> Se creó app interna con roles y registro automático de decisiones.</p>
+                        <p><strong>Resultado:</strong> mejoras medibles según el caso.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1223,38 +1253,45 @@
                 <p class="section-subtitle">Impacto Medible</p>
                 <h2 class="section-title">Resultados que hablan por sí mismos</h2>
                 <p class="section-description">
-                    Cada implementación genera retornos cuantificables. 
-                    Estos son los promedios de nuestros últimos 50 proyectos.
+                    Cada implementación se mide con el cliente. Los rangos reflejan variaciones por industria y punto de partida.
                 </p>
             </div>
             
             <div class="metrics-grid reveal">
                 <div class="metric-card">
-                    <div class="metric-value">87%</div>
-                    <p class="metric-label">Reducción en tiempo de reportes</p>
+                    <div class="metric-value">20-40%</div>
+                    <p class="metric-label">Menos tiempo preparando reportes</p>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">3.2x</div>
-                    <p class="metric-label">ROI en el primer año</p>
+                    <div class="metric-value">1.5x - 3x</div>
+                    <p class="metric-label">ROI típico estimado en 12 meses</p>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">45%</div>
-                    <p class="metric-label">Aumento en productividad</p>
+                    <div class="metric-value">15-35%</div>
+                    <p class="metric-label">Productividad del equipo</p>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">12</div>
-                    <p class="metric-label">Semanas para break-even</p>
+                    <div class="metric-value">8-16</div>
+                    <p class="metric-label">Semanas aproximadas a punto de equilibrio</p>
                 </div>
             </div>
+
+            <p class="section-description reveal" style="margin-top: var(--space-md);">
+                Resultados típicos varían según industria y punto de partida. Definimos las métricas con cada cliente antes de implementar.
+            </p>
             
             <!-- Video Case Study -->
             <div class="video-container reveal">
-                <iframe 
-                    src="https://player.vimeo.com/video/1095167933?h=4bb341459e&color=1E3A5F&title=0&byline=0&portrait=0"
-                    frameborder="0" 
-                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                    allowfullscreen>
-                </iframe>
+                <div class="video-wrapper">
+                    <iframe 
+                        class="lazy-embed"
+                        data-src="https://player.vimeo.com/video/1095167933?h=4bb341459e&color=1E3A5F&title=0&byline=0&portrait=0"
+                        title="Caso de resultados"
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
             </div>
         </div>
     </section>
@@ -1280,14 +1317,23 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Empleados afectados</label>
+                        <label class="form-label">Personas del equipo impactadas</label>
                         <input type="range" class="form-slider" id="employees" min="1" max="50" value="10" oninput="updateCalculator()">
                         <span id="employees-display">10 personas</span>
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Costo promedio por hora (USD)</label>
+                        <label class="form-label" id="cost-label">Costo promedio por hora (USD)</label>
+                        <select class="form-input" id="currency" onchange="updateCalculator()">
+                            <option value="USD" selected>USD</option>
+                            <option value="CLP">CLP</option>
+                        </select>
                         <input type="number" class="form-input" id="hourly-cost" value="35" oninput="updateCalculator()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Nota rápida</label>
+                        <p class="section-description" style="margin: 0;">Estimación referencial; validamos con su realidad.</p>
                     </div>
                     
                     <div class="form-group">
@@ -1318,7 +1364,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Resources Section -->
     <section id="recursos" class="section" style="background: var(--silk-gray);">
         <div class="container">
@@ -1334,13 +1380,13 @@
             <div class="services-grid">
                 <!-- Video 1 -->
                 <div class="service-card reveal">
-                    <div style="position: relative; padding-bottom: 56.25%; margin-bottom: 20px;">
+                    <div class="video-wrapper" style="margin-bottom: 20px;">
                         <iframe 
-                            src="https://player.vimeo.com/video/1095168160?h=dac104e81f&color=1E3A5F&title=0&byline=0&portrait=0"
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;"
-                            frameborder="0" 
+                            class="lazy-embed"
+                            data-src="https://player.vimeo.com/video/1095168160?h=dac104e81f&color=1E3A5F&title=0&byline=0&portrait=0"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                            allowfullscreen>
+                            allowfullscreen
+                            loading="lazy">
                         </iframe>
                     </div>
                     <h3 class="service-title">El poder de los datos</h3>
@@ -1352,13 +1398,13 @@
                 
                 <!-- Video 2 -->
                 <div class="service-card reveal" style="animation-delay: 0.1s;">
-                    <div style="position: relative; padding-bottom: 56.25%; margin-bottom: 20px;">
+                    <div class="video-wrapper" style="margin-bottom: 20px;">
                         <iframe 
-                            src="https://player.vimeo.com/video/1095176960?h=64c6c1108a&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;"
-                            frameborder="0" 
+                            class="lazy-embed"
+                            data-src="https://player.vimeo.com/video/1095176960?h=64c6c1108a&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                            allowfullscreen>
+                            allowfullscreen
+                            loading="lazy">
                         </iframe>
                     </div>
                     <h3 class="service-title">Automatización inteligente</h3>
@@ -1370,19 +1416,74 @@
                 
                 <!-- Video 3 -->
                 <div class="service-card reveal" style="animation-delay: 0.2s;">
-                    <div style="position: relative; padding-bottom: 56.25%; margin-bottom: 20px;">
+                    <div class="video-wrapper" style="margin-bottom: 20px;">
                         <iframe 
-                            src="https://player.vimeo.com/video/1095169755?h=8fb10670ba&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;"
-                            frameborder="0" 
+                            class="lazy-embed"
+                            data-src="https://player.vimeo.com/video/1095169755?h=8fb10670ba&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                            allowfullscreen>
+                            allowfullscreen
+                            loading="lazy">
                         </iframe>
                     </div>
                     <h3 class="service-title">IA para negocios</h3>
                     <p class="service-description">
                         Casos prácticos de inteligencia artificial aplicada 
                         a problemas empresariales reales.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Trust Section -->
+    <section id="confianza" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Por qué confiar</p>
+                <h2 class="section-title">Liderazgo claro y forma de trabajo abierta</h2>
+                <p class="section-description">
+                    Transparencia desde el día uno: quién lidera, cómo trabajamos y cómo cuidamos la confidencialidad de su información.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="service-title">Quién lidera</h3>
+                    <p class="service-description">
+                        Dirección directa del equipo fundador de JRO Asesorías. Revise nuestro perfil en 
+                        <a href="https://www.linkedin.com/company/jroasesorias" target="_blank" rel="noopener">LinkedIn</a>.
+                    </p>
+                </div>
+
+                <div class="service-card reveal" style="animation-delay: 0.1s;">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="service-title">Forma de trabajo</h3>
+                    <p class="service-description">
+                        Sprints semanales, demos en vivo y decisiones tomadas con los equipos dueños del proceso.
+                    </p>
+                </div>
+
+                <div class="service-card reveal" style="animation-delay: 0.2s;">
+                    <div class="service-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="service-title">Confidencialidad</h3>
+                    <p class="service-description">
+                        NDA desde la evaluación, accesos mínimos necesarios y entornos separados para pruebas y producción.
+                    </p>
+                </div>
+
+                <div class="service-card reveal" style="animation-delay: 0.3s;">
+                    <div class="service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="service-title">Acompañamiento</h3>
+                    <p class="service-description">
+                        Un solo punto de contacto responsable y soporte documentado para equipos de negocio y TI.
                     </p>
                 </div>
             </div>
@@ -1404,6 +1505,36 @@
                     <a href="#contacto" class="btn btn-primary" style="background: white; color: var(--midnight-ocean);">
                         Agendar conversación estratégica
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Sections -->
+    <section class="section" id="privacidad">
+        <div class="container">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Privacidad y Legal</p>
+                <h2 class="section-title">Políticas claras para operar con confianza</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <h3 class="service-title">Privacidad</h3>
+                    <p class="service-description">
+                        Solo recopilamos la información necesaria para prestar el servicio. Los datos se almacenan en entornos con acceso restringido y se eliminan cuando el cliente lo solicita o termina el proyecto.
+                    </p>
+                </div>
+                <div class="service-card reveal" id="terminos" style="animation-delay: 0.1s;">
+                    <h3 class="service-title">Términos</h3>
+                    <p class="service-description">
+                        Los alcances, entregables y responsabilidades quedan documentados en cada propuesta. Cualquier cambio se acuerda por escrito antes de implementarse.
+                    </p>
+                </div>
+                <div class="service-card reveal" id="seguridad" style="animation-delay: 0.2s;">
+                    <h3 class="service-title">Seguridad</h3>
+                    <p class="service-description">
+                        Gestión de accesos por rol, copias de respaldo y revisión de integraciones antes de pasar a producción. Sin certificaciones inventadas; compartimos los controles que aplicamos.
+                    </p>
                 </div>
             </div>
         </div>
@@ -1451,23 +1582,26 @@
                         <i class="fas fa-phone" style="margin-right: 8px;"></i>
                         +56 9 6689 5746
                     </a>
-                    <a href="mailto:info@duocapital.cl" class="footer-link">
+                    <a href="mailto:contacto@jroasesorias.cl" class="footer-link">
                         <i class="fas fa-envelope" style="margin-right: 8px;"></i>
-                        info@duocapital.cl
+                        contacto@jroasesorias.cl
                     </a>
                     <a href="https://wa.me/56966895746" class="footer-link">
                         <i class="fab fa-whatsapp" style="margin-right: 8px;"></i>
                         WhatsApp Business
                     </a>
+                    <p class="section-description" style="margin-top: 8px; color: rgba(255,255,255,0.75);">
+                        Contacto directo con JRO Asesorías.
+                    </p>
                 </div>
             </div>
             
             <div class="footer-bottom">
                 <p>&copy; 2025 JRO Asesorías E.I.R.L. RUT: 76.325.663-4. Todos los derechos reservados.</p>
                 <div style="display: flex; gap: 20px;">
-                    <a href="#" class="footer-link">Privacidad</a>
-                    <a href="#" class="footer-link">Términos</a>
-                    <a href="#" class="footer-link">Seguridad</a>
+                    <a href="#privacidad" class="footer-link">Privacidad</a>
+                    <a href="#terminos" class="footer-link">Términos</a>
+                    <a href="#seguridad" class="footer-link">Seguridad</a>
                 </div>
             </div>
         </div>
@@ -1594,10 +1728,17 @@
         
         // ROI Calculator
         function updateCalculator() {
-            const hours = document.getElementById('hours').value;
-            const employees = document.getElementById('employees').value;
-            const hourlyCost = document.getElementById('hourly-cost').value;
-            const errors = document.getElementById('errors').value;
+            const hours = Number(document.getElementById('hours').value);
+            const employees = Number(document.getElementById('employees').value);
+            const hourlyCost = Number(document.getElementById('hourly-cost').value);
+            const errors = Number(document.getElementById('errors').value);
+            const currency = document.getElementById('currency').value;
+            const exchangeRate = 900;
+            const investmentBaseUSD = 45000;
+            const investmentCost = currency === 'CLP' ? investmentBaseUSD * exchangeRate : investmentBaseUSD;
+            const locale = currency === 'CLP' ? 'es-CL' : 'en-US';
+            
+            document.getElementById('cost-label').textContent = `Costo promedio por hora (${currency})`;
             
             document.getElementById('hours-display').textContent = `${hours} horas`;
             document.getElementById('employees-display').textContent = `${employees} personas`;
@@ -1605,20 +1746,36 @@
             // Calculate savings
             const weeklyHoursSaved = hours * employees * 0.7; // 70% efficiency gain
             const monthlySavings = weeklyHoursSaved * 4 * hourlyCost;
-            const errorReduction = errors * 250 * 0.8; // $250 per error, 80% reduction
+            const errorReduction = errors * (currency === 'CLP' ? 225000 : 250) * 0.8; // 80% reduction
             const totalMonthlySavings = monthlySavings + errorReduction;
             const annualSavings = totalMonthlySavings * 12;
-            const investmentCost = 45000; // Average implementation cost
             const roi = ((annualSavings - investmentCost) / investmentCost * 100).toFixed(0);
             const payback = (investmentCost / totalMonthlySavings).toFixed(1);
+            const formatMoney = (value) => new Intl.NumberFormat(locale, { style: 'currency', currency, maximumFractionDigits: 0 }).format(value);
             
             // Update displays
-            document.getElementById('monthly-savings').textContent = `$${totalMonthlySavings.toLocaleString()}`;
+            document.getElementById('monthly-savings').textContent = formatMoney(totalMonthlySavings);
             document.getElementById('roi').textContent = `${roi}%`;
             document.getElementById('payback').textContent = `${payback} meses`;
-            document.getElementById('annual-value').textContent = `$${annualSavings.toLocaleString()}`;
+            document.getElementById('annual-value').textContent = formatMoney(annualSavings);
         }
         
+        // Lazy load iframes when they enter the viewport
+        const lazyEmbeds = document.querySelectorAll('.lazy-embed');
+        const iframeObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const iframe = entry.target;
+                    if (!iframe.src && iframe.dataset.src) {
+                        iframe.src = iframe.dataset.src;
+                    }
+                    observer.unobserve(iframe);
+                }
+            });
+        }, { rootMargin: '200px 0px' });
+
+        lazyEmbeds.forEach(iframe => iframeObserver.observe(iframe));
+
         // Initialize calculator
         updateCalculator();
         
