@@ -1102,7 +1102,8 @@
            ============================================ */
         @media (max-width: 1024px) {
             .contact-wrapper {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--espacio-lg);
             }
             
             .footer-content {
@@ -1113,6 +1114,11 @@
         @media (max-width: 768px) {
             section {
                 padding: var(--espacio-xl) 0;
+            }
+            
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: var(--espacio-lg);
             }
             
             .nav-menu {
@@ -1557,6 +1563,10 @@
                             </div>
                         </a>
                     </div>
+                    <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--gris-medio); font-style: italic;">
+                        <i class="fas fa-info-circle" style="margin-right: 5px;"></i>
+                        JRO es miembro del Grupo Duocapital
+                    </p>
                 </div>
                 
                 <form class="contact-form fade-up" action="https://formsubmit.co/info@duocapital.cl" method="POST">
@@ -1643,6 +1653,9 @@
                             <i class="fas fa-envelope" style="margin-right: 8px;"></i>
                             info@duocapital.cl
                         </a>
+                        <span style="font-size: 0.75rem; color: rgba(255,255,255,0.5); font-style: italic; display: block; margin-top: 0.5rem;">
+                            JRO es miembro del Grupo Duocapital
+                        </span>
                         <a href="https://wa.me/56966895746">
                             <i class="fab fa-whatsapp" style="margin-right: 8px;"></i>
                             WhatsApp
@@ -1652,7 +1665,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>Â© 2025 JRO Asesorías E.I.R.L. | RUT: 76.325.663-4 | Santiago, Chile</p>
+                <p>© 2025 JRO Asesorías E.I.R.L. | RUT: 76.325.663-4 | Santiago, Chile</p>
                 <p>En alianza con Instituto Tecnipro</p>
             </div>
         </div>
