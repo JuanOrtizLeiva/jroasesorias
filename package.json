@@ -1,5 +1,6 @@
 {
   "name": "jro-asesorias",
-  "version": "1.0.0",
-  "description": "Sitio web JRO Asesorías con chat IA"
+  "version": "2.0.0",
+  "description": "Sitio web JRO Asesorías con chatbot Claude AI + Power Automate",
+  "dependencies": {}
 }
