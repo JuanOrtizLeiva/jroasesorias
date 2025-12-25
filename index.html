@@ -1,6 +1,119 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- ============================================
+         PROTECCIÓN ANTI-COPIA
+         ============================================ -->
+    <script>
+    (function() {
+        // 1. Bloquear clic derecho
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // 2. Bloquear teclas de desarrollador
+        document.addEventListener('keydown', function(e) {
+            // F12
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+I (DevTools)
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+J (Console)
+            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+C (Inspect Element)
+            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+U (Ver código fuente)
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+S (Guardar página)
+            if (e.ctrlKey && (e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+A (Seleccionar todo)
+            if (e.ctrlKey && (e.key === 'a' || e.key === 'A')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+C (Copiar) - excepto en inputs
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'C')) {
+                if (document.activeElement.tagName !== 'INPUT' && 
+                    document.activeElement.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+        });
+
+        // 3. Detectar DevTools abierto
+        var devToolsOpen = false;
+        var threshold = 160;
+        
+        setInterval(function() {
+            var widthThreshold = window.outerWidth - window.innerWidth > threshold;
+            var heightThreshold = window.outerHeight - window.innerHeight > threshold;
+            
+            if (widthThreshold || heightThreshold) {
+                if (!devToolsOpen) {
+                    devToolsOpen = true;
+                    console.clear();
+                    console.log('%c⚠️ ADVERTENCIA', 'color: red; font-size: 30px; font-weight: bold;');
+                    console.log('%cEste sitio está protegido. El código no puede ser copiado.', 'color: gray; font-size: 14px;');
+                }
+            } else {
+                devToolsOpen = false;
+            }
+        }, 500);
+
+        // 4. Limpiar consola periódicamente
+        setInterval(function() {
+            console.clear();
+        }, 1000);
+    })();
+    </script>
+    
+    <style>
+    /* 5. Deshabilitar selección de texto (excepto inputs) */
+    body {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    /* Permitir selección solo en inputs y textareas */
+    input, textarea, .jro-chat-input {
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
+    }
+    
+    /* Deshabilitar arrastrar imágenes */
+    img {
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+        pointer-events: none;
+    }
+    </style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JRO Asesorías | Datos que impulsan decisiones</title>
@@ -987,7 +1100,7 @@
         /* ============================================
            RESPONSIVE
            ============================================ */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .contact-wrapper {
                 grid-template-columns: 1fr;
             }
@@ -1433,7 +1546,6 @@
                             <div>
                                 <span>Email</span>
                                 <p style="margin: 0; font-size: 0.85rem;">info@duocapital.cl</p>
-                                <p style="margin: 4px 0 0; font-size: 0.75rem; color: var(--gris-medio); font-style: italic;">JRO es miembro del Grupo Duocapital</p>
                             </div>
                         </a>
                         
@@ -1531,7 +1643,6 @@
                             <i class="fas fa-envelope" style="margin-right: 8px;"></i>
                             info@duocapital.cl
                         </a>
-                        <p style="margin: 4px 0 8px; font-size: 0.75rem; color: var(--gris-medio); font-style: italic;">JRO es miembro del Grupo Duocapital</p>
                         <a href="https://wa.me/56966895746">
                             <i class="fab fa-whatsapp" style="margin-right: 8px;"></i>
                             WhatsApp
@@ -1735,7 +1846,7 @@
 
   /* Header del chat */
   .jro-chat-header {
-    background: linear-gradient(135deg, #1f2937, #374151);
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
     color: white;
     padding: 16px 20px;
     display: flex;
@@ -1757,7 +1868,6 @@
     margin: 0; 
     font-size: 15px; 
     font-weight: 600; 
-    color: white;
   }
   .jro-chat-header-info p { 
     margin: 2px 0 0; 
