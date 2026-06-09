@@ -11,7 +11,7 @@
     <meta name="description" content="Ayudamos a equipos de Finanzas, RRHH y Operaciones a automatizar tareas y tomar mejores decisiones con sus datos. Consultoría en datos, automatización e IA, en español y sin complicaciones técnicas.">
     <meta name="keywords" content="Power BI Chile, automatización empresarial, análisis de datos, consultoría datos Santiago, inteligencia artificial empresas">
     <meta name="author" content="JRO Asesorías — Grupo Duocapital">
-    <meta name="theme-color" content="#0E1726">
+    <meta name="theme-color" content="#15110E">
 
     <!-- Open Graph / redes sociales -->
     <meta property="og:type" content="website">
@@ -20,8 +20,8 @@
     <meta property="og:title" content="JRO Asesorías — Transformamos sus datos en decisiones claras">
     <meta property="og:description" content="Consultoría en datos, automatización e IA para equipos de Finanzas, RRHH y Operaciones. En español, orientada a resultados, sin complicaciones técnicas.">
     <meta property="og:url" content="https://www.jroasesorias.cl/">
-    <!-- TODO og:image: subir imagen social 1200x630 (webp/jpg) a assets/og-image.jpg y confirmar la URL -->
-    <meta property="og:image" content="https://www.jroasesorias.cl/assets/og-image.jpg">
+    <!-- TODO og:image: subir imagen social 1200x630 (webp/jpg) a img/og-image.jpg y confirmar la URL -->
+    <meta property="og:image" content="https://www.jroasesorias.cl/img/og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="JRO Asesorías — Transformamos sus datos en decisiones claras">
     <meta name="twitter:description" content="Consultoría en datos, automatización e IA para equipos de Finanzas, RRHH y Operaciones.">
@@ -29,39 +29,41 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
 
-    <!-- Fuentes: Fraunces (display/serif) + Inter (cuerpo). Un solo request, con swap -->
+    <!-- Precarga del hero (mejora LCP) -->
+    <link rel="preload" as="image" href="img/hero.webp" imagesrcset="img/hero-1280.webp 1280w, img/hero.webp 1920w" imagesizes="100vw">
+
+    <!-- Fuentes: Fraunces variable (display/serif, eje óptico) + Inter (cuerpo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* ============================================
-           DESIGN TOKENS
+           DESIGN TOKENS — paleta casi-negro cálido + acento bronce
            ============================================ */
         :root {
-            /* Tipografía */
             --font-display: "Fraunces", Georgia, "Times New Roman", serif;
             --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-            /* Color — neutros cálidos + navy + acento azul medido */
-            --ink: #0E1726;          /* navy casi negro: hero, footer, secciones fuertes */
-            --ink-2: #1B2435;        /* navy secundario */
+            --ink: #15110E;          /* casi-negro CÁLIDO: hero, footer, secciones fuertes */
+            --ink-2: #211B16;        /* casi-negro secundario */
             --paper: #FBFAF7;        /* blanco cálido (no #fff) */
             --paper-2: #F4F2EC;      /* neutro cálido, secciones alternas */
-            --text: #1C2433;         /* texto principal sobre claro */
-            --text-muted: #5A6473;   /* texto secundario */
-            --accent: #2F5BEA;       /* azul de acción */
-            --accent-ink: #16308C;   /* azul profundo, detalles */
+            --text: #1C1A17;         /* texto principal sobre claro */
+            --text-muted: #6B6157;   /* texto secundario cálido */
+            --accent: #B08442;       /* bronce/dorado discreto */
+            --accent-dark: #8C6534;  /* bronce profundo, hover/detalles */
+            --accent-light: #D8B57E; /* bronce claro para fondos oscuros */
             --positive: #3F7D5B;     /* verde apagado (beneficios), no chillón */
             --line: #E7E3DA;         /* bordes/divisores sutiles */
             --line-on-dark: rgba(255,255,255,.12);
-            --on-dark: rgba(255,255,255,.78);
+            --hero-text: #FAFAF9;    /* blanco cálido sobre overlay */
+            --on-dark: rgba(250,250,249,.80);
             --on-dark-strong: #ffffff;
 
-            /* Layout */
             --maxw: 1200px;
             --gutter: clamp(1.25rem, 5vw, 4rem);
             --section-y: clamp(5rem, 10vw, 9rem);
@@ -69,46 +71,40 @@
             --radius-sm: 10px;
             --radius-pill: 999px;
 
-            /* Sombras suaves */
-            --shadow-sm: 0 1px 2px rgba(14,23,38,.04), 0 4px 12px rgba(14,23,38,.05);
-            --shadow: 0 1px 2px rgba(14,23,38,.04), 0 12px 32px rgba(14,23,38,.07);
+            --shadow-sm: 0 1px 2px rgba(21,17,14,.04), 0 4px 12px rgba(21,17,14,.05);
+            --shadow: 0 1px 2px rgba(21,17,14,.05), 0 12px 32px rgba(21,17,14,.08);
 
             --ease: .25s ease;
         }
 
-        /* ============================================
-           RESET / BASE
-           ============================================ */
+        /* ============================================ RESET / BASE ============================================ */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-
+        html { font-size: 16px; scroll-behavior: smooth; }
         body {
-            font-family: var(--font-sans);
-            font-weight: 400;
-            line-height: 1.6;
-            color: var(--text);
-            background: var(--paper);
+            font-family: var(--font-sans); font-weight: 400; line-height: 1.6;
+            color: var(--text); background: var(--paper);
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
-
         img { max-width: 100%; height: auto; display: block; }
         a { color: inherit; text-decoration: none; }
-        ::selection { background: rgba(47,91,234,.18); }
+        ::selection { background: rgba(176,132,66,.20); }
 
-        /* Tipografía editorial */
-        h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
-        h1 { font-size: clamp(2.6rem, 6vw, 5rem); line-height: 1.04; }
-        h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.1; }
-        h3 { font-size: 1.3rem; line-height: 1.25; }
+        /* Tipografía editorial — Fraunces ligera (peso 400), eje óptico alto, sin "wonk" */
+        h1, h2, h3 {
+            font-family: var(--font-display); font-weight: 400; color: var(--ink);
+            letter-spacing: -0.01em;
+            font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 0, "WONK" 0;
+        }
+        h1 { font-size: clamp(2.8rem, 6.5vw, 5rem); line-height: 1.05; }
+        h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); line-height: 1.1; font-variation-settings: "opsz" 144, "wght" 450, "SOFT" 0, "WONK" 0; }
+        h3 { font-size: 1.3rem; line-height: 1.25; font-variation-settings: "opsz" 60, "wght" 500, "SOFT" 0, "WONK" 0; }
         h4 { font-family: var(--font-sans); font-size: 1.05rem; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
         p { color: var(--text-muted); }
 
-        /* ============================================
-           LAYOUT
-           ============================================ */
+        /* ============================================ LAYOUT ============================================ */
         .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
         section { padding: var(--section-y) 0; }
-
         .section-light { background: var(--paper); }
         .section-alt { background: var(--paper-2); }
         .section-dark { background: var(--ink); }
@@ -121,263 +117,188 @@
         .section-header p { font-size: 1.125rem; line-height: 1.6; }
 
         .eyebrow {
-            display: inline-block;
-            font-family: var(--font-sans);
-            font-size: .8rem;
-            font-weight: 600;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            color: var(--accent-ink);
+            display: inline-block; font-family: var(--font-sans); font-size: .8rem; font-weight: 600;
+            letter-spacing: .12em; text-transform: uppercase; color: var(--accent-dark);
         }
-        .section-dark .eyebrow { color: #9db4ff; }
+        .section-dark .eyebrow { color: var(--accent-light); }
 
-        /* ============================================
-           BOTONES
-           ============================================ */
+        /* ============================================ BOTONES ============================================ */
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
-            padding: .95rem 1.6rem;
-            font-family: var(--font-sans); font-size: 1rem; font-weight: 500;
-            border: 1px solid transparent; border-radius: var(--radius-sm);
-            cursor: pointer; transition: transform var(--ease), background var(--ease), color var(--ease), box-shadow var(--ease), border-color var(--ease);
+            padding: .95rem 1.6rem; font-family: var(--font-sans); font-size: 1rem; font-weight: 500;
+            border: 1px solid transparent; border-radius: var(--radius-sm); cursor: pointer;
+            transition: transform var(--ease), background var(--ease), color var(--ease), box-shadow var(--ease), border-color var(--ease);
         }
-        .btn-primary { background: var(--accent); color: #fff; }
-        .btn-primary:hover { background: var(--accent-ink); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(47,91,234,.28); }
-        .btn-light { background: var(--on-dark-strong); color: var(--ink); }
-        .btn-light:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.25); }
+        /* Primario sobre fondos claros: oscuro sólido (sin azul) */
+        .btn-primary { background: var(--ink); color: var(--paper); }
+        .btn-primary:hover { background: var(--ink-2); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(21,17,14,.22); }
+        /* Sobre el hero oscuro: botón crema con texto oscuro */
+        .btn-light { background: var(--hero-text); color: var(--ink); }
+        .btn-light:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.28); }
         .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
         .btn-ghost:hover { border-color: var(--ink); }
 
-        /* enlace-acción secundario (baja jerarquía, no compite con el primario) */
-        .link-action {
-            display: inline-flex; align-items: center; gap: .45rem;
-            font-weight: 500; color: inherit; position: relative; padding: .2rem 0;
-        }
+        .link-action { display: inline-flex; align-items: center; gap: .45rem; font-weight: 500; color: inherit; position: relative; padding: .2rem 0; }
         .link-action i { transition: transform var(--ease); }
         .link-action:hover i { transform: translateX(4px); }
         .link-action::after { content: ''; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: currentColor; opacity: .35; transition: opacity var(--ease); }
         .link-action:hover::after { opacity: .8; }
 
-        /* ============================================
-           NAVEGACIÓN
-           ============================================ */
+        /* ============================================ NAV ============================================ */
         .nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            background: rgba(251,250,247,.72);
-            backdrop-filter: saturate(180%) blur(10px);
-            -webkit-backdrop-filter: saturate(180%) blur(10px);
-            border-bottom: 1px solid transparent;
-            transition: border-color var(--ease), background var(--ease);
+            background: rgba(251,250,247,.72); backdrop-filter: saturate(180%) blur(10px); -webkit-backdrop-filter: saturate(180%) blur(10px);
+            border-bottom: 1px solid transparent; transition: border-color var(--ease), background var(--ease);
         }
-        .nav.scrolled { border-bottom-color: var(--line); background: rgba(251,250,247,.9); }
+        .nav.scrolled { border-bottom-color: var(--line); background: rgba(251,250,247,.92); }
         .nav-container { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-
         .logo { display: inline-flex; align-items: baseline; gap: .4rem; }
-        .logo-jro { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; letter-spacing: -.02em; color: var(--ink); }
+        .logo-jro { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; font-variation-settings: "opsz" 90, "wght" 600, "SOFT" 0, "WONK" 0; letter-spacing: -.02em; color: var(--ink); }
         .logo-text { font-family: var(--font-sans); font-size: 1.05rem; font-weight: 400; color: var(--text-muted); letter-spacing: .01em; }
 
         .nav-menu { display: flex; align-items: center; gap: clamp(1rem, 2.5vw, 2rem); }
         .nav-link { font-size: .95rem; font-weight: 500; color: var(--text); padding: .4rem 0; position: relative; }
         .nav-link::after { content: ''; position: absolute; left: 0; bottom: 0; height: 1.5px; width: 0; background: var(--accent); transition: width var(--ease); }
-        .nav-link:hover { color: var(--accent-ink); }
+        .nav-link:hover { color: var(--accent-dark); }
         .nav-link:hover::after { width: 100%; }
         .nav-cta { margin-left: .25rem; }
-
         .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.4rem; color: var(--ink); cursor: pointer; padding: .25rem .5rem; }
 
-        /* ============================================
-           HERO
-           ============================================ */
+        /* ============================================ HERO (foto a sangre + overlay cálido) ============================================ */
         .hero {
             position: relative; min-height: 100vh; display: flex; align-items: center;
             background: var(--ink); padding-top: 72px; overflow: hidden; isolation: isolate;
         }
-        /* Slot opcional para video de producción real (ver TODO en el HTML) */
-        .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -3; }
-
-        /* Grilla de datos + curva ascendente (data-uri liviano, on-brand, estático) */
-        .hero::before {
-            content: ''; position: absolute; inset: 0; z-index: -2; opacity: .5; pointer-events: none;
-            background-image:
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.05' stroke-width='1'%3E%3Cpath d='M0 700 C200 660 360 600 540 520 S860 360 1200 240'/%3E%3Cpath d='M0 760 C220 740 380 700 560 640 S900 480 1200 360' stroke-opacity='0.035'/%3E%3C/g%3E%3Cg fill='%23ffffff' fill-opacity='0.045'%3E%3Ccircle cx='540' cy='520' r='3'/%3E%3Ccircle cx='760' cy='420' r='3'/%3E%3Ccircle cx='980' cy='300' r='3'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: cover; background-position: center;
+        .hero-img {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; object-position: 62% center; z-index: -2;
         }
-        /* Resplandor azul que deriva muy lento (movimiento sutil, no video) */
+        /* Overlay cálido (oscurece a la izquierda para legibilidad del texto) */
         .hero::after {
-            content: ''; position: absolute; inset: -20%; z-index: -1; pointer-events: none;
+            content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
             background:
-                radial-gradient(40% 50% at 72% 28%, rgba(47,91,234,.32) 0%, transparent 60%),
-                radial-gradient(45% 45% at 18% 85%, rgba(22,48,140,.30) 0%, transparent 55%);
-            animation: heroDrift 22s ease-in-out infinite alternate;
+                linear-gradient(95deg, rgba(20,16,13,.86) 0%, rgba(20,16,13,.62) 52%, rgba(20,16,13,.46) 100%),
+                linear-gradient(180deg, rgba(20,16,13,.28) 0%, rgba(20,16,13,.66) 100%);
         }
-        @keyframes heroDrift {
-            from { transform: translate3d(-2%, -1%, 0) scale(1); }
-            to   { transform: translate3d(3%, 2%, 0) scale(1.06); }
-        }
-
         .hero-content { position: relative; z-index: 1; max-width: 60rem; }
         .hero-badge {
-            display: inline-flex; align-items: center; gap: .55rem;
-            padding: .45rem .9rem; margin-bottom: 1.6rem;
-            border: 1px solid var(--line-on-dark); border-radius: var(--radius-pill);
-            font-size: .85rem; color: var(--on-dark);
+            display: inline-flex; align-items: center; gap: .55rem; padding: .45rem .9rem; margin-bottom: 1.6rem;
+            border: 1px solid var(--line-on-dark); border-radius: var(--radius-pill); font-size: .85rem; color: var(--on-dark);
+            background: rgba(20,16,13,.25);
         }
-        .hero-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 4px rgba(74,222,128,.18); }
+        .hero-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #6BBF8A; box-shadow: 0 0 0 4px rgba(107,191,138,.18); }
 
-        .hero h1 { color: #fff; margin-bottom: 1.4rem; max-width: 16ch; }
-        .hero h1 em { font-style: italic; font-weight: 500; color: #cdd9ff; }
-        .hero-description { font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.65; color: var(--on-dark); max-width: 56ch; margin-bottom: 2.2rem; }
+        .hero h1 { color: var(--hero-text); margin-bottom: 1.3rem; max-width: 16ch; }
+        .hero h1 em { font-style: italic; font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 0, "WONK" 0; color: inherit; }
+        .hero-description { font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.65; color: var(--on-dark); max-width: 54ch; margin-bottom: 1.1rem; }
+
+        /* Palabras rotativas (efecto odómetro vertical) */
+        .roll-line { font-size: clamp(1rem, 1.5vw, 1.18rem); color: var(--on-dark); margin-bottom: 2.1rem; display: flex; gap: .4rem; align-items: baseline; flex-wrap: wrap; }
+        .roll { display: inline-block; height: 1.4em; line-height: 1.4em; overflow: hidden; vertical-align: bottom; }
+        .roll ul { margin: 0; padding: 0; list-style: none; animation: roll 11s cubic-bezier(.55,0,.1,1) infinite; }
+        .roll li { height: 1.4em; line-height: 1.4em; color: var(--accent-light); font-weight: 600; white-space: nowrap; }
+        @keyframes roll {
+            0%,16% { transform: translateY(0); }
+            20%,36% { transform: translateY(-1.4em); }
+            40%,56% { transform: translateY(-2.8em); }
+            60%,76% { transform: translateY(-4.2em); }
+            80%,96% { transform: translateY(-5.6em); }
+            100% { transform: translateY(-7em); }
+        }
 
         .hero-actions { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
         .hero-actions .link-action { color: var(--on-dark); }
 
-        .scroll-indicator { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.4); animation: bounce 2.4s infinite; z-index: 1; }
+        .scroll-indicator { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.45); animation: bounce 2.4s infinite; z-index: 1; }
         @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
 
-        /* ============================================
-           BARRA DE CONFIANZA
-           ============================================ */
+        /* ============================================ BARRA DE CONFIANZA ============================================ */
         .trust-bar { background: var(--ink-2); padding: 1.4rem 0; }
         .trust-content { display: flex; align-items: center; justify-content: center; gap: .85rem; flex-wrap: wrap; text-align: center; }
-        .trust-content i { color: #9db4ff; font-size: 1.1rem; }
+        .trust-content i { color: var(--accent-light); font-size: 1.1rem; }
         .trust-content p { font-size: .98rem; color: var(--on-dark); margin: 0; }
         .trust-content strong { color: #fff; font-weight: 600; }
 
-        /* ============================================
-           SERVICIOS
-           ============================================ */
+        /* ============================================ SERVICIOS ============================================ */
         .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.25rem, 2.5vw, 2rem); }
-        .service-card {
-            background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
-            padding: clamp(1.6rem, 3vw, 2.4rem); transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
-        }
+        .service-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.6rem, 3vw, 2.4rem); transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease); }
         .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: #d9d3c6; }
-        .service-icon {
-            width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
-            background: rgba(47,91,234,.08); color: var(--accent-ink);
-            border-radius: 12px; font-size: 1.3rem; margin-bottom: 1.4rem;
-        }
+        .service-icon { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: rgba(176,132,66,.10); color: var(--accent-dark); border-radius: 12px; font-size: 1.3rem; margin-bottom: 1.4rem; }
         .service-card h3 { margin-bottom: .6rem; }
         .service-card p { font-size: 1rem; line-height: 1.6; margin-bottom: 1.2rem; max-width: 46ch; }
-        .service-benefit {
-            display: inline-flex; align-items: center; gap: .5rem;
-            font-size: .85rem; font-weight: 500; color: var(--positive);
-            background: rgba(63,125,91,.08); padding: .35rem .7rem; border-radius: var(--radius-pill);
-        }
+        .service-benefit { display: inline-flex; align-items: center; gap: .5rem; font-size: .85rem; font-weight: 500; color: var(--positive); background: rgba(63,125,91,.09); padding: .35rem .7rem; border-radius: var(--radius-pill); }
 
-        /* ============================================
-           PARA QUIÉN
-           ============================================ */
+        /* ============================================ PARA QUIÉN ============================================ */
         .audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1rem, 2vw, 1.6rem); }
         .audience-card { padding: 1.6rem .5rem; text-align: center; }
-        .audience-card .ico {
-            width: 56px; height: 56px; margin: 0 auto 1.1rem; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            border: 1px solid var(--line); color: var(--accent-ink); font-size: 1.25rem; background: var(--paper);
-        }
-        .audience-card h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: .5rem; }
+        .audience-card .ico { width: 56px; height: 56px; margin: 0 auto 1.1rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); color: var(--accent-dark); font-size: 1.25rem; background: var(--paper); }
+        .audience-card h3 { font-size: 1.2rem; margin-bottom: .5rem; }
         .audience-card p { font-size: .92rem; line-height: 1.55; max-width: 28ch; margin: 0 auto; }
 
-        /* ============================================
-           METODOLOGÍA — línea de tiempo
-           ============================================ */
+        /* ============================================ METODOLOGÍA — línea de tiempo ============================================ */
         .timeline { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); }
-        .timeline::before {
-            content: ''; position: absolute; top: 28px; left: 8%; right: 8%; height: 1px;
-            background: var(--line);
-        }
+        .timeline::before { content: ''; position: absolute; top: 28px; left: 8%; right: 8%; height: 1px; background: var(--line); }
         .tl-step { position: relative; text-align: center; }
-        .tl-num {
-            position: relative; z-index: 1; width: 56px; height: 56px; margin: 0 auto 1.2rem;
-            display: flex; align-items: center; justify-content: center;
-            font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: var(--accent-ink);
-            background: var(--paper); border: 1px solid var(--line); border-radius: 50%;
-        }
-        .tl-step h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: .5rem; }
+        .tl-num { position: relative; z-index: 1; width: 56px; height: 56px; margin: 0 auto 1.2rem; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.6rem; font-weight: 500; color: var(--accent-dark); background: var(--paper); border: 1px solid var(--line); border-radius: 50%; }
+        .tl-step h3 { font-size: 1.2rem; margin-bottom: .5rem; }
         .tl-step p { font-size: .92rem; line-height: 1.55; max-width: 26ch; margin: 0 auto .8rem; }
-        .tl-duration {
-            display: inline-block; font-size: .78rem; font-weight: 600; letter-spacing: .02em;
-            color: var(--accent-ink); background: rgba(47,91,234,.08);
-            padding: .3rem .75rem; border-radius: var(--radius-pill);
-        }
+        .tl-duration { display: inline-block; font-size: .78rem; font-weight: 600; letter-spacing: .02em; color: var(--accent-dark); background: rgba(176,132,66,.10); padding: .3rem .75rem; border-radius: var(--radius-pill); }
 
-        /* ============================================
-           CREDIBILIDAD (reemplaza la sección de números)
-           ============================================ */
+        /* ============================================ CREDIBILIDAD ============================================ */
         .cred-head { text-align: center; max-width: 60ch; margin: 0 auto 3rem; }
-        .cred-head .logos { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--font-display); font-size: 1.25rem; color: #fff; margin-bottom: 1.1rem; }
-        .cred-head .logos i { color: #9db4ff; }
+        .cred-head .logos { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--font-display); font-weight: 500; font-size: 1.3rem; color: #fff; margin-bottom: 1.1rem; }
+        .cred-head .logos i { color: var(--accent-light); }
         .cred-head p { font-size: 1.1rem; line-height: 1.65; }
-
         .badges-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); margin-bottom: clamp(1rem, 2vw, 1.5rem); }
-        .badge-card {
-            background: var(--ink-2); border: 1px solid var(--line-on-dark); border-radius: var(--radius);
-            padding: 1.6rem; text-align: center;
-        }
-        .badge-card .ico { font-size: 1.5rem; color: #9db4ff; margin-bottom: .9rem; }
-        .badge-card h3 { font-family: var(--font-display); font-size: 1.15rem; color: #fff; margin-bottom: .4rem; }
-        .badge-card p { font-size: .9rem; color: var(--on-dark); line-height: 1.5; margin: 0; max-width: 30ch; margin-inline: auto; }
-
+        .badge-card { background: var(--ink-2); border: 1px solid var(--line-on-dark); border-radius: var(--radius); padding: 1.6rem; text-align: center; }
+        .badge-card .ico { font-size: 1.5rem; color: var(--accent-light); margin-bottom: .9rem; }
+        .badge-card h3 { font-size: 1.15rem; color: #fff; margin-bottom: .4rem; }
+        .badge-card p { font-size: .9rem; color: var(--on-dark); line-height: 1.5; margin: 0 auto; max-width: 30ch; }
         .guarantees { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
         .guarantee { display: flex; align-items: center; gap: .8rem; justify-content: center; padding: 1rem; border: 1px solid var(--line-on-dark); border-radius: var(--radius-sm); }
-        .guarantee i { color: #4ade80; font-size: 1.05rem; }
+        .guarantee i { color: #8FC9A8; font-size: 1.05rem; }
         .guarantee span { font-size: .95rem; font-weight: 500; color: #fff; }
-        .cred-method { text-align: center; margin-top: 2.4rem; font-style: italic; font-family: var(--font-display); font-size: 1.15rem; color: var(--on-dark); max-width: 55ch; margin-inline: auto; }
+        .cred-method { text-align: center; margin-top: 2.4rem; font-style: italic; font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; color: var(--on-dark); max-width: 55ch; margin-inline: auto; }
 
-        /* ============================================
-           RECURSOS / VIDEOS
-           ============================================ */
+        /* ============================================ RECURSOS / VIDEOS ============================================ */
         .videos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 2.5vw, 2rem); }
         .video-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform var(--ease), box-shadow var(--ease); }
         .video-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
         .video-wrapper { position: relative; padding-bottom: 56.25%; background: var(--ink); }
         .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
         .video-info { padding: 1.4rem 1.5rem 1.6rem; }
-        .video-info h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: .45rem; }
+        .video-info h3 { font-size: 1.2rem; margin-bottom: .45rem; }
         .video-info p { font-size: .92rem; line-height: 1.55; margin: 0; }
 
-        /* ============================================
-           CONTACTO
-           ============================================ */
+        /* ============================================ CONTACTO ============================================ */
         .contact-wrapper { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
-        .contact-info h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: .6rem; }
+        .contact-info h3 { font-size: 1.5rem; margin-bottom: .6rem; }
         .contact-info > p { margin-bottom: 1.8rem; max-width: 40ch; }
         .contact-methods { display: flex; flex-direction: column; gap: .8rem; }
         .contact-method { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.1rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-sm); transition: border-color var(--ease), transform var(--ease); }
         .contact-method:hover { border-color: var(--accent); transform: translateX(3px); }
-        .contact-method > i { width: 42px; height: 42px; flex: none; display: flex; align-items: center; justify-content: center; background: rgba(47,91,234,.08); border-radius: 10px; color: var(--accent-ink); font-size: 1.05rem; }
+        .contact-method > i { width: 42px; height: 42px; flex: none; display: flex; align-items: center; justify-content: center; background: rgba(176,132,66,.10); border-radius: 10px; color: var(--accent-dark); font-size: 1.05rem; }
         .contact-method .ct-label { display: block; font-weight: 600; color: var(--ink); font-size: .95rem; }
         .contact-method .ct-value { display: block; font-size: .85rem; color: var(--text-muted); }
-
         .group-note { margin-top: 1.2rem; font-size: .82rem; color: var(--text-muted); font-style: italic; }
         .group-note i { margin-right: .4rem; }
-
         .duocapital-explainer { margin-top: 1.6rem; background: var(--paper-2); border: 1px solid var(--line); border-left: 3px solid var(--accent); padding: 1.1rem 1.2rem; border-radius: var(--radius-sm); }
         .duocapital-explainer strong { display: block; margin-bottom: .5rem; color: var(--ink); font-weight: 600; font-size: .92rem; }
         .duocapital-explainer p { margin: 0 0 .6rem; font-size: .85rem; }
         .duocapital-explainer ul { margin: 0; padding-left: 1.1rem; font-size: .85rem; color: var(--text-muted); }
         .duocapital-explainer li { margin-bottom: .3rem; }
-
         .contact-form { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.6rem, 3vw, 2.4rem); box-shadow: var(--shadow-sm); }
         .form-group { margin-bottom: 1.2rem; }
         .form-group label { display: block; font-size: .88rem; font-weight: 600; margin-bottom: .45rem; color: var(--ink); }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: .8rem 1rem; font-family: inherit; font-size: 1rem; color: var(--text);
-            background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm);
-            transition: border-color var(--ease), box-shadow var(--ease);
-        }
-        .form-group input::placeholder, .form-group textarea::placeholder { color: #9aa1ad; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(47,91,234,.15);
-        }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: .8rem 1rem; font-family: inherit; font-size: 1rem; color: var(--text); background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm); transition: border-color var(--ease), box-shadow var(--ease); }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: #9c948a; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(176,132,66,.18); }
         .form-group input:invalid:not(:placeholder-shown) { border-color: #c0563f; }
         .form-group textarea { resize: vertical; min-height: 110px; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
         .contact-form .btn { width: 100%; margin-top: .4rem; }
 
-        /* ============================================
-           FOOTER
-           ============================================ */
+        /* ============================================ FOOTER ============================================ */
         .footer { background: var(--ink); padding: clamp(3rem, 6vw, 4.5rem) 0 2rem; }
         .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: clamp(2rem, 4vw, 3rem); margin-bottom: 2.5rem; }
         .footer .logo-jro { color: #fff; }
@@ -387,35 +308,28 @@
         .footer-links { display: flex; flex-direction: column; gap: .65rem; }
         .footer-links a { color: var(--on-dark); font-size: .92rem; transition: color var(--ease); }
         .footer-links a:hover { color: #fff; }
-        .footer-links i { margin-right: .5rem; color: #9db4ff; width: 1rem; text-align: center; }
+        .footer-links i { margin-right: .5rem; color: var(--accent-light); width: 1rem; text-align: center; }
         .footer-note { font-size: .78rem; color: rgba(255,255,255,.45); font-style: italic; margin-top: .4rem; }
         .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--line-on-dark); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .6rem; }
         .footer-bottom p { color: rgba(255,255,255,.5); font-size: .82rem; margin: 0; }
 
-        /* ============================================
-           ANIMACIÓN REVEAL (visible por defecto; se anima solo con JS)
-           ============================================ */
+        /* ============================================ REVEAL (visible por defecto; anima con JS) ============================================ */
         .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
         .js .reveal.is-visible { opacity: 1; transform: none; }
         .reveal[data-delay="1"] { transition-delay: .08s; }
         .reveal[data-delay="2"] { transition-delay: .16s; }
         .reveal[data-delay="3"] { transition-delay: .24s; }
 
-        /* Accesibilidad: foco visible */
-        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-            outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px;
-        }
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 2px; border-radius: 4px; }
 
-        /* Reduce motion: sin animaciones */
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
             *, *::before, *::after { animation: none !important; transition: none !important; }
             .js .reveal { opacity: 1; transform: none; }
+            .roll ul { animation: none; }
         }
 
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
+        /* ============================================ RESPONSIVE ============================================ */
         @media (max-width: 980px) {
             .services-grid { grid-template-columns: 1fr; }
             .audience-grid { grid-template-columns: repeat(2, 1fr); }
@@ -427,12 +341,7 @@
             .timeline::before { display: none; }
         }
         @media (max-width: 600px) {
-            .nav-menu {
-                display: none; position: absolute; top: 72px; left: 0; right: 0;
-                flex-direction: column; align-items: stretch; gap: .25rem;
-                background: var(--paper); padding: 1rem var(--gutter) 1.4rem;
-                border-bottom: 1px solid var(--line); box-shadow: var(--shadow);
-            }
+            .nav-menu { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: .25rem; background: var(--paper); padding: 1rem var(--gutter) 1.4rem; border-bottom: 1px solid var(--line); box-shadow: var(--shadow); }
             .nav-menu.active { display: flex; }
             .nav-menu .nav-link { padding: .7rem 0; }
             .nav-cta { margin: .5rem 0 0; }
@@ -455,7 +364,6 @@
                 <span class="logo-jro">JRO</span>
                 <span class="logo-text">Asesorías</span>
             </a>
-
             <div class="nav-menu" id="nav-menu">
                 <a href="#servicios" class="nav-link">Servicios</a>
                 <a href="#nosotros" class="nav-link">Para quién</a>
@@ -463,7 +371,6 @@
                 <a href="#recursos" class="nav-link">Recursos</a>
                 <a href="#contacto" class="btn btn-primary nav-cta">Conversemos</a>
             </div>
-
             <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
                 <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
@@ -472,13 +379,8 @@
 
     <!-- ============================================ HERO ============================================ -->
     <section id="inicio" class="hero">
-        <!-- TODO video de fondo (opcional): cuando exista un video REAL de producción (1920x1080, webm+mp4, loop, sin audio, < 2 MB),
-             subirlo a assets/ y descomentar. Mantener poster para evitar parpadeo y respetar la carga.
-        <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-poster.webp" aria-hidden="true">
-            <source src="assets/hero.webm" type="video/webm">
-            <source src="assets/hero.mp4" type="video/mp4">
-        </video>
-        -->
+        <img class="hero-img" src="img/hero.webp" srcset="img/hero-1280.webp 1280w, img/hero.webp 1920w" sizes="100vw" width="1920" height="2880" alt="" loading="eager" fetchpriority="high">
+        <!-- TODO (opcional): si más adelante hay un video real de producción, puede reemplazar la <img> por un <video> de fondo. -->
         <div class="container">
             <div class="hero-content">
                 <span class="hero-badge">
@@ -492,6 +394,20 @@
                     Ayudamos a equipos de Finanzas, RRHH y Operaciones a dejar de perder
                     tiempo en tareas manuales y tomar mejores decisiones con información
                     confiable. Sin complicaciones técnicas.
+                </p>
+
+                <p class="roll-line">
+                    <span>Especialistas en</span>
+                    <span class="roll" aria-label="tableros de gestión, automatización de procesos, inteligencia artificial, capacitación a equipos y decisiones con datos">
+                        <ul aria-hidden="true">
+                            <li>tableros de gestión</li>
+                            <li>automatización de procesos</li>
+                            <li>inteligencia artificial</li>
+                            <li>capacitación a equipos</li>
+                            <li>decisiones con datos</li>
+                            <li>tableros de gestión</li>
+                        </ul>
+                    </span>
                 </p>
 
                 <div class="hero-actions">
@@ -529,7 +445,6 @@
                 <h2>¿En qué podemos ayudarle?</h2>
                 <p>Soluciones prácticas para problemas reales de su operación diaria.</p>
             </div>
-
             <div class="services-grid">
                 <article class="service-card reveal" data-delay="0">
                     <div class="service-icon"><i class="fas fa-chart-pie" aria-hidden="true"></i></div>
@@ -537,21 +452,18 @@
                     <p>Visualice toda la información de su área en un solo lugar. Reportes que se actualizan solos y que cualquier persona puede entender.</p>
                     <span class="service-benefit"><i class="fas fa-check" aria-hidden="true"></i> Deje de armar reportes en Excel cada semana</span>
                 </article>
-
                 <article class="service-card reveal" data-delay="1">
                     <div class="service-icon"><i class="fas fa-gears" aria-hidden="true"></i></div>
                     <h3>Automatización de Procesos</h3>
                     <p>Eliminamos las tareas repetitivas que consumen tiempo: envío de correos, consolidación de datos, generación de documentos.</p>
                     <span class="service-benefit"><i class="fas fa-check" aria-hidden="true"></i> Recupere hasta 10 horas semanales por persona</span>
                 </article>
-
                 <article class="service-card reveal" data-delay="0">
                     <div class="service-icon"><i class="fas fa-robot" aria-hidden="true"></i></div>
                     <h3>Inteligencia Artificial Aplicada</h3>
                     <p>Implementamos asistentes de IA que ayudan a su equipo a encontrar información, redactar documentos y analizar datos más rápido.</p>
                     <span class="service-benefit"><i class="fas fa-check" aria-hidden="true"></i> Tecnología de punta, sin complicaciones</span>
                 </article>
-
                 <article class="service-card reveal" data-delay="1">
                     <div class="service-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></div>
                     <h3>Capacitación y Acompañamiento</h3>
@@ -570,7 +482,6 @@
                 <h2>Trabajamos con equipos como el suyo</h2>
                 <p>No necesita ser experto en tecnología. Nosotros nos encargamos de eso.</p>
             </div>
-
             <div class="audience-grid">
                 <div class="audience-card reveal" data-delay="0">
                     <div class="ico"><i class="fas fa-calculator" aria-hidden="true"></i></div>
@@ -604,7 +515,6 @@
                 <h2>Así trabajamos con usted</h2>
                 <p>Un proceso simple y transparente. Sabe qué esperar en cada momento.</p>
             </div>
-
             <div class="timeline">
                 <div class="tl-step reveal" data-delay="0">
                     <div class="tl-num">1</div>
@@ -641,7 +551,6 @@
                 <span class="logos"><i class="fas fa-handshake" aria-hidden="true"></i> JRO Asesorías + Instituto Tecnipro</span>
                 <p>Trabajamos en alianza con Instituto de Capacitación Tecnipro, OTEC certificado bajo norma NCh2728, dentro del respaldo del Grupo Duocapital.</p>
             </div>
-
             <div class="badges-row">
                 <div class="badge-card reveal" data-delay="0">
                     <div class="ico"><i class="fas fa-certificate" aria-hidden="true"></i></div>
@@ -659,13 +568,11 @@
                     <p>Capacitación y acompañamiento de la mano de especialistas certificados.</p>
                 </div>
             </div>
-
             <div class="guarantees">
                 <div class="guarantee reveal" data-delay="0"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Diagnóstico inicial sin costo</span></div>
                 <div class="guarantee reveal" data-delay="1"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Respuesta en menos de 24 horas</span></div>
                 <div class="guarantee reveal" data-delay="2"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Acompañamiento permanente</span></div>
             </div>
-
             <p class="cred-method reveal">En español, orientados a resultados y sin complicaciones técnicas.</p>
         </div>
     </section>
@@ -678,7 +585,6 @@
                 <h2>Contenido para entender el valor de sus datos</h2>
                 <p>Material práctico sobre cómo los datos pueden ayudar a su empresa.</p>
             </div>
-
             <div class="videos-grid">
                 <article class="video-card reveal" data-delay="0">
                     <div class="video-wrapper">
@@ -689,7 +595,6 @@
                         <p>Cómo las empresas líderes usan información para tomar mejores decisiones.</p>
                     </div>
                 </article>
-
                 <article class="video-card reveal" data-delay="1">
                     <div class="video-wrapper">
                         <iframe src="https://player.vimeo.com/video/1095176960?h=64c6c1108a&title=0&byline=0&portrait=0" title="Automatización inteligente" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>
@@ -699,7 +604,6 @@
                         <p>Cómo eliminar tareas repetitivas sin perder el control.</p>
                     </div>
                 </article>
-
                 <article class="video-card reveal" data-delay="2">
                     <div class="video-wrapper">
                         <iframe src="https://player.vimeo.com/video/1095169755?h=8fb10670ba&title=0&byline=0&portrait=0" title="IA para negocios" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>
@@ -721,12 +625,10 @@
                 <h2>¿Listo para conversar?</h2>
                 <p>Cuéntenos brevemente su situación. Le responderemos en menos de 24 horas.</p>
             </div>
-
             <div class="contact-wrapper">
                 <div class="contact-info reveal">
                     <h3>También puede escribirnos directamente</h3>
                     <p>Elija el canal que le resulte más cómodo.</p>
-
                     <div class="contact-methods">
                         <a href="https://wa.me/56966895746" class="contact-method">
                             <i class="fab fa-whatsapp" aria-hidden="true"></i>
@@ -741,9 +643,7 @@
                             <span><span class="ct-label">Teléfono</span><span class="ct-value">+56 9 6689 5746</span></span>
                         </a>
                     </div>
-
                     <p class="group-note"><i class="fas fa-info-circle" aria-hidden="true"></i>JRO es miembro del Grupo Duocapital</p>
-
                     <div class="duocapital-explainer">
                         <strong>¿Por qué nuestro correo es @duocapital.cl?</strong>
                         <p>JRO Asesorías e Instituto Tecnipro son parte del Grupo Duocapital. Usamos un correo centralizado para:</p>
@@ -754,7 +654,6 @@
                         </ul>
                     </div>
                 </div>
-
                 <form class="contact-form reveal" action="https://formsubmit.co/info@duocapital.cl" method="POST">
                     <div class="form-row">
                         <div class="form-group">
@@ -766,12 +665,10 @@
                             <input type="text" id="empresa" name="empresa" placeholder="Nombre de su empresa">
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label for="email">Email *</label>
                         <input type="email" id="email" name="email" required placeholder="su@email.com">
                     </div>
-
                     <div class="form-group">
                         <label for="area">¿En qué área trabaja?</label>
                         <select id="area" name="area">
@@ -784,12 +681,10 @@
                             <option value="otro">Otra área</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label for="mensaje">¿Qué problema le gustaría resolver?</label>
                         <textarea id="mensaje" name="mensaje" placeholder="Cuéntenos brevemente su situación..."></textarea>
                     </div>
-
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-paper-plane" aria-hidden="true"></i>
                         Enviar mensaje
@@ -810,7 +705,6 @@
                     </a>
                     <p>Ayudamos a equipos administrativos a trabajar mejor con sus datos. Consultoría, automatización y capacitación en herramientas Microsoft y tecnologías de IA.</p>
                 </div>
-
                 <div class="footer-column">
                     <h4>Navegación</h4>
                     <div class="footer-links">
@@ -821,7 +715,6 @@
                         <a href="#contacto">Contacto</a>
                     </div>
                 </div>
-
                 <div class="footer-column">
                     <h4>Contacto</h4>
                     <div class="footer-links">
@@ -832,7 +725,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <p>© 2025 JRO Asesorías E.I.R.L. · RUT: 76.325.663-4 · Santiago, Chile</p>
                 <p>En alianza con Instituto Tecnipro</p>
@@ -840,64 +732,19 @@
         </div>
     </footer>
 
-    <!-- ============================================ SCRIPTS ============================================ -->
-    <script>
-        // Menú móvil con estado accesible
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const navMenu = document.getElementById('nav-menu');
-
-        function setMenu(open) {
-            navMenu.classList.toggle('active', open);
-            mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars', !open);
-            icon.classList.toggle('fa-times', open);
-        }
-        mobileMenuBtn.addEventListener('click', () => setMenu(!navMenu.classList.contains('active')));
-        document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => setMenu(false)));
-
-        // Sombra/borde del nav al hacer scroll
-        const nav = document.getElementById('nav');
-        const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-            });
-        });
-
-        // Reveal al hacer scroll — degradación elegante: si no hay soporte, todo queda visible
-        const revealEls = document.querySelectorAll('.reveal');
-        if ('IntersectionObserver' in window) {
-            const io = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) { entry.target.classList.add('is-visible'); obs.unobserve(entry.target); }
-                });
-            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-            revealEls.forEach(el => io.observe(el));
-        } else {
-            revealEls.forEach(el => el.classList.add('is-visible'));
-        }
-    </script>
-
     <!-- ============================================
-         CHATBOT JRO ASESORÍAS (más discreto, color sobrio)
+         CHATBOT JRO ASESORÍAS (neutro/discreto, cálido)
          Backend: netlify/functions/chat.js (Claude + Power Automate)
          ============================================ -->
     <style>
       .jro-chat-button {
-        position: fixed; bottom: 24px; right: 24px;
-        min-width: 54px; height: 54px; padding: 0 18px;
-        background: #1B2435; border: 1px solid rgba(255,255,255,.14); border-radius: 999px;
-        box-shadow: 0 8px 24px rgba(14,23,38,.22); cursor: pointer; z-index: 99999;
+        position: fixed; bottom: 24px; right: 24px; min-width: 54px; height: 54px; padding: 0 18px;
+        background: #211B16; border: 1px solid rgba(255,255,255,.14); border-radius: 999px;
+        box-shadow: 0 8px 24px rgba(21,17,14,.24); cursor: pointer; z-index: 99999;
         display: flex; align-items: center; justify-content: center; gap: 8px;
         transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
       }
-      .jro-chat-button:hover { transform: translateY(-2px); background: #0E1726; box-shadow: 0 12px 28px rgba(14,23,38,.3); }
+      .jro-chat-button:hover { transform: translateY(-2px); background: #15110E; box-shadow: 0 12px 28px rgba(21,17,14,.32); }
       .jro-chat-button svg { width: 24px; height: 24px; fill: #fff; }
       .jro-chat-button .chat-label { color: #fff; font-weight: 600; font-size: 14px; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
       .jro-chat-button.open .chat-label { display: none; }
@@ -907,21 +754,19 @@
       .jro-chat-button.open svg.close-icon { display: block; }
 
       .jro-chat-window {
-        position: fixed; bottom: 90px; right: 24px;
-        width: 400px; height: 560px; max-height: calc(100vh - 140px);
-        background: #fff; border: 1px solid #E7E3DA; border-radius: 16px;
-        box-shadow: 0 18px 48px rgba(14,23,38,.22); z-index: 99999;
-        display: none; flex-direction: column; overflow: hidden;
+        position: fixed; bottom: 90px; right: 24px; width: 400px; height: 560px; max-height: calc(100vh - 140px);
+        background: #fff; border: 1px solid #E7E3DA; border-radius: 16px; box-shadow: 0 18px 48px rgba(21,17,14,.24);
+        z-index: 99999; display: none; flex-direction: column; overflow: hidden;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       }
       .jro-chat-window.open { display: flex; animation: jroSlideUp .3s ease; }
       @keyframes jroSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
-      .jro-chat-header { background: #0E1726; color: #fff; padding: 16px 18px; display: flex; align-items: center; gap: 12px; }
-      .jro-chat-avatar { width: 38px; height: 38px; background: #2F5BEA; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; font-family: 'Fraunces', Georgia, serif; }
+      .jro-chat-header { background: #15110E; color: #fff; padding: 16px 18px; display: flex; align-items: center; gap: 12px; }
+      .jro-chat-avatar { width: 38px; height: 38px; background: #B08442; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 15px; font-family: 'Fraunces', Georgia, serif; color: #fff; }
       .jro-chat-header-info h4 { margin: 0; font-size: 14px; font-weight: 600; color: #fff; }
-      .jro-chat-header-info p { margin: 2px 0 0; font-size: 12px; color: #94a3b8; }
-      .jro-chat-status { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; margin-left: auto; }
+      .jro-chat-header-info p { margin: 2px 0 0; font-size: 12px; color: #b6ada1; }
+      .jro-chat-status { width: 8px; height: 8px; background: #6BBF8A; border-radius: 50%; margin-left: auto; }
       .jro-chat-close { background: rgba(255,255,255,.14); border: none; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-left: 8px; transition: background .2s; }
       .jro-chat-close:hover { background: rgba(255,255,255,.28); }
       .jro-chat-close svg { width: 16px; height: 16px; stroke: #fff; }
@@ -930,24 +775,24 @@
       .jro-chat-message { max-width: 85%; padding: 11px 15px; border-radius: 14px; font-size: 14px; line-height: 1.5; animation: jroFadeIn .3s ease; word-wrap: break-word; }
       @keyframes jroFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
       .jro-chat-message.bot { background: #fff; border: 1px solid #E7E3DA; align-self: flex-start; border-bottom-left-radius: 4px; }
-      .jro-chat-message.user { background: #2F5BEA; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+      .jro-chat-message.user { background: #211B16; color: #FAFAF9; align-self: flex-end; border-bottom-right-radius: 4px; }
       .jro-chat-message.typing { background: #fff; border: 1px solid #E7E3DA; align-self: flex-start; }
       .jro-typing-dots { display: flex; gap: 4px; }
-      .jro-typing-dots span { width: 7px; height: 7px; background: #94a3b8; border-radius: 50%; animation: jroTyping 1.4s infinite; }
+      .jro-typing-dots span { width: 7px; height: 7px; background: #b6ada1; border-radius: 50%; animation: jroTyping 1.4s infinite; }
       .jro-typing-dots span:nth-child(2) { animation-delay: .2s; }
       .jro-typing-dots span:nth-child(3) { animation-delay: .4s; }
       @keyframes jroTyping { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
 
       .jro-chat-input-container { padding: 14px; background: #fff; border-top: 1px solid #E7E3DA; display: flex; gap: 10px; }
       .jro-chat-input { flex: 1; padding: 11px 15px; border: 1px solid #E7E3DA; border-radius: 22px; font-size: 14px; outline: none; font-family: inherit; }
-      .jro-chat-input:focus { border-color: #2F5BEA; box-shadow: 0 0 0 3px rgba(47,91,234,.14); }
-      .jro-chat-send { width: 42px; height: 42px; background: #2F5BEA; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s, transform .2s; }
-      .jro-chat-send:hover { background: #16308C; transform: scale(1.05); }
+      .jro-chat-input:focus { border-color: #B08442; box-shadow: 0 0 0 3px rgba(176,132,66,.16); }
+      .jro-chat-send { width: 42px; height: 42px; background: #B08442; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s, transform .2s; }
+      .jro-chat-send:hover { background: #8C6534; transform: scale(1.05); }
       .jro-chat-send:disabled { opacity: .5; cursor: not-allowed; transform: none; }
       .jro-chat-send svg { width: 19px; height: 19px; fill: #fff; }
-      .jro-chat-footer { text-align: center; padding: 8px; font-size: 11px; color: #94a3b8; background: #fff; }
+      .jro-chat-footer { text-align: center; padding: 8px; font-size: 11px; color: #b6ada1; background: #fff; }
       .jro-chat-message a { text-decoration: underline; }
-      .jro-chat-message.bot a { color: #2F5BEA; }
+      .jro-chat-message.bot a { color: #8C6534; }
       .jro-chat-message.user a { color: #fff; }
 
       @media (max-width: 600px) {
@@ -984,6 +829,43 @@
       </div>
       <div class="jro-chat-footer">Powered by JRO Asesorías</div>
     </div>
+
+    <!-- ============================================ SCRIPTS ============================================ -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        function setMenu(open) {
+            navMenu.classList.toggle('active', open);
+            mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars', !open);
+            icon.classList.toggle('fa-times', open);
+        }
+        mobileMenuBtn.addEventListener('click', () => setMenu(!navMenu.classList.contains('active')));
+        document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+
+        const nav = document.getElementById('nav');
+        const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+
+        const revealEls = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); obs.unobserve(entry.target); } });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            revealEls.forEach(el => io.observe(el));
+        } else {
+            revealEls.forEach(el => el.classList.add('is-visible'));
+        }
+    </script>
 
     <script>
     (function() {
@@ -1040,8 +922,7 @@
         showTyping();
         try {
           const response = await fetch(API_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: message, conversationId: conversationId, conversationHistory: conversationHistory.slice(0, -1), endConversation: false })
           });
           const data = await response.json();
@@ -1062,8 +943,7 @@
         isConversationEnded = true;
         try {
           await fetch(API_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ conversationId: conversationId, conversationHistory: conversationHistory, endConversation: true, endReason: reason })
           });
         } catch (error) { console.error('Error al guardar conversación:', error); }
