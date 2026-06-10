@@ -932,6 +932,17 @@
             revealEls.forEach(el => el.classList.add('is-visible'));
         }
 
+        // Email corporativo: aviso instantáneo si el dominio es personal (el servidor también lo valida)
+        const DOMINIOS_PERSONALES = ['gmail.com','googlemail.com','hotmail.com','hotmail.cl','hotmail.es','outlook.com','outlook.cl','outlook.es','live.com','live.cl','yahoo.com','yahoo.cl','yahoo.es','icloud.com','me.com','mac.com','msn.com','aol.com','proton.me','protonmail.com','gmx.com','gmx.es','mail.com','zoho.com','yandex.com'];
+        const emailInput = document.getElementById('email');
+        if (emailInput) {
+            emailInput.addEventListener('input', () => {
+                const dominio = (emailInput.value.split('@')[1] || '').toLowerCase();
+                emailInput.setCustomValidity(DOMINIOS_PERSONALES.includes(dominio)
+                    ? 'Ingrese el correo de su empresa (los correos personales como Gmail o Hotmail no son válidos aquí).' : '');
+            });
+        }
+
         // Parallax sutil del hero (≤10%, solo transform; respeta reduced-motion)
         const heroImg = document.getElementById('hero-img');
         const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
