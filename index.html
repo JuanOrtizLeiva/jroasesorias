@@ -7,9 +7,8 @@
     <!-- Marca clase JS lo antes posible: el contenido es visible por defecto (sin JS) y solo se anima cuando hay JS -->
     <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
 
-    <title>JRO Asesorías — Datos que impulsan decisiones | Consultoría en datos, automatización e IA</title>
-    <meta name="description" content="Ayudamos a equipos de Finanzas, RRHH y Operaciones a automatizar tareas y tomar mejores decisiones con sus datos. Consultoría en datos, automatización e IA, en español y sin complicaciones técnicas.">
-    <meta name="keywords" content="Power BI Chile, automatización empresarial, análisis de datos, consultoría datos Santiago, inteligencia artificial empresas">
+    <title>JRO Asesorías — Primero la tubería. Después la IA. | Datos y automatización para empresas en Chile</title>
+    <meta name="description" content="Automatizamos el cierre, la cobranza y el reporting de empresas en Chile. Cuando sus datos corren solos, recién entonces hablamos de inteligencia artificial. JRO Asesorías, Grupo Duocapital.">
     <meta name="author" content="JRO Asesorías — Grupo Duocapital">
     <meta name="theme-color" content="#15110E">
 
@@ -17,14 +16,14 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_CL">
     <meta property="og:site_name" content="JRO Asesorías">
-    <meta property="og:title" content="JRO Asesorías — Transformamos sus datos en decisiones claras">
-    <meta property="og:description" content="Consultoría en datos, automatización e IA para equipos de Finanzas, RRHH y Operaciones. En español, orientada a resultados, sin complicaciones técnicas.">
+    <meta property="og:title" content="JRO Asesorías — Primero la tubería. Después la IA.">
+    <meta property="og:description" content="Automatizamos el cierre, la cobranza y el reporting de empresas en Chile. Cuando sus datos corren solos, recién entonces hablamos de IA.">
     <meta property="og:url" content="https://www.jroasesorias.cl/">
     <!-- TODO og:image: subir imagen social 1200x630 (webp/jpg) a img/og-image.jpg y confirmar la URL -->
     <meta property="og:image" content="https://www.jroasesorias.cl/img/og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="JRO Asesorías — Transformamos sus datos en decisiones claras">
-    <meta name="twitter:description" content="Consultoría en datos, automatización e IA para equipos de Finanzas, RRHH y Operaciones.">
+    <meta name="twitter:title" content="JRO Asesorías — Primero la tubería. Después la IA.">
+    <meta name="twitter:description" content="Automatizamos el cierre, la cobranza y el reporting de empresas en Chile.">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -37,9 +36,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Íconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         /* ============================================
            DESIGN TOKENS — paleta casi-negro cálido + acento bronce
@@ -48,25 +44,24 @@
             --font-display: "Fraunces", Georgia, "Times New Roman", serif;
             --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-            --ink: #15110E;          /* casi-negro CÁLIDO: hero, footer, secciones fuertes */
-            --ink-2: #211B16;        /* casi-negro secundario */
-            --paper: #FBFAF7;        /* blanco cálido (no #fff) */
-            --paper-2: #F4F2EC;      /* neutro cálido, secciones alternas */
-            --text: #1C1A17;         /* texto principal sobre claro */
-            --text-muted: #6B6157;   /* texto secundario cálido */
-            --accent: #B08442;       /* bronce/dorado discreto */
-            --accent-dark: #8C6534;  /* bronce profundo, hover/detalles */
-            --accent-light: #D8B57E; /* bronce claro para fondos oscuros */
-            --positive: #3F7D5B;     /* verde apagado (beneficios), no chillón */
-            --line: #E7E3DA;         /* bordes/divisores sutiles */
+            --ink: #15110E;
+            --ink-2: #211B16;
+            --paper: #FBFAF7;
+            --paper-2: #F4F2EC;
+            --paper-3: #EFEAE0;      /* alt cálido más denso (S7) */
+            --text: #1C1A17;
+            --text-muted: #6B6157;
+            --accent: #B08442;
+            --accent-dark: #8C6534;
+            --accent-light: #D8B57E;
+            --line: #E7E3DA;
             --line-on-dark: rgba(255,255,255,.12);
-            --hero-text: #FAFAF9;    /* blanco cálido sobre overlay */
+            --hero-text: #FAFAF9;
             --on-dark: rgba(250,250,249,.80);
             --on-dark-strong: #ffffff;
 
             --maxw: 1200px;
             --gutter: clamp(1.25rem, 5vw, 4rem);
-            --section-y: clamp(5rem, 10vw, 9rem);
             --radius: 14px;
             --radius-sm: 10px;
             --radius-pill: 999px;
@@ -75,6 +70,7 @@
             --shadow: 0 1px 2px rgba(21,17,14,.05), 0 12px 32px rgba(21,17,14,.08);
 
             --ease: .25s ease;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* ============================================ RESET / BASE ============================================ */
@@ -86,61 +82,85 @@
             -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }
-        img { max-width: 100%; height: auto; display: block; }
+        img, svg { max-width: 100%; height: auto; display: block; }
         a { color: inherit; text-decoration: none; }
         ::selection { background: rgba(176,132,66,.20); }
 
-        /* Tipografía editorial — Fraunces ligera (peso 400), eje óptico alto, sin "wonk" */
         h1, h2, h3 {
             font-family: var(--font-display); font-weight: 400; color: var(--ink);
             letter-spacing: -0.01em;
             font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 0, "WONK" 0;
         }
-        h1 { font-size: clamp(2.8rem, 6.5vw, 5rem); line-height: 1.05; }
-        h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); line-height: 1.1; font-variation-settings: "opsz" 144, "wght" 450, "SOFT" 0, "WONK" 0; }
+        h1 { font-size: clamp(2.6rem, 6.5vw, 5.2rem); line-height: 1.04; }
+        h2 { font-size: clamp(1.9rem, 3.6vw, 2.75rem); line-height: 1.12; font-variation-settings: "opsz" 144, "wght" 450, "SOFT" 0, "WONK" 0; }
         h3 { font-size: 1.3rem; line-height: 1.25; font-variation-settings: "opsz" 60, "wght" 500, "SOFT" 0, "WONK" 0; }
-        h4 { font-family: var(--font-sans); font-size: 1.05rem; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
         p { color: var(--text-muted); }
+        em { font-style: italic; }
+
+        .display {
+            font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em;
+            font-size: clamp(2.25rem, 5.4vw, 4.4rem); line-height: 1.08;
+            font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 0, "WONK" 0;
+        }
 
         /* ============================================ LAYOUT ============================================ */
         .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
-        section { padding: var(--section-y) 0; }
+        .container-narrow { max-width: 860px; }
+        .section-pad { padding: clamp(5.5rem, 9vw, 8.5rem) 0; }
         .section-light { background: var(--paper); }
         .section-alt { background: var(--paper-2); }
-        .section-dark { background: var(--ink); }
-        .section-dark h2, .section-dark h3, .section-dark h4 { color: var(--on-dark-strong); }
+        .section-alt-3 { background: var(--paper-3); }
+        .section-dark { background: var(--ink); position: relative; }
+        .section-dark h2, .section-dark h3 { color: var(--on-dark-strong); }
         .section-dark p { color: var(--on-dark); }
 
-        .section-header { max-width: 60ch; margin: 0 auto clamp(2.5rem, 5vw, 4rem); text-align: center; }
-        .section-header .eyebrow { margin-bottom: .9rem; }
-        .section-header h2 { margin-bottom: .9rem; }
-        .section-header p { font-size: 1.125rem; line-height: 1.6; }
+        /* Grano sutil sobre fondos oscuros */
+        .grain::before {
+            content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .035; z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+        .grain > .container { position: relative; z-index: 1; }
 
         .eyebrow {
-            display: inline-block; font-family: var(--font-sans); font-size: .8rem; font-weight: 600;
-            letter-spacing: .12em; text-transform: uppercase; color: var(--accent-dark);
+            display: inline-block; font-family: var(--font-sans); font-size: .75rem; font-weight: 600;
+            letter-spacing: .14em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 1rem;
         }
         .section-dark .eyebrow { color: var(--accent-light); }
+
+        /* Puentes serif entre secciones */
+        .bridge {
+            font-family: var(--font-display); font-style: italic; font-weight: 400;
+            font-size: clamp(1.2rem, 2vw, 1.45rem); line-height: 1.45; color: var(--text-muted);
+            max-width: 44ch; margin: clamp(3rem, 6vw, 4.5rem) auto 0; text-align: center;
+        }
+        .section-dark .bridge { color: var(--on-dark); }
+
+        /* Línea bronce que se dibuja */
+        .rule-line { width: 72px; height: 2px; background: var(--accent); margin: 1.4rem auto 0; transform-origin: left center; }
+        .js .rule-line { transform: scaleX(0); transition: transform .9s var(--ease-out) .25s; }
+        .js .is-visible .rule-line, .js .rule-line.is-visible { transform: scaleX(1); }
 
         /* ============================================ BOTONES ============================================ */
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
-            padding: .95rem 1.6rem; font-family: var(--font-sans); font-size: 1rem; font-weight: 500;
+            padding: 1rem 1.7rem; font-family: var(--font-sans); font-size: 1rem; font-weight: 500;
             border: 1px solid transparent; border-radius: var(--radius-sm); cursor: pointer;
             transition: transform var(--ease), background var(--ease), color var(--ease), box-shadow var(--ease), border-color var(--ease);
         }
-        /* Primario sobre fondos claros: oscuro sólido (sin azul) */
         .btn-primary { background: var(--ink); color: var(--paper); }
         .btn-primary:hover { background: var(--ink-2); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(21,17,14,.22); }
-        /* Sobre el hero oscuro: botón crema con texto oscuro */
         .btn-light { background: var(--hero-text); color: var(--ink); }
         .btn-light:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.28); }
-        .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
-        .btn-ghost:hover { border-color: var(--ink); }
+        .btn-bronze { background: var(--accent); color: #fff; }
+        .btn-bronze:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(140,101,52,.35); }
+        .btn-ghost-dark { background: transparent; color: var(--hero-text); border-color: var(--line-on-dark); }
+        .btn-ghost-dark:hover { border-color: rgba(255,255,255,.45); }
+
+        .micro-note { font-size: .85rem; color: var(--text-muted); margin-top: .8rem; }
 
         .link-action { display: inline-flex; align-items: center; gap: .45rem; font-weight: 500; color: inherit; position: relative; padding: .2rem 0; }
-        .link-action i { transition: transform var(--ease); }
-        .link-action:hover i { transform: translateX(4px); }
+        .link-action .arr { transition: transform var(--ease); }
+        .link-action:hover .arr { transform: translateX(4px); }
         .link-action::after { content: ''; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: currentColor; opacity: .35; transition: opacity var(--ease); }
         .link-action:hover::after { opacity: .8; }
 
@@ -161,184 +181,221 @@
         .nav-link::after { content: ''; position: absolute; left: 0; bottom: 0; height: 1.5px; width: 0; background: var(--accent); transition: width var(--ease); }
         .nav-link:hover { color: var(--accent-dark); }
         .nav-link:hover::after { width: 100%; }
-        .nav-cta { margin-left: .25rem; }
-        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.4rem; color: var(--ink); cursor: pointer; padding: .25rem .5rem; }
+        .nav-cta { margin-left: .25rem; padding: .7rem 1.2rem; }
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--ink); cursor: pointer; padding: .35rem .5rem; }
+        .mobile-menu-btn svg { width: 22px; height: 22px; stroke: currentColor; }
+        .mobile-menu-btn .icon-close { display: none; }
+        .mobile-menu-btn[aria-expanded="true"] .icon-bars { display: none; }
+        .mobile-menu-btn[aria-expanded="true"] .icon-close { display: block; }
 
-        /* ============================================ HERO (foto a sangre + overlay cálido) ============================================ */
+        /* ============================================ S1 — HERO ============================================ */
         .hero {
             position: relative; min-height: 100vh; display: flex; align-items: center;
             background: var(--ink); padding-top: 72px; overflow: hidden; isolation: isolate;
         }
         .hero-img {
-            position: absolute; inset: 0; width: 100%; height: 100%;
-            object-fit: cover; object-position: 62% center; z-index: -2;
+            position: absolute; inset: -6% 0; width: 100%; height: 112%;
+            object-fit: cover; object-position: 62% center; z-index: -2; will-change: transform;
         }
-        /* Overlay cálido (oscurece a la izquierda para legibilidad del texto) */
         .hero::after {
             content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
             background:
-                linear-gradient(95deg, rgba(20,16,13,.86) 0%, rgba(20,16,13,.62) 52%, rgba(20,16,13,.46) 100%),
-                linear-gradient(180deg, rgba(20,16,13,.28) 0%, rgba(20,16,13,.66) 100%);
+                linear-gradient(95deg, rgba(20,16,13,.88) 0%, rgba(20,16,13,.64) 52%, rgba(20,16,13,.46) 100%),
+                linear-gradient(180deg, rgba(20,16,13,.28) 0%, rgba(20,16,13,.70) 100%);
         }
-        .hero-content { position: relative; z-index: 1; max-width: 60rem; }
+        .hero-content { position: relative; z-index: 1; max-width: 62rem; padding-bottom: 4rem; }
         .hero-badge {
-            display: inline-flex; align-items: center; gap: .55rem; padding: .45rem .9rem; margin-bottom: 1.6rem;
+            display: inline-flex; align-items: center; gap: .55rem; padding: .45rem .9rem; margin-bottom: 1.8rem;
             border: 1px solid var(--line-on-dark); border-radius: var(--radius-pill); font-size: .85rem; color: var(--on-dark);
             background: rgba(20,16,13,.25);
         }
         .hero-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #6BBF8A; box-shadow: 0 0 0 4px rgba(107,191,138,.18); }
 
-        .hero h1 { color: var(--hero-text); margin-bottom: 1.3rem; max-width: 16ch; }
-        .hero h1 em { font-style: italic; font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 0, "WONK" 0; color: inherit; }
-        .hero-description { font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.65; color: var(--on-dark); max-width: 54ch; margin-bottom: 1.1rem; }
+        .hero h1 { color: var(--hero-text); margin-bottom: 1.5rem; max-width: 15ch; }
+        .hero h1 .h1-line { display: block; }
+        .hero h1 em { font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 0, "WONK" 0; color: var(--accent-light); }
+        .hero-description { font-size: clamp(1.05rem, 1.6vw, 1.3rem); line-height: 1.65; color: var(--on-dark); max-width: 52ch; margin-bottom: 2.2rem; }
 
-        /* Palabras rotativas (efecto odómetro vertical) */
-        .roll-line { font-size: clamp(1rem, 1.5vw, 1.18rem); color: var(--on-dark); margin-bottom: 2.1rem; display: flex; gap: .4rem; align-items: baseline; flex-wrap: wrap; }
-        .roll { display: inline-block; height: 1.4em; line-height: 1.4em; overflow: hidden; vertical-align: bottom; }
-        .roll ul { margin: 0; padding: 0; list-style: none; animation: roll 11s cubic-bezier(.55,0,.1,1) infinite; }
-        .roll li { height: 1.4em; line-height: 1.4em; color: var(--accent-light); font-weight: 600; white-space: nowrap; }
-        @keyframes roll {
-            0%,16% { transform: translateY(0); }
-            20%,36% { transform: translateY(-1.4em); }
-            40%,56% { transform: translateY(-2.8em); }
-            60%,76% { transform: translateY(-4.2em); }
-            80%,96% { transform: translateY(-5.6em); }
-            100% { transform: translateY(-7em); }
-        }
+        /* Entrada on-load por líneas (única animación de carga) */
+        .js .hero-rise { opacity: 0; transform: translateY(26px); animation: heroRise .9s var(--ease-out) forwards; }
+        .js .hero-rise-1 { animation-delay: .05s; }
+        .js .hero-rise-2 { animation-delay: .18s; }
+        .js .hero-rise-3 { animation-delay: .31s; }
+        .js .hero-rise-4 { animation-delay: .44s; }
+        @keyframes heroRise { to { opacity: 1; transform: none; } }
 
         .hero-actions { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
         .hero-actions .link-action { color: var(--on-dark); }
+        .hero-micro { font-size: .85rem; color: rgba(250,250,249,.62); margin-top: 1rem; }
 
         .scroll-indicator { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.45); animation: bounce 2.4s infinite; z-index: 1; }
+        .scroll-indicator svg { width: 18px; height: 18px; stroke: currentColor; }
         @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
 
-        /* ============================================ BARRA DE CONFIANZA ============================================ */
-        .trust-bar { background: var(--ink-2); padding: 1.4rem 0; }
-        .trust-content { display: flex; align-items: center; justify-content: center; gap: .85rem; flex-wrap: wrap; text-align: center; }
-        .trust-content i { color: var(--accent-light); font-size: 1.1rem; }
-        .trust-content p { font-size: .98rem; color: var(--on-dark); margin: 0; }
-        .trust-content strong { color: #fff; font-weight: 600; }
+        /* ============================================ S2 — EL ESPEJO ============================================ */
+        .espejo { background: var(--paper-2); position: relative; z-index: 2; padding: clamp(4.5rem, 8vw, 7rem) 0 clamp(4rem, 7vw, 6rem); }
+        .espejo-inner { max-width: 760px; }
+        .espejo h2 { max-width: 22ch; margin-bottom: 2.6rem; }
+        .sintomas { list-style: none; display: flex; flex-direction: column; gap: 1.9rem; margin-bottom: 2.6rem; }
+        .sintoma { display: grid; grid-template-columns: 64px 1fr; gap: 1.3rem; align-items: start; }
+        .sintoma-num {
+            font-family: var(--font-display); font-size: 2rem; font-weight: 400; color: var(--accent-dark);
+            line-height: 1; padding-top: .15rem; position: relative;
+            font-variation-settings: "opsz" 144, "wght" 400;
+        }
+        .sintoma-num::after { content: ''; position: absolute; left: 0; bottom: -8px; width: 40px; height: 2px; background: var(--accent); transform-origin: left center; }
+        .js .reveal .sintoma-num::after { transform: scaleX(0); transition: transform .8s var(--ease-out) .3s; }
+        .js .reveal.is-visible .sintoma-num::after { transform: scaleX(1); }
+        .sintoma p { font-size: clamp(1.02rem, 1.4vw, 1.15rem); line-height: 1.65; color: var(--text); margin: 0; }
+        .espejo-stack { font-size: 1rem; color: var(--text-muted); max-width: 58ch; }
 
-        /* ============================================ SERVICIOS ============================================ */
-        .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.25rem, 2.5vw, 2rem); }
-        .service-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.6rem, 3vw, 2.4rem); transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease); }
-        .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: #d9d3c6; }
-        .service-icon { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: rgba(176,132,66,.10); color: var(--accent-dark); border-radius: 12px; font-size: 1.3rem; margin-bottom: 1.4rem; }
-        .service-card h3 { margin-bottom: .6rem; }
-        .service-card p { font-size: 1rem; line-height: 1.6; margin-bottom: 1.2rem; max-width: 46ch; }
-        .service-benefit { display: inline-flex; align-items: center; gap: .5rem; font-size: .85rem; font-weight: 500; color: var(--positive); background: rgba(63,125,91,.09); padding: .35rem .7rem; border-radius: var(--radius-pill); }
+        /* ============================================ S3 — SERVICIOS COMO ESCENAS ============================================ */
+        .escenas-head { max-width: 60ch; margin-bottom: clamp(3rem, 6vw, 4.5rem); }
+        .escena { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; padding: clamp(2.2rem, 4.5vw, 3.6rem) 0; }
+        .escena + .escena { border-top: 1px solid var(--line); }
+        .escena:nth-child(even) .escena-art { order: -1; }
+        .escena-eyebrow { display: block; font-size: .75rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: .8rem; }
+        .escena h3 { font-size: clamp(1.45rem, 2.4vw, 1.9rem); margin-bottom: 1rem; max-width: 24ch; }
+        .escena-story { font-size: 1.05rem; line-height: 1.7; color: var(--text-muted); max-width: 50ch; }
+        .escena-story strong { color: var(--text); font-weight: 600; }
+        .escena-art figure { margin: 0; }
+        .escena-art .art-frame { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+        .escena-art figcaption { font-size: .78rem; color: var(--text-muted); margin-top: .7rem; font-style: italic; }
+        .art-chrome { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: var(--paper-2); border-bottom: 1px solid var(--line); }
+        .art-chrome span { width: 9px; height: 9px; border-radius: 50%; background: #DBD4C6; }
+        .escenas-cta { text-align: center; margin-top: clamp(2.5rem, 5vw, 3.5rem); }
 
-        /* ============================================ PARA QUIÉN ============================================ */
-        .audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1rem, 2vw, 1.6rem); }
-        .audience-card { padding: 1.6rem .5rem; text-align: center; }
-        .audience-card .ico { width: 56px; height: 56px; margin: 0 auto 1.1rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); color: var(--accent-dark); font-size: 1.25rem; background: var(--paper); }
-        .audience-card h3 { font-size: 1.2rem; margin-bottom: .5rem; }
-        .audience-card p { font-size: .92rem; line-height: 1.55; max-width: 28ch; margin: 0 auto; }
+        /* ============================================ S4 — RESPIRO: LA REGLA ============================================ */
+        .respiro { min-height: 48vh; display: flex; align-items: center; padding: clamp(5rem, 9vw, 7.5rem) 0; }
+        .respiro .display { color: var(--on-dark-strong); max-width: 24ch; margin: 0 auto; text-align: center; font-size: clamp(1.7rem, 3.6vw, 2.9rem); line-height: 1.25; }
+        .respiro .display em { color: var(--accent-light); }
 
-        /* ============================================ METODOLOGÍA — línea de tiempo ============================================ */
-        .timeline { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); }
-        .timeline::before { content: ''; position: absolute; top: 28px; left: 8%; right: 8%; height: 1px; background: var(--line); }
-        .tl-step { position: relative; text-align: center; }
-        .tl-num { position: relative; z-index: 1; width: 56px; height: 56px; margin: 0 auto 1.2rem; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.6rem; font-weight: 500; color: var(--accent-dark); background: var(--paper); border: 1px solid var(--line); border-radius: 50%; }
-        .tl-step h3 { font-size: 1.2rem; margin-bottom: .5rem; }
-        .tl-step p { font-size: .92rem; line-height: 1.55; max-width: 26ch; margin: 0 auto .8rem; }
-        .tl-duration { display: inline-block; font-size: .78rem; font-weight: 600; letter-spacing: .02em; color: var(--accent-dark); background: rgba(176,132,66,.10); padding: .3rem .75rem; border-radius: var(--radius-pill); }
+        /* ============================================ S5 — EL MÉTODO ============================================ */
+        .metodo { padding-top: 0; padding-bottom: clamp(5.5rem, 9vw, 8.5rem); }
+        .metodo-head { max-width: 62ch; margin-bottom: clamp(3rem, 6vw, 4.5rem); }
+        .metodo-head h2 { max-width: 22ch; }
+        .metodo-head p { font-size: 1.1rem; margin-top: 1rem; max-width: 52ch; }
+        .fases { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 2.5vw, 2rem); position: relative; }
+        .fase { background: var(--ink-2); border: 1px solid var(--line-on-dark); border-radius: var(--radius); padding: clamp(1.5rem, 2.5vw, 2.1rem); position: relative; }
+        .fase-num { font-family: var(--font-display); font-size: .95rem; color: var(--accent-light); letter-spacing: .1em; margin-bottom: 1rem; display: block; }
+        .fase h3 { font-size: 1.25rem; color: #fff; margin-bottom: .35rem; }
+        .fase-dur { display: inline-block; font-size: .78rem; font-weight: 600; color: var(--accent-light); background: rgba(176,132,66,.14); padding: .28rem .7rem; border-radius: var(--radius-pill); margin-bottom: 1rem; }
+        .fase p { font-size: .95rem; line-height: 1.6; margin: 0; }
+        .fase .entregable { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid var(--line-on-dark); }
+        .fase .entregable .lbl { display: block; font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-light); margin-bottom: .4rem; }
+        .fase .entregable p { color: rgba(250,250,249,.92); font-size: .95rem; }
 
-        /* ============================================ CREDIBILIDAD ============================================ */
-        .cred-head { text-align: center; max-width: 60ch; margin: 0 auto 3rem; }
-        .cred-head .logos { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--font-display); font-weight: 500; font-size: 1.3rem; color: #fff; margin-bottom: 1.1rem; }
-        .cred-head .logos i { color: var(--accent-light); }
-        .cred-head p { font-size: 1.1rem; line-height: 1.65; }
-        .badges-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); margin-bottom: clamp(1rem, 2vw, 1.5rem); }
-        .badge-card { background: var(--ink-2); border: 1px solid var(--line-on-dark); border-radius: var(--radius); padding: 1.6rem; text-align: center; }
-        .badge-card .ico { font-size: 1.5rem; color: var(--accent-light); margin-bottom: .9rem; }
-        .badge-card h3 { font-size: 1.15rem; color: #fff; margin-bottom: .4rem; }
-        .badge-card p { font-size: .9rem; color: var(--on-dark); line-height: 1.5; margin: 0 auto; max-width: 30ch; }
-        .guarantees { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
-        .guarantee { display: flex; align-items: center; gap: .8rem; justify-content: center; padding: 1rem; border: 1px solid var(--line-on-dark); border-radius: var(--radius-sm); }
-        .guarantee i { color: #8FC9A8; font-size: 1.05rem; }
-        .guarantee span { font-size: .95rem; font-weight: 500; color: #fff; }
-        .cred-method { text-align: center; margin-top: 2.4rem; font-style: italic; font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; color: var(--on-dark); max-width: 55ch; margin-inline: auto; }
+        .compuerta {
+            margin-top: clamp(1.5rem, 3vw, 2.2rem); border: 1px solid rgba(216,181,126,.4); border-radius: var(--radius);
+            padding: clamp(1.4rem, 2.5vw, 2rem); display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; align-items: center;
+            background: linear-gradient(180deg, rgba(176,132,66,.10), rgba(176,132,66,.04));
+        }
+        .compuerta-ico { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(216,181,126,.5); display: flex; align-items: center; justify-content: center; }
+        .compuerta-ico svg { width: 20px; height: 20px; stroke: var(--accent-light); }
+        .compuerta h3 { font-size: 1.15rem; color: #fff; margin-bottom: .3rem; }
+        .compuerta p { font-size: .95rem; margin: 0; }
+        .metodo-cta { text-align: center; margin-top: clamp(2.5rem, 5vw, 3.5rem); }
 
-        /* ============================================ RECURSOS / VIDEOS ============================================ */
-        .videos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 2.5vw, 2rem); }
-        .video-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform var(--ease), box-shadow var(--ease); }
-        .video-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; background: var(--ink); }
-        .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-        .video-info { padding: 1.4rem 1.5rem 1.6rem; }
-        .video-info h3 { font-size: 1.2rem; margin-bottom: .45rem; }
-        .video-info p { font-size: .92rem; line-height: 1.55; margin: 0; }
+        /* ============================================ S6 — ORIGEN Y PRUEBA ============================================ */
+        .origen-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(2.5rem, 5vw, 4.5rem); align-items: start; }
+        .origen-copy h2 { max-width: 20ch; margin-bottom: 1.4rem; }
+        .origen-copy p { font-size: 1.08rem; line-height: 1.7; max-width: 52ch; margin-bottom: 1.1rem; }
+        .origen-copy strong { color: var(--text); font-weight: 600; }
+        .socio-line { display: flex; align-items: center; gap: .9rem; margin-top: 1.8rem; padding: 1.1rem 1.3rem; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); background: #fff; }
+        .socio-line svg { width: 22px; height: 22px; stroke: var(--accent-dark); flex: none; }
+        .socio-line p { margin: 0; font-size: .98rem; color: var(--text); }
 
-        /* ============================================ CONTACTO ============================================ */
-        .contact-wrapper { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
-        .contact-info h3 { font-size: 1.5rem; margin-bottom: .6rem; }
-        .contact-info > p { margin-bottom: 1.8rem; max-width: 40ch; }
-        .contact-methods { display: flex; flex-direction: column; gap: .8rem; }
-        .contact-method { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.1rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-sm); transition: border-color var(--ease), transform var(--ease); }
-        .contact-method:hover { border-color: var(--accent); transform: translateX(3px); }
-        .contact-method > i { width: 42px; height: 42px; flex: none; display: flex; align-items: center; justify-content: center; background: rgba(176,132,66,.10); border-radius: 10px; color: var(--accent-dark); font-size: 1.05rem; }
-        .contact-method .ct-label { display: block; font-weight: 600; color: var(--ink); font-size: .95rem; }
-        .contact-method .ct-value { display: block; font-size: .85rem; color: var(--text-muted); }
-        .group-note { margin-top: 1.2rem; font-size: .82rem; color: var(--text-muted); font-style: italic; }
-        .group-note i { margin-right: .4rem; }
-        .duocapital-explainer { margin-top: 1.6rem; background: var(--paper-2); border: 1px solid var(--line); border-left: 3px solid var(--accent); padding: 1.1rem 1.2rem; border-radius: var(--radius-sm); }
-        .duocapital-explainer strong { display: block; margin-bottom: .5rem; color: var(--ink); font-weight: 600; font-size: .92rem; }
-        .duocapital-explainer p { margin: 0 0 .6rem; font-size: .85rem; }
-        .duocapital-explainer ul { margin: 0; padding-left: 1.1rem; font-size: .85rem; color: var(--text-muted); }
-        .duocapital-explainer li { margin-bottom: .3rem; }
-        .contact-form { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.6rem, 3vw, 2.4rem); box-shadow: var(--shadow-sm); }
-        .form-group { margin-bottom: 1.2rem; }
+        .trayectoria { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.6rem, 3vw, 2.2rem); box-shadow: var(--shadow-sm); }
+        .trayectoria .eyebrow { margin-bottom: .6rem; }
+        .trayectoria > p { font-size: .95rem; line-height: 1.6; margin-bottom: 1.4rem; }
+        .inst-list { list-style: none; display: flex; flex-direction: column; }
+        .inst-list li { font-family: var(--font-display); font-size: clamp(1.05rem, 1.6vw, 1.25rem); font-weight: 450; color: var(--ink); padding: .65rem 0; border-bottom: 1px solid var(--line); font-variation-settings: "opsz" 60, "wght" 480; }
+        .inst-list li:last-child { border-bottom: none; }
+        .inst-more { font-size: .85rem; color: var(--text-muted); font-style: italic; margin-top: 1rem; }
+
+        /* ============================================ S7 — CONDICIONES ============================================ */
+        .condiciones h2 { max-width: 24ch; margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+        .cond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 5vw, 5rem); }
+        .cond-col h3 { font-size: 1.05rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 1.6rem; }
+        .cond-list { list-style: none; display: flex; flex-direction: column; gap: 1.4rem; }
+        .cond-list li { display: grid; grid-template-columns: 26px 1fr; gap: .9rem; align-items: start; }
+        .cond-check { width: 22px; height: 22px; margin-top: .15rem; }
+        .cond-check svg { width: 22px; height: 22px; stroke: var(--accent-dark); }
+        .cond-list p { margin: 0; font-size: 1rem; line-height: 1.65; color: var(--text); }
+        .cond-list p strong { font-weight: 600; }
+        .cond-list .det { color: var(--text-muted); font-size: .95rem; }
+
+        /* ============================================ S8 — CIERRE: HERO INVERTIDO ============================================ */
+        .cierre { padding: clamp(5.5rem, 9vw, 8rem) 0 0; overflow: hidden; }
+        .cierre-statement { text-align: center; max-width: 24ch; margin: 0 auto clamp(3.5rem, 7vw, 5.5rem); color: var(--on-dark-strong); }
+        .cierre-statement em { color: var(--accent-light); }
+        .cierre-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(2.5rem, 5vw, 4.5rem); align-items: start; padding-bottom: clamp(4rem, 7vw, 6rem); }
+
+        .despues h3 { color: #fff; font-size: 1.35rem; margin-bottom: 1.6rem; }
+        .pasos { list-style: none; counter-reset: paso; display: flex; flex-direction: column; gap: 1.3rem; margin-bottom: 2.2rem; }
+        .pasos li { counter-increment: paso; display: grid; grid-template-columns: 44px 1fr; gap: 1rem; align-items: start; }
+        .pasos li::before {
+            content: counter(paso); font-family: var(--font-display); font-size: 1.25rem; color: var(--accent-light);
+            width: 40px; height: 40px; border: 1px solid rgba(216,181,126,.45); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .pasos p { margin: 0; font-size: .98rem; line-height: 1.6; padding-top: .45rem; }
+        .pasos p strong { color: #fff; font-weight: 600; }
+
+        .canales { display: flex; flex-direction: column; gap: .7rem; margin-bottom: 1.6rem; }
+        .canal { display: inline-flex; align-items: center; gap: .7rem; color: var(--on-dark); font-size: .95rem; transition: color var(--ease); }
+        .canal:hover { color: #fff; }
+        .canal svg { width: 17px; height: 17px; stroke: var(--accent-light); flex: none; }
+        .grupo-line { font-size: .82rem; color: rgba(255,255,255,.5); }
+
+        .cierre-form { background: var(--paper); border-radius: var(--radius); padding: clamp(1.7rem, 3vw, 2.5rem); box-shadow: 0 24px 64px rgba(0,0,0,.35); }
+        .cierre-form .form-title { font-family: var(--font-display); font-size: 1.45rem; color: var(--ink); margin-bottom: .4rem; font-variation-settings: "opsz" 60, "wght" 500; }
+        .cierre-form .form-sub { font-size: .9rem; color: var(--text-muted); margin-bottom: 1.6rem; }
+        .form-group { margin-bottom: 1.15rem; }
         .form-group label { display: block; font-size: .88rem; font-weight: 600; margin-bottom: .45rem; color: var(--ink); }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: .8rem 1rem; font-family: inherit; font-size: 1rem; color: var(--text); background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm); transition: border-color var(--ease), box-shadow var(--ease); }
-        .form-group input::placeholder, .form-group textarea::placeholder { color: #9c948a; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(176,132,66,.18); }
+        .form-group input, .form-group select { width: 100%; padding: .85rem 1rem; font-family: inherit; font-size: 1rem; color: var(--text); background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm); transition: border-color var(--ease), box-shadow var(--ease); }
+        .form-group input::placeholder { color: #9c948a; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(176,132,66,.18); }
         .form-group input:invalid:not(:placeholder-shown) { border-color: #c0563f; }
-        .form-group textarea { resize: vertical; min-height: 110px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-        .contact-form .btn { width: 100%; margin-top: .4rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.15rem; }
+        .cierre-form .btn { width: 100%; margin-top: .5rem; }
+        .form-reply { text-align: center; font-size: .85rem; color: var(--text-muted); margin-top: .9rem; }
 
-        /* ============================================ FOOTER ============================================ */
-        .footer { background: var(--ink); padding: clamp(3rem, 6vw, 4.5rem) 0 2rem; }
-        .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: clamp(2rem, 4vw, 3rem); margin-bottom: 2.5rem; }
-        .footer .logo-jro { color: #fff; }
-        .footer .logo-text { color: rgba(255,255,255,.55); }
-        .footer-brand p { color: var(--on-dark); font-size: .95rem; line-height: 1.6; margin-top: 1rem; max-width: 42ch; }
-        .footer-column h4 { color: #fff; font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1.1rem; }
-        .footer-links { display: flex; flex-direction: column; gap: .65rem; }
-        .footer-links a { color: var(--on-dark); font-size: .92rem; transition: color var(--ease); }
-        .footer-links a:hover { color: #fff; }
-        .footer-links i { margin-right: .5rem; color: var(--accent-light); width: 1rem; text-align: center; }
-        .footer-note { font-size: .78rem; color: rgba(255,255,255,.45); font-style: italic; margin-top: .4rem; }
-        .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--line-on-dark); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .6rem; }
-        .footer-bottom p { color: rgba(255,255,255,.5); font-size: .82rem; margin: 0; }
+        /* Footer integrado como banda final del mismo lienzo oscuro */
+        .footer-band { border-top: 1px solid var(--line-on-dark); padding: 1.8rem 0 2rem; }
+        .footer-band-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-band .fb-brand { font-family: var(--font-display); font-weight: 500; color: #fff; font-size: 1.05rem; }
+        .footer-band .fb-brand span { font-family: var(--font-sans); font-weight: 400; color: rgba(255,255,255,.5); font-size: .85rem; margin-left: .5rem; }
+        .footer-band p, .footer-band a { color: rgba(255,255,255,.5); font-size: .8rem; margin: 0; }
+        .footer-band a:hover { color: rgba(255,255,255,.85); }
+        .fb-links { display: flex; gap: 1.1rem; flex-wrap: wrap; }
 
         /* ============================================ REVEAL (visible por defecto; anima con JS) ============================================ */
-        .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+        .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); transition-delay: calc(var(--i, 0) * 120ms); }
         .js .reveal.is-visible { opacity: 1; transform: none; }
-        .reveal[data-delay="1"] { transition-delay: .08s; }
-        .reveal[data-delay="2"] { transition-delay: .16s; }
-        .reveal[data-delay="3"] { transition-delay: .24s; }
 
-        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 2px; border-radius: 4px; }
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 2px; border-radius: 4px; }
 
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
             *, *::before, *::after { animation: none !important; transition: none !important; }
-            .js .reveal { opacity: 1; transform: none; }
-            .roll ul { animation: none; }
+            .js .reveal, .js .hero-rise { opacity: 1; transform: none; }
+            .js .rule-line, .js .reveal .sintoma-num::after { transform: none; }
         }
 
         /* ============================================ RESPONSIVE ============================================ */
+        /* Solapamientos y profundidad: solo escritorio ancho */
+        @media (min-width: 1024px) {
+            .espejo { margin-top: -76px; border-radius: var(--radius) var(--radius) 0 0; box-shadow: 0 -18px 48px rgba(21,17,14,.18); }
+        }
         @media (max-width: 980px) {
-            .services-grid { grid-template-columns: 1fr; }
-            .audience-grid { grid-template-columns: repeat(2, 1fr); }
-            .videos-grid { grid-template-columns: 1fr; }
-            .badges-row, .guarantees { grid-template-columns: 1fr; }
-            .contact-wrapper { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr 1fr; }
-            .timeline { grid-template-columns: 1fr 1fr; row-gap: 2.5rem; }
-            .timeline::before { display: none; }
+            .escena { grid-template-columns: 1fr; gap: 1.6rem; }
+            .escena:nth-child(even) .escena-art { order: 0; }
+            .escena-art { order: -1; }
+            .fases { grid-template-columns: 1fr; }
+            .origen-grid { grid-template-columns: 1fr; }
+            .cond-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .cierre-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 600px) {
             .nav-menu { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: .25rem; background: var(--paper); padding: 1rem var(--gutter) 1.4rem; border-bottom: 1px solid var(--line); box-shadow: var(--shadow); }
@@ -346,13 +403,15 @@
             .nav-menu .nav-link { padding: .7rem 0; }
             .nav-cta { margin: .5rem 0 0; }
             .mobile-menu-btn { display: block; }
-            .audience-grid { grid-template-columns: 1fr; }
-            .timeline { grid-template-columns: 1fr; }
-            .form-row { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; }
-            .footer-bottom { flex-direction: column; text-align: center; }
-            .scroll-indicator { display: none; }
+            h1 { font-size: clamp(2.25rem, 9vw, 2.6rem); }
+            .display { font-size: clamp(1.6rem, 7.5vw, 2.1rem); }
             .hero-actions .btn { width: 100%; }
+            .form-row { grid-template-columns: 1fr; }
+            .sintoma { grid-template-columns: 48px 1fr; gap: 1rem; }
+            .sintoma-num { font-size: 1.6rem; }
+            .scroll-indicator { display: none; }
+            .compuerta { grid-template-columns: 1fr; }
+            .footer-band-inner { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -365,470 +424,475 @@
                 <span class="logo-text">Asesorías</span>
             </a>
             <div class="nav-menu" id="nav-menu">
+                <a href="#problema" class="nav-link">El problema</a>
                 <a href="#servicios" class="nav-link">Servicios</a>
-                <a href="#nosotros" class="nav-link">Para quién</a>
-                <a href="#metodologia" class="nav-link">Cómo trabajamos</a>
-                <a href="#recursos" class="nav-link">Recursos</a>
-                <a href="#contacto" class="btn btn-primary nav-cta">Conversemos</a>
+                <a href="#metodo" class="nav-link">Método</a>
+                <a href="#origen" class="nav-link">Quiénes somos</a>
+                <a href="#condiciones" class="nav-link">Condiciones</a>
+                <a href="#contacto" class="btn btn-primary nav-cta">Agendar diagnóstico</a>
             </div>
             <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
-                <i class="fas fa-bars" aria-hidden="true"></i>
+                <svg class="icon-bars" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
     </nav>
 
-    <!-- ============================================ HERO ============================================ -->
+    <!-- ============================================ S1 — HERO ============================================ -->
     <section id="inicio" class="hero">
-        <img class="hero-img" src="img/hero.webp" srcset="img/hero-1280.webp 1280w, img/hero.webp 1920w" sizes="100vw" width="1920" height="2880" alt="" loading="eager" fetchpriority="high">
-        <!-- TODO (opcional): si más adelante hay un video real de producción, puede reemplazar la <img> por un <video> de fondo. -->
+        <img class="hero-img" id="hero-img" src="img/hero.webp" srcset="img/hero-1280.webp 1280w, img/hero.webp 1920w" sizes="100vw" width="1920" height="2880" alt="" loading="eager" fetchpriority="high">
         <div class="container">
             <div class="hero-content">
-                <span class="hero-badge">
+                <span class="hero-badge hero-rise hero-rise-1">
                     <span class="hero-badge-dot" aria-hidden="true"></span>
-                    Consultoría en datos e inteligencia artificial
+                    Datos, automatización e IA para empresas
                 </span>
 
-                <h1>Transformamos sus datos en <em>decisiones claras</em></h1>
+                <h1>
+                    <span class="h1-line hero-rise hero-rise-2">Primero la tubería.</span>
+                    <span class="h1-line hero-rise hero-rise-3"><em>Después la IA.</em></span>
+                </h1>
 
-                <p class="hero-description">
-                    Ayudamos a equipos de Finanzas, RRHH y Operaciones a dejar de perder
-                    tiempo en tareas manuales y tomar mejores decisiones con información
-                    confiable. Sin complicaciones técnicas.
+                <p class="hero-description hero-rise hero-rise-4">
+                    Automatizamos el cierre, la cobranza y el reporting de empresas en Chile.
+                    Cuando sus datos corren solos, recién entonces hablamos de inteligencia artificial.
                 </p>
 
-                <p class="roll-line">
-                    <span>Especialistas en</span>
-                    <span class="roll" aria-label="tableros de gestión, automatización de procesos, inteligencia artificial, capacitación a equipos y decisiones con datos">
-                        <ul aria-hidden="true">
-                            <li>tableros de gestión</li>
-                            <li>automatización de procesos</li>
-                            <li>inteligencia artificial</li>
-                            <li>capacitación a equipos</li>
-                            <li>decisiones con datos</li>
-                            <li>tableros de gestión</li>
-                        </ul>
-                    </span>
-                </p>
-
-                <div class="hero-actions">
-                    <a href="#contacto" class="btn btn-light">
-                        <i class="fas fa-calendar-check" aria-hidden="true"></i>
-                        Conversemos sobre su caso
-                    </a>
-                    <a href="#servicios" class="link-action">
-                        Ver qué hacemos <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                <div class="hero-actions hero-rise hero-rise-4">
+                    <a href="#contacto" class="btn btn-light">Agendar diagnóstico de 30 minutos</a>
+                    <a href="#metodo" class="link-action">
+                        Ver cómo trabajamos <span class="arr" aria-hidden="true">→</span>
                     </a>
                 </div>
+                <p class="hero-micro hero-rise hero-rise-4">Sin costo. Si no podemos ayudarle, se lo decimos en la primera reunión.</p>
             </div>
         </div>
 
-        <a href="#servicios" class="scroll-indicator" aria-label="Bajar a servicios">
-            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        <a href="#problema" class="scroll-indicator" aria-label="Bajar al contenido">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </a>
     </section>
 
-    <!-- ============================================ BARRA DE CONFIANZA ============================================ -->
-    <div class="trust-bar">
+    <!-- ============================================ S2 — EL ESPEJO ============================================ -->
+    <section id="problema" class="espejo">
         <div class="container">
-            <div class="trust-content">
-                <i class="fas fa-award" aria-hidden="true"></i>
-                <p>Respaldados por <strong>Instituto Tecnipro</strong> — OTEC certificado bajo norma <strong>NCh2728</strong></p>
+            <div class="espejo-inner">
+                <div class="reveal">
+                    <span class="eyebrow">Le suena conocido</span>
+                    <h2>Su empresa ya tiene los datos. Lo que no tiene es la respuesta.</h2>
+                </div>
+                <ul class="sintomas">
+                    <li class="sintoma reveal" style="--i:0">
+                        <span class="sintoma-num" aria-hidden="true">01</span>
+                        <p>El cierre del mes vive en una planilla que alguien arma a mano un viernes a las siete de la tarde — cruzando el ERP con los DTE del SII, fila por fila.</p>
+                    </li>
+                    <li class="sintoma reveal" style="--i:1">
+                        <span class="sintoma-num" aria-hidden="true">02</span>
+                        <p>La conciliación bancaria sigue siendo una persona con dos pestañas abiertas, marcando con color.</p>
+                    </li>
+                    <li class="sintoma reveal" style="--i:2">
+                        <span class="sintoma-num" aria-hidden="true">03</span>
+                        <p>Cada gerente llega al comité con su propia versión de la cifra, y la reunión se gasta en discutir cuál es la verdadera.</p>
+                    </li>
+                    <li class="sintoma reveal" style="--i:3">
+                        <span class="sintoma-num" aria-hidden="true">04</span>
+                        <p>El dashboard que mandó a hacer el año pasado nadie lo abre. Porque nadie confía en lo que muestra.</p>
+                    </li>
+                </ul>
+                <p class="espejo-stack reveal">Da lo mismo si su ERP es Softland, Defontana, Nubox o una planilla con nombre de ERP: el problema es el mismo. Los datos llegan, pero no conversan.</p>
             </div>
+            <p class="bridge reveal">La pregunta no es si su empresa tiene datos. Es quién está decidiendo con ellos.</p>
         </div>
-    </div>
+    </section>
 
-    <!-- ============================================ SERVICIOS ============================================ -->
-    <section id="servicios" class="section-light">
+    <!-- ============================================ S3 — SERVICIOS COMO ESCENAS ============================================ -->
+    <section id="servicios" class="section-light section-pad">
         <div class="container">
-            <div class="section-header reveal">
+            <div class="escenas-head reveal">
                 <span class="eyebrow">Servicios</span>
-                <h2>¿En qué podemos ayudarle?</h2>
-                <p>Soluciones prácticas para problemas reales de su operación diaria.</p>
+                <h2>Lo que cambia cuando los datos corren solos.</h2>
             </div>
-            <div class="services-grid">
-                <article class="service-card reveal" data-delay="0">
-                    <div class="service-icon"><i class="fas fa-chart-pie" aria-hidden="true"></i></div>
-                    <h3>Tableros de Gestión</h3>
-                    <p>Visualice toda la información de su área en un solo lugar. Reportes que se actualizan solos y que cualquier persona puede entender.</p>
-                    <span class="service-benefit"><i class="fas fa-check" aria-hidden="true"></i> Deje de armar reportes en Excel cada semana</span>
-                </article>
-                <article class="service-card reveal" data-delay="1">
-                    <div class="service-icon"><i class="fas fa-gears" aria-hidden="true"></i></div>
-                    <h3>Automatización de Procesos</h3>
-                    <p>Eliminamos las tareas repetitivas que consumen tiempo: envío de correos, consolidación de datos, generación de documentos.</p>
-                    <span class="service-benefit"><i class="fas fa-check" aria-hidden="true"></i> Recupere hasta 10 horas semanales por persona</span>
-                </article>
-                <article class="service-card reveal" data-delay="0">
-                    <div class="service-icon"><i class="fas fa-robot" aria-hidden="true"></i></div>
-                    <h3>Inteligencia Artificial Aplicada</h3>
-                    <p>Implementamos asistentes de IA que ayudan a su equipo a encontrar información, redactar documentos y analizar datos más rápido.</p>
-                    <span class="service-benefit"><i class="fas fa-check" aria-hidden="true"></i> Tecnología de punta, sin complicaciones</span>
-                </article>
-                <article class="service-card reveal" data-delay="1">
-                    <div class="service-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></div>
-                    <h3>Capacitación y Acompañamiento</h3>
-                    <p>Entrenamos a su equipo para que aproveche estas herramientas. Cursos prácticos, en español, orientados a resultados.</p>
-                    <span class="service-benefit"><i class="fas fa-check" aria-hidden="true"></i> A través de Tecnipro, OTEC certificado</span>
-                </article>
+
+            <article class="escena reveal">
+                <div class="escena-copy">
+                    <span class="escena-eyebrow">Datos y reporting</span>
+                    <h3>La cifra lo espera a usted, no usted a la cifra.</h3>
+                    <p class="escena-story">
+                        Es lunes, 8 de la mañana. El gerente de finanzas abre un panel que ya consolidó
+                        las ventas del fin de semana desde el ERP. Nadie transcribió nada. Nadie pidió la
+                        planilla por correo. <strong>Las planillas que su equipo consolida a mano cada semana
+                        dejan de existir.</strong>
+                    </p>
+                </div>
+                <div class="escena-art">
+                    <figure>
+                        <div class="art-frame">
+                            <div class="art-chrome" aria-hidden="true"><span></span><span></span><span></span></div>
+                            <svg viewBox="0 0 560 320" role="img" aria-label="Representación referencial de un panel de gestión">
+                                <rect width="560" height="320" fill="#FBFAF7"/>
+                                <text x="28" y="40" font-family="Georgia, serif" font-size="17" fill="#15110E">Panel de gestión — Finanzas</text>
+                                <text x="28" y="60" font-family="Inter, sans-serif" font-size="10" fill="#9c948a">Actualizado automáticamente desde el ERP</text>
+                                <!-- KPIs -->
+                                <g font-family="Inter, sans-serif">
+                                    <rect x="28" y="78" width="156" height="64" rx="8" fill="#fff" stroke="#E7E3DA"/>
+                                    <text x="42" y="100" font-size="9" fill="#6B6157" letter-spacing="1">VENTAS DEL MES</text>
+                                    <rect x="42" y="110" width="92" height="14" rx="3" fill="#211B16"/>
+                                    <rect x="194" y="78" width="156" height="64" rx="8" fill="#fff" stroke="#E7E3DA"/>
+                                    <text x="208" y="100" font-size="9" fill="#6B6157" letter-spacing="1">COBRANZA AL DÍA</text>
+                                    <rect x="208" y="110" width="74" height="14" rx="3" fill="#B08442"/>
+                                    <rect x="360" y="78" width="172" height="64" rx="8" fill="#fff" stroke="#E7E3DA"/>
+                                    <text x="374" y="100" font-size="9" fill="#6B6157" letter-spacing="1">MARGEN</text>
+                                    <rect x="374" y="110" width="60" height="14" rx="3" fill="#3F7D5B"/>
+                                </g>
+                                <!-- Barras -->
+                                <g>
+                                    <rect x="28" y="160" width="324" height="132" rx="8" fill="#fff" stroke="#E7E3DA"/>
+                                    <text x="42" y="184" font-family="Inter, sans-serif" font-size="9" fill="#6B6157" letter-spacing="1">VENTAS POR SEMANA</text>
+                                    <rect x="50" y="244" width="30" height="32" rx="2" fill="#D8B57E"/>
+                                    <rect x="94" y="226" width="30" height="50" rx="2" fill="#D8B57E"/>
+                                    <rect x="138" y="236" width="30" height="40" rx="2" fill="#B08442"/>
+                                    <rect x="182" y="210" width="30" height="66" rx="2" fill="#B08442"/>
+                                    <rect x="226" y="218" width="30" height="58" rx="2" fill="#8C6534"/>
+                                    <rect x="270" y="198" width="30" height="78" rx="2" fill="#8C6534"/>
+                                </g>
+                                <!-- Línea -->
+                                <g>
+                                    <rect x="360" y="160" width="172" height="132" rx="8" fill="#fff" stroke="#E7E3DA"/>
+                                    <text x="374" y="184" font-family="Inter, sans-serif" font-size="9" fill="#6B6157" letter-spacing="1">FLUJO PROYECTADO</text>
+                                    <polyline points="374,262 404,250 434,256 464,232 494,238 518,212" fill="none" stroke="#3F7D5B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <figcaption>Representación referencial de un panel de gestión — datos de demostración.</figcaption>
+                    </figure>
+                </div>
+            </article>
+
+            <article class="escena reveal">
+                <div class="escena-copy">
+                    <span class="escena-eyebrow">Automatización de procesos</span>
+                    <h3>La cobranza y la conciliación dejan de depender de la memoria de alguien.</h3>
+                    <p class="escena-story">
+                        El sistema cruza la cartola bancaria con las facturas emitidas, marca lo que calza,
+                        levanta lo que no, y envía los recordatorios de cobro sin que nadie tenga que
+                        acordarse. <strong>Su equipo deja de perseguir datos y empieza a usarlos.</strong>
+                    </p>
+                </div>
+                <div class="escena-art">
+                    <figure>
+                        <div class="art-frame">
+                            <svg viewBox="0 0 560 300" role="img" aria-label="Esquema del flujo de automatización: las fuentes de datos se integran en una tubería que alimenta paneles y alertas">
+                                <rect width="560" height="300" fill="#FBFAF7"/>
+                                <g font-family="Inter, sans-serif" font-size="11" fill="#1C1A17">
+                                    <!-- Fuentes -->
+                                    <rect x="32" y="40" width="120" height="44" rx="8" fill="#fff" stroke="#E7E3DA"/>
+                                    <text x="92" y="66" text-anchor="middle">ERP</text>
+                                    <rect x="32" y="128" width="120" height="44" rx="8" fill="#fff" stroke="#E7E3DA"/>
+                                    <text x="92" y="154" text-anchor="middle">Cartola bancaria</text>
+                                    <rect x="32" y="216" width="120" height="44" rx="8" fill="#fff" stroke="#E7E3DA"/>
+                                    <text x="92" y="242" text-anchor="middle">DTE — SII</text>
+                                    <!-- Tubería -->
+                                    <rect x="220" y="106" width="150" height="88" rx="10" fill="#15110E"/>
+                                    <text x="295" y="142" text-anchor="middle" fill="#D8B57E" font-size="11" font-weight="600">TUBERÍA DE DATOS</text>
+                                    <text x="295" y="162" text-anchor="middle" fill="#FAFAF9" font-size="9.5">validación · cruce · historia</text>
+                                    <!-- Salidas -->
+                                    <rect x="436" y="62" width="96" height="44" rx="8" fill="#fff" stroke="#B08442"/>
+                                    <text x="484" y="88" text-anchor="middle">Panel</text>
+                                    <rect x="436" y="128" width="96" height="44" rx="8" fill="#fff" stroke="#B08442"/>
+                                    <text x="484" y="154" text-anchor="middle">Alertas</text>
+                                    <rect x="436" y="194" width="96" height="44" rx="8" fill="#fff" stroke="#B08442"/>
+                                    <text x="484" y="220" text-anchor="middle">Cobranza</text>
+                                </g>
+                                <g stroke="#B08442" stroke-width="1.6" fill="none" stroke-linecap="round">
+                                    <path d="M152 62 C 190 62, 190 122, 220 126"/>
+                                    <path d="M152 150 L 220 150"/>
+                                    <path d="M152 238 C 190 238, 190 178, 220 174"/>
+                                    <path d="M370 126 C 404 122, 404 84, 436 84"/>
+                                    <path d="M370 150 L 436 150"/>
+                                    <path d="M370 174 C 404 178, 404 216, 436 216"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <figcaption>Esquema referencial del flujo de automatización.</figcaption>
+                    </figure>
+                </div>
+            </article>
+
+            <article class="escena reveal">
+                <div class="escena-copy">
+                    <span class="escena-eyebrow">Inteligencia artificial aplicada</span>
+                    <h3>La IA llega al final, cuando hay tubería que la alimente.</h3>
+                    <p class="escena-story">
+                        Con los datos corriendo limpios, la IA tiene de dónde trabajar: resúmenes de gestión
+                        que se redactan solos, alertas que explican el porqué de una desviación, asistentes
+                        que responden con las cifras de su empresa. <strong>Antes de eso, es un chatbot caro.</strong>
+                    </p>
+                </div>
+                <div class="escena-art">
+                    <figure>
+                        <div class="art-frame">
+                            <svg viewBox="0 0 560 300" role="img" aria-label="Ejemplo referencial de un resumen de gestión generado con inteligencia artificial">
+                                <rect width="560" height="300" fill="#FBFAF7"/>
+                                <rect x="36" y="32" width="488" height="236" rx="10" fill="#fff" stroke="#E7E3DA"/>
+                                <text x="60" y="70" font-family="Georgia, serif" font-size="16" fill="#15110E">Resumen de gestión — semana</text>
+                                <text x="60" y="90" font-family="Inter, sans-serif" font-size="9.5" fill="#9c948a">Generado automáticamente sobre los datos de la tubería</text>
+                                <g fill="#E7E3DA">
+                                    <rect x="60" y="112" width="420" height="9" rx="4"/>
+                                    <rect x="60" y="130" width="380" height="9" rx="4"/>
+                                    <rect x="60" y="148" width="404" height="9" rx="4"/>
+                                </g>
+                                <rect x="60" y="172" width="3" height="56" fill="#B08442"/>
+                                <text x="76" y="192" font-family="Georgia, serif" font-size="12.5" font-style="italic" fill="#1C1A17">«La desviación del margen se concentra en una</text>
+                                <text x="76" y="212" font-family="Georgia, serif" font-size="12.5" font-style="italic" fill="#1C1A17">línea de producto; el detalle está en el panel.»</text>
+                                <g fill="#E7E3DA">
+                                    <rect x="60" y="240" width="300" height="9" rx="4"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <figcaption>Ejemplo referencial de un resumen generado con IA — datos de demostración.</figcaption>
+                    </figure>
+                </div>
+            </article>
+
+            <div class="escenas-cta reveal">
+                <a href="#contacto" class="btn btn-primary">Agendar diagnóstico de 30 minutos</a>
+            </div>
+            <p class="bridge reveal">Nada de esto parte por la tecnología. Parte por una regla.</p>
+        </div>
+    </section>
+
+    <!-- ============================================ S4 — RESPIRO: LA REGLA ============================================ -->
+    <section class="section-dark grain respiro">
+        <div class="container">
+            <div class="reveal" style="text-align:center;">
+                <p class="display">Una empresa que cierra su mes copiando datos entre cinco planillas no tiene un problema de IA. Tiene un problema de tubería. <em>Por eso tenemos una regla.</em></p>
+                <div class="rule-line" aria-hidden="true"></div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================ PARA QUIÉN ============================================ -->
-    <section id="nosotros" class="section-alt">
+    <!-- ============================================ S5 — EL MÉTODO ============================================ -->
+    <section id="metodo" class="section-dark grain metodo">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="eyebrow">Para quién</span>
-                <h2>Trabajamos con equipos como el suyo</h2>
-                <p>No necesita ser experto en tecnología. Nosotros nos encargamos de eso.</p>
+            <div class="metodo-head reveal">
+                <span class="eyebrow">El método</span>
+                <h2>No tocamos IA hasta que su cierre de mes corra solo.</h2>
+                <p>Esa regla ordena el método completo. Tres fases, cada una con un entregable que es suyo, siga o no con nosotros.</p>
             </div>
-            <div class="audience-grid">
-                <div class="audience-card reveal" data-delay="0">
-                    <div class="ico"><i class="fas fa-calculator" aria-hidden="true"></i></div>
-                    <h3>Finanzas</h3>
-                    <p>Control de presupuesto, reportes automáticos y visibilidad de gastos e ingresos en tiempo real.</p>
-                </div>
-                <div class="audience-card reveal" data-delay="1">
-                    <div class="ico"><i class="fas fa-users" aria-hidden="true"></i></div>
-                    <h3>Recursos Humanos</h3>
-                    <p>Seguimiento de personal, métricas de equipo y automatización de procesos de onboarding.</p>
-                </div>
-                <div class="audience-card reveal" data-delay="2">
-                    <div class="ico"><i class="fas fa-list-check" aria-hidden="true"></i></div>
-                    <h3>Operaciones</h3>
-                    <p>Control de procesos, alertas de desviaciones e indicadores de eficiencia medibles.</p>
-                </div>
-                <div class="audience-card reveal" data-delay="3">
-                    <div class="ico"><i class="fas fa-briefcase" aria-hidden="true"></i></div>
-                    <h3>Gerencia General</h3>
-                    <p>Visión completa del negocio en un solo lugar y decisiones basadas en datos reales.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ METODOLOGÍA ============================================ -->
-    <section id="metodologia" class="section-light">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="eyebrow">Cómo trabajamos</span>
-                <h2>Así trabajamos con usted</h2>
-                <p>Un proceso simple y transparente. Sabe qué esperar en cada momento.</p>
-            </div>
-            <div class="timeline">
-                <div class="tl-step reveal" data-delay="0">
-                    <div class="tl-num">1</div>
-                    <h3>Conversación inicial</h3>
-                    <p>Entendemos su situación actual y los problemas que enfrenta.</p>
-                    <span class="tl-duration">30 minutos, sin costo</span>
-                </div>
-                <div class="tl-step reveal" data-delay="1">
-                    <div class="tl-num">2</div>
+            <div class="fases">
+                <div class="fase reveal" style="--i:0">
+                    <span class="fase-num">FASE 01</span>
                     <h3>Diagnóstico</h3>
-                    <p>Identificamos qué se puede mejorar y cómo hacerlo.</p>
-                    <span class="tl-duration">1 semana</span>
+                    <span class="fase-dur">30 minutos de reunión</span>
+                    <p>Conversamos sobre su operación: dónde se pierde tiempo, dónde no calzan las cifras, qué decide a ciegas.</p>
+                    <div class="entregable">
+                        <span class="lbl">Entregable</span>
+                        <p>Un mapa priorizado de oportunidades, por escrito, dentro de 72 horas. Suyo, decida o no seguir.</p>
+                    </div>
                 </div>
-                <div class="tl-step reveal" data-delay="2">
-                    <div class="tl-num">3</div>
-                    <h3>Implementación</h3>
-                    <p>Construimos la solución y la dejamos funcionando.</p>
-                    <span class="tl-duration">2-4 semanas</span>
+                <div class="fase reveal" style="--i:1">
+                    <span class="fase-num">FASE 02</span>
+                    <h3>Diseño e implementación</h3>
+                    <span class="fase-dur">2 a 4 semanas</span>
+                    <p>Construimos la tubería: los datos de su ERP, banco y SII corriendo solos hacia un panel confiable.</p>
+                    <div class="entregable">
+                        <span class="lbl">Entregable</span>
+                        <p>Un tablero que su gerente abre cada mañana. No un PDF de 80 páginas.</p>
+                    </div>
                 </div>
-                <div class="tl-step reveal" data-delay="3">
-                    <div class="tl-num">4</div>
-                    <h3>Acompañamiento</h3>
-                    <p>Soporte continuo para que todo siga funcionando bien.</p>
-                    <span class="tl-duration">Permanente</span>
+                <div class="fase reveal" style="--i:2">
+                    <span class="fase-num">FASE 03</span>
+                    <h3>Operación</h3>
+                    <span class="fase-dur">Permanente · mensualidad fija</span>
+                    <p>El sistema no se entrega y se abandona: se opera. Monitoreo, mantención y mejoras continuas.</p>
+                    <div class="entregable">
+                        <span class="lbl">Entregable</span>
+                        <p>El sistema mantenido y mejorado, con compromiso de respuesta por escrito.</p>
+                    </div>
                 </div>
             </div>
+            <div class="compuerta reveal">
+                <div class="compuerta-ico" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div>
+                    <h3>La compuerta: recién aquí entra la IA.</h3>
+                    <p>Cuando el cierre corre solo y las cifras son confiables, la IA tiene de dónde alimentarse — y deja de ser una promesa para convertirse en una herramienta.</p>
+                </div>
+            </div>
+            <div class="metodo-cta reveal">
+                <a href="#contacto" class="btn btn-bronze">Agendar diagnóstico de 30 minutos</a>
+            </div>
+            <p class="bridge reveal">El método es nuestro. Lo primero que hicimos con él fue usarlo en casa.</p>
         </div>
     </section>
 
-    <!-- ============================================ CREDIBILIDAD / ALIANZA ============================================ -->
-    <section class="section-dark">
+    <!-- ============================================ S6 — ORIGEN Y PRUEBA ============================================ -->
+    <section id="origen" class="section-alt section-pad">
         <div class="container">
-            <div class="cred-head reveal">
-                <span class="logos"><i class="fas fa-handshake" aria-hidden="true"></i> JRO Asesorías + Instituto Tecnipro</span>
-                <p>Trabajamos en alianza con Instituto de Capacitación Tecnipro, OTEC certificado bajo norma NCh2728, dentro del respaldo del Grupo Duocapital.</p>
-            </div>
-            <div class="badges-row">
-                <div class="badge-card reveal" data-delay="0">
-                    <div class="ico"><i class="fas fa-certificate" aria-hidden="true"></i></div>
-                    <h3>OTEC certificado</h3>
-                    <p>Bajo norma chilena NCh2728, a través de Instituto Tecnipro.</p>
+            <div class="origen-grid">
+                <div class="origen-copy reveal">
+                    <span class="eyebrow">Quiénes somos</span>
+                    <h2>Construimos estos sistemas para operar nuestro propio grupo. Después nos los empezaron a pedir.</h2>
+                    <p>
+                        JRO Asesorías nace dentro del <strong>Grupo Duocapital</strong>. Los paneles de finanzas,
+                        cobranza y reporting que ofrecemos son los mismos que operan a diario la gestión
+                        de nuestro propio grupo y del <strong>Instituto Tecnipro</strong>. Con este método
+                        cerramos nuestro propio mes — por eso sabemos exactamente dónde duele y qué funciona.
+                    </p>
+                    <p>
+                        No vendemos software de terceros ni licencias con nombre de fantasía: diseñamos
+                        la tubería sobre las herramientas que su empresa ya tiene, y la dejamos en sus manos.
+                    </p>
+                    <div class="socio-line reveal">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <p>El diagnóstico lo atiende un socio del grupo — no un vendedor.</p>
+                    </div>
                 </div>
-                <div class="badge-card reveal" data-delay="1">
-                    <div class="ico"><i class="fas fa-layer-group" aria-hidden="true"></i></div>
-                    <h3>Parte del Grupo Duocapital</h3>
-                    <p>Respaldo y soporte unificado de un grupo de empresas consolidado.</p>
-                </div>
-                <div class="badge-card reveal" data-delay="2">
-                    <div class="ico"><i class="fas fa-handshake-angle" aria-hidden="true"></i></div>
-                    <h3>Alianza con Tecnipro</h3>
-                    <p>Capacitación y acompañamiento de la mano de especialistas certificados.</p>
+                <div class="trayectoria reveal" style="--i:1">
+                    <span class="eyebrow">Trayectoria del grupo</span>
+                    <p>A través del Instituto Tecnipro — OTEC certificada bajo la norma NCh2728 —, el grupo ha capacitado a equipos de instituciones como:</p>
+                    <ul class="inst-list">
+                        <li>Asociación Chilena de Seguridad (ACHS)</li>
+                        <li>Armada de Chile</li>
+                        <li>Fuerza Aérea de Chile</li>
+                        <li>Pontificia Universidad Católica de Chile</li>
+                        <li>Universidad Andrés Bello</li>
+                        <li>Colun</li>
+                        <li>Seremi de Educación</li>
+                    </ul>
+                    <p class="inst-more">…entre muchas otras a lo largo de su historia.</p>
                 </div>
             </div>
-            <div class="guarantees">
-                <div class="guarantee reveal" data-delay="0"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Diagnóstico inicial sin costo</span></div>
-                <div class="guarantee reveal" data-delay="1"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Respuesta en menos de 24 horas</span></div>
-                <div class="guarantee reveal" data-delay="2"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Acompañamiento permanente</span></div>
-            </div>
-            <p class="cred-method reveal">En español, orientados a resultados y sin complicaciones técnicas.</p>
+            <p class="bridge reveal">Queda una pregunta razonable: cómo se trabaja con nosotros y qué pasa después.</p>
         </div>
     </section>
 
-    <!-- ============================================ RECURSOS / VIDEOS ============================================ -->
-    <section id="recursos" class="section-alt">
+    <!-- ============================================ S7 — CONDICIONES ============================================ -->
+    <section id="condiciones" class="section-alt-3 section-pad condiciones">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="eyebrow">Recursos gratuitos</span>
-                <h2>Contenido para entender el valor de sus datos</h2>
-                <p>Material práctico sobre cómo los datos pueden ayudar a su empresa.</p>
+            <div class="reveal">
+                <span class="eyebrow">Cómo se trabaja con nosotros</span>
+                <h2>Condiciones claras antes de la primera reunión.</h2>
             </div>
-            <div class="videos-grid">
-                <article class="video-card reveal" data-delay="0">
-                    <div class="video-wrapper">
-                        <iframe src="https://player.vimeo.com/video/1095168160?h=dac104e81f&title=0&byline=0&portrait=0" title="El poder de los datos" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <h3>El poder de los datos</h3>
-                        <p>Cómo las empresas líderes usan información para tomar mejores decisiones.</p>
-                    </div>
-                </article>
-                <article class="video-card reveal" data-delay="1">
-                    <div class="video-wrapper">
-                        <iframe src="https://player.vimeo.com/video/1095176960?h=64c6c1108a&title=0&byline=0&portrait=0" title="Automatización inteligente" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <h3>Automatización inteligente</h3>
-                        <p>Cómo eliminar tareas repetitivas sin perder el control.</p>
-                    </div>
-                </article>
-                <article class="video-card reveal" data-delay="2">
-                    <div class="video-wrapper">
-                        <iframe src="https://player.vimeo.com/video/1095169755?h=8fb10670ba&title=0&byline=0&portrait=0" title="IA para negocios" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <h3>IA para negocios</h3>
-                        <p>Casos prácticos de inteligencia artificial en empresas reales.</p>
-                    </div>
-                </article>
+            <div class="cond-grid">
+                <div class="cond-col reveal" style="--i:0">
+                    <h3>El modelo</h3>
+                    <ul class="cond-list">
+                        <li>
+                            <span class="cond-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <p><strong>Proyectos de 2 a 4 semanas, con precio cerrado por escrito antes de empezar.</strong><br><span class="det">Sin sorpresas a mitad de camino.</span></p>
+                        </li>
+                        <li>
+                            <span class="cond-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <p><strong>Operación con mensualidad fija</strong> y compromiso de respuesta (SLA) por escrito.</p>
+                        </li>
+                        <li>
+                            <span class="cond-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <p><strong>El diagnóstico y el mapa de oportunidades no lo comprometen a nada.</strong><br><span class="det">El mapa es suyo, decida o no seguir con nosotros.</span></p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="cond-col reveal" style="--i:1">
+                    <h3>Continuidad y confidencialidad</h3>
+                    <ul class="cond-list">
+                        <li>
+                            <span class="cond-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <p><strong>El código, la documentación y los accesos quedan en su propiedad desde el día uno.</strong><br><span class="det">Si mañana quiere seguir con otro equipo, puede.</span></p>
+                        </li>
+                        <li>
+                            <span class="cond-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <p><strong>Trabajamos bajo acuerdo de confidencialidad desde la primera reunión.</strong></p>
+                        </li>
+                        <li>
+                            <span class="cond-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <p><strong>No reemplazamos a su equipo:</strong> le quitamos el trabajo que no debería estar haciendo una persona.</p>
+                        </li>
+                        <li>
+                            <span class="cond-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <p><strong>Trabajamos sobre su stack actual:</strong><br><span class="det">ERP chilenos (Softland, Defontana, Nubox u otros), SII/DTE, planillas, SharePoint y Power BI — construyendo con Python y bases de datos SQL.</span></p>
+                        </li>
+                    </ul>
+                </div>
             </div>
+            <p class="bridge reveal">Eso es todo lo que hay que saber. Lo que sigue es una conversación de 30 minutos.</p>
         </div>
     </section>
 
-    <!-- ============================================ CONTACTO ============================================ -->
-    <section id="contacto" class="section-light">
+    <!-- ============================================ S8 — CIERRE: EL HERO INVERTIDO ============================================ -->
+    <section id="contacto" class="section-dark grain cierre">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="eyebrow">Contacto</span>
-                <h2>¿Listo para conversar?</h2>
-                <p>Cuéntenos brevemente su situación. Le responderemos en menos de 24 horas.</p>
-            </div>
-            <div class="contact-wrapper">
-                <div class="contact-info reveal">
-                    <h3>También puede escribirnos directamente</h3>
-                    <p>Elija el canal que le resulte más cómodo.</p>
-                    <div class="contact-methods">
-                        <a href="https://wa.me/56966895746" class="contact-method">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                            <span><span class="ct-label">WhatsApp</span><span class="ct-value">+56 9 6689 5746</span></span>
+            <h2 class="display cierre-statement reveal">La ventaja no la tendrá quien tenga más datos. <em>La tendrá quien decida con ellos primero.</em></h2>
+
+            <div class="cierre-grid">
+                <div class="despues reveal">
+                    <h3>Qué pasa después</h3>
+                    <ol class="pasos">
+                        <li><p><strong>Conversamos 30 minutos</strong> sobre su operación: dónde se pierde tiempo y qué decide a ciegas.</p></li>
+                        <li><p><strong>Dentro de 72 horas</strong> recibe un mapa de oportunidades por escrito, priorizado y accionable.</p></li>
+                        <li><p><strong>Usted decide si avanzamos.</strong> Sin compromiso: el mapa es suyo de todas formas.</p></li>
+                    </ol>
+                    <div class="canales">
+                        <a href="https://wa.me/56966895746" class="canal">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                            WhatsApp · +56 9 6689 5746
                         </a>
-                        <a href="mailto:info@duocapital.cl" class="contact-method">
-                            <i class="fas fa-envelope" aria-hidden="true"></i>
-                            <span><span class="ct-label">Email</span><span class="ct-value">info@duocapital.cl</span></span>
-                        </a>
-                        <a href="tel:+56966895746" class="contact-method">
-                            <i class="fas fa-phone" aria-hidden="true"></i>
-                            <span><span class="ct-label">Teléfono</span><span class="ct-value">+56 9 6689 5746</span></span>
+                        <a href="mailto:info@duocapital.cl" class="canal">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                            info@duocapital.cl
                         </a>
                     </div>
-                    <p class="group-note"><i class="fas fa-info-circle" aria-hidden="true"></i>JRO es miembro del Grupo Duocapital</p>
-                    <div class="duocapital-explainer">
-                        <strong>¿Por qué nuestro correo es @duocapital.cl?</strong>
-                        <p>JRO Asesorías e Instituto Tecnipro son parte del Grupo Duocapital. Usamos un correo centralizado para:</p>
-                        <ul>
-                            <li>Responder más rápido a sus consultas</li>
-                            <li>Darle respaldo unificado del grupo</li>
-                            <li>Derivar cada solicitud al equipo correcto</li>
-                        </ul>
-                    </div>
+                    <p class="grupo-line">JRO Asesorías es parte del Grupo Duocapital.</p>
                 </div>
-                <form class="contact-form reveal" action="https://formsubmit.co/info@duocapital.cl" method="POST">
+
+                <form class="cierre-form reveal" style="--i:1" action="https://formsubmit.co/info@duocapital.cl" method="POST">
+                    <input type="hidden" name="_subject" value="Solicitud de diagnóstico — jroasesorias.cl">
+                    <p class="form-title">Agendar diagnóstico de 30 minutos</p>
+                    <p class="form-sub">Cuatro campos. Le respondemos con horarios disponibles.</p>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="nombre">Nombre *</label>
                             <input type="text" id="nombre" name="nombre" required placeholder="Su nombre">
                         </div>
                         <div class="form-group">
-                            <label for="empresa">Empresa</label>
-                            <input type="text" id="empresa" name="empresa" placeholder="Nombre de su empresa">
+                            <label for="empresa">Empresa *</label>
+                            <input type="text" id="empresa" name="empresa" required placeholder="Nombre de su empresa">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required placeholder="su@email.com">
+                        <label for="email">Email corporativo *</label>
+                        <input type="email" id="email" name="email" required placeholder="su@empresa.cl">
                     </div>
                     <div class="form-group">
-                        <label for="area">¿En qué área trabaja?</label>
-                        <select id="area" name="area">
+                        <label for="desafio">Su principal desafío hoy</label>
+                        <select id="desafio" name="desafio">
                             <option value="">Seleccione una opción</option>
-                            <option value="finanzas">Finanzas / Contabilidad</option>
-                            <option value="rrhh">Recursos Humanos</option>
-                            <option value="operaciones">Operaciones</option>
-                            <option value="gerencia">Gerencia General</option>
-                            <option value="ti">Tecnología / TI</option>
-                            <option value="otro">Otra área</option>
+                            <option value="cierre">Cierre de mes y reportes manuales</option>
+                            <option value="cobranza">Cobranza y conciliación</option>
+                            <option value="dashboards">Dashboards que nadie usa o no son confiables</option>
+                            <option value="ia">Quiero explorar IA en mi operación</option>
+                            <option value="otro">Otro desafío</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="mensaje">¿Qué problema le gustaría resolver?</label>
-                        <textarea id="mensaje" name="mensaje" placeholder="Cuéntenos brevemente su situación..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                        Enviar mensaje
-                    </button>
+                    <button type="submit" class="btn btn-primary">Agendar diagnóstico</button>
+                    <p class="form-reply">Respuesta en menos de 24 horas.</p>
                 </form>
             </div>
         </div>
+
+        <!-- Footer integrado como banda final del mismo lienzo oscuro -->
+        <div class="footer-band">
+            <div class="container footer-band-inner">
+                <p class="fb-brand">JRO <span>Asesorías · Grupo Duocapital</span></p>
+                <div class="fb-links">
+                    <a href="https://player.vimeo.com/video/1095168160" target="_blank" rel="noopener">El poder de los datos</a>
+                    <a href="https://player.vimeo.com/video/1095176960" target="_blank" rel="noopener">Automatización inteligente</a>
+                    <a href="https://player.vimeo.com/video/1095169755" target="_blank" rel="noopener">IA para negocios</a>
+                </div>
+                <p>© 2026 JRO Asesorías E.I.R.L. · RUT 76.325.663-4 · Santiago, Chile · En alianza con Instituto Tecnipro</p>
+            </div>
+        </div>
     </section>
-
-    <!-- ============================================ FOOTER ============================================ -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <a href="#inicio" class="logo" aria-label="JRO Asesorías, inicio">
-                        <span class="logo-jro">JRO</span>
-                        <span class="logo-text">Asesorías</span>
-                    </a>
-                    <p>Ayudamos a equipos administrativos a trabajar mejor con sus datos. Consultoría, automatización y capacitación en herramientas Microsoft y tecnologías de IA.</p>
-                </div>
-                <div class="footer-column">
-                    <h4>Navegación</h4>
-                    <div class="footer-links">
-                        <a href="#servicios">Servicios</a>
-                        <a href="#nosotros">Para quién</a>
-                        <a href="#metodologia">Cómo trabajamos</a>
-                        <a href="#recursos">Recursos</a>
-                        <a href="#contacto">Contacto</a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h4>Contacto</h4>
-                    <div class="footer-links">
-                        <a href="tel:+56966895746"><i class="fas fa-phone" aria-hidden="true"></i>+56 9 6689 5746</a>
-                        <a href="mailto:info@duocapital.cl"><i class="fas fa-envelope" aria-hidden="true"></i>info@duocapital.cl</a>
-                        <a href="https://wa.me/56966895746"><i class="fab fa-whatsapp" aria-hidden="true"></i>WhatsApp</a>
-                        <span class="footer-note">JRO es miembro del Grupo Duocapital</span>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2025 JRO Asesorías E.I.R.L. · RUT: 76.325.663-4 · Santiago, Chile</p>
-                <p>En alianza con Instituto Tecnipro</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ============================================
-         CHATBOT JRO ASESORÍAS (neutro/discreto, cálido)
-         Backend: netlify/functions/chat.js (Claude + Power Automate)
-         ============================================ -->
-    <style>
-      .jro-chat-button {
-        position: fixed; bottom: 24px; right: 24px; min-width: 54px; height: 54px; padding: 0 18px;
-        background: #211B16; border: 1px solid rgba(255,255,255,.14); border-radius: 999px;
-        box-shadow: 0 8px 24px rgba(21,17,14,.24); cursor: pointer; z-index: 99999;
-        display: flex; align-items: center; justify-content: center; gap: 8px;
-        transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
-      }
-      .jro-chat-button:hover { transform: translateY(-2px); background: #15110E; box-shadow: 0 12px 28px rgba(21,17,14,.32); }
-      .jro-chat-button svg { width: 24px; height: 24px; fill: #fff; }
-      .jro-chat-button .chat-label { color: #fff; font-weight: 600; font-size: 14px; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
-      .jro-chat-button.open .chat-label { display: none; }
-      .jro-chat-button.open { width: 54px; min-width: 54px; padding: 0; border-radius: 50%; }
-      .jro-chat-button.open svg.chat-icon { display: none; }
-      .jro-chat-button svg.close-icon { display: none; }
-      .jro-chat-button.open svg.close-icon { display: block; }
-
-      .jro-chat-window {
-        position: fixed; bottom: 90px; right: 24px; width: 400px; height: 560px; max-height: calc(100vh - 140px);
-        background: #fff; border: 1px solid #E7E3DA; border-radius: 16px; box-shadow: 0 18px 48px rgba(21,17,14,.24);
-        z-index: 99999; display: none; flex-direction: column; overflow: hidden;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      }
-      .jro-chat-window.open { display: flex; animation: jroSlideUp .3s ease; }
-      @keyframes jroSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
-      .jro-chat-header { background: #15110E; color: #fff; padding: 16px 18px; display: flex; align-items: center; gap: 12px; }
-      .jro-chat-avatar { width: 38px; height: 38px; background: #B08442; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 15px; font-family: 'Fraunces', Georgia, serif; color: #fff; }
-      .jro-chat-header-info h4 { margin: 0; font-size: 14px; font-weight: 600; color: #fff; }
-      .jro-chat-header-info p { margin: 2px 0 0; font-size: 12px; color: #b6ada1; }
-      .jro-chat-status { width: 8px; height: 8px; background: #6BBF8A; border-radius: 50%; margin-left: auto; }
-      .jro-chat-close { background: rgba(255,255,255,.14); border: none; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-left: 8px; transition: background .2s; }
-      .jro-chat-close:hover { background: rgba(255,255,255,.28); }
-      .jro-chat-close svg { width: 16px; height: 16px; stroke: #fff; }
-
-      .jro-chat-messages { flex: 1; overflow-y: auto; padding: 16px; background: #FBFAF7; display: flex; flex-direction: column; gap: 12px; }
-      .jro-chat-message { max-width: 85%; padding: 11px 15px; border-radius: 14px; font-size: 14px; line-height: 1.5; animation: jroFadeIn .3s ease; word-wrap: break-word; }
-      @keyframes jroFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-      .jro-chat-message.bot { background: #fff; border: 1px solid #E7E3DA; align-self: flex-start; border-bottom-left-radius: 4px; }
-      .jro-chat-message.user { background: #211B16; color: #FAFAF9; align-self: flex-end; border-bottom-right-radius: 4px; }
-      .jro-chat-message.typing { background: #fff; border: 1px solid #E7E3DA; align-self: flex-start; }
-      .jro-typing-dots { display: flex; gap: 4px; }
-      .jro-typing-dots span { width: 7px; height: 7px; background: #b6ada1; border-radius: 50%; animation: jroTyping 1.4s infinite; }
-      .jro-typing-dots span:nth-child(2) { animation-delay: .2s; }
-      .jro-typing-dots span:nth-child(3) { animation-delay: .4s; }
-      @keyframes jroTyping { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
-
-      .jro-chat-input-container { padding: 14px; background: #fff; border-top: 1px solid #E7E3DA; display: flex; gap: 10px; }
-      .jro-chat-input { flex: 1; padding: 11px 15px; border: 1px solid #E7E3DA; border-radius: 22px; font-size: 14px; outline: none; font-family: inherit; }
-      .jro-chat-input:focus { border-color: #B08442; box-shadow: 0 0 0 3px rgba(176,132,66,.16); }
-      .jro-chat-send { width: 42px; height: 42px; background: #B08442; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s, transform .2s; }
-      .jro-chat-send:hover { background: #8C6534; transform: scale(1.05); }
-      .jro-chat-send:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-      .jro-chat-send svg { width: 19px; height: 19px; fill: #fff; }
-      .jro-chat-footer { text-align: center; padding: 8px; font-size: 11px; color: #b6ada1; background: #fff; }
-      .jro-chat-message a { text-decoration: underline; }
-      .jro-chat-message.bot a { color: #8C6534; }
-      .jro-chat-message.user a { color: #fff; }
-
-      @media (max-width: 600px) {
-        .jro-chat-window { width: calc(100% - 24px); right: 12px; bottom: 84px; height: 72vh; max-height: 72vh; }
-        .jro-chat-button { bottom: 18px; right: 16px; }
-        .jro-chat-button.open { display: none; }
-      }
-    </style>
-
-    <button class="jro-chat-button" id="jroChatButton" aria-label="Abrir chat">
-      <svg class="chat-icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-      <span class="chat-label">Chat</span>
-      <svg class="close-icon" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-    </button>
-
-    <div class="jro-chat-window" id="jroChatWindow">
-      <div class="jro-chat-header">
-        <div class="jro-chat-avatar">J</div>
-        <div class="jro-chat-header-info">
-          <h4>Asistente JRO Asesorías</h4>
-          <p>Asesoría empresarial</p>
-        </div>
-        <div class="jro-chat-status"></div>
-        <button class="jro-chat-close" id="jroChatClose" aria-label="Cerrar chat">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-      <div class="jro-chat-messages" id="jroChatMessages"></div>
-      <div class="jro-chat-input-container">
-        <input type="text" class="jro-chat-input" id="jroChatInput" placeholder="Escribe tu mensaje..." autocomplete="off">
-        <button class="jro-chat-send" id="jroChatSend" aria-label="Enviar mensaje">
-          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-        </button>
-      </div>
-      <div class="jro-chat-footer">Powered by JRO Asesorías</div>
-    </div>
 
     <!-- ============================================ SCRIPTS ============================================ -->
     <script>
@@ -837,9 +901,6 @@
         function setMenu(open) {
             navMenu.classList.toggle('active', open);
             mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars', !open);
-            icon.classList.toggle('fa-times', open);
         }
         mobileMenuBtn.addEventListener('click', () => setMenu(!navMenu.classList.contains('active')));
         document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => setMenu(false)));
@@ -856,7 +917,8 @@
             });
         });
 
-        const revealEls = document.querySelectorAll('.reveal');
+        // Reveal al scroll: un solo IntersectionObserver para todo el sistema de motion
+        const revealEls = document.querySelectorAll('.reveal, .rule-line');
         if ('IntersectionObserver' in window) {
             const io = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); obs.unobserve(entry.target); } });
@@ -865,101 +927,22 @@
         } else {
             revealEls.forEach(el => el.classList.add('is-visible'));
         }
-    </script>
 
-    <script>
-    (function() {
-      const API_ENDPOINT = '/.netlify/functions/chat';
-      let conversationId = 'conv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-      let conversationHistory = [];
-      let isConversationEnded = false;
-
-      const chatButton = document.getElementById('jroChatButton');
-      const chatWindow = document.getElementById('jroChatWindow');
-      const messagesContainer = document.getElementById('jroChatMessages');
-      const inputField = document.getElementById('jroChatInput');
-      const sendButton = document.getElementById('jroChatSend');
-      const closeButton = document.getElementById('jroChatClose');
-
-      function toggleChat() {
-        chatButton.classList.toggle('open');
-        chatWindow.classList.toggle('open');
-        if (chatWindow.classList.contains('open') && conversationHistory.length === 0) {
-          setTimeout(() => { addMessage('bot', '¡Hola! 👋 Soy el asistente virtual de JRO Asesorías.\n\n¿En qué puedo ayudarte hoy? ¿Buscas asesoría para tu empresa?'); }, 500);
+        // Parallax sutil del hero (≤10%, solo transform; respeta reduced-motion)
+        const heroImg = document.getElementById('hero-img');
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (heroImg && !prefersReduced) {
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(() => {
+                    const y = Math.min(window.scrollY, window.innerHeight);
+                    heroImg.style.transform = 'translateY(' + (y * 0.08) + 'px)';
+                    ticking = false;
+                });
+            }, { passive: true });
         }
-        if (chatWindow.classList.contains('open')) { inputField.focus(); }
-      }
-
-      function addMessage(type, text) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'jro-chat-message ' + type;
-        let cleanText = text.replace(/\*\*/g, '').replace(/__/g, '').replace(/\*/g, '').replace(/_/g, '');
-        cleanText = cleanText.replace(/\n/g, '<br>');
-        cleanText = cleanText.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
-        cleanText = cleanText.replace(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/g, '<a href="mailto:$1">$1</a>');
-        messageDiv.innerHTML = cleanText;
-        messagesContainer.appendChild(messageDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        conversationHistory.push({ role: type === 'user' ? 'user' : 'assistant', content: text });
-      }
-
-      function showTyping() {
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'jro-chat-message typing';
-        typingDiv.id = 'jroTypingIndicator';
-        typingDiv.innerHTML = '<div class="jro-typing-dots"><span></span><span></span><span></span></div>';
-        messagesContainer.appendChild(typingDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      }
-      function hideTyping() { const t = document.getElementById('jroTypingIndicator'); if (t) t.remove(); }
-
-      async function sendMessage() {
-        const message = inputField.value.trim();
-        if (!message || isConversationEnded) return;
-        addMessage('user', message);
-        inputField.value = '';
-        sendButton.disabled = true;
-        showTyping();
-        try {
-          const response = await fetch(API_ENDPOINT, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: message, conversationId: conversationId, conversationHistory: conversationHistory.slice(0, -1), endConversation: false })
-          });
-          const data = await response.json();
-          hideTyping();
-          if (data.reply) { addMessage('bot', data.reply); }
-          else if (data.error) { addMessage('bot', data.error); }
-        } catch (error) {
-          hideTyping();
-          addMessage('bot', 'Lo siento, hubo un problema técnico. Por favor contáctanos directamente:\n\nWhatsApp: https://wa.me/56966895746\nCorreo: ygonzalez@duocapital.cl');
-          console.error('Error en chat:', error);
-        }
-        sendButton.disabled = false;
-        inputField.focus();
-      }
-
-      async function endConversation(reason) {
-        if (isConversationEnded || conversationHistory.length < 2) return;
-        isConversationEnded = true;
-        try {
-          await fetch(API_ENDPOINT, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ conversationId: conversationId, conversationHistory: conversationHistory, endConversation: true, endReason: reason })
-          });
-        } catch (error) { console.error('Error al guardar conversación:', error); }
-      }
-
-      chatButton.addEventListener('click', toggleChat);
-      sendButton.addEventListener('click', sendMessage);
-      inputField.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
-      closeButton.addEventListener('click', function() {
-        if (conversationHistory.length > 1 && !isConversationEnded) { endConversation('chat_closed'); }
-        toggleChat();
-      });
-      window.addEventListener('beforeunload', () => { if (conversationHistory.length > 1 && !isConversationEnded) { endConversation('window_close'); } });
-    })();
     </script>
-    <!-- FIN CHATBOT JRO ASESORÍAS -->
-
 </body>
 </html>
