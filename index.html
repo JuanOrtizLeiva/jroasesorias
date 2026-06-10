@@ -845,8 +845,12 @@
                     <p class="grupo-line">JRO Asesorías es parte del Grupo Duocapital.</p>
                 </div>
 
-                <form class="cierre-form reveal" style="--i:1" action="https://formsubmit.co/info@duocapital.cl" method="POST">
-                    <input type="hidden" name="_subject" value="Solicitud de diagnóstico — jroasesorias.cl">
+                <form class="cierre-form reveal" style="--i:1" action="https://casos.duocapital.cl/jro" method="POST" accept-charset="UTF-8">
+                    <!-- honeypot anti-bots: invisible para humanos -->
+                    <div style="position:absolute;left:-9999px;top:-9999px;height:1px;width:1px;overflow:hidden" aria-hidden="true">
+                        <label for="sitio_web">No complete este campo</label>
+                        <input type="text" id="sitio_web" name="sitio_web" tabindex="-1" autocomplete="off">
+                    </div>
                     <p class="form-title">Agendar diagnóstico de 30 minutos</p>
                     <p class="form-sub">Cuatro campos. Le respondemos con horarios disponibles.</p>
                     <div class="form-row">
