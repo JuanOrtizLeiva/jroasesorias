@@ -89,6 +89,7 @@
 
             --ease: .25s ease;
             --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* ============================================ RESET / BASE ============================================ */
@@ -101,6 +102,7 @@
             text-rendering: optimizeLegibility;
         }
         img, svg { max-width: 100%; height: auto; display: block; }
+        [id] { scroll-margin-top: 88px; }
         a { color: inherit; text-decoration: none; }
         ::selection { background: rgba(176,132,66,.20); }
 
@@ -113,6 +115,7 @@
         h2 { font-size: clamp(1.9rem, 3.6vw, 2.75rem); line-height: 1.12; font-variation-settings: "opsz" 144, "wght" 450, "SOFT" 0, "WONK" 0; }
         h3 { font-size: 1.3rem; line-height: 1.25; font-variation-settings: "opsz" 60, "wght" 500, "SOFT" 0, "WONK" 0; }
         p { color: var(--text-muted); }
+        h1, h2, h3, .display, .caso-cifra { text-wrap: balance; }
         em { font-style: italic; }
 
         .display {
@@ -163,7 +166,7 @@
             display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
             padding: 1rem 1.7rem; font-family: var(--font-sans); font-size: 1rem; font-weight: 500;
             border: 1px solid transparent; border-radius: var(--radius-sm); cursor: pointer;
-            transition: transform var(--ease), background var(--ease), color var(--ease), box-shadow var(--ease), border-color var(--ease);
+            transition: transform .3s var(--ease-out), background var(--ease), color var(--ease), box-shadow .3s var(--ease-out), border-color var(--ease);
         }
         .btn-primary { background: var(--ink); color: var(--paper); }
         .btn-primary:hover { background: var(--ink-2); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(21,17,14,.22); }
@@ -172,9 +175,12 @@
         .btn-bronze { background: var(--accent); color: #fff; }
         .btn-bronze:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(140,101,52,.35); }
         .btn-ghost-dark { background: transparent; color: var(--hero-text); border-color: var(--line-on-dark); }
-        .btn-ghost-dark:hover { border-color: rgba(255,255,255,.45); }
+        .btn-ghost-dark:hover { border-color: rgba(255,255,255,.45); transform: translateY(-2px); }
+        .btn:active { transform: translateY(0) scale(.98); transition-duration: .1s; }
 
         .micro-note { font-size: .85rem; color: var(--text-muted); margin-top: .8rem; }
+        .note-aside { font-size: .85rem; font-style: italic; color: var(--text-muted); margin-top: 1.2rem; }
+        .caso-destacado .note-aside { margin-top: 0; }
 
         .link-action { display: inline-flex; align-items: center; gap: .45rem; font-weight: 500; color: inherit; position: relative; padding: .2rem 0; }
         .link-action .arr { transition: transform var(--ease); }
@@ -196,9 +202,9 @@
 
         .nav-menu { display: flex; align-items: center; gap: clamp(1rem, 2.5vw, 2rem); }
         .nav-link { font-size: .95rem; font-weight: 500; color: var(--text); padding: .4rem 0; position: relative; }
-        .nav-link::after { content: ''; position: absolute; left: 0; bottom: 0; height: 1.5px; width: 0; background: var(--accent); transition: width var(--ease); }
+        .nav-link::after { content: ''; position: absolute; left: 0; bottom: 0; height: 1.5px; width: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left center; transition: transform .3s var(--ease-out); }
         .nav-link:hover { color: var(--accent-dark); }
-        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover::after { transform: scaleX(1); }
         .nav-cta { margin-left: .25rem; padding: .7rem 1.2rem; }
         .mobile-menu-btn { display: none; background: none; border: none; color: var(--ink); cursor: pointer; padding: .35rem .5rem; }
         .mobile-menu-btn svg { width: 22px; height: 22px; stroke: currentColor; }
@@ -294,7 +300,8 @@
         .metodo-head h2 { max-width: 22ch; }
         .metodo-head p { font-size: 1.1rem; margin-top: 1rem; max-width: 52ch; }
         .fases { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 2.5vw, 2rem); position: relative; }
-        .fase { background: var(--ink-2); border: 1px solid var(--line-on-dark); border-radius: var(--radius); padding: clamp(1.5rem, 2.5vw, 2.1rem); position: relative; }
+        .fase { background: var(--ink-2); border: 1px solid var(--line-on-dark); border-radius: var(--radius); padding: clamp(1.5rem, 2.5vw, 2.1rem); position: relative; transition: transform .35s var(--ease-out), border-color .35s var(--ease-out); }
+        .fase:hover { transform: translateY(-3px); border-color: rgba(216,181,126,.38); }
         .fase-num { font-family: var(--font-display); font-size: .95rem; color: var(--accent-light); letter-spacing: .1em; margin-bottom: 1rem; display: block; }
         .fase h3 { font-size: 1.25rem; color: #fff; margin-bottom: .35rem; }
         .fase-dur { display: inline-block; font-size: .78rem; font-weight: 600; color: var(--accent-light); background: rgba(176,132,66,.14); padding: .28rem .7rem; border-radius: var(--radius-pill); margin-bottom: 1rem; }
@@ -315,36 +322,25 @@
         .metodo-cta { text-align: center; margin-top: clamp(2.5rem, 5vw, 3.5rem); }
 
         /* ============================================ S6 — ORIGEN Y PRUEBA ============================================ */
-        .origen-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(2.5rem, 5vw, 4.5rem); align-items: start; }
         .origen-copy h2 { max-width: 20ch; margin-bottom: 1.4rem; }
         .origen-copy p { font-size: 1.08rem; line-height: 1.7; max-width: 52ch; margin-bottom: 1.1rem; }
         .origen-copy strong { color: var(--text); font-weight: 600; }
-        .socio-line { display: flex; align-items: center; gap: .9rem; margin-top: 1.8rem; padding: 1.1rem 1.3rem; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); background: #fff; }
-        .socio-line svg { width: 22px; height: 22px; stroke: var(--accent-dark); flex: none; }
-        .socio-line p { margin: 0; font-size: .98rem; color: var(--text); }
-
-        .trayectoria { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.6rem, 3vw, 2.2rem); box-shadow: var(--shadow-sm); }
-        .trayectoria .eyebrow { margin-bottom: .6rem; }
-        .trayectoria > p { font-size: .95rem; line-height: 1.6; margin-bottom: 1.4rem; }
-        .inst-list { list-style: none; display: flex; flex-direction: column; }
-        .inst-list li { font-family: var(--font-display); font-size: clamp(1.05rem, 1.6vw, 1.25rem); font-weight: 450; color: var(--ink); padding: .65rem 0; border-bottom: 1px solid var(--line); font-variation-settings: "opsz" 60, "wght" 480; }
-        .inst-list li:last-child { border-bottom: none; }
-        .inst-more { font-size: .85rem; color: var(--text-muted); font-style: italic; margin-top: 1rem; }
 
         /* Resultados reales — casos anonimizados */
         .casos { margin-top: clamp(3.5rem, 6.5vw, 5rem); }
         .casos-head { max-width: 60ch; margin-bottom: clamp(1.8rem, 3.5vw, 2.6rem); }
         .casos-head h3 { font-size: clamp(1.45rem, 2.4vw, 1.9rem); max-width: 26ch; }
-        .casos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.25rem, 2.5vw, 1.75rem); }
-        .caso { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.5rem, 2.5vw, 2rem); box-shadow: var(--shadow-sm); }
+        .casos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.25rem, 2.5vw, 1.75rem); counter-reset: caso; }
+        .caso { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.5rem, 2.5vw, 2rem); box-shadow: var(--shadow-sm); counter-increment: caso; position: relative; transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out); }
+        .caso::before { content: '0' counter(caso); position: absolute; top: 1.5rem; right: 1.6rem; font-family: var(--font-display); font-size: .9rem; letter-spacing: .12em; color: var(--accent); font-variation-settings: "opsz" 60, "wght" 480; }
+        .caso:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
         .caso-cifra {
             font-family: var(--font-display); font-size: clamp(1.7rem, 2.8vw, 2.2rem); line-height: 1.1;
-            color: var(--accent-dark); letter-spacing: -0.01em; margin-bottom: .85rem;
+            color: var(--accent-dark); letter-spacing: -0.01em; padding-bottom: .85rem; border-bottom: 1px solid var(--line); margin-bottom: .9rem;
             font-variation-settings: "opsz" 144, "wght" 480, "SOFT" 0, "WONK" 0;
         }
         .caso-titulo { display: block; font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text); margin-bottom: .55rem; }
-        .caso p { font-size: .95rem; line-height: 1.65; margin: 0; }
-        .casos-note { font-size: .85rem; color: var(--text-muted); font-style: italic; margin-top: 1.4rem; }
+        .caso p { font-size: .95rem; line-height: 1.6; margin: 0; }
 
         /* ============================================ S7 — CONDICIONES ============================================ */
         .condiciones h2 { max-width: 24ch; margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
@@ -382,9 +378,10 @@
         .grupo-line { font-size: .82rem; color: rgba(255,255,255,.5); }
 
         /* Lead magnet — mapa de muestra (compacto, mismo lienzo oscuro) */
-        .mapa { margin: 2.2rem 0; padding: clamp(1.3rem, 2.2vw, 1.7rem); background: transparent; border: 1px solid var(--line-on-dark); border-radius: var(--radius); }
+        .mapa { margin: 2.2rem 0; padding: clamp(1.3rem, 2.2vw, 1.7rem); background: linear-gradient(180deg, rgba(176,132,66,.10), rgba(176,132,66,.04)); border: 1px solid rgba(216,181,126,.4); border-radius: var(--radius); }
+        #mapa:target { border-color: rgba(216,181,126,.55); }
         .mapa-title { font-family: var(--font-display); font-size: 1.2rem; color: #fff; margin-bottom: .35rem; font-variation-settings: "opsz" 60, "wght" 500; }
-        .mapa-sub { font-size: .92rem; line-height: 1.55; margin-bottom: 1.1rem; }
+        .mapa-sub { font-size: .9rem; line-height: 1.55; margin-bottom: 1.1rem; }
         .mapa-form { display: flex; gap: .7rem; }
         .mapa-form input[type="email"] {
             flex: 1; min-width: 0; padding: .75rem .95rem; font-family: inherit; font-size: .95rem;
@@ -418,42 +415,82 @@
         .footer-band a:hover { color: rgba(255,255,255,.85); }
         .fb-links { display: flex; gap: 1.1rem; flex-wrap: wrap; }
 
-        /* ============================================ MARQUEE TRAYECTORIA ============================================ */
+        /* ============================================ MARQUEE TRAYECTORIA — banda ink full-bleed ============================================ */
+        #origen { overflow-x: clip; }
         .origen-solo { max-width: 820px; }
-        .trayectoria-band { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
-        .trayectoria-head { font-size: .98rem; color: var(--text-muted); margin: .35rem 0 1.4rem; }
-        .marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-        .marquee-track { display: flex; width: max-content; animation: marquee 36s linear infinite; }
+        .trayectoria-band {
+            margin-top: clamp(2.5rem, 5vw, 3.5rem);
+            margin-inline: calc(50% - 50vw);
+            background: var(--ink);
+            position: relative;
+            text-align: center;
+            padding: clamp(2.6rem, 5vw, 3.4rem) 0 clamp(2.2rem, 4vw, 2.8rem);
+            border-top: 1px solid rgba(216,181,126,.28);
+            border-bottom: 1px solid rgba(216,181,126,.28);
+        }
+        .trayectoria-band > * { position: relative; z-index: 1; }
+        .trayectoria-band::after {
+            content: ''; position: absolute; inset: 0; pointer-events: none;
+            background: radial-gradient(60% 130% at 50% 0%, rgba(176,132,66,.10), transparent 70%);
+        }
+        .trayectoria-band .eyebrow { color: var(--accent-light); }
+        .trayectoria-head {
+            font-size: 1rem; color: rgba(250,250,249,.65);
+            max-width: 60ch; margin: .35rem auto 1.6rem; padding: 0 var(--gutter);
+        }
+        .marquee {
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+        }
+        .marquee-track { display: flex; width: max-content; animation: marquee 48s linear infinite; }
         .marquee:hover .marquee-track { animation-play-state: paused; }
-        .marquee-group { display: flex; gap: 3.5rem; padding-right: 3.5rem; align-items: baseline; }
-        .marquee-group span { font-family: var(--font-display); font-size: clamp(1.05rem, 1.6vw, 1.3rem); color: var(--ink); white-space: nowrap; font-variation-settings: "opsz" 60, "wght" 480; }
+        .marquee-group { display: flex; gap: 0; padding-right: 0; align-items: baseline; }
+        .marquee-group span {
+            font-family: var(--font-display); white-space: nowrap;
+            font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+            color: var(--paper-3);
+            font-variation-settings: "opsz" 60, "wght" 430;
+        }
+        .marquee-group span::after {
+            content: '◆'; display: inline-block; margin: 0 1.9rem;
+            font-size: .5em; color: var(--accent); transform: translateY(-.18em);
+        }
         @keyframes marquee { to { transform: translateX(-50%); } }
-        .trayectoria-band .inst-more { margin-top: 1.1rem; font-size: .85rem; color: var(--text-muted); font-style: italic; }
+        .trayectoria-band .note-aside { color: rgba(250,250,249,.45); margin-top: 1.4rem; padding: 0 var(--gutter); }
 
         /* ============================================ CASO DESTACADO (Servicios) ============================================ */
-        .caso-destacado { margin: clamp(2.2rem, 4.5vw, 3.2rem) auto 0; max-width: 740px; background: var(--paper-2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 1.5rem 1.75rem; }
-        .cd-texto { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.1rem, 1.8vw, 1.3rem); line-height: 1.5; color: var(--text); margin: .6rem 0 .5rem; }
+        .caso-destacado { margin: clamp(2.2rem, 4.5vw, 3.2rem) auto 0; max-width: 740px; background: transparent; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: clamp(1.8rem, 3.5vw, 2.2rem) clamp(1.5rem, 3vw, 2.5rem); text-align: center; }
+        .caso-destacado::before { content: '◆'; display: block; font-size: .6rem; color: var(--accent); margin-bottom: .9rem; }
+        .caso-destacado .eyebrow { margin-bottom: 0; }
+        .cd-texto { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.1rem, 1.8vw, 1.3rem); line-height: 1.5; color: var(--text); margin: .6rem auto .5rem; max-width: 52ch; }
         .cd-texto strong { color: var(--accent-dark); font-weight: 500; }
-        .cd-nota { font-size: .8rem; color: var(--text-muted); font-style: italic; margin: 0; }
 
         /* ============================================ SEGURIDAD Y DATOS ============================================ */
         .seguridad { margin-top: clamp(2.5rem, 5vw, 3.5rem); padding-top: clamp(2rem, 4vw, 2.8rem); border-top: 1px solid var(--line); }
-        .seg-title { font-size: 1.05rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 1.4rem; }
-        .seg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem 2.5rem; }
-        .seg-item { font-size: .95rem; line-height: 1.65; color: var(--text-muted); }
+        .seg-title { font-size: 1.05rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 1.6rem; }
+        .seg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem clamp(2.5rem, 5vw, 5rem); }
+        .seg-item { font-size: .95rem; line-height: 1.65; color: var(--text-muted); padding-top: 1rem; border-top: 1px solid var(--line); }
         .seg-item strong { color: var(--text); display: block; margin-bottom: .15rem; font-weight: 600; }
+        .seg-item strong::before { content: '◆'; font-size: .55rem; color: var(--accent); margin-right: .55rem; vertical-align: .18em; }
 
         /* ============================================ REVEAL (visible por defecto; anima con JS) ============================================ */
         .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); transition-delay: calc(var(--i, 0) * 120ms); }
-        .js .reveal.is-visible { opacity: 1; transform: none; }
+        .js .reveal.is-visible { opacity: 1; transform: none; transition-delay: 0s; }
 
         a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 2px; border-radius: 4px; }
+        .section-dark a:focus-visible, .section-dark button:focus-visible, .section-dark input:focus-visible,
+        .section-dark select:focus-visible, .hero a:focus-visible, .trayectoria-band a:focus-visible { outline-color: var(--accent-light); }
 
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
             *, *::before, *::after { animation: none !important; transition: none !important; }
             .js .reveal, .js .hero-rise { opacity: 1; transform: none; }
             .js .rule-line, .js .reveal .sintoma-num::after { transform: none; }
+            .marquee { mask-image: none; -webkit-mask-image: none; }
+            .marquee-track { width: auto; flex-wrap: wrap; justify-content: center; gap: .6rem 0; padding: 0 var(--gutter); }
+            .marquee-group { flex-wrap: wrap; justify-content: center; row-gap: .6rem; }
+            .marquee-group[aria-hidden="true"] { display: none; }
         }
 
         /* ============================================ RESPONSIVE ============================================ */
@@ -466,7 +503,6 @@
             .escena:nth-child(even) .escena-art { order: 0; }
             .escena-art { order: -1; }
             .fases { grid-template-columns: 1fr; }
-            .origen-grid { grid-template-columns: 1fr; }
             .cond-grid { grid-template-columns: 1fr; gap: 2.5rem; }
             .cierre-grid { grid-template-columns: 1fr; }
             .seg-grid { grid-template-columns: 1fr; }
@@ -665,6 +701,7 @@
                 <div class="escena-art">
                     <figure>
                         <div class="art-frame">
+                            <div class="art-chrome" aria-hidden="true"><span></span><span></span><span></span></div>
                             <svg viewBox="0 0 560 300" role="img" aria-label="Esquema del flujo de automatización: las fuentes de datos se integran en un flujo automático que alimenta paneles y alertas">
                                 <rect width="560" height="300" fill="#FBFAF7"/>
                                 <g font-family="Inter, sans-serif" font-size="11" fill="#1C1A17">
@@ -715,6 +752,7 @@
                 <div class="escena-art">
                     <figure>
                         <div class="art-frame">
+                            <div class="art-chrome" aria-hidden="true"><span></span><span></span><span></span></div>
                             <svg viewBox="0 0 560 300" role="img" aria-label="Ejemplo referencial de un resumen de gestión generado con inteligencia artificial">
                                 <rect width="560" height="300" fill="#FBFAF7"/>
                                 <rect x="36" y="32" width="488" height="236" rx="10" fill="#fff" stroke="#E7E3DA"/>
@@ -741,7 +779,7 @@
             <aside class="caso-destacado reveal">
                 <span class="eyebrow">Caso reciente — servicio de datos</span>
                 <p class="cd-texto">El área de finanzas de una empresa mediana armaba su reportería a mano en Excel: <strong>cada informe demoraba días</strong>. Rediseñamos su proceso de datos y aplicamos IA generativa sobre cifras ya confiables: <strong>hoy demora segundos</strong>.</p>
-                <p class="cd-nota">Caso real, anonimizado por confidencialidad.</p>
+                <p class="note-aside">Caso real, anonimizado por confidencialidad.</p>
             </aside>
 
             <div class="escenas-cta reveal">
@@ -838,7 +876,7 @@
             </div>
 
             <!-- Trayectoria del grupo: marquee de instituciones -->
-            <div class="trayectoria-band reveal">
+            <div class="trayectoria-band grain reveal">
                 <span class="eyebrow">Trayectoria del grupo</span>
                 <p class="trayectoria-head">Grupo Duocapital, por medio del Instituto de Capacitación Tecnipro y de JRO Asesorías, ha capacitado o asesorado a equipos de instituciones como estas:</p>
                 <div class="marquee">
@@ -863,7 +901,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="inst-more">…entre muchas otras a lo largo de su historia.</p>
+                <p class="note-aside">…entre muchas otras a lo largo de su historia.</p>
             </div>
 
             <!-- Resultados reales: casos anonimizados -->
@@ -894,7 +932,7 @@
                         <p>Automatizamos la lectura de compras ágiles y licitaciones públicas. Las pérdidas por no revisarlas dentro de plazo bajaron a prácticamente cero.</p>
                     </article>
                 </div>
-                <p class="casos-note reveal">Casos reales de implementaciones recientes, anonimizados por confidencialidad.</p>
+                <p class="note-aside reveal">Casos reales de implementaciones recientes, anonimizados por confidencialidad.</p>
             </div>
 
             <p class="bridge reveal">Queda una pregunta razonable: cómo se trabaja con nosotros y qué pasa después.</p>
@@ -952,13 +990,13 @@
                     </ul>
                 </div>
             </div>
-            <div class="seguridad reveal">
-                <h3 class="seg-title">Seguridad y manejo de sus datos</h3>
+            <div class="seguridad">
+                <h3 class="seg-title reveal">Seguridad y manejo de sus datos</h3>
                 <div class="seg-grid">
-                    <div class="seg-item"><strong>Dónde viven sus datos.</strong> Se define al inicio del proyecto y queda por escrito — de preferencia, en la infraestructura y las cuentas de su propia empresa.</div>
-                    <div class="seg-item"><strong>Accesos nominados.</strong> Usted sabe quién de nuestro equipo accede a qué. Los accesos se acuerdan con usted y se revocan al cerrar el proyecto.</div>
-                    <div class="seg-item"><strong>Al terminar.</strong> Usted decide qué conservamos y qué eliminamos de nuestro lado; queda registrado junto con la entrega.</div>
-                    <div class="seg-item"><strong>Si la solución usa IA.</strong> Se lo decimos antes: acordamos juntos qué datos puede ver el modelo y bajo qué tipo de servicio. Nunca a sus espaldas.</div>
+                    <div class="seg-item reveal" style="--i:0"><strong>Dónde viven sus datos.</strong> Se define al inicio del proyecto y queda por escrito — de preferencia, en la infraestructura y las cuentas de su propia empresa.</div>
+                    <div class="seg-item reveal" style="--i:1"><strong>Accesos nominados.</strong> Usted sabe quién de nuestro equipo accede a qué. Los accesos se acuerdan con usted y se revocan al cerrar el proyecto.</div>
+                    <div class="seg-item reveal" style="--i:2"><strong>Al terminar.</strong> Usted decide qué conservamos y qué eliminamos de nuestro lado; queda registrado junto con la entrega.</div>
+                    <div class="seg-item reveal" style="--i:3"><strong>Si la solución usa IA.</strong> Se lo decimos antes: acordamos juntos qué datos puede ver el modelo y bajo qué tipo de servicio. Nunca a sus espaldas.</div>
                 </div>
             </div>
             <p class="bridge reveal">Eso es todo lo que hay que saber. Lo que sigue es una conversación de 30 minutos.</p>
@@ -1081,7 +1119,7 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); history.pushState(null, '', this.getAttribute('href')); }
             });
         });
 
