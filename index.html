@@ -19,7 +19,6 @@
     <meta property="og:title" content="JRO Asesorías — Sus datos deberían correr solos. La IA viene después.">
     <meta property="og:description" content="Automatizamos el cierre, la cobranza y el reporting de empresas en Chile. Cuando sus datos corren solos, recién entonces hablamos de IA.">
     <meta property="og:url" content="https://www.jroasesorias.cl/">
-    <!-- TODO og:image: subir imagen social 1200x630 (webp/jpg) a img/og-image.jpg y confirmar la URL -->
     <meta property="og:image" content="https://www.jroasesorias.cl/img/og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="JRO Asesorías — Sus datos deberían correr solos. La IA viene después.">
@@ -27,6 +26,25 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.jroasesorias.cl/">
+
+    <!-- Datos estructurados -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "JRO Asesorías",
+        "url": "https://www.jroasesorias.cl/",
+        "parentOrganization": { "@type": "Organization", "name": "Grupo Duocapital" },
+        "areaServed": "Chile",
+        "email": "info@duocapital.cl",
+        "telephone": "+56966895746",
+        "sameAs": ["https://www.tecnipro.cl/", "https://www.duocapital.cl/"]
+    }
+    </script>
 
     <!-- Precarga del hero (mejora LCP) -->
     <link rel="preload" as="image" href="img/hero.webp" imagesrcset="img/hero-1280.webp 1280w, img/hero.webp 1920w" imagesizes="100vw">
@@ -313,6 +331,21 @@
         .inst-list li:last-child { border-bottom: none; }
         .inst-more { font-size: .85rem; color: var(--text-muted); font-style: italic; margin-top: 1rem; }
 
+        /* Resultados reales — casos anonimizados */
+        .casos { margin-top: clamp(3.5rem, 6.5vw, 5rem); }
+        .casos-head { max-width: 60ch; margin-bottom: clamp(1.8rem, 3.5vw, 2.6rem); }
+        .casos-head h3 { font-size: clamp(1.45rem, 2.4vw, 1.9rem); max-width: 26ch; }
+        .casos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.25rem, 2.5vw, 1.75rem); }
+        .caso { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.5rem, 2.5vw, 2rem); box-shadow: var(--shadow-sm); }
+        .caso-cifra {
+            font-family: var(--font-display); font-size: clamp(1.7rem, 2.8vw, 2.2rem); line-height: 1.1;
+            color: var(--accent-dark); letter-spacing: -0.01em; margin-bottom: .85rem;
+            font-variation-settings: "opsz" 144, "wght" 480, "SOFT" 0, "WONK" 0;
+        }
+        .caso-titulo { display: block; font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text); margin-bottom: .55rem; }
+        .caso p { font-size: .95rem; line-height: 1.65; margin: 0; }
+        .casos-note { font-size: .85rem; color: var(--text-muted); font-style: italic; margin-top: 1.4rem; }
+
         /* ============================================ S7 — CONDICIONES ============================================ */
         .condiciones h2 { max-width: 24ch; margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
         .cond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 5vw, 5rem); }
@@ -348,6 +381,21 @@
         .canal svg { width: 17px; height: 17px; stroke: var(--accent-light); flex: none; }
         .grupo-line { font-size: .82rem; color: rgba(255,255,255,.5); }
 
+        /* Lead magnet — mapa de muestra (compacto, mismo lienzo oscuro) */
+        .mapa { margin: 2.2rem 0; padding: clamp(1.3rem, 2.2vw, 1.7rem); background: transparent; border: 1px solid var(--line-on-dark); border-radius: var(--radius); }
+        .mapa-title { font-family: var(--font-display); font-size: 1.2rem; color: #fff; margin-bottom: .35rem; font-variation-settings: "opsz" 60, "wght" 500; }
+        .mapa-sub { font-size: .92rem; line-height: 1.55; margin-bottom: 1.1rem; }
+        .mapa-form { display: flex; gap: .7rem; }
+        .mapa-form input[type="email"] {
+            flex: 1; min-width: 0; padding: .75rem .95rem; font-family: inherit; font-size: .95rem;
+            color: var(--hero-text); background: rgba(255,255,255,.05); border: 1px solid var(--line-on-dark);
+            border-radius: var(--radius-sm); transition: border-color var(--ease), box-shadow var(--ease);
+        }
+        .mapa-form input[type="email"]::placeholder { color: rgba(250,250,249,.45); }
+        .mapa-form input[type="email"]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(176,132,66,.22); }
+        .mapa-form .btn { padding: .75rem 1.25rem; font-size: .95rem; white-space: nowrap; }
+        .mapa .grupo-line { margin-top: .75rem; }
+
         .cierre-form { background: var(--paper); border-radius: var(--radius); padding: clamp(1.7rem, 3vw, 2.5rem); box-shadow: 0 24px 64px rgba(0,0,0,.35); }
         .cierre-form .form-title { font-family: var(--font-display); font-size: 1.45rem; color: var(--ink); margin-bottom: .4rem; font-variation-settings: "opsz" 60, "wght" 500; }
         .cierre-form .form-sub { font-size: .9rem; color: var(--text-muted); margin-bottom: 1.6rem; }
@@ -369,6 +417,31 @@
         .footer-band p, .footer-band a { color: rgba(255,255,255,.5); font-size: .8rem; margin: 0; }
         .footer-band a:hover { color: rgba(255,255,255,.85); }
         .fb-links { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+
+        /* ============================================ MARQUEE TRAYECTORIA ============================================ */
+        .origen-solo { max-width: 820px; }
+        .trayectoria-band { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+        .trayectoria-head { font-size: .95rem; color: var(--text-muted); margin-bottom: 1.4rem; max-width: 64ch; }
+        .marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+        .marquee-track { display: flex; width: max-content; animation: marquee 36s linear infinite; }
+        .marquee:hover .marquee-track { animation-play-state: paused; }
+        .marquee-group { display: flex; gap: 3.5rem; padding-right: 3.5rem; align-items: baseline; }
+        .marquee-group span { font-family: var(--font-display); font-size: clamp(1.05rem, 1.6vw, 1.3rem); color: var(--ink); white-space: nowrap; font-variation-settings: "opsz" 60, "wght" 480; }
+        @keyframes marquee { to { transform: translateX(-50%); } }
+        .trayectoria-band .inst-more { margin-top: 1.1rem; font-size: .85rem; color: var(--text-muted); font-style: italic; }
+
+        /* ============================================ CASO DESTACADO (Servicios) ============================================ */
+        .caso-destacado { margin: clamp(2.2rem, 4.5vw, 3.2rem) auto 0; max-width: 740px; background: var(--paper-2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 1.5rem 1.75rem; }
+        .cd-texto { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.1rem, 1.8vw, 1.3rem); line-height: 1.5; color: var(--text); margin: .6rem 0 .5rem; }
+        .cd-texto strong { color: var(--accent-dark); font-weight: 500; }
+        .cd-nota { font-size: .8rem; color: var(--text-muted); font-style: italic; margin: 0; }
+
+        /* ============================================ SEGURIDAD Y DATOS ============================================ */
+        .seguridad { margin-top: clamp(2.5rem, 5vw, 3.5rem); padding-top: clamp(2rem, 4vw, 2.8rem); border-top: 1px solid var(--line); }
+        .seg-title { font-size: 1.05rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 1.4rem; }
+        .seg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem 2.5rem; }
+        .seg-item { font-size: .95rem; line-height: 1.65; color: var(--text-muted); }
+        .seg-item strong { color: var(--text); display: block; margin-bottom: .15rem; font-weight: 600; }
 
         /* ============================================ REVEAL (visible por defecto; anima con JS) ============================================ */
         .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); transition-delay: calc(var(--i, 0) * 120ms); }
@@ -396,6 +469,7 @@
             .origen-grid { grid-template-columns: 1fr; }
             .cond-grid { grid-template-columns: 1fr; gap: 2.5rem; }
             .cierre-grid { grid-template-columns: 1fr; }
+            .seg-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 600px) {
             .nav-menu { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: .25rem; background: var(--paper); padding: 1rem var(--gutter) 1.4rem; border-bottom: 1px solid var(--line); box-shadow: var(--shadow); }
@@ -413,6 +487,9 @@
             .scroll-indicator { display: none; }
             .compuerta { grid-template-columns: 1fr; }
             .footer-band-inner { flex-direction: column; text-align: center; }
+            .casos-grid { grid-template-columns: 1fr; }
+            .mapa-form { flex-direction: column; }
+            .mapa-form .btn { width: 100%; }
         }
     </style>
 </head>
@@ -461,8 +538,8 @@
 
                 <div class="hero-actions hero-rise hero-rise-4">
                     <a href="#contacto" class="btn btn-light">Agendar diagnóstico de 30 minutos</a>
-                    <a href="#metodo" class="link-action">
-                        Ver cómo trabajamos <span class="arr" aria-hidden="true">→</span>
+                    <a href="#mapa" class="link-action">
+                        Descargar un mapa de oportunidades de muestra <span class="arr" aria-hidden="true">→</span>
                     </a>
                 </div>
                 <p class="hero-micro hero-rise hero-rise-4">Sin costo. Si no podemos ayudarle, se lo decimos en la primera reunión.</p>
@@ -498,6 +575,10 @@
                     <li class="sintoma reveal" style="--i:3">
                         <span class="sintoma-num" aria-hidden="true">04</span>
                         <p>El dashboard que mandó a hacer el año pasado nadie lo abre. Porque nadie confía en lo que muestra.</p>
+                    </li>
+                    <li class="sintoma reveal" style="--i:4">
+                        <span class="sintoma-num" aria-hidden="true">05</span>
+                        <p>El informe de dotación y ausentismo llega tarde al comité — armado a mano desde un sistema de asistencia que no conversa con remuneraciones.</p>
                     </li>
                 </ul>
                 <p class="espejo-stack reveal">Da lo mismo si su ERP es Softland, Defontana, Nubox o una planilla con nombre de ERP: el problema es el mismo. Los datos llegan, pero no conversan.</p>
@@ -576,7 +657,9 @@
                     <p class="escena-story">
                         El sistema cruza la cartola bancaria con las facturas emitidas, marca lo que calza,
                         levanta lo que no, y envía los recordatorios de cobro sin que nadie tenga que
-                        acordarse. <strong>Su equipo deja de perseguir datos y empieza a usarlos.</strong>
+                        acordarse. Lo mismo en RRHH: el reporting de dotación y ausentismo, y la rendición
+                        de la franquicia SENCE, dejan de armarse a mano. <strong>Su equipo deja de perseguir
+                        datos y empieza a usarlos.</strong>
                     </p>
                 </div>
                 <div class="escena-art">
@@ -655,6 +738,12 @@
                 </div>
             </article>
 
+            <aside class="caso-destacado reveal">
+                <span class="eyebrow">Caso reciente — servicio de datos</span>
+                <p class="cd-texto">El área de finanzas de una empresa mediana armaba su reportería a mano en Excel: <strong>cada informe demoraba días</strong>. Rediseñamos su proceso de datos y aplicamos IA generativa sobre cifras ya confiables: <strong>hoy demora segundos</strong>.</p>
+                <p class="cd-nota">Caso real, anonimizado por confidencialidad.</p>
+            </aside>
+
             <div class="escenas-cta reveal">
                 <a href="#contacto" class="btn btn-primary">Agendar diagnóstico de 30 minutos</a>
             </div>
@@ -731,7 +820,7 @@
     <!-- ============================================ S6 — ORIGEN Y PRUEBA ============================================ -->
     <section id="origen" class="section-alt section-pad">
         <div class="container">
-            <div class="origen-grid">
+            <div class="origen-solo">
                 <div class="origen-copy reveal">
                     <span class="eyebrow">Quiénes somos</span>
                     <h2>Construimos estos sistemas para operar nuestro propio grupo. Después nos los empezaron a pedir.</h2>
@@ -750,21 +839,68 @@
                         <p>El diagnóstico lo atiende un socio del grupo — no un vendedor.</p>
                     </div>
                 </div>
-                <div class="trayectoria reveal" style="--i:1">
-                    <span class="eyebrow">Trayectoria del grupo</span>
-                    <p>A través del Instituto Tecnipro — OTEC certificada bajo la norma NCh2728 —, el grupo ha capacitado a equipos de instituciones como:</p>
-                    <ul class="inst-list">
-                        <li>Asociación Chilena de Seguridad (ACHS)</li>
-                        <li>Armada de Chile</li>
-                        <li>Fuerza Aérea de Chile</li>
-                        <li>Pontificia Universidad Católica de Chile</li>
-                        <li>Universidad Andrés Bello</li>
-                        <li>Colun</li>
-                        <li>Seremi de Educación</li>
-                    </ul>
-                    <p class="inst-more">…entre muchas otras a lo largo de su historia.</p>
-                </div>
             </div>
+
+            <!-- Trayectoria del grupo: marquee de instituciones -->
+            <div class="trayectoria-band reveal">
+                <p class="trayectoria-head"><span class="eyebrow">Trayectoria del grupo</span><br>
+                A través del Instituto Tecnipro — OTEC certificada bajo la norma NCh2728 —, el grupo ha capacitado a equipos de instituciones como estas:</p>
+                <div class="marquee">
+                    <div class="marquee-track">
+                        <div class="marquee-group">
+                            <span>Asociación Chilena de Seguridad (ACHS)</span>
+                            <span>Armada de Chile</span>
+                            <span>Fuerza Aérea de Chile</span>
+                            <span>Pontificia Universidad Católica de Chile</span>
+                            <span>Universidad Andrés Bello</span>
+                            <span>Colun</span>
+                            <span>Seremi de Educación</span>
+                        </div>
+                        <div class="marquee-group" aria-hidden="true">
+                            <span>Asociación Chilena de Seguridad (ACHS)</span>
+                            <span>Armada de Chile</span>
+                            <span>Fuerza Aérea de Chile</span>
+                            <span>Pontificia Universidad Católica de Chile</span>
+                            <span>Universidad Andrés Bello</span>
+                            <span>Colun</span>
+                            <span>Seremi de Educación</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="inst-more">…entre muchas otras a lo largo de su historia.</p>
+            </div>
+
+            <!-- Resultados reales: casos anonimizados -->
+            <div class="casos">
+                <div class="casos-head reveal">
+                    <span class="eyebrow">Casos reales — anonimizados</span>
+                    <h3>Resultados reales</h3>
+                </div>
+                <div class="casos-grid">
+                    <article class="caso reveal" style="--i:0">
+                        <p class="caso-cifra">−90%</p>
+                        <span class="caso-titulo">Adquisiciones de activo fijo</span>
+                        <p>El proceso de compras pasaba por demasiadas autorizaciones y avanzaba lento. Automatizamos el flujo de aprobaciones y los tiempos del proceso cayeron un 90%.</p>
+                    </article>
+                    <article class="caso reveal" style="--i:1">
+                        <p class="caso-cifra">De días a segundos</p>
+                        <span class="caso-titulo">Reportería financiera</span>
+                        <p>Un área de finanzas armaba su reportería en planillas Excel y demoraba días. Con IA generativa y un proceso de datos mejorado, hoy demora segundos. Literalmente.</p>
+                    </article>
+                    <article class="caso reveal" style="--i:2">
+                        <p class="caso-cifra">Clasificación automática</p>
+                        <span class="caso-titulo">Selección de personal</span>
+                        <p>Una institución académica demoraba días en procesar, leer y clasificar currículums. Con Power Automate e IA el proceso quedó automático: menos errores de clasificación y dejaron de perderse buenos postulantes.</p>
+                    </article>
+                    <article class="caso reveal" style="--i:3">
+                        <p class="caso-cifra">~0 licitaciones perdidas</p>
+                        <span class="caso-titulo">Licitaciones públicas</span>
+                        <p>Automatizamos la lectura de compras ágiles y licitaciones públicas. Las pérdidas por no revisarlas dentro de plazo bajaron a prácticamente cero.</p>
+                    </article>
+                </div>
+                <p class="casos-note reveal">Casos reales de implementaciones recientes, anonimizados por confidencialidad.</p>
+            </div>
+
             <p class="bridge reveal">Queda una pregunta razonable: cómo se trabaja con nosotros y qué pasa después.</p>
         </div>
     </section>
@@ -790,6 +926,10 @@
                         </li>
                         <li>
                             <span class="cond-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <p><strong>Orden de magnitud, sin letra chica:</strong> la mayoría de los proyectos parte en el rango de inversión de una pyme mediana — no de un proyecto enterprise.<br><span class="det">El número exacto queda cerrado por escrito tras el diagnóstico.</span></p>
+                        </li>
+                        <li>
+                            <span class="cond-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                             <p><strong>El diagnóstico y el mapa de oportunidades no lo comprometen a nada.</strong><br><span class="det">El mapa es suyo, decida o no seguir con nosotros.</span></p>
                         </li>
                     </ul>
@@ -811,9 +951,18 @@
                         </li>
                         <li>
                             <span class="cond-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            <p><strong>Trabajamos sobre su stack actual:</strong><br><span class="det">ERP chilenos (Softland, Defontana, Nubox u otros), SII/DTE, planillas, SharePoint y Power BI — construyendo con Python y bases de datos SQL.</span></p>
+                            <p><strong>Trabajamos sobre su stack actual:</strong><br><span class="det">ERP chilenos (Softland, Defontana, Nubox u otros), SII/DTE, sistemas de asistencia y remuneraciones, planillas, SharePoint y Power BI — construyendo con Python y bases de datos SQL.</span></p>
                         </li>
                     </ul>
+                </div>
+            </div>
+            <div class="seguridad reveal">
+                <h3 class="seg-title">Seguridad y manejo de sus datos</h3>
+                <div class="seg-grid">
+                    <div class="seg-item"><strong>Dónde viven sus datos.</strong> Se define al inicio del proyecto y queda por escrito — de preferencia, en la infraestructura y las cuentas de su propia empresa.</div>
+                    <div class="seg-item"><strong>Accesos nominados.</strong> Usted sabe quién de nuestro equipo accede a qué. Los accesos se acuerdan con usted y se revocan al cerrar el proyecto.</div>
+                    <div class="seg-item"><strong>Al terminar.</strong> Usted decide qué conservamos y qué eliminamos de nuestro lado; queda registrado junto con la entrega.</div>
+                    <div class="seg-item"><strong>Si la solución usa IA.</strong> Se lo decimos antes: acordamos juntos qué datos puede ver el modelo y bajo qué tipo de servicio. Nunca a sus espaldas.</div>
                 </div>
             </div>
             <p class="bridge reveal">Eso es todo lo que hay que saber. Lo que sigue es una conversación de 30 minutos.</p>
@@ -833,6 +982,23 @@
                         <li><p><strong>Dentro de 72 horas</strong> recibe un mapa de oportunidades por escrito, priorizado y accionable.</p></li>
                         <li><p><strong>Usted decide si avanzamos.</strong> Sin compromiso: el mapa es suyo de todas formas.</p></li>
                     </ol>
+
+                    <!-- Lead magnet: mapa de oportunidades de muestra -->
+                    <div class="mapa reveal" id="mapa">
+                        <p class="mapa-title">¿Aún no quiere una reunión?</p>
+                        <p class="mapa-sub">Descargue un ejemplo real (anonimizado) del mapa que recibiría tras el diagnóstico.</p>
+                        <form class="mapa-form" action="https://casos.duocapital.cl/jro/mapa" method="POST" accept-charset="UTF-8">
+                            <!-- honeypot anti-bots: invisible para humanos -->
+                            <div style="position:absolute;left:-9999px;top:-9999px;height:1px;width:1px;overflow:hidden" aria-hidden="true">
+                                <label for="sitio_web_mapa">No complete este campo</label>
+                                <input type="text" id="sitio_web_mapa" name="sitio_web" tabindex="-1" autocomplete="off">
+                            </div>
+                            <input type="email" id="email_mapa" name="email" required placeholder="su@empresa.cl" aria-label="Email corporativo">
+                            <button type="submit" class="btn btn-bronze" data-cta="recibir-mapa">Recibir el mapa</button>
+                        </form>
+                        <p class="grupo-line">Se lo enviamos a su correo. Sin spam, sin llamadas.</p>
+                    </div>
+
                     <div class="canales">
                         <a href="https://wa.me/56966895746" class="canal">
                             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
@@ -875,11 +1041,12 @@
                             <option value="cierre">Cierre de mes y reportes manuales</option>
                             <option value="cobranza">Cobranza y conciliación</option>
                             <option value="dashboards">Dashboards que nadie usa o no son confiables</option>
+                            <option value="rrhh">Reportería de RRHH / franquicia SENCE</option>
                             <option value="ia">Quiero explorar IA en mi operación</option>
                             <option value="otro">Otro desafío</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Agendar diagnóstico</button>
+                    <button type="submit" class="btn btn-primary" data-cta="agendar-diagnostico">Agendar diagnóstico</button>
                     <p class="form-reply">Respuesta en menos de 24 horas.</p>
                 </form>
             </div>
@@ -958,6 +1125,19 @@
                     ticking = false;
                 });
             }, { passive: true });
+        }
+
+        // Medición ligera (sin cookies ni identificadores): pv, cta y submit
+        if (navigator.sendBeacon) {
+            const q = new URLSearchParams(location.search);
+            const utm = q.get('utm_source') ? [q.get('utm_source'), q.get('utm_medium'), q.get('utm_campaign')].join('|') : '';
+            const t = (e, d) => navigator.sendBeacon('https://casos.duocapital.cl/t',
+                new Blob([JSON.stringify({ s: 'jro', e: e, p: location.pathname, d: d || '', r: (document.referrer || '').split('/')[2] || '', u: utm })], { type: 'application/json' }));
+            t('pv');
+            document.querySelectorAll('a.btn, form button[type="submit"]').forEach(el =>
+                el.addEventListener('click', () => t('cta', el.dataset.cta || (el.textContent || '').trim())));
+            document.querySelectorAll('form').forEach(f =>
+                f.addEventListener('submit', () => t('submit', f.getAttribute('action') || '')));
         }
     </script>
 </body>
